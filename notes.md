@@ -2,14 +2,15 @@ Small Trash - Can Vacuum Up small trash which is stored in a tank on the users b
 Medium Trash - Can pick up and bring to a designated location. (Will be carried by a bubble deployed using the bubble tool)
 Big Trash - Have to first destroy with pickaxe to break up into small/medium trash pieces
 
-Vacumn Tool and Pickaxe Tool, Flashlight Tool (F on keyboard)
+Vacumn Tool and Pickaxe Tool, Flashlight Tool (F on keyboard) - Possible replace with Prodding stick and Walkie-Talkie/Phone
 
-Bubble Tool that makes bubbles which carries all your trash instead of a simple backpack. Used to have the bubble follow you and carry medium trash pieces. Can toss trash into the bubble from a range.
+Bubble Tool that makes bubbles which carries all your trash instead of a simple backpack. Used to have the bubble follow you and carry medium trash pieces. Can toss trash into the bubble from a range. - Could be visualization instead of inventory
 
 Game Design
 Level one with 3 rounds
 Rounds - 2 minute seconds to pickup trash from the ongoing disaster. At the beginning of each new round get access to the shop to upgrade items/tools.
 
+- Backburner Ideas -
 Shop
 Pickaxe upgrade - breaks down bigger stuff faster also dmg to destory evil roombas
 3 types of vacuum updates - radius, power, tank capacity? (also increase Bubble capacity)
@@ -21,7 +22,7 @@ Final level/round should have some sort of final boss design
 
 Enemies
 - Evil roombas (WIP)
-
+---
 
 Purpose / Need
 Describe the purpose for the project, including why it is needed or useful, by whom, and in what context.
