@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Numerics;
+using System.Runtime;
 
 public partial class TestController : CharacterBody3D
 {
@@ -61,7 +62,7 @@ public partial class TestController : CharacterBody3D
 
 	private void Movement()
 	{
-		var input_dir = Input.GetVector("left", "right", "up", "down");
+		var input_dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		Godot.Vector3 direction = new();
 		//Basis aim = _camera.GlobalTransform.Basis;
 
