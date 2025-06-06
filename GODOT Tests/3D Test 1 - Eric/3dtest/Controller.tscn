@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://jyicx8h0utos"]
 
-[ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://TestController.cs" id="1_s7e8h"]
+[ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://Controller.cs" id="1_s7e8h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbbhj"]
 
@@ -12,12 +12,12 @@ bottom_radius = 0.1
 height = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+platform_on_leave = 2
 script = ExtResource("1_s7e8h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_lbbhj")
-disabled = true
 
 [node name="WorldModel" type="Node3D" parent="."]
 
@@ -25,11 +25,10 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_lbbhj")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.8, -0.5)
-mesh = SubResource("CylinderMesh_lbbhj")
-
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
+mesh = SubResource("CylinderMesh_lbbhj")
+skeleton = NodePath("../../WorldModel")
