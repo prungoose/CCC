@@ -13,7 +13,7 @@ config_version=5
 config/name="3DTest"
 run/main_scene="uid://bc07qh3pxn6kk"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [display]
 
@@ -60,3 +60,7 @@ orbit_right={
 [physics]
 
 common/physics_ticks_per_second=165
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

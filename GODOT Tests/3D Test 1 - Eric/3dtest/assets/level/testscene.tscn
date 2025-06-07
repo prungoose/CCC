@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://bc07qh3pxn6kk"]
 
-[ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://Controller.tscn" id="1_jotil"]
-[ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="2_44gc5"]
-[ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://Camera.cs" id="3_612pj"]
-[ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://CameraTarget.cs" id="3_mawog"]
-[ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://MouseTarget.cs" id="4_asog6"]
+[ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
+[ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
+[ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
+[ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
+[ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -22,7 +22,7 @@ size = Vector3(50, 1, 50)
 size = Vector3(50, 1, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_612pj"]
-albedo_texture = ExtResource("2_44gc5")
+albedo_texture = ExtResource("1_4nu0a")
 uv1_scale = Vector3(-0.25, -0.25, -0.25)
 uv1_triplanar = true
 
@@ -113,7 +113,7 @@ mesh = SubResource("BoxMesh_b56k5")
 skeleton = NodePath("../../RigidBody3D2")
 
 [node name="Camera" type="Node3D" parent="." node_paths=PackedStringArray("_target")]
-script = ExtResource("3_612pj")
+script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
 
 [node name="Camera3D" type="Camera3D" parent="Camera"]
@@ -123,7 +123,7 @@ size = 15.0
 
 [node name="CameraTarget" type="Node3D" parent="Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
 visible = false
-script = ExtResource("3_mawog")
+script = ExtResource("3_ofhqe")
 _player = NodePath("../../Player")
 _mousetarget = NodePath("../../MouseTarget")
 _distance = 0.15
@@ -133,12 +133,12 @@ mesh = SubResource("BoxMesh_mawog")
 
 [node name="MouseTarget" type="Node3D" parent="." node_paths=PackedStringArray("_camera")]
 visible = false
-script = ExtResource("4_asog6")
+script = ExtResource("4_suvuw")
 _camera = NodePath("../Camera/Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTarget"]
 mesh = SubResource("BoxMesh_mawog")
 
-[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("1_jotil")]
+[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("5_8wjkr")]
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
