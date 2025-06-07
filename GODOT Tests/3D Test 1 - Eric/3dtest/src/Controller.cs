@@ -93,6 +93,7 @@ public partial class Controller : CharacterBody3D
 		{
 			_velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
 		}
+		_velocity.Y -= 100 * (float)delta;
 		Velocity = _velocity;
 		MoveAndSlide();
 

@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class MouseTarget : Node3D
 {
 
 	[Export] public Camera3D _camera;
+	[Export] public CharacterBody3D _player;
 
 	public override void _Ready()
 	{
@@ -15,7 +17,7 @@ public partial class MouseTarget : Node3D
 		Vector2 mousePos = GetViewport().GetMousePosition();
 		Vector3 from = _camera.ProjectRayOrigin(mousePos);
 		Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
-		Vector3? pos = GetGroundIntersection(from, to);
+		Vector3? pos = GetIntersection(from, to);
 
 		if (pos != null)
 		{
@@ -24,12 +26,26 @@ public partial class MouseTarget : Node3D
 
 
 	}
-	
-	private Vector3? GetGroundIntersection(Vector3 rayOrigin, Vector3 rayEnd)
-	{
-    	Plane groundPlane = new Plane(Vector3.Up, 0);
-    	Vector3 rayDir = (rayEnd - rayOrigin).Normalized();
 
-		return groundPlane.IntersectsRay(rayOrigin, rayDir);
+	private Vector3? GetIntersection(Vector3 from, Vector3 to)
+	{
+		var space = GetWorld3D().DirectSpaceState;
+		var query = new PhysicsRayQueryParameters3D
+		{
+			From = from,
+			To = to,
+			CollideWithAreas = false,
+			CollideWithBodies = true,
+		};
+		query.Exclude = new Godot.Collections.Array<Rid> { _player.GetRid() };
+
+
+
+		var result = space.IntersectRay(query);
+		if (result.Count > 0 && result.ContainsKey("position"))
+		{
+			return (Vector3)result["position"];
+		}
+		return null;
 	}
 }

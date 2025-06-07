@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=20 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
+[ext_resource type="Script" uid="uid://c688tp6pwfgnk" path="res://src/CleaningSpawner.cs" id="6_ofhqe"]
+[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/level/cleaning_sphere.tscn" id="7_suvuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -44,7 +46,7 @@ emission_energy_multiplier = 5.04
 material = SubResource("StandardMaterial3D_asog6")
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" groups=["cleanable_vacuum"]]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_44gc5")
@@ -93,6 +95,19 @@ mesh = SubResource("BoxMesh_jotil")
 skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
+[node name="StaticBody3D4" type="StaticBody3D" parent="Level"]
+transform = Transform3D(-0.00100741, 0.0214657, 0.0451465, -0.00211646, 0.0450969, -0.0214893, -0.049945, -0.00234399, 2.36863e-10, -4.00262, 0.44303, -0.849921)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_jotil")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_jotil")
+skeleton = NodePath("../../StaticBody3D2")
+surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
+
 [node name="RigidBody3D" type="RigidBody3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86154, 2.11296, 0)
 
@@ -131,13 +146,18 @@ _distance = 0.15
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera/CameraTarget"]
 mesh = SubResource("BoxMesh_mawog")
 
-[node name="MouseTarget" type="Node3D" parent="." node_paths=PackedStringArray("_camera")]
-visible = false
+[node name="MouseTarget" type="Node3D" parent="." node_paths=PackedStringArray("_camera", "_player")]
 script = ExtResource("4_suvuw")
 _camera = NodePath("../Camera/Camera3D")
+_player = NodePath("../Player")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTarget"]
 mesh = SubResource("BoxMesh_mawog")
+
+[node name="CleaningSpawner" type="Node3D" parent="MouseTarget" node_paths=PackedStringArray("_target")]
+script = ExtResource("6_ofhqe")
+_cleaningscene = ExtResource("7_suvuw")
+_target = NodePath("..")
 
 [node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("5_8wjkr")]
 _headtarget = NodePath("../MouseTarget")
