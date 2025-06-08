@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp8fj6wujphhr"]
+
+[ext_resource type="Texture2D" uid="uid://fjmeh14ci4vs" path="res://assets/menu/Title.png" id="1_7a366"]
+[ext_resource type="Texture2D" uid="uid://ww7uln05l322" path="res://assets/icon.svg" id="2_toexd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1929.0
+offset_bottom = 1087.0
+texture = ExtResource("1_7a366")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 604.0
+offset_right = 1173.0
+offset_bottom = 695.0
+text = "Start"
+icon = ExtResource("2_toexd")
+icon_alignment = 1
+
+[node name="OptionsButton" type="Button" parent="."]
+offset_left = 960.0
+offset_top = 754.0
+offset_right = 1173.0
+offset_bottom = 845.0
+text = "Options"
+icon = ExtResource("2_toexd")
+icon_alignment = 1
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 960.0
+offset_top = 904.0
+offset_right = 1173.0
+offset_bottom = 995.0
+text = "Exit"
+icon = ExtResource("2_toexd")
+icon_alignment = 1
