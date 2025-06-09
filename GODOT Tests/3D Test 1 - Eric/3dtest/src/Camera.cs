@@ -17,11 +17,12 @@ public partial class Camera : Node3D
 	{
 		GlobalTransform = new Transform3D(GlobalTransform.Basis, GlobalTransform.Origin.Lerp(_target.GlobalTransform.Origin, _followspeed * (float)delta));
 		_SmoothOrbit(delta);
-	
+
 	}
 
 	void _SmoothOrbit(double delta)
 	{
+		//smoothly orbit in 45 degree increments
 		if (Input.IsActionJustPressed("orbit_left"))
 			_targetangle += Mathf.DegToRad(45);
 		if (Input.IsActionJustPressed("orbit_right"))

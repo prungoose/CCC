@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://go1ix51gk6xl"]
+
+[ext_resource type="Script" uid="uid://c1pb4ne1uxk7k" path="res://src/Vacuumzone.cs" id="1_jmqnw"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmqnw"]
+points = PackedVector3Array(0.0118846, -0.18699, -1.20626, 0.299786, 3.07521, 1.93427, 0.682576, 3.06684, 1.83259, 0.291429, -2.9859, 0.478548, -1.88697, 3.03763, 0.486624, 1.63671, 3.25, -1.10512, -1.1187, 3.01516, -1.5899, -0.548998, -2.99352, 0.105325, 1.83264, 3.06697, 0.6825, 0.482846, -3.01593, -0.270823, -0.930224, 3.0154, 1.70831, 0.486266, 3.03788, -1.88713, -1.80549, 3.06131, -0.753118, -0.355524, -2.94041, -0.44691, 1.63671, 3.25, 1.12893, 1.91812, 3.05004, -0.369123, -0.270756, -3.01503, 0.4831, -1.50145, 3.02717, 1.24148, -0.464675, 3.05183, -1.89584, 0.571904, -2.89528, 0.105181, 0.296197, -3.03684, -0.461955, 1.24147, 3.02723, -1.50148, -0.369084, 3.049, 1.91789, 1.22335, 2.98263, 1.50298, -1.85212, 2.70223, -0.267625, 0.105132, -2.89439, 0.572123, -1.58989, 3.01514, -1.11869, -0.544848, -2.7852, -0.266646, 1.93442, 3.0761, 0.300212, -0.0817682, -3.001, -0.550752, 0.478195, -2.98614, 0.29184, -0.753127, 3.0613, -1.80548)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jmqnw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jtj0b"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmqnw"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.32549)
+proximity_fade_distance = 3.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t20ma"]
+material = SubResource("StandardMaterial3D_jmqnw")
+top_radius = 2.0
+height = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtj0b"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.32549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qsi6i"]
+material = SubResource("StandardMaterial3D_jtj0b")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsi6i"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.32549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jmqnw"]
+material = SubResource("StandardMaterial3D_qsi6i")
+radius = 2.0
+height = 4.0
+
+[node name="Area3D" type="Area3D"]
+collision_layer = 4
+collision_mask = 4
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector3(0, 0.2, -1)
+gravity_direction = Vector3(0, 0.2, -1)
+gravity = 25.0
+script = ExtResource("1_jmqnw")
+_deletedistance = 1.25
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.25)
+shape = SubResource("ConvexPolygonShape3D_jmqnw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jmqnw")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
+shape = SubResource("SphereShape3D_jtj0b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.25)
+mesh = SubResource("CylinderMesh_t20ma")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_qsi6i")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
+mesh = SubResource("SphereMesh_jmqnw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -17,17 +17,17 @@ public partial class MouseTarget : Node3D
 		Vector2 mousePos = GetViewport().GetMousePosition();
 		Vector3 from = _camera.ProjectRayOrigin(mousePos);
 		Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
-		Vector3? pos = GetIntersection(from, to);
+		var result = GetMouseGroundPos(from, to);
 
-		if (pos != null)
+		if (result != null)
 		{
-			this.Position = pos.Value;
+			this.Position = result.Value;
 		}
 
 
 	}
 
-	private Vector3? GetIntersection(Vector3 from, Vector3 to)
+	private Vector3? GetMouseGroundPos(Vector3 from, Vector3 to)
 	{
 		var space = GetWorld3D().DirectSpaceState;
 		var query = new PhysicsRayQueryParameters3D
@@ -36,10 +36,8 @@ public partial class MouseTarget : Node3D
 			To = to,
 			CollideWithAreas = false,
 			CollideWithBodies = true,
+			CollisionMask = 1 << 1
 		};
-		query.Exclude = new Godot.Collections.Array<Rid> { _player.GetRid() };
-
-
 
 		var result = space.IntersectRay(query);
 		if (result.Count > 0 && result.ContainsKey("position"))

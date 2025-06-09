@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b204gjbgamu82"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mawog"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_b56k5"]
+radius = 0.2
+height = 0.4
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["cleanable_vacuum"]]
+collision_layer = 5
+max_contacts_reported = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_mawog")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_b56k5")
