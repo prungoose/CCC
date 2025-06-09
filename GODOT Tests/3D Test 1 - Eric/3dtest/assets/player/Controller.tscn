@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://jyicx8h0utos"]
+[gd_scene load_steps=12 format=3 uid="uid://jyicx8h0utos"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bptfaku15yjek" path="res://assets/player/test spritesheet.png" id="2_hsahs"]
-[ext_resource type="Script" uid="uid://dk8uew1r7ueqn" path="res://assets/player/Label3d.cs" id="3_rlquk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 1.8, 1)
@@ -204,9 +203,3 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
 mesh = SubResource("CylinderMesh_lbbhj")
 skeleton = NodePath("../../WorldModel")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96719, 0)
-billboard = 1
-font_size = 64
-script = ExtResource("3_rlquk")

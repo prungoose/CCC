@@ -30,6 +30,7 @@ icon = ExtResource("2_toexd")
 icon_alignment = 1
 
 [node name="OptionsButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 960.0
 offset_top = 754.0
 offset_right = 1173.0
@@ -39,6 +40,7 @@ icon = ExtResource("2_toexd")
 icon_alignment = 1
 
 [node name="ExitButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 960.0
 offset_top = 904.0
 offset_right = 1173.0

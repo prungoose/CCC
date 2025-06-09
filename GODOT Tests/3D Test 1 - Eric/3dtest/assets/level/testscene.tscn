@@ -1,12 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=18 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
-[ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
-[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/level/vacuumzone.tscn" id="7_suvuw"]
+[ext_resource type="Script" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
 [ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
@@ -144,7 +143,6 @@ mesh = SubResource("CylinderMesh_ofhqe")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461197, 0.0141516, -0.0109234)
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
-_vacuumzone = ExtResource("7_suvuw")
 
 [node name="trash spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)

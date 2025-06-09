@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://bva6mcck4gd4x"]
+
+[ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_ipep8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wg1f7"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aibhc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mhhf2"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1m5w"]
+albedo_texture = ExtResource("1_ipep8")
+uv1_scale = Vector3(-0.25, -0.25, -0.25)
+uv1_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ipep8"]
+
+[sub_resource type="Sky" id="Sky_jotil"]
+sky_material = SubResource("ProceduralSkyMaterial_ipep8")
+
+[sub_resource type="Environment" id="Environment_wg1f7"]
+background_mode = 2
+sky = SubResource("Sky_jotil")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Combustibles" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Combustibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Combustibles"]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_mhhf2")
+surface_material_override/0 = SubResource("StandardMaterial3D_q1m5w")
+
+[node name="Non-Combustibles" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Non-Combustibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Non-Combustibles"]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="Recycleables" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Recycleables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Recycleables"]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wg1f7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 28.3337, 0)
+shadow_enabled = true
+shadow_blur = 0.25
