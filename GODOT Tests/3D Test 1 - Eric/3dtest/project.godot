@@ -27,6 +27,7 @@ project/assembly_name="3DTest"
 [global_group]
 
 cleanable_vacuum=""
+ground=""
 
 [input]
 

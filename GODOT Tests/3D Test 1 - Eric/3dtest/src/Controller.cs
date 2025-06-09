@@ -14,8 +14,11 @@ public partial class Controller : CharacterBody3D
 	[Export] private float _mass = .2f;
 	[Export] public Node3D _headtarget;
 	[Export] public Node3D _campivot;
+	[Export] public PackedScene _vacuumzone;
+	public int _tankpercentage = 0;
 	private Node3D _head;
 	private AnimationPlayer _anim;
+	private Area3D _vacuum;
 	bool face_left = false;
 
 	public override void _Ready()
@@ -26,14 +29,69 @@ public partial class Controller : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		GD.Print(_tankpercentage);
 		_Movement((float)delta);
-		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Forward);
 		_HandleCollisions();
 
 	}
 
 	public override void _Process(double delta)
 	{
+		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Forward);
+		_HandleAnimations();
+		_HandleControls();
+
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+
+
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+
+	}
+
+	private void _Movement(float delta)
+	{
+		//get input direction, align it to camera, move that direction
+		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		Godot.Vector3 dir = new Godot.Vector3(inputdir.X, 0, inputdir.Y);
+		dir = new Basis(Godot.Vector3.Up, _campivot.Rotation.Y + Mathf.DegToRad(-45)) * dir;
+
+		if (dir != Godot.Vector3.Zero)
+		{
+			_velocity = _velocity.Lerp(dir * _movespeed, (float)delta * _accel);
+		}
+		else
+		{
+			_velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
+		}
+		_velocity.Y -= 100 * (float)delta;
+		Velocity = _velocity;
+		MoveAndSlide();
+
+	}
+
+	private void _HandleCollisions()
+	{
+		//push away stuff collided with
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var col = GetSlideCollision(i);
+			if (col.GetCollider() is RigidBody3D rigidbody)
+			{
+				Godot.Vector3 pushdir = col.GetNormal() * -1;
+				rigidbody.ApplyCentralImpulse(pushdir * _mass);
+			}
+		}
+	}
+
+	private void _HandleAnimations()
+	{
+		//play the right animation based on player input
 		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
 		if (inputdir.X != 0)
@@ -65,53 +123,35 @@ public partial class Controller : CharacterBody3D
 		{
 			_anim.Play("idle");
 		}
-
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
+	private void _HandleControls()
 	{
-
-
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-
-	}
-
-	private void _Movement(float delta)
-	{
-		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		Godot.Vector3 dir = new Godot.Vector3(inputdir.X, 0, inputdir.Y);
-		dir = new Basis(Godot.Vector3.Up, _campivot.Rotation.Y + Mathf.DegToRad(-45)) * dir;
-
-		if (dir != Godot.Vector3.Zero)
+		if (Input.IsActionJustPressed("m1"))
 		{
-			_velocity = _velocity.Lerp(dir * _movespeed, (float)delta * _accel);
+			_vacuum = _vacuumzone.Instantiate<Area3D>();
+			this.AddChild(_vacuum);
 		}
-		else
+		else if (Input.IsActionJustReleased("m1"))
 		{
-			_velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
+			_vacuum.QueueFree();
+			_vacuum = null;
 		}
-		_velocity.Y -= 100 * (float)delta;
-		Velocity = _velocity;
-		MoveAndSlide();
 
-	}
-
-	private void _HandleCollisions()
-	{
-		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		if (_vacuum != null)
 		{
-			var col = GetSlideCollision(i);
-			if (col.GetCollider() is RigidBody3D rigidbody)
-			{
-				Godot.Vector3 pushdir = col.GetNormal() * -1;
-				rigidbody.ApplyCentralImpulse(pushdir * _mass);
-			}
+			_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+
 		}
 	}
 
+	private void _addpercent(int value)
+	{
+		_tankpercentage += value;
+	}
 
-
+	private int _gettankpercent()
+	{
+		return _tankpercentage;
+	}
 }

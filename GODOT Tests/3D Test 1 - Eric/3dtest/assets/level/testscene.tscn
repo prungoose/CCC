@@ -1,12 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=19 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
-[ext_resource type="Script" uid="uid://c688tp6pwfgnk" path="res://src/CleaningSpawner.cs" id="6_ofhqe"]
-[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/level/cleaning_sphere.tscn" id="7_suvuw"]
+[ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
+[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/level/vacuumzone.tscn" id="7_suvuw"]
+[ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -28,14 +29,6 @@ albedo_texture = ExtResource("1_4nu0a")
 uv1_scale = Vector3(-0.25, -0.25, -0.25)
 uv1_triplanar = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_mawog"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_b56k5"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mawog"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_b56k5"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asog6"]
 albedo_color = Color(0.162066, 0.162066, 0.162066, 1)
 emission_enabled = true
@@ -45,6 +38,16 @@ emission_energy_multiplier = 5.04
 [sub_resource type="BoxMesh" id="BoxMesh_mawog"]
 material = SubResource("StandardMaterial3D_asog6")
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofhqe"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.992157, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ofhqe"]
+material = SubResource("StandardMaterial3D_ofhqe")
+top_radius = 0.32
+height = 0.155
 
 [node name="Node3D" type="Node3D" groups=["cleanable_vacuum"]]
 
@@ -59,13 +62,14 @@ shadow_blur = 0.25
 [node name="Level" type="Node3D" parent="."]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_jotil")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727954, -0.569995, 0.000700474)
 mesh = SubResource("BoxMesh_jotil")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
@@ -108,25 +112,6 @@ mesh = SubResource("BoxMesh_jotil")
 skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86154, 2.11296, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RigidBody3D"]
-shape = SubResource("SphereShape3D_mawog")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/RigidBody3D"]
-mesh = SubResource("SphereMesh_b56k5")
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99287, 2.54703, 2.20663)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/RigidBody3D2"]
-shape = SubResource("BoxShape3D_mawog")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/RigidBody3D2"]
-mesh = SubResource("BoxMesh_b56k5")
-skeleton = NodePath("../../RigidBody3D2")
-
 [node name="Camera" type="Node3D" parent="." node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
@@ -147,18 +132,21 @@ _distance = 0.15
 mesh = SubResource("BoxMesh_mawog")
 
 [node name="MouseTarget" type="Node3D" parent="." node_paths=PackedStringArray("_camera", "_player")]
+visible = false
 script = ExtResource("4_suvuw")
 _camera = NodePath("../Camera/Camera3D")
 _player = NodePath("../Player")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTarget"]
-mesh = SubResource("BoxMesh_mawog")
-
-[node name="CleaningSpawner" type="Node3D" parent="MouseTarget" node_paths=PackedStringArray("_target")]
-script = ExtResource("6_ofhqe")
-_cleaningscene = ExtResource("7_suvuw")
-_target = NodePath("..")
+mesh = SubResource("CylinderMesh_ofhqe")
 
 [node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("5_8wjkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461197, 0.0141516, -0.0109234)
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
+_vacuumzone = ExtResource("7_suvuw")
+
+[node name="trash spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
+script = ExtResource("7_ofhqe")
+_spawn = ExtResource("8_suvuw")
