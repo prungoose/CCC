@@ -11,14 +11,16 @@ public partial class Controller : CharacterBody3D
 	[Export] private float _movespeed = 10;
 	[Export] private float _accel = 7.5f;
 	[Export] private float _fric = 10;
-	[Export] private float _mass = .2f;
+	[Export] private float _pushforce = 5f;
 	[Export] public Node3D _headtarget;
 	[Export] public Node3D _campivot;
 	[Export] public PackedScene _vacuumzone;
+	[Export] public Control _ui;
 	public int _tankpercentage = 0;
 	private Node3D _head;
 	private AnimationPlayer _anim;
 	private Area3D _vacuum;
+	bool phone = false;
 	bool face_left = false;
 
 	public override void _Ready()
@@ -29,14 +31,17 @@ public partial class Controller : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		GD.Print(_tankpercentage);
-		_Movement((float)delta);
-		_HandleCollisions();
+
+		_HandleCollisions((float)delta);
 
 	}
 
 	public override void _Process(double delta)
 	{
+		if (!phone)
+		{
+			_Movement((float)delta);
+		}
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Forward);
 		_HandleAnimations();
 		_HandleControls();
@@ -46,7 +51,27 @@ public partial class Controller : CharacterBody3D
 	public override void _UnhandledInput(InputEvent @event)
 	{
 
-
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed && phone)
+		{
+			switch (keyEvent.PhysicalKeycode)
+			{
+				case Key.W:
+					_ui.Call("_dial", '↑');
+					break;
+				case Key.S:
+					_ui.Call("_dial", '↓');
+					break;
+				case Key.A:
+					_ui.Call("_dial", '←');
+					break;
+				case Key.D:
+					_ui.Call("_dial", '→');
+					break;
+				case Key.Space:
+					_ui.Call("_dial", ' ');
+					break;
+			}
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -75,7 +100,7 @@ public partial class Controller : CharacterBody3D
 
 	}
 
-	private void _HandleCollisions()
+	private void _HandleCollisions(float delta)
 	{
 		//push away stuff collided with
 		for (int i = 0; i < GetSlideCollisionCount(); i++)
@@ -84,7 +109,7 @@ public partial class Controller : CharacterBody3D
 			if (col.GetCollider() is RigidBody3D rigidbody)
 			{
 				Godot.Vector3 pushdir = col.GetNormal() * -1;
-				rigidbody.ApplyCentralImpulse(pushdir * _mass);
+				rigidbody.ApplyCentralImpulse(pushdir * _pushforce * delta);
 			}
 		}
 	}
@@ -94,7 +119,12 @@ public partial class Controller : CharacterBody3D
 		//play the right animation based on player input
 		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-		if (inputdir.X != 0)
+		if (phone)
+		{
+			_anim.Play("idle");
+		}
+
+		else if (inputdir.X != 0)
 		{
 			if (inputdir.X > 0)
 			{
@@ -127,22 +157,41 @@ public partial class Controller : CharacterBody3D
 
 	private void _HandleControls()
 	{
-		if (Input.IsActionJustPressed("m1"))
+		if (Input.IsActionJustPressed("phone"))
 		{
-			_vacuum = _vacuumzone.Instantiate<Area3D>();
-			this.AddChild(_vacuum);
-		}
-		else if (Input.IsActionJustReleased("m1"))
-		{
-			_vacuum.QueueFree();
-			_vacuum = null;
+			phone = !phone;
+			_ui.Call("_updatephone", phone);
+			if (_vacuum != null)
+			{
+				_vacuum.QueueFree();
+				_vacuum = null;
+			}
 		}
 
-		if (_vacuum != null)
+		if (phone)
 		{
-			_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
-
+			_velocity = Godot.Vector3.Zero;
 		}
+		else
+		{
+			if (Input.IsActionJustPressed("m1"))
+			{
+				_vacuum = _vacuumzone.Instantiate<Area3D>();
+				this.AddChild(_vacuum);
+			}
+			else if (Input.IsActionJustReleased("m1") && _vacuum != null)
+			{
+				_vacuum.QueueFree();
+				_vacuum = null;
+			}
+
+			if (_vacuum != null)
+			{
+				_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+
+			}
+		}
+
 	}
 
 	private void _addpercent(int value)
@@ -154,4 +203,7 @@ public partial class Controller : CharacterBody3D
 	{
 		return _tankpercentage;
 	}
+
+
+
 }

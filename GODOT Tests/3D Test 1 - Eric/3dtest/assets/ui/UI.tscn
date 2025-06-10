@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxp72rj3a11g4"]
+
+[ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
+[ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6u48x"]
+bg_color = Color(1, 0.305882, 0.290196, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4b2l8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Phone" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 1547.0
+offset_top = 1590.0
+offset_right = 1548.0
+offset_bottom = 1591.0
+
+[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
+scale = Vector2(1.9321, 1.9321)
+texture = ExtResource("1_22xga")
+
+[node name="Label" type="Label" parent="Phone/PhoneSprite"]
+offset_left = 15.0096
+offset_top = -118.006
+offset_right = 216.01
+offset_bottom = 192.994
+rotation = 0.260187
+scale = Vector2(0.33148, 0.317913)
+label_settings = SubResource("LabelSettings_6u48x")
+autowrap_mode = 1
+clip_text = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+offset_left = 1821.0
+offset_top = 764.0
+offset_right = 1897.0
+offset_bottom = 1061.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_6u48x")
+fill_mode = 3

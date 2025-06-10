@@ -5,7 +5,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_b56k5"]
 
 [node name="RigidBody3D2" type="RigidBody3D"]
-collision_layer = 5
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mawog")

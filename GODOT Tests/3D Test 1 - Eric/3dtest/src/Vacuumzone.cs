@@ -7,6 +7,7 @@ public partial class Vacuumzone : Area3D
 
 	private CharacterBody3D _player;
 	private List<RigidBody3D> _bodies;
+	private Area3D _fast;
 	[Export] private float _deletedistance = 1.5f;
 
 
@@ -15,12 +16,20 @@ public partial class Vacuumzone : Area3D
 	{
 		_player = GetParent<CharacterBody3D>();
 		_bodies = new List<RigidBody3D>();
+		_fast = GetNode<Area3D>("fast");
 	}
 
 
 	public override void _Process(double delta)
 	{
-		//GD.Print(_bodies.Count);
+		if ((int)_player.Call("_gettankpercent") == 100)
+		{
+			_fast.Gravity = 0;
+		}
+		else
+		{
+			_fast.Gravity = 40;
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -30,7 +39,7 @@ public partial class Vacuumzone : Area3D
 		{
 			RigidBody3D body = _bodies[i];
 			Vector3 vec = body.GlobalPosition - _player.GlobalPosition;
-			if (vec.Length() <= _deletedistance && (int)_player.Call("_gettankpercent") < 100000)
+			if (vec.Length() <= _deletedistance && (int)_player.Call("_gettankpercent") < 100)
 			{
 				_bodies.Remove(body);
 				body.QueueFree();
@@ -49,5 +58,6 @@ public partial class Vacuumzone : Area3D
 	{
 		_bodies.Remove((RigidBody3D)body);
 	}
+	
 	
 }
