@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jyicx8h0utos"]
+[gd_scene load_steps=11 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bptfaku15yjek" path="res://assets/player/test spritesheet.png" id="2_hsahs"]

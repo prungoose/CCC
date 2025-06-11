@@ -9,6 +9,7 @@
 texture = ExtResource("1_7a366")
 
 [sub_resource type="SystemFont" id="SystemFont_hheb7"]
+subpixel_positioning = 0
 
 [sub_resource type="FontVariation" id="FontVariation_e3vxt"]
 base_font = SubResource("SystemFont_hheb7")

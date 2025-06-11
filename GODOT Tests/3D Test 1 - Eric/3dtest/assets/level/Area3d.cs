@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
-public partial class TrashBin : RigidBody3D
+public partial class Area3d : Area3D
 {
 	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 	}
@@ -13,8 +15,8 @@ public partial class TrashBin : RigidBody3D
 	{
 	}
 
-	private void _TouchBin()
+	public void _on_body_entered(Node3D body)
 	{
-		GetTree().ChangeSceneToFile("res://assets/level/minigame.tscn");
+		GD.Print("hallo");
 	}
 }

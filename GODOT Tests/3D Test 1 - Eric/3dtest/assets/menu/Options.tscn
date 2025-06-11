@@ -110,6 +110,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sxq6w")
 
 [node name="TimerButton" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = 775.0
 offset_top = 791.0
 offset_right = 1265.0
@@ -136,6 +137,7 @@ popup/item_3/text = "2:00"
 popup/item_3/id = 0
 
 [node name="LanguageButton" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = 775.0
 offset_top = 615.0
 offset_right = 1265.0
