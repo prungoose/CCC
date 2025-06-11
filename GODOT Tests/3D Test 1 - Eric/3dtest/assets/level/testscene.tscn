@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=21 format=3 uid="uid://bc07qh3pxn6kk"]
+=======
+[gd_scene load_steps=20 format=3 uid="uid://bc07qh3pxn6kk"]
+>>>>>>> main
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
@@ -6,8 +10,13 @@
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://domm6upsiu5dl" path="res://assets/level/TrashBin.cs" id="8_8wjkr"]
+=======
+[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="7_suvuw"]
+>>>>>>> main
 [ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
+[ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -144,16 +153,22 @@ _player = NodePath("../Player")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTarget"]
 mesh = SubResource("CylinderMesh_ofhqe")
 
-[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("5_8wjkr")]
+[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461197, 0.0141516, -0.0109234)
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
+<<<<<<< HEAD
+=======
+_vacuumzone = ExtResource("7_suvuw")
+_ui = NodePath("../UI")
+>>>>>>> main
 
 [node name="trash spawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
 script = ExtResource("7_ofhqe")
 _spawn = ExtResource("8_suvuw")
 
+<<<<<<< HEAD
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
 mass = 1000.0
@@ -186,3 +201,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 
 [connection signal="body_shape_entered" from="RigidBody3D" to="RigidBody3D" method="_TouchBin"]
+=======
+[node name="UI" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
+_player = NodePath("../Player")
+>>>>>>> main

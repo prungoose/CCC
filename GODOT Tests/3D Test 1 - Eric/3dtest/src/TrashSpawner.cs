@@ -19,7 +19,7 @@ public partial class TrashSpawner : Node3D
 			this.AddChild(_spawn.Instantiate<RigidBody3D>());
 			acc -= 0.2f;
 		}
-		
+
 		{
 			acc += (float)delta;
 		}

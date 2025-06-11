@@ -39,6 +39,10 @@ public partial class MouseTarget : Node3D
 			CollisionMask = 1 << 1
 		};
 
+		query.Exclude = new Godot.Collections.Array<Rid> { _player.GetRid() };
+
+
+
 		var result = space.IntersectRay(query);
 		if (result.Count > 0 && result.ContainsKey("position"))
 		{

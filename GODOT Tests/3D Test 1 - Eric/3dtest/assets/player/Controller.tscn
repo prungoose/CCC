@@ -1,12 +1,14 @@
+<<<<<<< HEAD
 [gd_scene load_steps=12 format=3 uid="uid://jyicx8h0utos"]
+=======
+[gd_scene load_steps=11 format=3 uid="uid://jyicx8h0utos"]
+>>>>>>> main
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bptfaku15yjek" path="res://assets/player/test spritesheet.png" id="2_hsahs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 1.8, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_lbbhj"]
 
 [sub_resource type="Animation" id="Animation_rlquk"]
 length = 0.001
@@ -172,11 +174,6 @@ shape = SubResource("BoxShape3D_hsahs")
 
 [node name="WorldModel" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194504, 0.0224304, -0.256992)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00568342, 1.01113, -0.00297737)
-visible = false
-mesh = SubResource("CapsuleMesh_lbbhj")
 
 [node name="Sprite3D" type="Sprite3D" parent="WorldModel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187, 1.175, 0.255)
