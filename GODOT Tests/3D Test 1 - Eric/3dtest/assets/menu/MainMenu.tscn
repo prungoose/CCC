@@ -1,7 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=12 format=3 uid="uid://bp8fj6wujphhr"]
 
 [ext_resource type="Texture2D" uid="uid://fjmeh14ci4vs" path="res://assets/menu/Title.png" id="1_7a366"]
-[ext_resource type="Texture2D" uid="uid://ww7uln05l322" path="res://assets/icon.svg" id="2_toexd"]
+[ext_resource type="Script" uid="uid://ydjvpr3yqgfm" path="res://assets/menu/StartButton.cs" id="2_toexd"]
+[ext_resource type="Script" uid="uid://dl7nh8sxdxxae" path="res://assets/menu/ExitButton.cs" id="3_aid4m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aid4m"]
+texture = ExtResource("1_7a366")
+
+[sub_resource type="SystemFont" id="SystemFont_hheb7"]
+
+[sub_resource type="FontVariation" id="FontVariation_e3vxt"]
+base_font = SubResource("SystemFont_hheb7")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toexd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oaxce"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhy4u"]
+bg_color = Color(0.838897, 0.838897, 0.838897, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfoks"]
+bg_color = Color(0.617455, 0.617455, 0.617455, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5d6s"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,40 +54,79 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1929.0
-offset_bottom = 1087.0
-texture = ExtResource("1_7a366")
-expand_mode = 3
-stretch_mode = 3
+[node name="Title" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_aid4m")
 
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 960.0
-offset_top = 604.0
-offset_right = 1173.0
-offset_bottom = 695.0
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -343.0
+offset_top = -560.0
+offset_right = 343.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_e3vxt")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
 text = "Start"
-icon = ExtResource("2_toexd")
 icon_alignment = 1
+script = ExtResource("2_toexd")
 
-[node name="OptionsButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 960.0
-offset_top = 754.0
-offset_right = 1173.0
-offset_bottom = 845.0
+[node name="OptionsButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_e3vxt")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
 text = "Options"
-icon = ExtResource("2_toexd")
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 960.0
-offset_top = 904.0
-offset_right = 1173.0
-offset_bottom = 995.0
+[node name="ExitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_e3vxt")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
 text = "Exit"
-icon = ExtResource("2_toexd")
 icon_alignment = 1
+script = ExtResource("3_aid4m")
+
+[connection signal="pressed" from="Buttons/StartButton" to="Buttons/StartButton" method="_StartButtonPressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="Buttons/ExitButton" method="_ExitButtonPressed"]
