@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=10 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
 
@@ -6,7 +6,7 @@
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxq6w"]
-bg_color = Color(0.775063, 0.775063, 0.775063, 1)
+bg_color = Color(0.635799, 0.6358, 0.635799, 1)
 border_width_left = 15
 border_width_top = 15
 border_width_right = 15
@@ -17,16 +17,17 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fypi"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fypi"]
-bg_color = Color(0.587078, 0.587078, 0.587078, 1)
+bg_color = Color(0.533037, 0.533037, 0.533037, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbmmy"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sxq6w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtj14"]
 bg_color = Color(0.402349, 0.79691, 0.699831, 1)
@@ -86,6 +87,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 6.0
+offset_right = 45.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 100
@@ -98,16 +103,17 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sxq6w")
 
 [node name="TimerButton" type="OptionButton" parent="."]
-offset_left = 781.0
-offset_top = 732.0
-offset_right = 1271.0
-offset_bottom = 852.0
+offset_left = 775.0
+offset_top = 791.0
+offset_right = 1265.0
+offset_bottom = 911.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1fypi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
@@ -123,18 +129,19 @@ popup/item_3/text = "2:00"
 popup/item_3/id = 0
 
 [node name="LanguageButton" type="OptionButton" parent="."]
-offset_left = 780.0
-offset_top = 563.0
-offset_right = 1270.0
-offset_bottom = 683.0
+offset_left = 775.0
+offset_top = 615.0
+offset_right = 1265.0
+offset_bottom = 735.0
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1fypi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_nbmmy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
 selected = 3
 item_count = 2
@@ -154,30 +161,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sxq6w")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wtj14")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xygxo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
 text = "<="
 script = ExtResource("1_1fypi")
-
-[node name="OptionsDesc" type="TextEdit" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 200.0
-offset_top = -316.5
-offset_right = 690.0
-offset_bottom = 316.5
-grow_vertical = 2
-theme_override_font_sizes/font_size = 60
-text = "Volume
-
-SFX
-
-Language
-
-Timer"
 
 [node name="OptionsLabel" type="Label" parent="."]
 layout_mode = 1
@@ -194,5 +183,42 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
 text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 214.0
+offset_top = -282.0
+offset_right = 750.0
+offset_bottom = 431.0
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 100
+
+[node name="Volume" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Sound Effects" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Sound Effects"
+horizontal_alignment = 1
+
+[node name="Language" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Language"
+horizontal_alignment = 1
+
+[node name="Timer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Timer"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]
