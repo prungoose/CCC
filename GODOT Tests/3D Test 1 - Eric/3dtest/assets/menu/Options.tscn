@@ -1,0 +1,198 @@
+[gd_scene load_steps=9 format=3 uid="uid://cm5rd518ga13s"]
+
+[ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
+bg_color = Color(0.741176, 0.811765, 0.843137, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxq6w"]
+bg_color = Color(0.775063, 0.775063, 0.775063, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fypi"]
+bg_color = Color(0.587078, 0.587078, 0.587078, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbmmy"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtj14"]
+bg_color = Color(0.402349, 0.79691, 0.699831, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.80687, 0.80687, 0.80687, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xygxo"]
+bg_color = Color(0.344832, 0.724022, 0.632316, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.695503, 0.695503, 0.695503, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5wrm"]
+bg_color = Color(0.494118, 0.878431, 0.780392, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3tk4e")
+
+[node name="Border" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="Border"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sxq6w")
+
+[node name="TimerButton" type="OptionButton" parent="."]
+offset_left = 781.0
+offset_top = 732.0
+offset_right = 1271.0
+offset_bottom = 852.0
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
+selected = 3
+item_count = 4
+popup/item_0/text = "0:30"
+popup/item_0/id = 3
+popup/item_1/text = "1:00"
+popup/item_1/id = 2
+popup/item_2/text = "1:30"
+popup/item_2/id = 1
+popup/item_3/text = "2:00"
+popup/item_3/id = 0
+
+[node name="LanguageButton" type="OptionButton" parent="."]
+offset_left = 780.0
+offset_top = 563.0
+offset_right = 1270.0
+offset_bottom = 683.0
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nbmmy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
+selected = 3
+item_count = 2
+popup/item_0/text = "Japanese"
+popup/item_0/id = 1
+popup/item_1/text = "English"
+popup/item_1/id = 0
+
+[node name="MainMenuButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 134.0
+offset_top = 58.0
+offset_right = 305.0
+offset_bottom = 212.0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/hover = SubResource("StyleBoxFlat_wtj14")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xygxo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
+text = "<="
+script = ExtResource("1_1fypi")
+
+[node name="OptionsDesc" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = -316.5
+offset_right = 690.0
+offset_bottom = 316.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Volume
+
+SFX
+
+Language
+
+Timer"
+
+[node name="OptionsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 25.0
+offset_right = 240.0
+offset_bottom = 202.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]

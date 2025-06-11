@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=13 format=3 uid="uid://bp8fj6wujphhr"]
 
 [ext_resource type="Texture2D" uid="uid://fjmeh14ci4vs" path="res://assets/menu/Title.png" id="1_7a366"]
 [ext_resource type="Script" uid="uid://ydjvpr3yqgfm" path="res://assets/menu/StartButton.cs" id="2_toexd"]
 [ext_resource type="Script" uid="uid://dl7nh8sxdxxae" path="res://assets/menu/ExitButton.cs" id="3_aid4m"]
+[ext_resource type="Script" uid="uid://b0esanefjn1cc" path="res://assets/menu/OptionsButton.cs" id="3_hheb7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aid4m"]
 texture = ExtResource("1_7a366")
@@ -110,6 +111,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
 text = "Options"
 icon_alignment = 1
+script = ExtResource("3_hheb7")
 
 [node name="ExitButton" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -129,4 +131,5 @@ icon_alignment = 1
 script = ExtResource("3_aid4m")
 
 [connection signal="pressed" from="Buttons/StartButton" to="Buttons/StartButton" method="_StartButtonPressed"]
+[connection signal="pressed" from="Buttons/OptionsButton" to="Buttons/OptionsButton" method="_OptionsButtonPressed"]
 [connection signal="pressed" from="Buttons/ExitButton" to="Buttons/ExitButton" method="_ExitButtonPressed"]

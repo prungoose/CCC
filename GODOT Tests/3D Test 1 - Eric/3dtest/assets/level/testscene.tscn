@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=21 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://jyicx8h0utos" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
+[ext_resource type="Script" uid="uid://domm6upsiu5dl" path="res://assets/level/TrashBin.cs" id="8_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
@@ -47,6 +48,10 @@ emission = Color(0, 0.992157, 0, 1)
 material = SubResource("StandardMaterial3D_ofhqe")
 top_radius = 0.32
 height = 0.155
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ofhqe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_suvuw"]
 
 [node name="Node3D" type="Node3D" groups=["cleanable_vacuum"]]
 
@@ -148,3 +153,18 @@ _campivot = NodePath("../Camera")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
 script = ExtResource("7_ofhqe")
 _spawn = ExtResource("8_suvuw")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
+mass = 1000.0
+script = ExtResource("8_8wjkr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_ofhqe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_suvuw")
+
+[connection signal="body_shape_entered" from="RigidBody3D" to="RigidBody3D" method="_TouchBin"]

@@ -77,3 +77,6 @@ environment = SubResource("Environment_wg1f7")
 transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 28.3337, 0)
 shadow_enabled = true
 shadow_blur = 0.25
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.434162, 0.900835, 0, -0.900835, 0.434162, 0, 10.4841, 5.50526)
