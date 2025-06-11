@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=13 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
 
@@ -65,6 +65,17 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1fypi"]
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sxq6w"]
+color = Color(0.494118, 0.878431, 0.780392, 1)
+thickness = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f5wrm"]
+color = Color(0.494118, 0.878431, 0.780392, 1)
+thickness = 10
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -87,10 +98,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 45.0
-offset_top = 6.0
-offset_right = 45.0
-offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 100
@@ -143,7 +150,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1fypi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
-selected = 3
+selected = 1
 item_count = 2
 popup/item_0/text = "Japanese"
 popup/item_0/id = 1
@@ -165,7 +172,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sxq6w")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wtj14")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xygxo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
-text = "<="
+text = "<"
 script = ExtResource("1_1fypi")
 
 [node name="OptionsLabel" type="Label" parent="."]
@@ -220,5 +227,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Timer"
 horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 774.0
+offset_top = 297.0
+offset_right = 1716.0
+offset_bottom = 529.0
+theme_override_constants/separation = 160
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
+
+[node name="SoundEffectsSlider" type="HSlider" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
 
 [connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]
