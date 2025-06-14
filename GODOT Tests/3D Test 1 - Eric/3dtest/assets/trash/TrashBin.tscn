@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cklsw1rjdbip0"]
 
-[ext_resource type="Script" uid="uid://bfdvi74gs5bro" path="res://assets/player/TrashBin.cs" id="1_pfhd3"]
+[ext_resource type="Script" uid="uid://bfdvi74gs5bro" path="res://src/TrashBin.cs" id="1_pfhd3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2ov1"]
 
