@@ -122,6 +122,7 @@ script = ExtResource("3_ki1gq")
 
 [node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
 process_mode = 2
+visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="PauseButton" to="PauseButton" method="PauseButtonPressed"]
+[connection signal="pressed" from="PauseButton" to="PauseButton" method="Paused"]

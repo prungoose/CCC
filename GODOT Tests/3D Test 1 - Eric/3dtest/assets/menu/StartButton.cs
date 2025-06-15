@@ -7,8 +7,9 @@ public partial class StartButton : Button
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_pauseScreen = GetNode<Control>("res://assets/ui/pause_screen.tscn");
-		_pauseScreen.Hide();
+		var parent = GetParent<Container>();
+		_pauseScreen = parent.GetParent<Control>();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,5 +20,6 @@ public partial class StartButton : Button
 	private void _StartButtonPressed()
 	{
 		GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
+		_pauseScreen.Hide();
 	}
 }

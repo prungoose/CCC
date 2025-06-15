@@ -7,7 +7,9 @@ public partial class ResumeButton : Button
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_pauseScreen = GetNode<Control>("res://assets/ui/pause_screen.tscn");
+		var parent = GetParent<Container>();
+		_pauseScreen = parent.GetParent<Control>();
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,6 +20,6 @@ public partial class ResumeButton : Button
 	public void Play()
 	{
 		GetTree().Paused = false;
-		GetNode<Control>("PauseScreen").Hide();
+		_pauseScreen.Hide();
 	}
 }

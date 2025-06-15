@@ -7,7 +7,8 @@ public partial class PauseButton : Button
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_pauseScreen = GetNode<Control>("res://assets/ui/pause_screen.tscn");
+		var parent = GetParent<Control>();
+		_pauseScreen = parent.GetNode<Control>("PauseScreen");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
