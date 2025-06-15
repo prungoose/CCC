@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PauseButton : Button
+public partial class ResumeButton : Button
 {
 	private Control _pauseScreen;
 	// Called when the node enters the scene tree for the first time.
@@ -15,9 +15,9 @@ public partial class PauseButton : Button
 	{
 	}
 
-	public void Paused()
+	public void Play()
 	{
-		GetTree().Paused = true;
-		_pauseScreen.Show();
+		GetTree().Paused = false;
+		GetNode<Control>("PauseScreen").Hide();
 	}
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=11 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
+[ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
 font_size = 50
@@ -118,5 +119,9 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_um4x4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ie8hw")
 text = "M"
 script = ExtResource("3_ki1gq")
+
+[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
+process_mode = 2
+layout_mode = 1
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="PauseButtonPressed"]

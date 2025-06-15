@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmfwxtxydwese"]
+[gd_scene load_steps=8 format=3 uid="uid://bmfwxtxydwese"]
 
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_p7ktw"]
+[ext_resource type="Script" uid="uid://cwh20xf1vxbye" path="res://assets/ui/ResumeButton.cs" id="2_mg1la"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7ktw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42rq1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg1la"]
 bg_color = Color(0.868985, 0.868985, 0.868985, 1)
@@ -21,6 +22,8 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 shadow_size = 7
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7ktw"]
 
 [node name="PauseScreen" type="Control"]
 layout_mode = 3
@@ -46,14 +49,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -381.5
-offset_top = -163.5
-offset_right = 381.5
-offset_bottom = 163.5
+offset_left = -381.0
+offset_top = -163.0
+offset_right = 382.0
+offset_bottom = 239.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_42rq1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mg1la")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
+text = "Resume"
+script = ExtResource("2_mg1la")
 
 [node name="InGameOptionsButton" type="Button" parent="Container"]
 layout_mode = 2
@@ -81,7 +98,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
 text = "Quit Level"
 
-[node name="Label" type="Label" parent="."]
+[node name="PauseTitle" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -95,3 +112,5 @@ theme_override_font_sizes/font_size = 100
 text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="Container/ResumeButton" to="Container/ResumeButton" method="Play"]
