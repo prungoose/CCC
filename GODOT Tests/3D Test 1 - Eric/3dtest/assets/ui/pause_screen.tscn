@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmfwxtxydwese"]
+[gd_scene load_steps=12 format=3 uid="uid://bmfwxtxydwese"]
 
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_p7ktw"]
 [ext_resource type="Script" uid="uid://cwh20xf1vxbye" path="res://assets/ui/ResumeButton.cs" id="2_mg1la"]
+[ext_resource type="Script" uid="uid://dug6advdwnfns" path="res://assets/ui/QuitLevelButton.cs" id="3_42rq1"]
+[ext_resource type="Script" uid="uid://cmwxxildyoaa1" path="res://assets/ui/InGameOptionsButton.cs" id="3_a7jig"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42rq1"]
 
@@ -22,6 +24,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 shadow_size = 7
+
+[sub_resource type="InputEventKey" id="InputEventKey_a7jig"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_e3e87"]
+events = [SubResource("InputEventKey_a7jig")]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p7ktw"]
 
@@ -69,6 +78,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_42rq1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mg1la")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
+shortcut = SubResource("Shortcut_e3e87")
 text = "Resume"
 script = ExtResource("2_mg1la")
 
@@ -84,6 +94,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mg1la")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
 text = "Options"
+script = ExtResource("3_a7jig")
 
 [node name="QuitLevelButton" type="Button" parent="Container"]
 layout_mode = 2
@@ -97,6 +108,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mg1la")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
 text = "Quit Level"
+script = ExtResource("3_42rq1")
 
 [node name="PauseTitle" type="Label" parent="."]
 layout_mode = 1
@@ -114,3 +126,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="Container/ResumeButton" to="Container/ResumeButton" method="Play"]
+[connection signal="pressed" from="Container/InGameOptionsButton" to="Container/InGameOptionsButton" method="InGameOptions"]
+[connection signal="pressed" from="Container/QuitLevelButton" to="Container/QuitLevelButton" method="QuitLevel"]

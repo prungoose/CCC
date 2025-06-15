@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=14 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
+[ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
 font_size = 50
@@ -52,6 +53,14 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="InputEventKey" id="InputEventKey_um4x4"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_um4x4"]
+resource_local_to_scene = true
+events = [SubResource("InputEventKey_um4x4")]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -117,11 +126,16 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_6u48x")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ki1gq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_um4x4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ie8hw")
+shortcut = SubResource("Shortcut_um4x4")
 text = "M"
 script = ExtResource("3_ki1gq")
 
 [node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
 process_mode = 2
+visible = false
+layout_mode = 1
+
+[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
 visible = false
 layout_mode = 1
 
