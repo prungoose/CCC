@@ -232,7 +232,7 @@ public partial class Controller : CharacterBody3D
 		}
 		else
 		{
-			if (Input.IsActionJustPressed("m1"))
+			if (Input.IsActionJustPressed("m1") && _vacuum == null)
 			{
 				_vacuum = _vacuumzone.Instantiate<Area3D>();
 				this.AddChild(_vacuum);
