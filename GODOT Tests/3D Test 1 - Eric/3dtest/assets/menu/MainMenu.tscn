@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=19 format=3 uid="uid://bp8fj6wujphhr"]
 
-[ext_resource type="Texture2D" uid="uid://fjmeh14ci4vs" path="res://assets/menu/Title.png" id="1_7a366"]
+[ext_resource type="Texture2D" uid="uid://c0wqekvabgq3m" path="res://assets/menu/Title_Finished.png" id="1_hheb7"]
+[ext_resource type="Texture2D" uid="uid://c4g28pgjeawrx" path="res://assets/menu/Start_Button_Hover.png" id="2_jfoks"]
 [ext_resource type="Script" uid="uid://ydjvpr3yqgfm" path="res://assets/menu/StartButton.cs" id="2_toexd"]
 [ext_resource type="Script" uid="uid://dl7nh8sxdxxae" path="res://assets/menu/ExitButton.cs" id="3_aid4m"]
 [ext_resource type="Script" uid="uid://b0esanefjn1cc" path="res://assets/menu/OptionsButton.cs" id="3_hheb7"]
+[ext_resource type="Texture2D" uid="uid://bx6eejr3kjepe" path="res://assets/menu/Start_Button.png" id="3_n5d6s"]
+[ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="5_p340a"]
+[ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="6_4528w"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aid4m"]
-texture = ExtResource("1_7a366")
+texture = ExtResource("1_hheb7")
 
 [sub_resource type="SystemFont" id="SystemFont_hheb7"]
 subpixel_positioning = 0
@@ -16,37 +20,23 @@ base_font = SubResource("SystemFont_hheb7")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toexd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oaxce"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x8w13"]
+texture = ExtResource("2_jfoks")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhy4u"]
-bg_color = Color(0.838897, 0.838897, 0.838897, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sewyn"]
+texture = ExtResource("2_jfoks")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfoks"]
-bg_color = Color(0.617455, 0.617455, 0.617455, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iwx2b"]
+texture = ExtResource("3_n5d6s")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5d6s"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7fa8d"]
+texture = ExtResource("5_p340a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a4suk"]
+texture = ExtResource("5_p340a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bu73w"]
+texture = ExtResource("6_4528w")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -72,10 +62,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -343.0
-offset_top = -560.0
-offset_right = 343.0
-offset_bottom = -49.0
+offset_left = -231.0
+offset_top = -562.0
+offset_right = 232.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
@@ -89,11 +79,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_e3vxt")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
-text = "Start"
+theme_override_styles/hover = SubResource("StyleBoxTexture_x8w13")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sewyn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_iwx2b")
 icon_alignment = 1
 script = ExtResource("2_toexd")
 
@@ -106,11 +94,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_e3vxt")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
-text = "Options"
+theme_override_styles/hover = SubResource("StyleBoxTexture_7fa8d")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_a4suk")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bu73w")
 icon_alignment = 1
 script = ExtResource("3_hheb7")
 
@@ -123,10 +109,6 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_e3vxt")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_oaxce")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uhy4u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jfoks")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n5d6s")
 text = "Exit"
 icon_alignment = 1
 script = ExtResource("3_aid4m")

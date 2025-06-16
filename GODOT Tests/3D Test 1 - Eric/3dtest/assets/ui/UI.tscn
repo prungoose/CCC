@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=15 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
+[ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
@@ -111,6 +112,7 @@ offset_left = 1821.0
 offset_top = 764.0
 offset_right = 1897.0
 offset_bottom = 1061.0
+theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6u48x")
 fill_mode = 3
 
@@ -121,6 +123,7 @@ offset_left = 39.0
 offset_top = 38.0
 offset_right = 89.0
 offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6u48x")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ki1gq")
