@@ -1,15 +1,14 @@
 using Godot;
 using System;
 
-public partial class StartButton : Button
+public partial class PauseButton : Button
 {
 	private Control _pauseScreen;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var parent = GetParent<Container>();
-		_pauseScreen = parent.GetParent<Control>();
-		
+		var parent = GetParent<Control>();
+		_pauseScreen = parent.GetNode<Control>("PauseScreen");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,9 +16,9 @@ public partial class StartButton : Button
 	{
 	}
 
-	private void _StartButtonPressed()
+	public void Paused()
 	{
-		GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
-		_pauseScreen.Hide();
+		GetTree().Paused = true;
+		_pauseScreen.Show();
 	}
 }

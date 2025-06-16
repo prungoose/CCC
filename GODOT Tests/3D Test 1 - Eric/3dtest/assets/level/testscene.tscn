@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
-[ext_resource type="PackedScene" path="res://assets/player/vacuumzone.tscn" id="7_suvuw"]
+[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="7_suvuw"]
 [ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
-[ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/player/TrashBin.tscn" id="10_a4dfg"]
+[ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -114,6 +114,14 @@ mesh = SubResource("BoxMesh_jotil")
 skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
+[node name="trash spawner" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
+script = ExtResource("7_ofhqe")
+_spawn = ExtResource("8_suvuw")
+
+[node name="trashcan" parent="Level" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 0, 0, 10)
+
 [node name="Camera" type="Node3D" parent="." node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
@@ -142,19 +150,12 @@ _player = NodePath("../Player")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTarget"]
 mesh = SubResource("CylinderMesh_ofhqe")
 
-[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot") instance=ExtResource("5_8wjkr")]
+[node name="Player" parent="." node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461197, 0.0141516, -0.0109234)
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
 _vacuumzone = ExtResource("7_suvuw")
-
-[node name="trash spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
-script = ExtResource("7_ofhqe")
-_spawn = ExtResource("8_suvuw")
+_ui = NodePath("../UI")
 
 [node name="UI" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 _player = NodePath("../Player")
-
-[node name="StaticBody3D" parent="." instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)

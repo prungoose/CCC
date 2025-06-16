@@ -18,15 +18,17 @@ public partial class Controller : CharacterBody3D
 	[Export] public Control _ui;
 	public int _tankpercentage = 0;
 	private Node3D _head;
-	private AnimationPlayer _anim;
+	private AnimatedSprite3D _anim;
 	private Area3D _vacuum;
 	bool phone = false;
 	bool face_left = false;
+	bool is_sucking = false;
+	bool is_moving = true;
 
 	public override void _Ready()
 	{
 		_head = GetNode<Node3D>("Head");
-		_anim = GetNode<AnimationPlayer>("WorldModel/Sprite3D/AnimationPlayer");
+		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -38,11 +40,12 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
+
 		if (!phone)
 		{
 			_Movement((float)delta);
 		}
-		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Forward);
+		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		_HandleAnimations();
 		_HandleControls();
 
@@ -116,43 +119,98 @@ public partial class Controller : CharacterBody3D
 
 	private void _HandleAnimations()
 	{
+		var frame = _anim.Frame;
+		var prog = _anim.FrameProgress;
 		//play the right animation based on player input
-		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_down", "move_up").Normalized();
 
-		if (phone)
+		if (is_sucking && !phone)
 		{
-			_anim.Play("idle");
+
+
 		}
 
-		else if (inputdir.X != 0)
+		else if (!inputdir.IsZeroApprox() && !phone)
 		{
-			if (inputdir.X > 0)
+			switch (Mathf.RadToDeg(inputdir.Angle()) + 180)
 			{
-				_anim.Play("walk_right");
-				face_left = false;
-			}
-			else
-			{
-				_anim.Play("walk_left");
-				face_left = true;
-			}
-		}
-		else if (inputdir.Y != 0)
-		{
-			if (face_left)
-			{
-				_anim.Play("walk_left");
-			}
-			else
-			{
-				_anim.Play("walk_right");
+				case 45:
+					_anim.Play("sw_run");
+					break;
+
+				case 90:
+					_anim.Play("s_run");
+					break;
+
+				case 135:
+					_anim.Play("se_run");
+					break;
+
+				case 180:
+					_anim.Play("e_run");
+					break;
+
+				case 225:
+					_anim.Play("ne_run");
+					break;
+
+				case 270:
+					_anim.Play("n_run");
+					break;
+
+				case 315:
+					_anim.Play("nw_run");
+					break;
+
+				case 360:
+					_anim.Play("w_run");
+					break;
 			}
 		}
 
 		else
 		{
-			_anim.Play("idle");
+			switch (Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle()) + 180)
+			{
+				case < 22.5f:
+					_anim.Play("se_idle");
+					break;
+
+				case < 67.5f:
+					_anim.Play("e_idle");
+					break;
+
+				case < 112.5f:
+					_anim.Play("ne_idle");
+					break;
+
+				case < 157.5f:
+					_anim.Play("n_idle");
+					break;
+
+				case < 202.5f:
+					_anim.Play("nw_idle");
+					break;
+
+				case < 247.5f:
+					_anim.Play("w_idle");
+					break;
+
+				case < 292.5f:
+					_anim.Play("sw_idle");
+					break;
+
+				case < 337.5f:
+					_anim.Play("s_idle");
+					break;
+
+				case < 360f:
+					_anim.Play("se_idle");
+					break;
+			}
 		}
+		_anim.SetFrameAndProgress(frame, prog);
+		
 	}
 
 	private void _HandleControls()
@@ -174,7 +232,7 @@ public partial class Controller : CharacterBody3D
 		}
 		else
 		{
-			if (Input.IsActionJustPressed("m1"))
+			if (Input.IsActionJustPressed("m1") && _vacuum == null)
 			{
 				_vacuum = _vacuumzone.Instantiate<Area3D>();
 				this.AddChild(_vacuum);
