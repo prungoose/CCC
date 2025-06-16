@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7l01n2hwrqkt"]
+
+[ext_resource type="Script" uid="uid://hi0na1gh0l4c" path="res://src/TestNpc.cs" id="1_i0d35"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i0d35"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b7p7y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fh8cu"]
+radius = 0.987931
+height = 3.00591
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_i0d35")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_b7p7y")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_i0d35")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_fh8cu")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_OnPlayerEntry"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_OnPlayerExit"]

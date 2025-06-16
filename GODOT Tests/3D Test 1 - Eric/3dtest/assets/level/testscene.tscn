@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=22 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
+[ext_resource type="PackedScene" uid="uid://c7l01n2hwrqkt" path="res://assets/level/NPC.tscn" id="4_a4lti"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
@@ -63,61 +64,63 @@ shadow_blur = 0.25
 
 [node name="Level" type="Node3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Level"]
+[node name="Ground Floor" type="StaticBody3D" parent="Level"]
 collision_layer = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Ground Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_jotil")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Ground Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727954, -0.569995, 0.000700474)
 mesh = SubResource("BoxMesh_jotil")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Level"]
+[node name="Backwall2" type="StaticBody3D" parent="Level"]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 1, -3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Backwall2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_jotil")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Backwall2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Level"]
+[node name="Backwall" type="StaticBody3D" parent="Level"]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 2.47089, 1, -3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Backwall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_jotil")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Backwall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
+skeleton = NodePath("../../Backwall2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="Level"]
+[node name="Ramp" type="StaticBody3D" parent="Level"]
 transform = Transform3D(-0.00100741, 0.0214657, 0.0451465, -0.00211646, 0.0450969, -0.0214893, -0.049945, -0.00234399, 2.36863e-10, -4.00262, 0.44303, -0.849921)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Ramp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_jotil")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Ramp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
+skeleton = NodePath("../../Backwall2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
 [node name="trash spawner" type="Node3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
 script = ExtResource("7_ofhqe")
 _spawn = ExtResource("8_suvuw")
+
+[node name="NPC" parent="Level" instance=ExtResource("4_a4lti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5438, 0.979867, 0)
 
 [node name="trashcan" parent="Level" instance=ExtResource("10_a4dfg")]
 transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 0, 0, 10)
