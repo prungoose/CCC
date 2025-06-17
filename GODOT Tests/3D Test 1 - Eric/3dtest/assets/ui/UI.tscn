@@ -85,9 +85,9 @@ offset_bottom = 1080.0
 [node name="Phone" type="Control" parent="."]
 layout_mode = 2
 anchors_preset = 0
-offset_left = 1547.0
+offset_left = 1550.0
 offset_top = 1590.0
-offset_right = 1548.0
+offset_right = 1551.0
 offset_bottom = 1591.0
 
 [node name="PhoneSprite" type="Sprite2D" parent="Phone"]

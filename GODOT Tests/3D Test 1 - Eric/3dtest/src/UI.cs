@@ -19,7 +19,6 @@ public partial class UI : Control
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Label");
 		_tank = GetNode<ProgressBar>("ProgressBar");
 
-
 	}
 
 	public override void _Process(double delta)
@@ -31,9 +30,10 @@ public partial class UI : Control
 
 	public void _updatephone(bool isPhoneOpen)
 	{
+		_tween?.CustomStep(0.3);
 		if (isPhoneOpen)
 		{
-			_tween?.Kill(); // Stop any existing tweens
+			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 		}
