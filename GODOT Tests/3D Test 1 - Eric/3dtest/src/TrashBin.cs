@@ -3,28 +3,55 @@ using System;
 
 public partial class TrashBin : Area3D
 {
-	// Called when the node enters the scene tree for the first time.
+
+	[Export] PackedScene _minigamepacked;
+	private CharacterBody3D _player;
+	private Node3D _minigame;
+	private bool playerEntry = false;
+	private Camera3D oldcam;
+
+
 	public override void _Ready()
 	{
+		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("Player");
+
 	}
-	bool playerEntry = false;
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 	public override void _Process(double delta)
 	{
-		//GD.Print(playerEntry);
-		if (playerEntry && Input.IsActionPressed("jump"))
+		if (playerEntry && Input.IsActionJustPressed("jump") && _minigame == null)
 		{
-
-			GetTree().ChangeSceneToFile("res://assets/level/minigame.tscn");
+			oldcam = GetViewport().GetCamera3D();
+			_minigame = _minigamepacked.Instantiate<Node3D>();
+			AddChild(_minigame);
+			_minigame.GlobalPosition = new Godot.Vector3(0, 200, 0);
+			_minigame.GlobalRotation = new Godot.Vector3(0, Mathf.DegToRad(-45), 0);
+			var cam = _minigame.GetNode<Camera3D>("TrashCam");
+			cam.MakeCurrent();
+			_player.Call("_changestatus", 1);
 		}
+	}
+
+	private void _minigame_done()
+	{
+		oldcam.MakeCurrent();
+		_player.Call("_changestatus", 0);
 	}
 
 	private void _OnPlayerEntry(Node3D body)
 	{
-		playerEntry = true;
+		if (body.IsInGroup("player"))
+		{
+			playerEntry = true;
+		}
 	}
 	private void _OnPlayerExit(Node3D body)
 	{
-		playerEntry = false;
+		if (body.IsInGroup("player"))
+		{
+			playerEntry = false;
+		}
 	}
+	
 }

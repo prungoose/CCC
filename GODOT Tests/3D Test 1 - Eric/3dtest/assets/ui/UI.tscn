@@ -123,6 +123,7 @@ offset_left = 39.0
 offset_top = 38.0
 offset_right = 89.0
 offset_bottom = 88.0
+focus_mode = 1
 theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6u48x")

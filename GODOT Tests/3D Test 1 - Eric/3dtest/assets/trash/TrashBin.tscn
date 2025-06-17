@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cklsw1rjdbip0"]
+[gd_scene load_steps=6 format=3 uid="uid://cklsw1rjdbip0"]
 
 [ext_resource type="Script" uid="uid://bfdvi74gs5bro" path="res://src/TrashBin.cs" id="1_pfhd3"]
+[ext_resource type="PackedScene" uid="uid://bva6mcck4gd4x" path="res://assets/level/minigame.tscn" id="2_ff1ya"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2ov1"]
 
@@ -19,6 +20,7 @@ mesh = SubResource("BoxMesh_pfhd3")
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("1_pfhd3")
+_minigamepacked = ExtResource("2_ff1ya")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_u87gn")

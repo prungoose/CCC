@@ -24,11 +24,13 @@ public partial class Controller : CharacterBody3D
 	bool face_left = false;
 	bool is_sucking = false;
 	bool is_moving = true;
+	private int _status = 0;
 
 	public override void _Ready()
 	{
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
+		AddToGroup("player");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -41,7 +43,7 @@ public partial class Controller : CharacterBody3D
 	public override void _Process(double delta)
 	{
 
-		if (!phone)
+		if (!phone && _status == 0)
 		{
 			_Movement((float)delta);
 		}
@@ -49,11 +51,16 @@ public partial class Controller : CharacterBody3D
 		_HandleAnimations();
 		_HandleControls();
 
+		//GD.Print("Current vp: ", GetViewport());
+
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+	}
 
+	public override void _Input(InputEvent @event)
+	{
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && phone)
 		{
 			switch (keyEvent.PhysicalKeycode)
@@ -75,11 +82,6 @@ public partial class Controller : CharacterBody3D
 					break;
 			}
 		}
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-
 	}
 
 	private void _Movement(float delta)
@@ -210,11 +212,13 @@ public partial class Controller : CharacterBody3D
 			}
 		}
 		_anim.SetFrameAndProgress(frame, prog);
-		
+
 	}
 
 	private void _HandleControls()
 	{
+		if (_status != 0) return;
+
 		if (Input.IsActionJustPressed("phone"))
 		{
 			phone = !phone;
@@ -235,7 +239,7 @@ public partial class Controller : CharacterBody3D
 			if (Input.IsActionJustPressed("m1") && _vacuum == null)
 			{
 				_vacuum = _vacuumzone.Instantiate<Area3D>();
-				this.AddChild(_vacuum);
+				AddChild(_vacuum);
 			}
 			else if (Input.IsActionJustReleased("m1") && _vacuum != null)
 			{
@@ -262,6 +266,15 @@ public partial class Controller : CharacterBody3D
 		return _tankpercentage;
 	}
 
+	private int _getstatus()
+	{
+		//0 = normal, 1 = in minigame, 
+		return _status;
+	}
 
+	private void _changestatus(int s)
+	{
+		_status = s;
+	}
 
 }

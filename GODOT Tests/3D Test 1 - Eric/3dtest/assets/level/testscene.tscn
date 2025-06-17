@@ -51,7 +51,7 @@ material = SubResource("StandardMaterial3D_ofhqe")
 top_radius = 0.32
 height = 0.155
 
-[node name="Node3D" type="Node3D" groups=["cleanable_vacuum"]]
+[node name="MainRoot" type="Node3D" groups=["cleanable_vacuum"]]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_44gc5")
@@ -85,7 +85,6 @@ shape = SubResource("BoxShape3D_jotil")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="Level"]
@@ -119,8 +118,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
 script = ExtResource("7_ofhqe")
 _spawn = ExtResource("8_suvuw")
 
-[node name="trashcan" parent="Level" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 0, 0, 10)
+[node name="TrashBin" parent="Level" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 3.79858, 0.56979, 3.77973)
 
 [node name="Camera" type="Node3D" parent="." node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
@@ -158,4 +157,5 @@ _vacuumzone = ExtResource("7_suvuw")
 _ui = NodePath("../UI")
 
 [node name="UI" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
+visible = false
 _player = NodePath("../Player")

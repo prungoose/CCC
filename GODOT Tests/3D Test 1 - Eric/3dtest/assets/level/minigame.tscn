@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bva6mcck4gd4x"]
+[gd_scene load_steps=13 format=3 uid="uid://bva6mcck4gd4x"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_ipep8"]
-[ext_resource type="Script" uid="uid://3m0a32qgpcxx" path="res://assets/level/Trash.cs" id="2_wg1f7"]
+[ext_resource type="PackedScene" uid="uid://cr4d8leday4nm" path="res://assets/trash/throwable_trash.tscn" id="2_wg1f7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mhhf2"]
 size = Vector3(50, 1, 50)
@@ -14,19 +14,6 @@ uv1_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_se3hl"]
 size = Vector3(50, 1, 50)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ipep8"]
-
-[sub_resource type="Sky" id="Sky_jotil"]
-sky_material = SubResource("ProceduralSkyMaterial_ipep8")
-
-[sub_resource type="Environment" id="Environment_wg1f7"]
-background_mode = 2
-sky = SubResource("Sky_jotil")
-
-[sub_resource type="SphereMesh" id="SphereMesh_ipep8"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wg1f7"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg1f7"]
 size = Vector3(5, 1, 5)
 
@@ -34,7 +21,15 @@ size = Vector3(5, 1, 5)
 size = Vector3(5, 1, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aibhc"]
-size = Vector3(7, 0.01, 3.75)
+size = Vector3(12, 0.01, 3.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg1f7"]
+transparency = 1
+albedo_color = Color(0.950092, 0.569093, 0.617046, 0.12549)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q1m5w"]
+material = SubResource("StandardMaterial3D_wg1f7")
+size = Vector3(12, 0.01, 3.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_aibhc"]
 size = Vector3(2, 4, 2)
@@ -55,30 +50,17 @@ surface_material_override/0 = SubResource("StandardMaterial3D_q1m5w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_se3hl")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wg1f7")
+[node name="TrashCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 10.4841, 5.50526)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 28.3337, 0)
-shadow_enabled = true
-shadow_blur = 0.25
+[node name="Trash1" parent="." instance=ExtResource("2_wg1f7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.922, 5.862)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.434162, 0.900835, 0, -0.900835, 0.434162, 0, 10.4841, 5.50526)
+[node name="Trash2" parent="." instance=ExtResource("2_wg1f7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5.922, 5.862)
 
-[node name="Trash" type="RigidBody3D" parent="." node_paths=PackedStringArray("_camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.92202, 5.8617)
-disable_mode = 2
-gravity_scale = 4.0
-script = ExtResource("2_wg1f7")
-_camera = NodePath("../Camera3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Trash"]
-mesh = SubResource("SphereMesh_ipep8")
-skeleton = NodePath("../CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash"]
-shape = SubResource("SphereShape3D_wg1f7")
+[node name="Trash3" parent="." instance=ExtResource("2_wg1f7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 5.922, 5.862)
 
 [node name="BallsHolder" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.92202, 7.6979)
@@ -90,13 +72,16 @@ shape = SubResource("BoxShape3D_wg1f7")
 visible = false
 mesh = SubResource("BoxMesh_wg1f7")
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 6.485, 3.68)
+[node name="MouseCollider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965925, -0.258819, 0, 0.258819, 0.965925, 0, 5.46513, 5.84635)
 collision_layer = 2
+collision_priority = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478761, 1.875)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MouseCollider"]
 shape = SubResource("BoxShape3D_aibhc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MouseCollider"]
+mesh = SubResource("BoxMesh_q1m5w")
 
 [node name="Trash Bins" type="Node3D" parent="."]
 
@@ -131,6 +116,3 @@ mesh = SubResource("BoxMesh_aibhc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trash Bins/trash bin3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("ConcavePolygonShape3D_wg1f7")
-
-[connection signal="mouse_entered" from="Trash" to="Trash" method="SelectTrash"]
-[connection signal="mouse_exited" from="Trash" to="Trash" method="DeselectTrash"]

@@ -4,52 +4,63 @@ using System.Numerics;
 
 public partial class Trash : RigidBody3D
 {
-	// Called when the node enters the scene tree for the first time.
-
-	[Export] Camera3D _camera;
-	bool hovered = false; // when clicked = true
-	bool dragging = false;
-	bool thrown = false;
-	Godot.Vector3 originalpos;
-	float timesincethrown = 0;
-	float speedofTrash = 100f;
+	private Node3D _pivot;
+	private bool hovered = false;
+	private bool dragging = false;
+	private bool thrown = false;
+	private Godot.Vector3? originalpos;
+	private float timesincethrown = 0;
+	private float speedofTrash = 35f;
+	private float acc = 0;
 
 	public override void _Ready()
 	{
-		originalpos = GlobalPosition;
+		_pivot = GetNode<Node3D>("SpotlightPivot");
 	}
 
 	public override void _Process(double delta)
 	{
+		if (originalpos == null)
+		{
+			originalpos = GlobalPosition;
+		}
+
 		if (thrown)
 		{
 			timesincethrown += (float)delta;
+			if (timesincethrown > 3)
+			{
+				GlobalPosition = (Godot.Vector3)originalpos;
+				LinearVelocity = Godot.Vector3.Zero;
+				AngularVelocity = Godot.Vector3.Zero;
+				thrown = false;
+				timesincethrown = 0;
+			}
 		}
-		if (timesincethrown > 3)
-		{
-			GlobalPosition = originalpos;
-			LinearVelocity = Godot.Vector3.Zero;
-			AngularVelocity = Godot.Vector3.Zero;
-			thrown = false;
-			timesincethrown = 0;
-		}
+		_pivot.GlobalPosition = GlobalPosition;
 
+		acc += (float)delta;
+		if (acc > 0.5)
+		{
+			acc = 0;
+			//GD.Print(this.Name, ":\thovered: ", hovered, "\t\tdragging: ", dragging, "\t\tthrown: ", thrown, "\t\ttst: ", timesincethrown, "\tgp: ", GlobalPosition);
+		}
+		
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		base._Input(@event);
+		//base._Input(@event);
 		if (@event is InputEventMouseButton mouseevent)
 		{
 			if (mouseevent.ButtonIndex == MouseButton.Left && hovered && @event.IsPressed())
 			{
 				dragging = true;
 			}
-			else if (mouseevent.ButtonIndex == MouseButton.Left && @event.IsReleased())
+			else if (dragging && mouseevent.ButtonIndex == MouseButton.Left && @event.IsReleased())
 			{
 				dragging = false;
 				thrown = true;
-				//apply some upwards velocity here maybe?
 			}
 		}
 
@@ -71,11 +82,7 @@ public partial class Trash : RigidBody3D
 				thrown = true;
 			}
 		}
-		//Godot.Vector3 temp = LinearVelocity;
-		//temp.Y -= (float)GetGravity().Y;
 	}
-
-
 
 	public void SelectTrash()
 	{
@@ -90,8 +97,8 @@ public partial class Trash : RigidBody3D
 	private Godot.Vector3? GetArea3DMousePos()
 	{
 		Godot.Vector2 mousePos = GetViewport().GetMousePosition();
-		Godot.Vector3 from = _camera.ProjectRayOrigin(mousePos);
-		Godot.Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
+		Godot.Vector3 from = GetViewport().GetCamera3D().ProjectRayOrigin(mousePos);
+		Godot.Vector3 to = from + GetViewport().GetCamera3D().ProjectRayNormal(mousePos) * 1000f;
 		var space = GetWorld3D().DirectSpaceState;
 		var query = new PhysicsRayQueryParameters3D
 		{
@@ -102,11 +109,10 @@ public partial class Trash : RigidBody3D
 			CollisionMask = 1 << 1
 		};
 
-		query.Exclude = new Godot.Collections.Array<Rid> { this.GetRid() };
+		query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
 		var result = space.IntersectRay(query);
 		if (result.Count > 0 && result.ContainsKey("position"))
 		{
-			//GD.Print(result);
 			return (Godot.Vector3)result["position"];
 		}
 		return null;
