@@ -6,42 +6,109 @@ public partial class Trash : RigidBody3D
 {
 	// Called when the node enters the scene tree for the first time.
 
-	bool Selected = false; // when clicked = true
+	[Export] Camera3D _camera;
+	bool hovered = false; // when clicked = true
+	bool dragging = false;
+	bool thrown = false;
+	Godot.Vector3 originalpos;
+	float timesincethrown = 0;
+	float speedofTrash = 100f;
 
-	
-
-	float speedofTrash = 5f; // standard spd of trash
 	public override void _Ready()
 	{
+		originalpos = GlobalPosition;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Selected && Input.IsActionJustPressed("m1"))
+		if (thrown)
 		{
-			Godot.Vector2 mousePos = GetViewport().GetMousePosition(); // takes the position of the mouse on the screen, not in a 3d space
-			Godot.Vector2 positionDiff = new Godot.Vector2(mousePos.X-GlobalPosition.X, mousePos.Y-GlobalPosition.Y);
-
-			LinearVelocity = new Godot.Vector3(positionDiff.X * speedofTrash, positionDiff.Y * speedofTrash, 0f); // grab the mouseposition and set a fixed Z value
-
+			timesincethrown += (float)delta;
 		}
-		if (Selected && Input.IsActionJustReleased("m1"))
+		if (timesincethrown > 3)
 		{
-			LinearDamp = 0.1f;// grab the last mouse position when m1 was held down and keep the obj moving in the direction the mouse was headed towards
+			GlobalPosition = originalpos;
+			LinearVelocity = Godot.Vector3.Zero;
+			AngularVelocity = Godot.Vector3.Zero;
+			thrown = false;
+			timesincethrown = 0;
 		}
 
 	}
+
+	public override void _Input(InputEvent @event)
+	{
+		base._Input(@event);
+		if (@event is InputEventMouseButton mouseevent)
+		{
+			if (mouseevent.ButtonIndex == MouseButton.Left && hovered && @event.IsPressed())
+			{
+				dragging = true;
+			}
+			else if (mouseevent.ButtonIndex == MouseButton.Left && @event.IsReleased())
+			{
+				dragging = false;
+				thrown = true;
+				//apply some upwards velocity here maybe?
+			}
+		}
+
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		//base._PhysicsProcess(delta);
+		if (dragging && !thrown)
+		{
+			var result = GetArea3DMousePos();
+			if (result != null)
+			{
+				LinearVelocity = ((Godot.Vector3)result - GlobalPosition) * speedofTrash;
+			}
+			else
+			{
+				dragging = false;
+				thrown = true;
+			}
+		}
+		//Godot.Vector3 temp = LinearVelocity;
+		//temp.Y -= (float)GetGravity().Y;
+	}
+
+
 
 	public void SelectTrash()
 	{
-		GD.Print("select trash");
-		Selected = true;
+		hovered = true;
 	}
 
 	public void DeselectTrash()
 	{
-		GD.Print("exit trash");
-		Selected = false;
+		hovered = false;
+	}
+	
+	private Godot.Vector3? GetArea3DMousePos()
+	{
+		Godot.Vector2 mousePos = GetViewport().GetMousePosition();
+		Godot.Vector3 from = _camera.ProjectRayOrigin(mousePos);
+		Godot.Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
+		var space = GetWorld3D().DirectSpaceState;
+		var query = new PhysicsRayQueryParameters3D
+		{
+			From = from,
+			To = to,
+			CollideWithAreas = true,
+			CollideWithBodies = false,
+			CollisionMask = 1 << 1
+		};
+
+		query.Exclude = new Godot.Collections.Array<Rid> { this.GetRid() };
+		var result = space.IntersectRay(query);
+		if (result.Count > 0 && result.ContainsKey("position"))
+		{
+			//GD.Print(result);
+			return (Godot.Vector3)result["position"];
+		}
+		return null;
 	}
 }

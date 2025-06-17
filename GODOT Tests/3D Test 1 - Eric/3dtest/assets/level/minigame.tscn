@@ -1,11 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bva6mcck4gd4x"]
+[gd_scene load_steps=16 format=3 uid="uid://bva6mcck4gd4x"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_ipep8"]
 [ext_resource type="Script" uid="uid://3m0a32qgpcxx" path="res://assets/level/Trash.cs" id="2_wg1f7"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wg1f7"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_q1m5w"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mhhf2"]
 size = Vector3(50, 1, 50)
@@ -17,14 +13,6 @@ uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_se3hl"]
 size = Vector3(50, 1, 50)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_aibhc"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_se3hl"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_5nclc"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_puvg1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ipep8"]
 
@@ -38,18 +26,23 @@ sky = SubResource("Sky_jotil")
 [sub_resource type="SphereMesh" id="SphereMesh_ipep8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wg1f7"]
-radius = 0.77
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wg1f7"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wg1f7"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aibhc"]
+size = Vector3(7, 0.01, 3.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aibhc"]
+size = Vector3(2, 4, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wg1f7"]
+data = PackedVector3Array(-1, 2, 1, 1, 2, 1, -1, -2, 1, 1, 2, 1, 1, -2, 1, -1, -2, 1, 1, 2, -1, -1, 2, -1, 1, -2, -1, -1, 2, -1, -1, -2, -1, 1, -2, -1, 1, 2, 1, 1, 2, -1, 1, -2, 1, 1, 2, -1, 1, -2, -1, 1, -2, 1, -1, 2, -1, -1, 2, 1, -1, -2, -1, -1, 2, 1, -1, -2, 1, -1, -2, -1, 1, 2, 1, -1, 2, 1, 1, 2, -1, -1, 2, 1, -1, 2, -1, 1, 2, -1, -1, -2, 1, 1, -2, 1, -1, -2, -1, 1, -2, 1, 1, -2, -1, -1, -2, -1)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Combustibles" type="StaticBody3D" parent="."]
-transform = Transform3D(3.28019, 0, 0, 0, 5.34351, 0, 0, 0, 3.28019, -4, 2.59844, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Combustibles"]
-shape = SubResource("BoxShape3D_wg1f7")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Combustibles"]
-mesh = SubResource("BoxMesh_q1m5w")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -62,25 +55,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_q1m5w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_se3hl")
 
-[node name="Non-Combustibles" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.35065, -0.0829906, 1.5, -0.0110779)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Non-Combustibles"]
-shape = SubResource("BoxShape3D_aibhc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Non-Combustibles"]
-transform = Transform3D(4.24791, 0, 0, 0, 5.37835, 0, 0, 0, 1, 0, 1.26997, 0)
-mesh = SubResource("BoxMesh_se3hl")
-
-[node name="Recycleables" type="StaticBody3D" parent="."]
-transform = Transform3D(3.56693, 0, 0, 0, 4.91675, 0, 0, 0, 3.52262, 4, 2.68542, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Recycleables"]
-mesh = SubResource("BoxMesh_5nclc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Recycleables"]
-shape = SubResource("BoxShape3D_puvg1")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wg1f7")
 
@@ -92,10 +66,12 @@ shadow_blur = 0.25
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.434162, 0.900835, 0, -0.900835, 0.434162, 0, 10.4841, 5.50526)
 
-[node name="Trash" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 2.62567)
+[node name="Trash" type="RigidBody3D" parent="." node_paths=PackedStringArray("_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.92202, 5.8617)
 disable_mode = 2
+gravity_scale = 4.0
 script = ExtResource("2_wg1f7")
+_camera = NodePath("../Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Trash"]
 mesh = SubResource("SphereMesh_ipep8")
@@ -103,6 +79,58 @@ skeleton = NodePath("../CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trash"]
 shape = SubResource("SphereShape3D_wg1f7")
+
+[node name="BallsHolder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.92202, 7.6979)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BallsHolder"]
+shape = SubResource("BoxShape3D_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BallsHolder"]
+visible = false
+mesh = SubResource("BoxMesh_wg1f7")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573576, 0, 0.573576, 0.819152, 0, 6.485, 3.68)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478761, 1.875)
+shape = SubResource("BoxShape3D_aibhc")
+
+[node name="Trash Bins" type="Node3D" parent="."]
+
+[node name="trash bin" type="StaticBody3D" parent="Trash Bins"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trash Bins/trash bin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000451088, 2.01093, -0.00240993)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash Bins/trash bin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("ConcavePolygonShape3D_wg1f7")
+
+[node name="trash bin2" type="StaticBody3D" parent="Trash Bins"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trash Bins/trash bin2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000451088, 2.01093, -0.00240993)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash Bins/trash bin2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("ConcavePolygonShape3D_wg1f7")
+
+[node name="trash bin3" type="StaticBody3D" parent="Trash Bins"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0123, 0.0484066, -0.00570822)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trash Bins/trash bin3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000451088, 2.01093, -0.00240993)
+mesh = SubResource("BoxMesh_aibhc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash Bins/trash bin3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("ConcavePolygonShape3D_wg1f7")
 
 [connection signal="mouse_entered" from="Trash" to="Trash" method="SelectTrash"]
 [connection signal="mouse_exited" from="Trash" to="Trash" method="DeselectTrash"]

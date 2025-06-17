@@ -14,11 +14,7 @@ public partial class MouseTarget : Node3D
 
 	public override void _Process(double delta)
 	{
-		Vector2 mousePos = GetViewport().GetMousePosition();
-		Vector3 from = _camera.ProjectRayOrigin(mousePos);
-		Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
-		var result = GetMouseGroundPos(from, to);
-
+		var result = GetMouseGroundPos();
 		if (result != null)
 		{
 			this.Position = result.Value;
@@ -27,8 +23,11 @@ public partial class MouseTarget : Node3D
 
 	}
 
-	private Vector3? GetMouseGroundPos(Vector3 from, Vector3 to)
+	private Vector3? GetMouseGroundPos()
 	{
+		Vector2 mousePos = GetViewport().GetMousePosition();
+		Vector3 from = _camera.ProjectRayOrigin(mousePos);
+		Vector3 to = from + _camera.ProjectRayNormal(mousePos) * 1000f;
 		var space = GetWorld3D().DirectSpaceState;
 		var query = new PhysicsRayQueryParameters3D
 		{
