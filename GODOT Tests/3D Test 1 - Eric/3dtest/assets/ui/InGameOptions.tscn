@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=18 format=3 uid="uid://cyh4mgfebq10y"]
 
 [ext_resource type="Script" uid="uid://ckvctlfd3hh4u" path="res://assets/ui/BacktoGameButton.cs" id="1_2fkgi"]
+[ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
+[ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7lg"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -17,17 +19,8 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgxot"]
-bg_color = Color(0.494118, 0.878431, 0.780392, 1)
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qx56b"]
+texture = ExtResource("1_q2ip2")
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6ifhe"]
 thickness = 10
@@ -140,12 +133,11 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -240.0
 offset_top = 25.0
-offset_right = 240.0
+offset_right = 226.0
 offset_bottom = 202.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxFlat_wgxot")
-text = "Options"
+theme_override_styles/normal = SubResource("StyleBoxTexture_qx56b")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -167,6 +159,7 @@ theme_override_constants/separation = 100
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 60
 text = "Volume"
 horizontal_alignment = 1
@@ -175,6 +168,7 @@ horizontal_alignment = 1
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
 horizontal_alignment = 1
@@ -183,12 +177,14 @@ horizontal_alignment = 1
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 60
 text = "Language"
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 774.0
 offset_top = 183.0
 offset_right = 1716.0
@@ -235,6 +231,7 @@ popup/item_1/id = 0
 
 [node name="BacktoGameButton" type="Button" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 134.0
 offset_top = 58.0
 offset_right = 305.0
@@ -243,6 +240,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qx56b")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6ifhe")
