@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bva6mcck4gd4x"]
+[gd_scene load_steps=17 format=3 uid="uid://bva6mcck4gd4x"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_ipep8"]
+[ext_resource type="Script" uid="uid://3m0a32qgpcxx" path="res://assets/level/Trash.cs" id="2_wg1f7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wg1f7"]
-size = Vector3(50, 1, 50)
 
-[sub_resource type="BoxMesh" id="BoxMesh_aibhc"]
+[sub_resource type="BoxMesh" id="BoxMesh_q1m5w"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mhhf2"]
 size = Vector3(50, 1, 50)
@@ -14,6 +14,17 @@ size = Vector3(50, 1, 50)
 albedo_texture = ExtResource("1_ipep8")
 uv1_scale = Vector3(-0.25, -0.25, -0.25)
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_se3hl"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aibhc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_se3hl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5nclc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_puvg1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ipep8"]
 
@@ -24,51 +35,51 @@ sky_material = SubResource("ProceduralSkyMaterial_ipep8")
 background_mode = 2
 sky = SubResource("Sky_jotil")
 
+[sub_resource type="SphereMesh" id="SphereMesh_ipep8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wg1f7"]
+radius = 0.77
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Combustibles" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+transform = Transform3D(3.28019, 0, 0, 0, 5.34351, 0, 0, 0, 3.28019, -4, 2.59844, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Combustibles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_wg1f7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Combustibles"]
-transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
-mesh = SubResource("BoxMesh_aibhc")
+mesh = SubResource("BoxMesh_q1m5w")
 
 [node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_wg1f7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_mhhf2")
 surface_material_override/0 = SubResource("StandardMaterial3D_q1m5w")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_se3hl")
+
 [node name="Non-Combustibles" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.35065, -0.0829906, 1.5, -0.0110779)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Non-Combustibles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_wg1f7")
+shape = SubResource("BoxShape3D_aibhc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Non-Combustibles"]
-transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
-mesh = SubResource("BoxMesh_aibhc")
+transform = Transform3D(4.24791, 0, 0, 0, 5.37835, 0, 0, 0, 1, 0, 1.26997, 0)
+mesh = SubResource("BoxMesh_se3hl")
 
 [node name="Recycleables" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Recycleables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_wg1f7")
+transform = Transform3D(3.56693, 0, 0, 0, 4.91675, 0, 0, 0, 3.52262, 4, 2.68542, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Recycleables"]
-transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 1, 0)
-mesh = SubResource("BoxMesh_aibhc")
+mesh = SubResource("BoxMesh_5nclc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Recycleables"]
+shape = SubResource("BoxShape3D_puvg1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wg1f7")
@@ -80,3 +91,18 @@ shadow_blur = 0.25
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.434162, 0.900835, 0, -0.900835, 0.434162, 0, 10.4841, 5.50526)
+
+[node name="Trash" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 2.62567)
+disable_mode = 2
+script = ExtResource("2_wg1f7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Trash"]
+mesh = SubResource("SphereMesh_ipep8")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trash"]
+shape = SubResource("SphereShape3D_wg1f7")
+
+[connection signal="mouse_entered" from="Trash" to="Trash" method="SelectTrash"]
+[connection signal="mouse_exited" from="Trash" to="Trash" method="DeselectTrash"]

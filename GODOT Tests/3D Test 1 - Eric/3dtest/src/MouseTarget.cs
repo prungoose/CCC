@@ -40,12 +40,10 @@ public partial class MouseTarget : Node3D
 		};
 
 		query.Exclude = new Godot.Collections.Array<Rid> { _player.GetRid() };
-
-
-
 		var result = space.IntersectRay(query);
 		if (result.Count > 0 && result.ContainsKey("position"))
 		{
+			//GD.Print(result);
 			return (Vector3)result["position"];
 		}
 		return null;
