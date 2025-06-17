@@ -29,6 +29,8 @@ public partial class Controller : CharacterBody3D
 	{
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
+
+		AddToGroup("player");
 	}
 
 	public override void _PhysicsProcess(double delta)
