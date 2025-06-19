@@ -55,23 +55,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_aid4m")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -231.0
-offset_top = -562.0
-offset_right = 232.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 10
-
-[node name="StartButton" type="Button" parent="Buttons"]
+[node name="StartButton" type="Button" parent="."]
 layout_mode = 2
+offset_left = 729.0
+offset_top = 518.0
+offset_right = 1192.0
+offset_bottom = 684.0
+pivot_offset = Vector2(226, 78)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -85,8 +75,13 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_iwx2b")
 icon_alignment = 1
 script = ExtResource("2_toexd")
 
-[node name="OptionsButton" type="Button" parent="Buttons"]
+[node name="OptionsButton" type="Button" parent="."]
 layout_mode = 2
+offset_left = 729.0
+offset_top = 693.0
+offset_right = 1192.0
+offset_bottom = 859.0
+pivot_offset = Vector2(228, 77)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -100,8 +95,13 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_bu73w")
 icon_alignment = 1
 script = ExtResource("3_hheb7")
 
-[node name="ExitButton" type="Button" parent="Buttons"]
+[node name="ExitButton" type="Button" parent="."]
 layout_mode = 2
+offset_left = 729.0
+offset_top = 868.0
+offset_right = 1192.0
+offset_bottom = 1034.0
+pivot_offset = Vector2(231, 79)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -113,6 +113,12 @@ text = "Exit"
 icon_alignment = 1
 script = ExtResource("3_aid4m")
 
-[connection signal="pressed" from="Buttons/StartButton" to="Buttons/StartButton" method="_StartButtonPressed"]
-[connection signal="pressed" from="Buttons/OptionsButton" to="Buttons/OptionsButton" method="_OptionsButtonPressed"]
-[connection signal="pressed" from="Buttons/ExitButton" to="Buttons/ExitButton" method="_ExitButtonPressed"]
+[connection signal="mouse_entered" from="StartButton" to="StartButton" method="hovered"]
+[connection signal="mouse_exited" from="StartButton" to="StartButton" method="Nothovered"]
+[connection signal="pressed" from="StartButton" to="StartButton" method="_StartButtonPressed"]
+[connection signal="mouse_entered" from="OptionsButton" to="OptionsButton" method="hovered"]
+[connection signal="mouse_exited" from="OptionsButton" to="OptionsButton" method="Nothovered"]
+[connection signal="pressed" from="OptionsButton" to="OptionsButton" method="_OptionsButtonPressed"]
+[connection signal="mouse_entered" from="ExitButton" to="ExitButton" method="hovered"]
+[connection signal="mouse_exited" from="ExitButton" to="ExitButton" method="Nothovered"]
+[connection signal="pressed" from="ExitButton" to="ExitButton" method="_ExitButtonPressed"]
