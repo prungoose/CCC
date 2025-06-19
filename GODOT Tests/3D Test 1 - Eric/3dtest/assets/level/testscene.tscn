@@ -157,5 +157,4 @@ _vacuumzone = ExtResource("7_suvuw")
 _ui = NodePath("../UI")
 
 [node name="UI" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
-visible = false
 _player = NodePath("../Player")
