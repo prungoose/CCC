@@ -52,6 +52,8 @@ public partial class Controller : CharacterBody3D
 		_HandleControls();
 
 		//GD.Print("Current vp: ", GetViewport());
+		
+		
 
 	}
 

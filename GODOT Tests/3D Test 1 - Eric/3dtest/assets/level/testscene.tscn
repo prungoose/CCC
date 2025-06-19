@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=22 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="8_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
+[ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle1.tscn" id="11_a4lti"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -157,4 +158,9 @@ _vacuumzone = ExtResource("7_suvuw")
 _ui = NodePath("../UI")
 
 [node name="UI" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
+_player = NodePath("../Player")
+
+[node name="StaticBody3D" parent="." node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("11_a4lti")]
+transform = Transform3D(3.08466, 0, 0, 0, 3.94307, 0, 0, 0, 2.59466, -12.0911, 1.90735e-06, 7.67856)
+_ui = NodePath("../UI")
 _player = NodePath("../Player")
