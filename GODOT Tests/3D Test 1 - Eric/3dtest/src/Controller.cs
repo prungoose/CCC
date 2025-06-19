@@ -128,8 +128,44 @@ public partial class Controller : CharacterBody3D
 
 		if (is_sucking && !phone)
 		{
+			switch (Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle()) + 180)
+			{
+				case < 22.5f:
+					_anim.Play("se_suck");
+					break;
 
+				case < 67.5f:
+					_anim.Play("e_suck");
+					break;
 
+				case < 112.5f:
+					_anim.Play("ne_suck");
+					break;
+
+				case < 157.5f:
+					_anim.Play("n_suck");
+					break;
+
+				case < 202.5f:
+					_anim.Play("nw_suck");
+					break;
+
+				case < 247.5f:
+					_anim.Play("w_suck");
+					break;
+
+				case < 292.5f:
+					_anim.Play("sw_suck");
+					break;
+
+				case < 337.5f:
+					_anim.Play("s_suck");
+					break;
+
+				case < 360f:
+					_anim.Play("se_suck");
+					break;
+			}
 		}
 
 		else if (!inputdir.IsZeroApprox() && !phone)
@@ -227,6 +263,8 @@ public partial class Controller : CharacterBody3D
 			{
 				_vacuum.QueueFree();
 				_vacuum = null;
+				_movespeed = 10f;
+				is_sucking = false;
 			}
 		}
 
@@ -240,11 +278,15 @@ public partial class Controller : CharacterBody3D
 			{
 				_vacuum = _vacuumzone.Instantiate<Area3D>();
 				AddChild(_vacuum);
+				_movespeed = 2f;
+				is_sucking = true;
 			}
 			else if (Input.IsActionJustReleased("m1") && _vacuum != null)
 			{
 				_vacuum.QueueFree();
 				_vacuum = null;
+				_movespeed = 10f;
+				is_sucking = false;
 			}
 
 			if (_vacuum != null)
