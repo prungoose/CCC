@@ -1,9 +1,12 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Numerics;
+using System.Security.Cryptography;
 
 public partial class Controller : CharacterBody3D
 {
@@ -18,12 +21,15 @@ public partial class Controller : CharacterBody3D
 	[Export] public Node3D _campivot;
 	[Export] public PackedScene _vacuumzone;
 	[Export] public PackedScene _thrown_trash;
+	[Export] public PackedScene _trajectory;
 	[Export] public Control _ui;
 	public int _tankpercentage = 0;
 	private Node3D _head;
 	private AnimatedSprite3D _anim;
 	private Area3D _vacuum;
-	private MeshInstance3D _trajectory;
+	private CsgPolygon3D _trajpathmesh;
+	private Path3D _trajpath;
+	private Node3D _trajnode;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -34,10 +40,13 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Ready()
 	{
+		AddToGroup("player");
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
-		AddToGroup("player");
-		_trajectory = GetNode<MeshInstance3D>("Trajectory");
+		_trajpathmesh = GetNode<CsgPolygon3D>("Trajectory/CSGPolygon3D");
+		_trajpathmesh.Polygon = _makecirclepolygon();
+		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
+		_trajnode = GetNode<Node3D>("Trajectory");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -307,9 +316,10 @@ public partial class Controller : CharacterBody3D
 		}
 
 		//start a throw
-		if (Input.IsActionJustPressed("m2") && _tankpercentage >= 25 && !is_sucking)
+		if (Input.IsActionJustPressed("m2") && !is_sucking)
 		{
 			is_blowing = true;
+			_trajnode.Show();
 		}
 
 		//hold a throw
@@ -321,13 +331,13 @@ public partial class Controller : CharacterBody3D
 			{
 				_throw_strength = 100;
 			}
-			GD.Print("throw strength: ", _throw_strength);
+			_drawthrowtrajectory();
 		}
-
 
 		//release a throw
 		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
 		{
+			_trajnode.Hide();
 			var yeet = _thrown_trash.Instantiate<RigidBody3D>();
 			GetTree().CurrentScene.AddChild(yeet);
 			yeet.GlobalPosition = GlobalPosition + new Godot.Vector3(0, 1, 0);
@@ -339,6 +349,7 @@ public partial class Controller : CharacterBody3D
 			is_blowing = false;
 			_throw_strength = 0;
 			_tankpercentage -= 25;
+			_trajpath.Curve.ClearPoints();
 		}
 	}
 
@@ -365,11 +376,90 @@ public partial class Controller : CharacterBody3D
 
 	private void _drawthrowtrajectory()
 	{
+		var start_pos = GlobalPosition + new Godot.Vector3(0, 1, 0);
+		var v = new Godot.Vector3(0, 5f, -5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength * _throw_strength / 250000);
+		var start_vel = v.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
+		Array<Godot.Vector3> result = (Array<Godot.Vector3>)_gettrajectorypoints(start_pos, start_vel)["points"];
 
-
-
+		Curve3D curve = new Curve3D();
+		foreach (Godot.Vector3 i in result)
+		{
+			var p = i - GlobalPosition;
+			curve.AddPoint(p);
+		}
+		_trajpath.Curve = curve;
 	}
 
+	private Dictionary _gettrajectorypoints(Godot.Vector3 start_pos, Godot.Vector3 start_vel)
+	{
+		var t_step = 0.05f;
+		var g = -(float)ProjectSettings.GetSetting("physics/3d/default_gravity", 9.8);
+		var d = -(float)ProjectSettings.GetSetting("physics/3d/default_linear_damp", 0.0);
+		Array<Godot.Vector3> pts = new Array<Godot.Vector3> { start_pos };
+		var total_len = 0.0f;
+		var cur_pos = start_pos;
+		var cur_vel = start_vel;
+
+		for (int i = 0; i < 60; i++)
+		{
+			var next_pos = cur_pos + cur_vel * t_step;
+			cur_vel.Y += g * t_step;
+			cur_vel *= Mathf.Clamp(1.0f - d * t_step, 0.0f, 1.0f);
+
+			//prediction hit something
+			var que = _raycastquery(cur_pos, next_pos);
+			if (que.Count != 0)
+			{
+				var point = (Godot.Vector3)que["position"];
+				pts.Add(point);
+				total_len += (point - cur_pos).Length();
+				break;
+			}
+
+			total_len += (next_pos - cur_pos).Length();
+			pts.Add(next_pos);
+			cur_pos = next_pos;
+		}
+		Dictionary result = new Dictionary
+		{
+			{"points", pts },
+			{"length", total_len}
+		};
+		
+
+		return result;
+	}
+
+	private Dictionary _raycastquery(Godot.Vector3 a, Godot.Vector3 b) {
+		var space = GetWorld3D().DirectSpaceState;
+		var query = new PhysicsRayQueryParameters3D
+		{
+			From = a,
+			To = b,
+			CollideWithAreas = false,
+			CollideWithBodies = true,
+			CollisionMask = 1 << 0
+		};
+		query.Exclude = new Godot.Collections.Array<Rid> { this.GetRid() };
+		query.HitFromInside = false;
+		var result = space.IntersectRay(query);
+		return result;
+	}
+
+	private Godot.Vector2[] _makecirclepolygon()
+	{
+		var res = 4;
+		var radius = 0.05f;
+		var circ = new Godot.Vector2[res];
+		for (int i = 0; i < res; i++)
+		{
+			var x = radius * Mathf.Sin(Mathf.Pi * 2 * i / res);
+			var y = radius * Mathf.Cos(Mathf.Pi * 2 * i / res);
+			var coords = new Godot.Vector2(x, y);
+			circ[i] = coords;
+		}
+		return circ;
+	}
 
 
 

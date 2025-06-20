@@ -1,9 +1,10 @@
-[gd_scene load_steps=65 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=66 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bnavsdne3ftc8" path="res://assets/player/spritesheet.png" id="2_hsahs"]
 [ext_resource type="Texture2D" uid="uid://ccg8y5hoswvw7" path="res://assets/player/spritesheet2.png" id="3_rlquk"]
 [ext_resource type="Texture2D" uid="uid://d33iihj7b1e1f" path="res://assets/player/vaccuum_spritesheet3.png" id="4_k44c5"]
+[ext_resource type="PackedScene" uid="uid://babpq66f1k38y" path="res://assets/player/trajectory.tscn" id="5_apjbu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 0.784766, 1)
@@ -548,7 +549,7 @@ billboard = 1
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"nw_suck"
+animation = &"se_idle"
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
@@ -563,5 +564,6 @@ skeleton = NodePath("../../WorldModel")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
 shape = SubResource("CapsuleShape3D_rlquk")
 
-[node name="Trajectory" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="Trajectory" parent="." instance=ExtResource("5_apjbu")]
+
+[editable path="Trajectory"]

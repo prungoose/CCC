@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://babpq66f1k38y"]
+
+[ext_resource type="Script" uid="uid://dki003xcwtehl" path="res://assets/player/Trajectory.cs" id="1_kraoq"]
+
+[node name="Trajectory" type="Node3D"]
+script = ExtResource("1_kraoq")
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transparency = 0.2
+cast_shadow = 0
+polygon = PackedVector2Array()
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 3.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
