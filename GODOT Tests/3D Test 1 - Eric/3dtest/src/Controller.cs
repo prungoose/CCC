@@ -21,7 +21,7 @@ public partial class Controller : CharacterBody3D
 	[Export] public Node3D _campivot;
 	[Export] public PackedScene _vacuumzone;
 	[Export] public PackedScene _thrown_trash;
-	[Export] public PackedScene _trajectory;
+	[Export] public PackedScene _trajtarget_scene;
 	[Export] public Control _ui;
 	public int _tankpercentage = 0;
 	private Node3D _head;
@@ -30,6 +30,7 @@ public partial class Controller : CharacterBody3D
 	private CsgPolygon3D _trajpathmesh;
 	private Path3D _trajpath;
 	private Node3D _trajnode;
+	private MeshInstance3D _trajtarget;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -64,6 +65,7 @@ public partial class Controller : CharacterBody3D
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		_HandleAnimations();
 		_HandleControls((float)delta);
+		//GD.Print("fps: ", Engine.GetFramesPerSecond());
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -316,10 +318,15 @@ public partial class Controller : CharacterBody3D
 		}
 
 		//start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking)
+		if (Input.IsActionJustPressed("m2") && !is_sucking && _tankpercentage >= 25)
 		{
 			is_blowing = true;
 			_trajnode.Show();
+			if (_trajtarget != null)
+			{
+				_trajtarget.Show();
+			}
+			
 		}
 
 		//hold a throw
@@ -341,15 +348,19 @@ public partial class Controller : CharacterBody3D
 			var yeet = _thrown_trash.Instantiate<RigidBody3D>();
 			GetTree().CurrentScene.AddChild(yeet);
 			yeet.GlobalPosition = GlobalPosition + new Godot.Vector3(0, 1, 0);
-			var yeetvelocity = new Godot.Vector3(0, 5f, -5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength * _throw_strength / 250000);
+			var yeetvelocity = new Godot.Vector3(0, 5f, -5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength / 2500);
 			var yeetrotation = new Godot.Vector3(-10, 0, 0);
 			yeet.LinearVelocity = yeetvelocity.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
 			yeet.AngularVelocity = yeetrotation.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
-			GD.Print("tried yeeting at: ", yeetvelocity, "\t dir: ", _head.Rotation.Y);
 			is_blowing = false;
 			_throw_strength = 0;
 			_tankpercentage -= 25;
 			_trajpath.Curve.ClearPoints();
+			if (_trajtarget != null)
+			{
+				_trajtarget.Hide();
+			}
+
 		}
 	}
 
@@ -377,29 +388,36 @@ public partial class Controller : CharacterBody3D
 	private void _drawthrowtrajectory()
 	{
 		var start_pos = GlobalPosition + new Godot.Vector3(0, 1, 0);
-		var v = new Godot.Vector3(0, 5f, -5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength * _throw_strength / 250000);
-		var start_vel = v.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
+		var v = new Godot.Vector3(0, 5f, -5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength / 2500);
+		v = v.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
+		var start_vel = v *= 0.92f;
 		Array<Godot.Vector3> result = (Array<Godot.Vector3>)_gettrajectorypoints(start_pos, start_vel)["points"];
 
 		Curve3D curve = new Curve3D();
 		foreach (Godot.Vector3 i in result)
 		{
-			var p = i - GlobalPosition;
-			curve.AddPoint(p);
+			curve.AddPoint(i);
 		}
 		_trajpath.Curve = curve;
+		if (_trajtarget == null)
+		{
+			_trajtarget = _trajtarget_scene.Instantiate<MeshInstance3D>();
+			GetTree().CurrentScene.AddChild(_trajtarget);
+		}
+		_trajtarget.GlobalPosition = curve.GetPointPosition(curve.PointCount - 1);
+		_trajtarget.Show();
 	}
 
 	private Dictionary _gettrajectorypoints(Godot.Vector3 start_pos, Godot.Vector3 start_vel)
 	{
 		var t_step = 0.05f;
 		var g = -(float)ProjectSettings.GetSetting("physics/3d/default_gravity", 9.8);
-		var d = -(float)ProjectSettings.GetSetting("physics/3d/default_linear_damp", 0.0);
+		var d = -(float)ProjectSettings.GetSetting("physics/3d/default_linear_damp", 0.1);
 		Array<Godot.Vector3> pts = new Array<Godot.Vector3> { start_pos };
 		var total_len = 0.0f;
 		var cur_pos = start_pos;
 		var cur_vel = start_vel;
-
+		Dictionary que;
 		for (int i = 0; i < 60; i++)
 		{
 			var next_pos = cur_pos + cur_vel * t_step;
@@ -407,12 +425,13 @@ public partial class Controller : CharacterBody3D
 			cur_vel *= Mathf.Clamp(1.0f - d * t_step, 0.0f, 1.0f);
 
 			//prediction hit something
-			var que = _raycastquery(cur_pos, next_pos);
+			que = _raycastquery(cur_pos, next_pos);
 			if (que.Count != 0)
 			{
 				var point = (Godot.Vector3)que["position"];
 				pts.Add(point);
 				total_len += (point - cur_pos).Length();
+
 				break;
 			}
 
@@ -420,17 +439,19 @@ public partial class Controller : CharacterBody3D
 			pts.Add(next_pos);
 			cur_pos = next_pos;
 		}
+		
 		Dictionary result = new Dictionary
 		{
 			{"points", pts },
 			{"length", total_len}
 		};
-		
+
 
 		return result;
 	}
 
-	private Dictionary _raycastquery(Godot.Vector3 a, Godot.Vector3 b) {
+	private Dictionary _raycastquery(Godot.Vector3 a, Godot.Vector3 b)
+	{
 		var space = GetWorld3D().DirectSpaceState;
 		var query = new PhysicsRayQueryParameters3D
 		{
@@ -460,8 +481,5 @@ public partial class Controller : CharacterBody3D
 		}
 		return circ;
 	}
-
-
-
 
 }

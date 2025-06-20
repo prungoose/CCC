@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://babpq66f1k38y"]
+[gd_scene load_steps=2 format=3 uid="uid://k1eaxjlrusp5"]
 
-[ext_resource type="Script" uid="uid://dki003xcwtehl" path="res://assets/player/Trajectory.cs" id="1_kraoq"]
+[sub_resource type="CSharpScript" id="CSharpScript_smabd"]
+script/source = "using Godot;
+using System;
+
+public partial class Trajectory : Node3D
+{
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}
+"
 
 [node name="Trajectory" type="Node3D"]
-script = ExtResource("1_kraoq")
+script = SubResource("CSharpScript_smabd")
 
 [node name="Path3D" type="Path3D" parent="."]
 
