@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://b83ge5vg8o8bc"]
+
+[ext_resource type="Script" uid="uid://01mmpqfqelgx" path="res://src/ThrownTrash.cs" id="1_pm7ff"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d8ss7"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_pm7ff"]
+inner_radius = 0.205
+outer_radius = 0.455
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_pm7ff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_d8ss7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("TorusMesh_pm7ff")
+
+[node name="SpotlightPivot" type="Node3D" parent="."]
+top_level = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpotlightPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8.65615, 0)
+light_color = Color(0.741384, 0.741385, 0.741385, 1)
+light_energy = 3.5
+light_negative = true
+light_cull_mask = 4293918721
+spot_range = 25.0
+spot_attenuation = 0.45
+spot_angle = 2.5
+spot_angle_attenuation = 0.00124469

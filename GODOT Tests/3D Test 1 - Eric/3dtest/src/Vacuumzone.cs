@@ -41,9 +41,13 @@ public partial class Vacuumzone : Area3D
 			Vector3 vec = body.GlobalPosition - _player.GlobalPosition;
 			if (vec.Length() <= _deletedistance && (int)_player.Call("_gettankpercent") < 100)
 			{
-				_bodies.Remove(body);
-				body.QueueFree();
-				_player.Call("_addpercent", 1);
+				if (body.IsInGroup("cleanable_vacuum"))
+				{
+					_bodies.Remove(body);
+					body.QueueFree();
+					_player.Call("_addpercent", 1);	
+				}
+
 			}
 		}
 		

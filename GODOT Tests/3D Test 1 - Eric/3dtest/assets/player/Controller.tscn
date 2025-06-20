@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=66 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bnavsdne3ftc8" path="res://assets/player/spritesheet.png" id="2_hsahs"]
@@ -529,7 +529,10 @@ size = Vector3(1, 0.405, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
 height = 1.52642
 
+[sub_resource type="Curve3D" id="Curve3D_k44c5"]
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 2
 floor_constant_speed = true
 platform_on_leave = 2
 script = ExtResource("1_s7e8h")
@@ -561,3 +564,6 @@ skeleton = NodePath("../../WorldModel")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
 shape = SubResource("CapsuleShape3D_rlquk")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_k44c5")
