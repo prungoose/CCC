@@ -42,7 +42,7 @@ public partial class ThrownTrash : RigidBody3D
 
         RigidBody3D newObject = _trashscene.Instantiate<RigidBody3D>();
         newObject.Position = new Vector3(x, y, z) + GlobalPosition;
-		newObject.LinearVelocity = LinearVelocity + new Vector3(x, y, z) * 3;
+		newObject.LinearVelocity = LinearVelocity + new Vector3(x, y, z);
 		GetTree().CurrentScene.AddChild(newObject);
 	}
 
