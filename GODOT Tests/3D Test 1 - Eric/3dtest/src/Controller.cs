@@ -23,7 +23,7 @@ public partial class Controller : CharacterBody3D
 	private Node3D _head;
 	private AnimatedSprite3D _anim;
 	private Area3D _vacuum;
-	private Path3D _trajectory;
+	private MeshInstance3D _trajectory;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -37,23 +37,21 @@ public partial class Controller : CharacterBody3D
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
 		AddToGroup("player");
-		_trajectory = GetNode<Path3D>("Path3D");
+		_trajectory = GetNode<MeshInstance3D>("Trajectory");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-
+		if (!phone && _status == 0)
+		{
+			_HandleMovement((float)delta);
+		}
 		_HandleCollisions((float)delta);
 
 	}
 
 	public override void _Process(double delta)
 	{
-
-		if (!phone && _status == 0)
-		{
-			_Movement((float)delta);
-		}
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		_HandleAnimations();
 		_HandleControls((float)delta);
@@ -88,7 +86,7 @@ public partial class Controller : CharacterBody3D
 		}
 	}
 
-	private void _Movement(float delta)
+	private void _HandleMovement(float delta)
 	{
 		//get input direction, align it to camera, move that direction
 
@@ -342,9 +340,6 @@ public partial class Controller : CharacterBody3D
 			_throw_strength = 0;
 			_tankpercentage -= 25;
 		}
-
-
-
 	}
 
 	private void _addpercent(int value)
@@ -368,10 +363,10 @@ public partial class Controller : CharacterBody3D
 		_status = s;
 	}
 
-	private void _drawthrowtrajectory(RigidBody3D body, Godot.Vector3 vel)
+	private void _drawthrowtrajectory()
 	{
-		
-		
+
+
 
 	}
 
