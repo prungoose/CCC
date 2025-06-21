@@ -185,7 +185,6 @@ fov = 22.5
 size = 15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
-visible = false
 mesh = SubResource("QuadMesh_pr11n")
 
 [node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
