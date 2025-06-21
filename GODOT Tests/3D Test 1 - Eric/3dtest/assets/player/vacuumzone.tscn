@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://go1ix51gk6xl"]
+[gd_scene load_steps=17 format=3 uid="uid://go1ix51gk6xl"]
 
 [ext_resource type="Script" uid="uid://c1pb4ne1uxk7k" path="res://src/Vacuumzone.cs" id="1_jmqnw"]
 
@@ -44,6 +44,31 @@ is_hemisphere = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_jmqnw"]
 size = Vector3(6, 3, 2.5)
 
+[sub_resource type="Curve" id="Curve_pxoxk"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_ul6ya"]
+curve = SubResource("Curve_pxoxk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxoxk"]
+emission_shape_scale = Vector3(1, 1, 0.375)
+emission_shape = 1
+emission_sphere_radius = 2.5
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 4.71
+initial_velocity_max = 4.71
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.2
+alpha_curve = SubResource("CurveTexture_ul6ya")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxoxk"]
+shading_mode = 0
+disable_ambient_light = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_ul6ya"]
+material = SubResource("StandardMaterial3D_pxoxk")
+shape = 0
+
 [node name="Area3D" type="Area3D"]
 collision_layer = 4
 collision_mask = 12
@@ -69,6 +94,7 @@ shape = SubResource("SphereShape3D_jtj0b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.25)
+visible = false
 mesh = SubResource("CylinderMesh_t20ma")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
@@ -77,6 +103,7 @@ mesh = SubResource("SphereMesh_qsi6i")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -6.45161)
+visible = false
 mesh = SubResource("SphereMesh_jmqnw")
 
 [node name="fast" type="Area3D" parent="."]
@@ -93,6 +120,21 @@ gravity = 40.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="fast"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.75)
 shape = SubResource("BoxShape3D_jmqnw")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.34188)
+amount = 32
+interp_to_end = 1.0
+randomness = 1.0
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_pxoxk")
+draw_pass_1 = SubResource("RibbonTrailMesh_ul6ya")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.32813)
+strength = 72.76
+attenuation = 2.14355
+radius = 10.3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

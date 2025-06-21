@@ -37,8 +37,10 @@ spot_angle = 2.5
 spot_angle_attenuation = 0.00124469
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+layers = 2
 pixel_size = 0.0023
 billboard = 1
+alpha_cut = 3
 texture_filter = 0
 texture = ExtResource("3_rikpg")
 

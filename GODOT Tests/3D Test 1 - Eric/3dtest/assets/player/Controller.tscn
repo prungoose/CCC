@@ -530,6 +530,7 @@ size = Vector3(1, 0.405, 1)
 height = 1.52642
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k44c5"]
+render_priority = 1
 transparency = 1
 albedo_color = Color(0, 0, 0, 0.054902)
 emission_enabled = true
@@ -552,7 +553,7 @@ shape = SubResource("BoxShape3D_hsahs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.853468, 0)
 pixel_size = 0.012
 billboard = 1
-alpha_cut = 2
+alpha_cut = 3
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
 animation = &"se_idle"
