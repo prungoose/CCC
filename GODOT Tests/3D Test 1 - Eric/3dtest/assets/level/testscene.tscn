@@ -166,8 +166,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
 script = ExtResource("7_ofhqe")
 _spawn = ExtResource("8_suvuw")
 
-[node name="TrashBin" parent="SubViewportContainer/SubViewport/Level" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 3.79858, 0.56979, 3.77973)
+[node name="StaticBody3D" parent="SubViewportContainer/SubViewport/Level" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.42265, 0.5, 2.83642)
 
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
