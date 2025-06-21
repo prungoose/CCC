@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b83ge5vg8o8bc"]
+
+[ext_resource type="Script" uid="uid://01mmpqfqelgx" path="res://src/ThrownTrash.cs" id="1_pm7ff"]
+[ext_resource type="PackedScene" uid="uid://b204gjbgamu82" path="res://assets/trash/trash_sphere1.tscn" id="2_5yqu2"]
+[ext_resource type="Texture2D" uid="uid://bkurwsxv1sa3c" path="res://assets/trash/test_trashbag.png" id="3_rikpg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rikpg"]
+friction = 0.0
+bounce = 0.75
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d8ss7"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_rikpg")
+contact_monitor = true
+max_contacts_reported = 3
+script = ExtResource("1_pm7ff")
+_trashscene = ExtResource("2_5yqu2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_d8ss7")
+
+[node name="SpotlightPivot" type="Node3D" parent="."]
+top_level = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpotlightPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8.65615, 0)
+light_color = Color(0.741384, 0.741385, 0.741385, 1)
+light_energy = 3.5
+light_negative = true
+light_cull_mask = 4293918721
+spot_range = 25.0
+spot_attenuation = 0.45
+spot_angle = 2.5
+spot_angle_attenuation = 0.00124469
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0023
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_rikpg")
+
+[connection signal="body_entered" from="." to="." method="_collision"]

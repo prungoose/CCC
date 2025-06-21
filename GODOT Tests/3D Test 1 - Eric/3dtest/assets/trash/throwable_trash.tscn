@@ -6,7 +6,6 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_wg1f7"]
 
 [node name="Trash" type="RigidBody3D"]
-collision_layer = 2
 gravity_scale = 4.0
 script = ExtResource("1_7cf68")
 
