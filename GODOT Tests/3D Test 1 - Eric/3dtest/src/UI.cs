@@ -37,9 +37,7 @@ public partial class UI : Control
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-		}
-		else
-		{
+		} else {
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y + 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
