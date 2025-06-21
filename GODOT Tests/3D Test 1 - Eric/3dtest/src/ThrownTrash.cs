@@ -32,16 +32,16 @@ public partial class ThrownTrash : RigidBody3D
 
 	void _spawntrash()
 	{
-        float randomTheta = (float)GD.RandRange(0.0, Mathf.Tau);
-        float randomPhi = Mathf.Acos((float)GD.RandRange(-1.0, 1.0));
-        float randomRadius = (float)GD.RandRange(0.0, radius);
+		float randomTheta = (float)GD.RandRange(0.0, Mathf.Tau);
+		float randomPhi = Mathf.Acos((float)GD.RandRange(-1.0, 1.0));
+		float randomRadius = (float)GD.RandRange(0.0, radius);
 
-        float x = randomRadius * Mathf.Sin(randomPhi) * Mathf.Cos(randomTheta);
-        float y = randomRadius * Mathf.Sin(randomPhi) * Mathf.Sin(randomTheta);
-        float z = randomRadius * Mathf.Cos(randomPhi);
+		float x = randomRadius * Mathf.Sin(randomPhi) * Mathf.Cos(randomTheta);
+		float y = randomRadius * Mathf.Sin(randomPhi) * Mathf.Sin(randomTheta);
+		float z = randomRadius * Mathf.Cos(randomPhi);
 
-        RigidBody3D newObject = _trashscene.Instantiate<RigidBody3D>();
-        newObject.Position = new Vector3(x, y, z) + GlobalPosition;
+		RigidBody3D newObject = _trashscene.Instantiate<RigidBody3D>();
+		newObject.Position = new Vector3(x, y, z) + GlobalPosition;
 		newObject.LinearVelocity = LinearVelocity + new Vector3(x, y, z);
 		GetTree().CurrentScene.AddChild(newObject);
 	}
