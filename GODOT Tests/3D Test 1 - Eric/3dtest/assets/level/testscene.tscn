@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=27 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
+[ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle1.tscn" id="5_bofc0"]
 [ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
 [ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="7_suvuw"]
@@ -169,6 +170,11 @@ _spawn = ExtResource("8_suvuw")
 [node name="TrashBin" parent="SubViewportContainer/SubViewport/Level" instance=ExtResource("10_a4dfg")]
 transform = Transform3D(1.00655, 0, 0, 0, 1.00655, 0, 0, 0, 1.00655, 3.79858, 0.56979, 3.77973)
 
+[node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
+transform = Transform3D(3.44018, 0, 0, 0, 3.03557, 0, 0, 0, 2.75452, -9.37583, 1.49288, 8.81923)
+_ui = NodePath("../../../UI")
+_player = NodePath("../../Player")
+
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
@@ -179,16 +185,17 @@ fov = 22.5
 size = 15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
+visible = false
 mesh = SubResource("QuadMesh_pr11n")
 
 [node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
-visible = false
 script = ExtResource("3_ofhqe")
 _player = NodePath("../../Player")
 _mousetarget = NodePath("../../MouseTarget")
 _distance = 0.15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/CameraTarget"]
+visible = false
 mesh = SubResource("BoxMesh_mawog")
 
 [node name="MouseTarget" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_camera", "_player")]
