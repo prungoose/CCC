@@ -51,6 +51,7 @@ public partial class Vacuumzone : Area3D
 					body.QueueFree();
 					_player.Call("_addpercent", 1);
 					pickupSFX.PitchScale = (float)GD.RandRange(0.7, 1.0);
+					pickupSFX.VolumeDb = -10f;
 					pickupSFX.Play();
 				}
 

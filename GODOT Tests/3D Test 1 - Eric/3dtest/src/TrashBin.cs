@@ -21,9 +21,8 @@ public partial class TrashBin : Area3D
 	{
 		if (body.IsInGroup("thrown"))
 		{
-			GD.Print("trash entered");
 			body.QueueFree();
-			SFX.PitchScale = (float)GD.RandRange(0.8, 1.0);;
+			SFX.PitchScale = (float)GD.RandRange(0.8, 2.0);;
 			SFX.Play();
 		}
 	}
