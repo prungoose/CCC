@@ -1,18 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://n8u7og81agdi"]
+[gd_scene load_steps=9 format=3 uid="uid://n8u7og81agdi"]
 
 [ext_resource type="Script" uid="uid://b4h8si7mv3xng" path="res://src/MajorObstacle1.cs" id="1_0jk1x"]
+[ext_resource type="Texture2D" uid="uid://d33iihj7b1e1f" path="res://assets/player/vaccuum_spritesheet3.png" id="2_v0qbx"]
+[ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="3_qcs8f"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_jyq6q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6n1xx"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6s6"]
+atlas = ExtResource("3_qcs8f")
+region = Rect2(0, 0, 243, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enbpq"]
+atlas = ExtResource("2_v0qbx")
+region = Rect2(1056, 352, 352, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xh6s6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6s6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enbpq")
+}],
+"loop": true,
+"name": &"Warning Sign",
+"speed": 2.0
+}]
+
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_0jk1x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("PrismMesh_jyq6q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_6n1xx")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.164321, 0, 0, 0, 0.168058, 0, 0, 0, 1, 0.00143571, 1.02596, 0.0433283)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_xh6s6")
+animation = &"Warning Sign"
+frame_progress = 0.881743

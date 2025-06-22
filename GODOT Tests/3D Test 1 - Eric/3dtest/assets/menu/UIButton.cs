@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class OptionsButton : Button
+public partial class UIButton : Button
 {
 	private Tween _tween;
 	private Vector2 originalScale = Godot.Vector2.One;

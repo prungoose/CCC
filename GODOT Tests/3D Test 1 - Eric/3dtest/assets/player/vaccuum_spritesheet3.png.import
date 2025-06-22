@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byf0pv06hej6t"
-path.s3tc="res://.godot/imported/run_spritesheet2.png-bfcf635a9aa9c218b13acd7e14ba0f53.s3tc.ctex"
+uid="uid://d33iihj7b1e1f"
+path.s3tc="res://.godot/imported/vaccuum_spritesheet3.png-46afa0ced326ad9286a1da57ac4630d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/player/run_spritesheet2.png"
-dest_files=["res://.godot/imported/run_spritesheet2.png-bfcf635a9aa9c218b13acd7e14ba0f53.s3tc.ctex"]
+source_file="res://assets/player/vaccuum_spritesheet3.png"
+dest_files=["res://.godot/imported/vaccuum_spritesheet3.png-46afa0ced326ad9286a1da57ac4630d9.s3tc.ctex"]
 
 [params]
 

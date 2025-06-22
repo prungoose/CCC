@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 public partial class UI : Control
 {
@@ -11,6 +13,7 @@ public partial class UI : Control
 	private Control _phone;
 	private ProgressBar _tank;
 	private Label _phonedisplay;
+	private Label popUp;
 	private string _phonetext;
 
 	public override void _Ready()
@@ -18,7 +21,9 @@ public partial class UI : Control
 		_phone = GetNode<Control>("Phone");
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Label");
 		_tank = GetNode<ProgressBar>("ProgressBar");
+		popUp = GetNode<Label>("Popupmsg");
 
+		
 	}
 
 	public override void _Process(double delta)
@@ -26,7 +31,6 @@ public partial class UI : Control
 		_phonedisplay.Text = _phonetext;
 		_tank.Value = (float)_player.Call("_gettankpercent");
 	}
-
 
 	public void _updatephone(bool isPhoneOpen)
 	{
@@ -45,6 +49,23 @@ public partial class UI : Control
 			_phonetext = "";
 		}
 	}
+	public void Pop(string message)
+	{
+		_tween?.Kill();
+		//_tween?.CustomStep(0.3);
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(popUp, "scale", new Vector2(1, 1), .2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+		popUp.Text = message;
+	}
+
+	public void noPop()
+	{
+		_tween?.Kill();
+		//_tween?.CustomStep(0.3);
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(popUp, "scale", new Vector2(0, 0), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
+
+	}
 
 	public void _dial(char c)
 	{
@@ -55,6 +76,7 @@ public partial class UI : Control
 		else
 		{
 			_phonetext = "";
+			//here 
 		}
 		_wiggle();
 	}
@@ -63,8 +85,8 @@ public partial class UI : Control
 	{
 		_wiggletween?.Kill();
 		_wiggletween = GetTree().CreateTween();
-    	_wiggletween.TweenProperty(_phone, "rotation_degrees", -5.0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+		_wiggletween.TweenProperty(_phone, "rotation_degrees", -5.0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", 5.0f, 0.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
-    	_wiggletween.TweenProperty(_phone, "rotation_degrees", 0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		_wiggletween.TweenProperty(_phone, "rotation_degrees", 0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
 }
