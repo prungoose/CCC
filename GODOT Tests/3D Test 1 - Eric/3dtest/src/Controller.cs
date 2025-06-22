@@ -201,12 +201,15 @@ public partial class Controller : CharacterBody3D {
 		}
 
 		// hold a throw
-		if (Input.IsActionPressed("m2") && is_blowing && !is_sucking) {
+		if (Input.IsActionPressed("m2") && is_blowing && !is_sucking)
+		{
 			// one second to max throw strength
 			_throw_strength += 150 * delta;
 			if (_throw_strength >= 100)
 				_throw_strength = 100;
 			_drawthrowtrajectory();
+			vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/FWOOMP.wav");
+			vacSFX.Play();
 		}
 
 		//release a throw

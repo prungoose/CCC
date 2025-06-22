@@ -17,13 +17,16 @@ shape = SubResource("BoxShape3D_m2ov1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_pfhd3")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("SFX")]
 collision_mask = 8
 priority = 1
 script = ExtResource("1_pfhd3")
+SFX = NodePath("../SFX")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565782, 0)
 shape = SubResource("BoxShape3D_u87gn")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_body_entered"]

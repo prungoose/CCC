@@ -11,7 +11,6 @@ public partial class Vacuumzone : Area3D
 	private float _timeactive;
 	[Export] private float _deletedistance = 1.5f;
 	private AudioStreamPlayer pickupSFX;
-	Variant rng = new RandomNumberGenerator();
 
 
 	public override void _Ready()
