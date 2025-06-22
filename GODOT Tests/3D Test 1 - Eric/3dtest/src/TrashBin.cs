@@ -23,7 +23,7 @@ public partial class TrashBin : Area3D
 		{
 			GD.Print("trash entered");
 			body.QueueFree();
-			SFX.PitchScale = (float)GD.RandRange(1.0, 1.7);;
+			SFX.PitchScale = (float)GD.RandRange(0.8, 1.0);;
 			SFX.Play();
 		}
 	}

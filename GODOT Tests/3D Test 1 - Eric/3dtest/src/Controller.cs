@@ -208,12 +208,12 @@ public partial class Controller : CharacterBody3D {
 			if (_throw_strength >= 100)
 				_throw_strength = 100;
 			_drawthrowtrajectory();
-			vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/FWOOMP.wav");
-			vacSFX.Play();
+
 		}
 
 		//release a throw
-		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking) {
+		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
+		{
 			_trajnode.Hide();
 			var yeet = _thrown_trash.Instantiate<RigidBody3D>();
 			GetTree().CurrentScene.AddChild(yeet);
@@ -228,6 +228,10 @@ public partial class Controller : CharacterBody3D {
 			_trajpath.Curve.ClearPoints();
 			if (_trajtarget != null)
 				_trajtarget.Hide();
+			vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/FWOOMP.wav");
+			vacSFX.VolumeDb = 0f;
+			vacSFX.PitchScale = 1.0f;
+			vacSFX.Play();
 		}
 	}
 

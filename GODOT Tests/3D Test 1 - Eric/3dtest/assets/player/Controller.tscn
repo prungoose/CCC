@@ -615,7 +615,7 @@ alpha_scissor_threshold = 0.025
 alpha_hash_scale = 0.0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"nw_suck"
+animation = &"sw_run"
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
