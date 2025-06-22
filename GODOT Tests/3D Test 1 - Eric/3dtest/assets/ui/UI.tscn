@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=20 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
+[ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="7_d8c6n"]
+[ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="8_d2ctu"]
+[ext_resource type="Texture2D" uid="uid://dt5lkcsl20vo" path="res://assets/ui/chat_bubble.png" id="9_d2ctu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
 font_size = 50
@@ -170,5 +174,54 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_bscbh")
 text = "Pop up"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Tutorial Stuff" type="MarginContainer" parent="." node_paths=PackedStringArray("TutorialText", "TutorialUI")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.085
+anchor_bottom = 0.085
+offset_left = 98.0
+offset_top = 0.199997
+offset_right = 808.0
+offset_bottom = 190.2
+script = ExtResource("7_cufnj")
+TutorialText = NodePath("HBoxContainer/Chat Bubble/RichTextLabel")
+TutorialUI = NodePath(".")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial Stuff"]
+clip_contents = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Stuff/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+texture = ExtResource("7_d8c6n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial Stuff/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -78.0
+offset_right = 178.0
+offset_bottom = 164.0
+texture = ExtResource("8_d2ctu")
+expand_mode = 1
+flip_h = true
+
+[node name="Chat Bubble" type="TextureRect" parent="Tutorial Stuff/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_d2ctu")
+expand_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial Stuff/HBoxContainer/Chat Bubble"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 14.0
+offset_right = 444.0
+offset_bottom = 178.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 26
+text = "Here is some sample text"
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="Paused"]

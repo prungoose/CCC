@@ -15,6 +15,10 @@ public partial class UI : Control
 	private Label _phonedisplay;
 	private Label popUp;
 	private string _phonetext;
+	private MarginContainer _tutorialStuff;
+
+	private bool _tankStepCompleted = false;
+
 
 	public override void _Ready()
 	{
@@ -22,14 +26,20 @@ public partial class UI : Control
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Label");
 		_tank = GetNode<ProgressBar>("ProgressBar");
 		popUp = GetNode<Label>("Popupmsg");
-
-		
+		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 	}
 
 	public override void _Process(double delta)
 	{
 		_phonedisplay.Text = _phonetext;
 		_tank.Value = (float)_player.Call("_gettankpercent");
+
+		// Go to next step in tutorial first time tank reaches 50%
+		if ((float)_player.Call("_gettankpercent") >= 50 && _tutorialStuff.Visible && !_tankStepCompleted)
+		{
+			_tankStepCompleted = true;
+			NextTutorialStep();
+		}
 	}
 
 	public void _updatephone(bool isPhoneOpen)
@@ -89,4 +99,20 @@ public partial class UI : Control
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", 5.0f, 0.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", 0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
+
+	public void OnBeaconReached(Node3D body, Node3D beacon)
+	{
+		// GD.Print($"  beacon: {beacon?.Name}, type: {beacon?.GetType()}");
+		if (body is CharacterBody3D)
+		{
+			NextTutorialStep();
+			beacon.QueueFree();
+		}
+	}
+	public void NextTutorialStep()
+	{
+		_tutorialStuff.Call("NextStep");
+	}
+
+
 }
