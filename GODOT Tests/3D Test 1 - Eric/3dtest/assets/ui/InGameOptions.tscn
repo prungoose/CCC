@@ -182,7 +182,7 @@ theme_override_font_sizes/font_size = 60
 text = "Language"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="Adjustments" type="VBoxContainer" parent="."]
 process_mode = 3
 layout_mode = 0
 offset_left = 774.0
@@ -191,7 +191,7 @@ offset_right = 1716.0
 offset_bottom = 891.0
 theme_override_constants/separation = 160
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer2"]
+[node name="VolumeSlider" type="HSlider" parent="Adjustments"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -200,7 +200,7 @@ theme_override_styles/slider = SubResource("StyleBoxLine_6ifhe")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_6lw4i")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
 
-[node name="SoundEffectsSlider" type="HSlider" parent="VBoxContainer2"]
+[node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -208,7 +208,7 @@ theme_override_styles/slider = SubResource("StyleBoxLine_6ifhe")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_6lw4i")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
 
-[node name="LanguageButton" type="OptionButton" parent="VBoxContainer2"]
+[node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -229,7 +229,7 @@ popup/item_0/id = 1
 popup/item_1/text = "English"
 popup/item_1/id = 0
 
-[node name="BacktoGameButton" type="Button" parent="."]
+[node name="BacktoGameButton" type="Button" parent="." node_paths=PackedStringArray("parent")]
 process_mode = 3
 layout_mode = 0
 offset_left = 134.0
@@ -249,5 +249,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_i5ekm")
 shortcut = SubResource("Shortcut_q2ip2")
 text = "<"
 script = ExtResource("1_2fkgi")
+parent = NodePath("../Adjustments")
 
 [connection signal="pressed" from="BacktoGameButton" to="BacktoGameButton" method="BacktoGame"]
