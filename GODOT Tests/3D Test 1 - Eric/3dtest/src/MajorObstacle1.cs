@@ -32,8 +32,7 @@ public partial class MajorObstacle1 : StaticBody3D
 			if (popupExists == false)
 			{
 				popupExists = true;
-				popUp.Show();
-				_ui.Call("Pop", "hello");
+				_ui.Call("Pop", "Hello");
 			}
 		}
 		else 

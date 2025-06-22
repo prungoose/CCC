@@ -3,13 +3,24 @@ using System;
 
 public partial class MainMenuButton : Button
 {
-	private Tween _tween;
-	private Vector2 originalScale = Godot.Vector2.One;
-	private Vector2 hoverScale = new Godot.Vector2(1.2f, 1.2f);
-	private float _animationTime = 0.15f;
+	private HSlider volslider;
+	private HSlider sfxslider;
+	private OptionButton langbutton;
+	private OptionButton timebutton;
+	public ConfigFile CF = new ConfigFile();
+	[Export] public VBoxContainer parent;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//var parent = GetParent<Control>().GetNode<VBoxContainer>("Adjustments");
+		GD.Print(parent.Name);
+		volslider = parent.GetNode<HSlider>("VolumeSlider");
+		sfxslider = parent.GetNode<HSlider>("SoundEffectsSlider");
+		langbutton = parent.GetNode<OptionButton>("LanguageButton");
+		timebutton = parent.GetNode<OptionButton>("TimerButton");
+
+		Load();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,22 +30,32 @@ public partial class MainMenuButton : Button
 
 	private void _MainMenuButtonPressed()
 	{
+		Save();
 		GetTree().ChangeSceneToFile("res://assets/menu/MainMenu.tscn");
 	}
 
-	private void hovered()
+	public void Save()
 	{
-		_tween?.CustomStep(0.3);
-		_tween?.Kill();
-		_tween = GetTree().CreateTween();
-		_tween.TweenProperty(this, "scale", new Vector2(this.Scale.X*1.2f, this.Scale.Y*1.2f), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		CF.SetValue("playersettings", "vol", volslider.Value);
+		CF.SetValue("playersettings", "sfx", sfxslider.Value);
+		CF.SetValue("playersettings", "lang", langbutton.Selected);
+		CF.SetValue("playersettings", "time", timebutton.Selected);
+		CF.Save(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg");
+		GD.Print(OS.GetUserDataDir());
 	}
-
-	private void Nothovered()
+	
+		public void Load()
 	{
-		_tween?.CustomStep(0.3);
-		_tween?.Kill();
-		_tween = GetTree().CreateTween();
-		_tween.TweenProperty(this, "scale", new Vector2(this.Scale.X/1.2f, this.Scale.Y/1.2f), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.In);
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			Save();
+		}
+		else
+		{
+			volslider.Value = (float)CF.GetValue("playersettings", "vol", volslider.Value);
+			sfxslider.Value = (float)CF.GetValue("playersettings", "sfx", sfxslider.Value);
+			langbutton.Selected = (int)CF.GetValue("playersettings", "lang", langbutton.Selected);
+			timebutton.Selected = (int)CF.GetValue("playersettings", "time", timebutton.Selected);
+		}
 	}
 }

@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 public partial class UI : Control
 {
@@ -20,6 +22,8 @@ public partial class UI : Control
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Label");
 		_tank = GetNode<ProgressBar>("ProgressBar");
 		popUp = GetNode<Label>("Popupmsg");
+
+		
 	}
 
 	public override void _Process(double delta)
@@ -27,7 +31,6 @@ public partial class UI : Control
 		_phonedisplay.Text = _phonetext;
 		_tank.Value = (float)_player.Call("_gettankpercent");
 	}
-
 
 	public void _updatephone(bool isPhoneOpen)
 	{
@@ -37,7 +40,9 @@ public partial class UI : Control
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-		} else {
+		}
+		else
+		{
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y + 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);

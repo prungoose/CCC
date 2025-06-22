@@ -84,7 +84,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="Control2" type="Control"]
+[node name="Options" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +117,7 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sxq6w")
 
-[node name="MainMenuButton" type="Button" parent="."]
+[node name="MainMenuButton" type="Button" parent="." node_paths=PackedStringArray("parent")]
 layout_mode = 1
 offset_left = 134.0
 offset_top = 58.0
@@ -136,6 +136,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
 shortcut = SubResource("Shortcut_sxq6w")
 text = "<"
 script = ExtResource("1_1fypi")
+parent = NodePath("../Adjustments")
 
 [node name="OptionsLabel" type="Label" parent="."]
 layout_mode = 1
@@ -154,7 +155,7 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Labels" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -167,35 +168,35 @@ grow_vertical = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 110
 
-[node name="Volume" type="Label" parent="VBoxContainer"]
+[node name="Volume" type="Label" parent="Labels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 60
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Sound Effects" type="Label" parent="VBoxContainer"]
+[node name="Sound Effects" type="Label" parent="Labels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
 horizontal_alignment = 1
 
-[node name="Language" type="Label" parent="VBoxContainer"]
+[node name="Language" type="Label" parent="Labels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 60
 text = "Language"
 horizontal_alignment = 1
 
-[node name="Timer" type="Label" parent="VBoxContainer"]
+[node name="Timer" type="Label" parent="Labels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 60
 text = "Timer"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="Adjustments" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 774.0
 offset_top = 271.0
@@ -203,22 +204,24 @@ offset_right = 1716.0
 offset_bottom = 907.0
 theme_override_constants/separation = 120
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer2"]
+[node name="VolumeSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/center_grabber = 0
 theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
+value = 50.0
 
-[node name="SoundEffectsSlider" type="HSlider" parent="VBoxContainer2"]
+[node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
+value = 50.0
 
-[node name="LanguageButton" type="OptionButton" parent="VBoxContainer2"]
+[node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
@@ -238,7 +241,7 @@ popup/item_0/id = 1
 popup/item_1/text = "English"
 popup/item_1/id = 0
 
-[node name="TimerButton" type="OptionButton" parent="VBoxContainer2"]
+[node name="TimerButton" type="OptionButton" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
