@@ -610,11 +610,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.853468, 0)
 layers = 2
 pixel_size = 0.012
 billboard = 1
+alpha_cut = 3
 alpha_scissor_threshold = 0.025
 alpha_hash_scale = 0.0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"ne_suck"
+animation = &"nw_suck"
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
