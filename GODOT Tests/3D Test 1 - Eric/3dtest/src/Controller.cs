@@ -36,9 +36,10 @@ public partial class Controller : CharacterBody3D {
 	bool is_moving 	= true;
 	float 		_throw_strength = 0;
 	private int _status = 0;
+	private AudioStreamPlayer vacSFX;
 
-
-	public override void _Ready() {
+	public override void _Ready()
+	{
 		AddToGroup("player");
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
@@ -46,6 +47,7 @@ public partial class Controller : CharacterBody3D {
 		_trajpathmesh.Polygon = _makecirclepolygon();
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
 		_trajnode = GetNode<Node3D>("Trajectory");
+		vacSFX = GetNode<AudioStreamPlayer>("SFX");
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -142,22 +144,36 @@ public partial class Controller : CharacterBody3D {
 				is_sucking = false;
 			}
 		}
-		
-		if (_vacuum != null) {
-			
+
+		if (_vacuum != null)
+		{
+
 			// if vacuuming, rotate the vacuum zone in the direction of the mouse
 			_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
-			
+			if (!vacSFX.Playing)
+			{
+				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyInhale.mp3");
+				vacSFX.Play();
+			}
+
 			//stop vacuuming
-			if (Input.IsActionJustReleased("m1")) {
+			if (Input.IsActionJustReleased("m1"))
+			{
 				_vacuum.QueueFree();
 				_vacuum = null;
 				is_sucking = false;
+				vacSFX.Stop();
+				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStop.mp3");
+				vacSFX.Play();
 			}
-		} else if (Input.IsActionJustPressed("m1") && !is_blowing) { // start vacuuming
+		}
+		else if (Input.IsActionJustPressed("m1") && !is_blowing)
+		{ // start vacuuming
 			_vacuum = _vacuumzone.Instantiate<Area3D>();
 			AddChild(_vacuum);
 			is_sucking = true;
+			vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStart.mp3");
+			vacSFX.Play();
 		}
 
 		// start a throw

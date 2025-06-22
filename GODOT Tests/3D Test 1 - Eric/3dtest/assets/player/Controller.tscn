@@ -557,7 +557,7 @@ billboard = 1
 alpha_cut = 3
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"se_idle"
+animation = &"ne_suck"
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
@@ -606,3 +606,7 @@ light_cull_mask = 4293918721
 spot_range = 25.0
 spot_angle = 3.55
 spot_angle_attenuation = 0.00124469
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+max_polyphony = 4

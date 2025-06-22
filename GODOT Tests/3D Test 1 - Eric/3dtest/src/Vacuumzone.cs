@@ -10,7 +10,8 @@ public partial class Vacuumzone : Area3D
 	private Area3D _fasthitbox;
 	private float _timeactive;
 	[Export] private float _deletedistance = 1.5f;
-
+	private AudioStreamPlayer pickupSFX;
+	Variant rng = new RandomNumberGenerator();
 
 
 	public override void _Ready()
@@ -18,6 +19,8 @@ public partial class Vacuumzone : Area3D
 		_player = GetParent<CharacterBody3D>();
 		_bodies = new List<RigidBody3D>();
 		_fasthitbox = GetNode<Area3D>("fast");
+		pickupSFX = GetNode<AudioStreamPlayer>("SFX");
+		pickupSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/PickupTrash.wav");
 	}
 
 
@@ -47,7 +50,9 @@ public partial class Vacuumzone : Area3D
 				{
 					_bodies.Remove(body);
 					body.QueueFree();
-					_player.Call("_addpercent", 1);	
+					_player.Call("_addpercent", 1);
+					pickupSFX.PitchScale = (float)GD.RandRange(0.8, 2.0);
+					pickupSFX.Play();
 				}
 
 			}
