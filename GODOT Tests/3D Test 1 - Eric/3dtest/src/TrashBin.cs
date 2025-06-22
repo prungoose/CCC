@@ -17,10 +17,11 @@ public partial class TrashBin : Area3D
 
 	}
 
-	void _body_entered(Node body)
+	void _body_entered(Node3D body)
 	{
 		if (body.IsInGroup("thrown"))
 		{
+			GD.Print("trash entered");
 			body.QueueFree();
 		}
 	}
