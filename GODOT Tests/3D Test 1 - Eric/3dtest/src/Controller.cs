@@ -92,9 +92,19 @@ public partial class Controller : CharacterBody3D {
 			Godot.Vector2 inputdir	= Input.GetVector("move_left", "move_right", "move_up", "move_down");
 			Godot.Vector3 dir 		= new Godot.Vector3(inputdir.X, 0, inputdir.Y);
 			dir = new Basis(Godot.Vector3.Up, _campivot.Rotation.Y + Mathf.DegToRad(-45)) * dir;
+			if (!dir.IsZeroApprox() && !vacSFX.Playing && !is_sucking && !is_blowing)
+			{
+				vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/wanpeesWalk.wav");
+				vacSFX.VolumeDb = -15f;
+				vacSFX.PitchScale = 1f;
+				vacSFX.Play();
+			}
+			
 
 			if (dir != Godot.Vector3.Zero)
+			{
 				_velocity = _velocity.Lerp(dir * _movespeed, (float)delta * _accel);
+			}
 			else _velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
 			_velocity.Y -= 100 * (float)delta;
 			Velocity = _velocity;
@@ -153,6 +163,8 @@ public partial class Controller : CharacterBody3D {
 			if (!vacSFX.Playing)
 			{
 				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyInhale.mp3");
+				vacSFX.VolumeDb = -25f;
+				vacSFX.PitchScale = 0.8f;
 				vacSFX.Play();
 			}
 
@@ -164,6 +176,8 @@ public partial class Controller : CharacterBody3D {
 				is_sucking = false;
 				vacSFX.Stop();
 				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStop.mp3");
+				vacSFX.VolumeDb = -25f;
+				vacSFX.PitchScale = 0.8f;
 				vacSFX.Play();
 			}
 		}
@@ -173,6 +187,8 @@ public partial class Controller : CharacterBody3D {
 			AddChild(_vacuum);
 			is_sucking = true;
 			vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStart.mp3");
+			vacSFX.VolumeDb = -25f;
+			vacSFX.PitchScale = 0.8f;
 			vacSFX.Play();
 		}
 

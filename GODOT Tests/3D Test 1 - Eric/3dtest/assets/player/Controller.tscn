@@ -608,5 +608,4 @@ spot_angle = 3.55
 spot_angle_attenuation = 0.00124469
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
-max_polyphony = 4
+max_polyphony = 6
