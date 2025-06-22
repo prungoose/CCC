@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2shsjl7raa2y"
-path="res://.godot/imported/placeholder_character2.png-c6e90007aed935d3197df8115e44cacd.ctex"
+uid="uid://bb07myhdyjoqp"
+path="res://.godot/imported/vaccuum_spritesheet3 (1).png-8e75bba9d50dda41f8b16220cb8bf507.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cutscene characters/placeholder_character2.png"
-dest_files=["res://.godot/imported/placeholder_character2.png-c6e90007aed935d3197df8115e44cacd.ctex"]
+source_file="res://assets/player/vaccuum_spritesheet3 (1).png"
+dest_files=["res://.godot/imported/vaccuum_spritesheet3 (1).png-8e75bba9d50dda41f8b16220cb8bf507.ctex"]
 
 [params]
 
