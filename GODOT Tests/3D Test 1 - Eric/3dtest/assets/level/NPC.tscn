@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7l01n2hwrqkt"]
 
 [ext_resource type="Script" uid="uid://hi0na1gh0l4c" path="res://src/TestNpc.cs" id="1_i0d35"]
+[ext_resource type="Texture2D" uid="uid://5g36vp6ob0jp" path="res://assets/npc/character2.png" id="2_b7p7y"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i0d35"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_b7p7y"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7p7y"]
+size = Vector3(2, 2.5, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fh8cu"]
 radius = 0.987931
@@ -13,16 +13,23 @@ height = 3.00591
 [node name="StaticBody3D" type="StaticBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_i0d35")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_b7p7y")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0590566, 1.54698, 0.0859576)
+shape = SubResource("BoxShape3D_b7p7y")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06555, 0)
 script = ExtResource("1_i0d35")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_fh8cu")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.40009, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2343, 0)
+pixel_size = 0.004
+texture = ExtResource("2_b7p7y")
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_OnPlayerEntry"]
 [connection signal="body_exited" from="Area3D" to="Area3D" method="_OnPlayerExit"]

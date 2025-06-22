@@ -13,6 +13,8 @@ public partial class TrashBin : Area3D
 
 	public override void _Ready()
 	{
+		GD.Print("TrashBin ready: ", Name, " | In tree: ", IsInsideTree());
+
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("Player");
 
 	}

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b08eupd0siqq0"]
+[gd_scene load_steps=3 format=3 uid="uid://b08eupd0siqq0"]
 
-[ext_resource type="Script" uid="uid://dnadq23pknmim" path="res://assets/level/TextDisplay.cs" id="1_1fxib"]
-[ext_resource type="Script" uid="uid://y11uv1sf74q0" path="res://assets/level/VisualNovelDisplay.cs" id="1_bnrcd"]
+[ext_resource type="Script" uid="uid://b6eieblmxosag" path="res://assets/level/preSequenceText.cs" id="1_j715x"]
 [ext_resource type="Texture2D" uid="uid://5g36vp6ob0jp" path="res://assets/npc/character2.png" id="3_c6ojl"]
-[ext_resource type="Texture2D" uid="uid://du3as8j1sidfr" path="res://assets/npc/character3.png" id="4_0dro5"]
 
 [node name="VisualNovelDisplay" type="Control"]
 layout_mode = 3
@@ -12,7 +10,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bnrcd")
 
 [node name="Text Display" type="ColorRect" parent="."]
 z_index = 1
@@ -25,21 +22,32 @@ color = Color(0.976345, 0.753536, 0.726594, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Text Display"]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 1786.0
-offset_bottom = 225.0
-theme_override_font_sizes/normal_font_size = 40
-text = "This works betters"
-script = ExtResource("1_1fxib")
+offset_left = 35.0
+offset_top = 15.0
+offset_right = 1769.0
+offset_bottom = 227.0
+theme_override_font_sizes/normal_font_size = 38
+fit_content = true
+scroll_active = false
+script = ExtResource("1_j715x")
+
+[node name="Press Space Tip" type="RichTextLabel" parent="Text Display"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 179.0
+offset_right = 1206.0
+offset_bottom = 232.0
+theme_override_font_sizes/normal_font_size = 38
+text = "Press Space to Continue..."
+fit_content = true
 
 [node name="SpeakerName" type="ColorRect" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 1530.0
-offset_top = 746.0
-offset_right = 1834.0
-offset_bottom = 829.0
+offset_left = 1550.0
+offset_top = 719.0
+offset_right = 1795.0
+offset_bottom = 802.0
 color = Color(0.962062, 0.78139, 0.545515, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SpeakerName"]
@@ -49,23 +57,12 @@ offset_top = 8.0
 offset_right = 290.0
 offset_bottom = 68.0
 theme_override_font_sizes/normal_font_size = 40
-text = "Kyodai-Sensei"
-script = ExtResource("1_1fxib")
+text = "Mayumoto"
 
 [node name="PlayerPng" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -64.0
-offset_top = -128.0
-offset_right = 709.0
-offset_bottom = 949.0
+offset_left = 997.0
+offset_top = -394.0
+offset_right = 2003.0
+offset_bottom = 1008.0
 texture = ExtResource("3_c6ojl")
-flip_h = true
-
-[node name="NPCPng" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1110.0
-offset_top = 22.0
-offset_right = 1883.0
-offset_bottom = 1014.0
-texture = ExtResource("4_0dro5")
-expand_mode = 3

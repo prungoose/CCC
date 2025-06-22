@@ -9,7 +9,7 @@ public partial class StartButton : Button
 	{
 		var parent = GetParent<Container>();
 		_pauseScreen = parent.GetParent<Control>();
-		
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,7 +19,7 @@ public partial class StartButton : Button
 
 	private void _StartButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
+		GetTree().ChangeSceneToFile("res://assets/level/visualNovelDisplay.tscn");
 		_pauseScreen.Hide();
 	}
 }
