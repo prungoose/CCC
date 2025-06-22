@@ -10,6 +10,7 @@ public partial class TrashBin : Area3D
 	public override void _Ready()
 	{
 		SFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/THWOOM.wav");
+		var ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
 	}
 
 
@@ -33,7 +34,7 @@ public partial class TrashBin : Area3D
 			if (_trashCount >= 2)
 			{
 				// Go to next step in tutorial
-				var ui = GetTree().GetRoot().GetNode<Control>("SubViewportContainer/UI");
+				var ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
 				ui.Call("NextTutorialStep");
 			}
 		}

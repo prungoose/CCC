@@ -144,7 +144,7 @@ public partial class Controller : CharacterBody3D {
 		if (_status != 0) return;
 
 		// pull up phone
-		if (Input.IsActionJustPressed("phone")) {
+		if (Input.IsActionJustPressed("phone") && !is_blowing && !is_sucking) {
 			phone = !phone;
 			_ui.Call("_updatephone", phone);
 			// get rid of vacuum if it is out
@@ -181,7 +181,7 @@ public partial class Controller : CharacterBody3D {
 				vacSFX.Play();
 			}
 		}
-		else if (Input.IsActionJustPressed("m1") && !is_blowing)
+		else if (Input.IsActionJustPressed("m1") && !is_blowing && !phone)
 		{ // start vacuuming
 			_vacuum = _vacuumzone.Instantiate<Area3D>();
 			AddChild(_vacuum);
@@ -193,7 +193,7 @@ public partial class Controller : CharacterBody3D {
 		}
 
 		// start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking && _tankpercentage >= 25) {
+		if (Input.IsActionJustPressed("m2") && !is_sucking && _tankpercentage >= 25 && !phone) {
 			is_blowing = true;
 			_trajnode.Show();
 			if (_trajtarget != null)

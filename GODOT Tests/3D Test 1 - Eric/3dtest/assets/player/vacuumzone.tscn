@@ -1,15 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://go1ix51gk6xl"]
+[gd_scene load_steps=18 format=3 uid="uid://go1ix51gk6xl"]
 
 [ext_resource type="Script" uid="uid://c1pb4ne1uxk7k" path="res://src/Vacuumzone.cs" id="1_jmqnw"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmqnw"]
-points = PackedVector3Array(0.0118846, -0.18699, -1.20626, 0.299786, 3.07521, 1.93427, 0.682576, 3.06684, 1.83259, 0.291429, -2.9859, 0.478548, -1.88697, 3.03763, 0.486624, 1.63671, 3.25, -1.10512, -1.1187, 3.01516, -1.5899, -0.548998, -2.99352, 0.105325, 1.83264, 3.06697, 0.6825, 0.482846, -3.01593, -0.270823, -0.930224, 3.0154, 1.70831, 0.486266, 3.03788, -1.88713, -1.80549, 3.06131, -0.753118, -0.355524, -2.94041, -0.44691, 1.63671, 3.25, 1.12893, 1.91812, 3.05004, -0.369123, -0.270756, -3.01503, 0.4831, -1.50145, 3.02717, 1.24148, -0.464675, 3.05183, -1.89584, 0.571904, -2.89528, 0.105181, 0.296197, -3.03684, -0.461955, 1.24147, 3.02723, -1.50148, -0.369084, 3.049, 1.91789, 1.22335, 2.98263, 1.50298, -1.85212, 2.70223, -0.267625, 0.105132, -2.89439, 0.572123, -1.58989, 3.01514, -1.11869, -0.544848, -2.7852, -0.266646, 1.93442, 3.0761, 0.300212, -0.0817682, -3.001, -0.550752, 0.478195, -2.98614, 0.29184, -0.753127, 3.0613, -1.80548)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_jmqnw"]
-radius = 1.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_jtj0b"]
-radius = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmqnw"]
 render_priority = 1
@@ -41,6 +32,15 @@ material = SubResource("StandardMaterial3D_qsi6i")
 radius = 2.0
 height = 2.0
 is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ul6ya"]
+top_radius = 5.0
+bottom_radius = 2.0
+height = 8.0
+radial_segments = 8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ul6ya"]
+points = PackedVector3Array(1.04615, 3.78049, 4.48434, 1.9386, -3.8346, 0.297972, -4.79805, 3.79245, 0.299643, 4.79858, 3.79287, -0.298737, -1.9386, -3.83461, 0.297972, 1.47143, -3.78449, -1.47115, -3.49374, 3.8432, 3.49401, -0.147276, -3.65368, 2.06887, 3.49389, 3.84231, -3.49321, 3.49389, 3.84231, 3.49321, -1.47143, -3.78449, -1.47115, -3.49374, 3.8432, -3.49401, -0.299781, 3.79346, 4.79838, 1.47143, -3.78449, 1.47115, 0.147276, -3.65368, -2.06887, -1.47143, -3.78449, 1.47115, -4.72981, 3.44211, -0.147228, 0.298875, 3.79389, -4.79891, 4.73033, 3.4425, 0.146318, 2.06942, -3.65231, -0.147191, 0.147295, 3.44302, 4.73012, -2.06904, -3.65327, -0.14723, -0.298061, -3.835, -1.93842, 0.297159, -3.83542, 1.93863, -0.147295, 3.44302, -4.73012, -4.79806, 3.79245, -0.299644, 4.79806, 3.79245, 0.299644, -4.55763, 2.98208, 0.146427, -0.29978, 3.79345, -4.79837, -0.147295, 3.44302, 4.73012, 0.147295, 3.44302, -4.73012, 2.06964, -3.65271, 0.146282)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pxoxk"]
 top_radius = 4.0
@@ -83,6 +83,7 @@ billboard_keep_scale = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_ul6ya"]
 material = SubResource("StandardMaterial3D_pxoxk")
+shape = 0
 sections = 45
 section_segments = 1
 curve = SubResource("Curve_ul6ya")
@@ -90,7 +91,7 @@ curve = SubResource("Curve_ul6ya")
 [node name="Area3D" type="Area3D"]
 collision_layer = 4
 collision_mask = 12
-gravity_space_override = 2
+gravity_space_override = 1
 gravity_point = true
 gravity_point_center = Vector3(0, 1, -1)
 gravity_direction = Vector3(0, 1, -1)
@@ -98,17 +99,6 @@ gravity = 25.0
 linear_damp = 20.0
 script = ExtResource("1_jmqnw")
 _deletedistance = 1.4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.25)
-shape = SubResource("ConvexPolygonShape3D_jmqnw")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_jmqnw")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
-shape = SubResource("SphereShape3D_jtj0b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3.25)
@@ -124,11 +114,22 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 visible = false
 mesh = SubResource("SphereMesh_jmqnw")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3)
+visible = false
+mesh = SubResource("CylinderMesh_ul6ya")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3)
+shape = SubResource("ConvexPolygonShape3D_ul6ya")
+
 [node name="fast" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 collision_layer = 4
 collision_mask = 4
-gravity_space_override = 1
+priority = 1
+gravity_space_override = 3
 gravity_point = true
 gravity_point_unit_distance = 10.0
 gravity_point_center = Vector3(0, 0, 1)

@@ -39,7 +39,7 @@ mesh = SubResource("PrismMesh_jyq6q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_6n1xx")
 
-[node name="Phone" type="AnimatedSprite3D" parent="."]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.00143571, 1.02596, 0.0433283)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_xh6s6")

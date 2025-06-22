@@ -18,7 +18,7 @@ public partial class MajorObstacle1 : StaticBody3D
 	public override void _Ready()
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
-		_anim.Play("Warning Sign");
+		_anim.Play("Warning_Sign");
 
 		var parent = GetParent().GetParent().GetParent().GetNode<Control>("UI");
 		popUp = parent.GetNode<Label>("Popupmsg");
