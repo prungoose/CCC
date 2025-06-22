@@ -162,5 +162,8 @@ strength = 95.11
 attenuation = 1.56917
 radius = 16.05
 
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+max_polyphony = 4
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
