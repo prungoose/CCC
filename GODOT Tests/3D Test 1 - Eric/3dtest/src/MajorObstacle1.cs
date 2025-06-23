@@ -31,6 +31,7 @@ public partial class MajorObstacle1 : StaticBody3D
 			if ((int)_ui.Call("GetTutorialStep") == 4)
 			{
 				_ui.Call("NextTutorialStep");
+				StopAnimation();
 			}
 			if (popupExists == false)
 			{
@@ -55,8 +56,15 @@ public partial class MajorObstacle1 : StaticBody3D
 
 	public void StartAnimation()
 	{
+		_anim.Visible = true;
 		_anim.Play("Warning_Sign");
 
+	}
+
+	public void StopAnimation()
+	{
+		_anim.Stop();
+		_anim.Visible = false;
 	}
 
 

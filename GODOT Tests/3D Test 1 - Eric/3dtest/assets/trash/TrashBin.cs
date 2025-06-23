@@ -71,19 +71,7 @@ public partial class TrashBin : Node3D
 			}
 			if (_trashId == 4 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 3)
 			{
-				GD.Print("Next step in tutorial");
-				GD.Print("Starting Animation");
 				_ui.Call("NextTutorialStep");
-
-				// Check if major obstacle exists and start its animation
-				if (_majorObstacle == null) GD.PrintErr("Major obstacle not found!");
-
-				// Check fi major obstacle has the StartAnimation method
-				if (!_majorObstacle.HasMethod("StartAnimation"))
-				{
-					GD.PrintErr("Major obstacle does not have StartAnimation method!");
-				}
-
 				_majorObstacle.Call("StartAnimation");
 			}
 		}
