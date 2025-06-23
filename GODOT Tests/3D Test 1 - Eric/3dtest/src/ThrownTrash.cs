@@ -6,7 +6,6 @@ public partial class ThrownTrash : RigidBody3D
 	[Export] private PackedScene _trashscene;
 	private Node3D _lightpivot;
 	private CharacterBody3D _player;
-	private int _trashId = 1;
 	private int _bounces;
 
 	public override void _Ready()
