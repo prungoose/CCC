@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="5_p340a"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="6_4528w"]
 [ext_resource type="Texture2D" uid="uid://b1ipy74768n1y" path="res://assets/menu/EXIT_Pressed.png" id="9_4528w"]
-[ext_resource type="Texture2D" uid="uid://d1ry7wuldve26" path="res://assets/menu/EXIT.png" id="9_p340a"]
+[ext_resource type="Texture2D" uid="uid://d1ry7wuldve26" path="res://assets/menu/EXIT.png" id="10_x8w13"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aid4m"]
 texture = ExtResource("1_hheb7")
@@ -47,8 +47,8 @@ texture = ExtResource("9_4528w")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_we4v7"]
 texture = ExtResource("9_4528w")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4528w"]
-texture = ExtResource("9_p340a")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iuqd3"]
+texture = ExtResource("10_x8w13")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -127,7 +127,7 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qvu25")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_we4v7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_4528w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_iuqd3")
 icon_alignment = 1
 script = ExtResource("3_aid4m")
 
