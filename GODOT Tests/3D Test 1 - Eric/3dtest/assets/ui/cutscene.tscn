@@ -14,15 +14,15 @@ grow_vertical = 2
 [node name="Character Image" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 1029.0
-offset_top = -313.0
-offset_right = 2003.0
+offset_top = -399.0
+offset_right = 2095.0
 offset_bottom = 1044.0
 texture = ExtResource("1_b0kbf")
 
 [node name="Big ColorBox" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 31.0
-offset_top = 830.0
+offset_top = 763.0
 offset_right = 1827.0
 offset_bottom = 1043.0
 color = Color(0.942317, 0.621788, 0.669498, 1)
@@ -32,31 +32,30 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.364
 anchor_bottom = 0.556
-offset_left = 12.0
-offset_top = 9.0
-offset_right = 1122.26
-offset_bottom = 78.572
+offset_left = 11.0
+offset_top = 37.0
+offset_right = 1142.26
+offset_bottom = 78.32
 theme_override_font_sizes/normal_font_size = 40
-text = "This is all sample text to see how it looks"
 fit_content = true
 script = ExtResource("2_kfutr")
 
 [node name="Bottom Tip" type="RichTextLabel" parent="Big ColorBox"]
 layout_mode = 0
 offset_left = 643.0
-offset_top = 164.0
+offset_top = 234.0
 offset_right = 1189.0
-offset_bottom = 206.0
+offset_bottom = 276.0
 theme_override_font_sizes/normal_font_size = 30
 text = "Press Space/Click to Continue..."
 fit_content = true
 
 [node name="CharacterName Colorbox" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 1514.0
-offset_top = 789.0
-offset_right = 1771.0
-offset_bottom = 860.0
+offset_left = 1517.0
+offset_top = 729.0
+offset_right = 1774.0
+offset_bottom = 800.0
 color = Color(0.822223, 0.635929, 0.270016, 1)
 
 [node name="Character Name" type="RichTextLabel" parent="CharacterName Colorbox"]

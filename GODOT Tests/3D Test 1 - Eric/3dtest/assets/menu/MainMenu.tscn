@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=25 format=3 uid="uid://bp8fj6wujphhr"]
 
 [ext_resource type="Texture2D" uid="uid://c0wqekvabgq3m" path="res://assets/menu/Title_Finished.png" id="1_hheb7"]
 [ext_resource type="Texture2D" uid="uid://c4g28pgjeawrx" path="res://assets/menu/Start_Button_Hover.png" id="2_jfoks"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bx6eejr3kjepe" path="res://assets/menu/Start_Button.png" id="3_n5d6s"]
 [ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="5_p340a"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="6_4528w"]
+[ext_resource type="Texture2D" uid="uid://b1ipy74768n1y" path="res://assets/menu/EXIT_Pressed.png" id="9_4528w"]
+[ext_resource type="Texture2D" uid="uid://d1ry7wuldve26" path="res://assets/menu/EXIT.png" id="9_p340a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aid4m"]
 texture = ExtResource("1_hheb7")
@@ -38,6 +40,15 @@ texture = ExtResource("5_p340a")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bu73w"]
 texture = ExtResource("6_4528w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qvu25"]
+texture = ExtResource("9_4528w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_we4v7"]
+texture = ExtResource("9_4528w")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4528w"]
+texture = ExtResource("9_p340a")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -81,9 +92,9 @@ script = ExtResource("2_toexd")
 [node name="OptionsButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 729.0
-offset_top = 693.0
+offset_top = 704.0
 offset_right = 1192.0
-offset_bottom = 859.0
+offset_bottom = 870.0
 pivot_offset = Vector2(228, 77)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -100,11 +111,13 @@ script = ExtResource("3_hheb7")
 
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 2
-offset_left = 729.0
-offset_top = 868.0
-offset_right = 1192.0
-offset_bottom = 1034.0
-pivot_offset = Vector2(231, 79)
+offset_left = 784.0
+offset_top = 896.0
+offset_right = 1134.0
+offset_bottom = 1021.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(177, 58)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -112,7 +125,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_e3vxt")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxEmpty_toexd")
-text = "Exit"
+theme_override_styles/hover = SubResource("StyleBoxTexture_qvu25")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_we4v7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_4528w")
 icon_alignment = 1
 script = ExtResource("3_aid4m")
 

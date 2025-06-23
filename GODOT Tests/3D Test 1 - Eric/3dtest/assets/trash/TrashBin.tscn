@@ -30,5 +30,6 @@ shape = SubResource("BoxShape3D_u87gn")
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
 max_polyphony = 2
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_body_entered"]

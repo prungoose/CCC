@@ -9,6 +9,7 @@ public partial class MainMenuButton : Button
 	private OptionButton timebutton;
 	public ConfigFile CF = new ConfigFile();
 	[Export] public VBoxContainer parent;
+	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

@@ -669,3 +669,4 @@ spot_angle_attenuation = 0.00124469
 volume_db = -25.0
 pitch_scale = 0.8
 max_polyphony = 4
+bus = &"SFX"
