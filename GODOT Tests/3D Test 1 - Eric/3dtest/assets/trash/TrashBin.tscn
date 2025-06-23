@@ -113,7 +113,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565782, 0)
 shape = SubResource("BoxShape3D_u87gn")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
 max_polyphony = 2
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
