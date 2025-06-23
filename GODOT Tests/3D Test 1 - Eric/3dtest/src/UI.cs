@@ -16,6 +16,7 @@ public partial class UI : Control
 	private Label popUp;
 	private string _phonetext;
 	private MarginContainer _tutorialStuff;
+	private Label _currentTrashLabel;
 
 	private bool _tankStepCompleted = false;
 
@@ -27,12 +28,14 @@ public partial class UI : Control
 		_tank = GetNode<ProgressBar>("ProgressBar");
 		popUp = GetNode<Label>("Popupmsg");
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
+		_currentTrashLabel = GetNode<Label>("ProgressBar/Label");
 	}
 
 	public override void _Process(double delta)
 	{
 		_phonedisplay.Text = _phonetext;
 		_tank.Value = (float)_player.Call("_gettankpercent");
+		_currentTrashLabel.Text = (string)_player.Call("GetCurrentTrashID");
 
 		// Go to next step in tutorial first time tank reaches 50%
 		if ((float)_player.Call("_gettankpercent") >= 50 && _tutorialStuff.Visible && !_tankStepCompleted)
@@ -113,6 +116,13 @@ public partial class UI : Control
 	{
 		_tutorialStuff.Call("NextStep");
 	}
+
+	public int GetTutorialStep()
+	{
+		return (int)_tutorialStuff.Call("GetTutorialStep");
+	}
+
+
 
 
 }

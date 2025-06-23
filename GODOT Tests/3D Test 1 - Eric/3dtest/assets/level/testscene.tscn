@@ -139,9 +139,6 @@ light_size = 0.34
 omni_range = 2.663
 omni_attenuation = 10.0
 
-[node name="Trashbin" parent="SubViewportContainer/SubViewport/Level" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700374, 0.5, 2.47416)
-
 [node name="Level geometry" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
 [node name="Floor" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry" groups=["ground"]]
@@ -251,3 +248,24 @@ _ui = NodePath("../../UI")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
+
+[node name="Trashbin1" parent="." instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3835, 0.5, 1.13117)
+_trashId = 1
+
+[node name="Trashbin2" parent="." instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5148, 0.5, 4.76888)
+_trashId = 2
+
+[node name="Trashbin3" parent="." instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8126, 0.5, 8.51359)
+_trashId = 3
+
+[node name="Trashbin4" parent="." instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0939, 0.5, 12.2147)
+_trashId = 4
+
+[editable path="Trashbin1"]
+[editable path="Trashbin2"]
+[editable path="Trashbin3"]
+[editable path="Trashbin4"]

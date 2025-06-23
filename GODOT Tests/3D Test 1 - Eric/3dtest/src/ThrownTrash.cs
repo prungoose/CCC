@@ -5,11 +5,14 @@ public partial class ThrownTrash : RigidBody3D
 {
 	[Export] private PackedScene _trashscene;
 	private Node3D _lightpivot;
-	private float radius = 0.5f;
+	private CharacterBody3D _player;
+	private int _trashId = 1;
+	private int _bounces;
 
 	public override void _Ready()
 	{
 		_lightpivot = GetNode<Node3D>("SpotlightPivot");
+		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
 	}
 
 	public override void _Process(double delta)
@@ -21,17 +24,23 @@ public partial class ThrownTrash : RigidBody3D
 	{
 		if (body.IsInGroup("ground"))
 		{
-			for (int i = 0; i < 25; i++)
+			_bounces++;
+			if (_bounces >= 2)
 			{
-				_spawntrash();
+				for (int i = 0; i < 25; i++)
+				{
+					_spawntrash();
+				}
+				QueueFree();
 			}
-			this.QueueFree();
+
 		}
-		
+
 	}
 
 	void _spawntrash()
 	{
+		float radius = 0.5f;
 		float randomTheta = (float)GD.RandRange(0.0, Mathf.Tau);
 		float randomPhi = Mathf.Acos((float)GD.RandRange(-1.0, 1.0));
 		float randomRadius = (float)GD.RandRange(0.0, radius);
@@ -44,6 +53,11 @@ public partial class ThrownTrash : RigidBody3D
 		newObject.Position = new Vector3(x, y, z) + GlobalPosition;
 		newObject.LinearVelocity = LinearVelocity + new Vector3(x, y, z);
 		GetTree().CurrentScene.AddChild(newObject);
+	}
+
+	private int GetThrownTrashID()
+	{
+		return (int)_player.Call("GetCurrentTrashID");
 	}
 
 }

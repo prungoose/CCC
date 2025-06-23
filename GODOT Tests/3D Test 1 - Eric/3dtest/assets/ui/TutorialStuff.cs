@@ -39,4 +39,9 @@ public partial class TutorialStuff : MarginContainer
         _step++;
         ShowStep(_step);
     }
+
+    public int GetTutorialStep()
+	{
+        return _step;
+	}
 }
