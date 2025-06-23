@@ -6,12 +6,15 @@ public partial class TrashBin : Node3D
 
 	//1: combustibles 2: plastic 3: aluminums 4: PET
 	[Export] private int _trashId;
+	// Each bin has a independent trash count
 	private int _trashCount = 0;
 	private Control _ui;
 	private CharacterBody3D _player;
 	private MeshInstance3D _mesh;
 	private AudioStreamPlayer _SFX;
 	private GpuParticles3D _particles;
+
+	private StaticBody3D _majorObstacle;
 
 
 
@@ -24,6 +27,9 @@ public partial class TrashBin : Node3D
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
 		_mesh = GetNode<MeshInstance3D>("StaticBody3D/BinColorMesh");
 		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
+
+		// For starting animation in tutorial sequence
+		_majorObstacle = GetTree().CurrentScene.GetNode<StaticBody3D>("SubViewportContainer/SubViewport/Level/Major Obstacle");
 
 		Material m = (Material)_mesh.GetSurfaceOverrideMaterial(0).Duplicate(true);
 		_mesh.SetSurfaceOverrideMaterial(0, m);
@@ -65,7 +71,20 @@ public partial class TrashBin : Node3D
 			}
 			if (_trashId == 4 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 3)
 			{
+				GD.Print("Next step in tutorial");
+				GD.Print("Starting Animation");
 				_ui.Call("NextTutorialStep");
+
+				// Check if major obstacle exists and start its animation
+				if (_majorObstacle == null) GD.PrintErr("Major obstacle not found!");
+
+				// Check fi major obstacle has the StartAnimation method
+				if (!_majorObstacle.HasMethod("StartAnimation"))
+				{
+					GD.PrintErr("Major obstacle does not have StartAnimation method!");
+				}
+
+				_majorObstacle.Call("StartAnimation");
 			}
 		}
 	}

@@ -12,8 +12,9 @@ public partial class TutorialStuff : MarginContainer
     {
         "Welcome! Move around using WASD. Try heading over to the blue beacon over there!",
         "By using left click, you can pick up trash. Try filling your tank to 50% by picking up trash!",
-        "Great job! Now, let's learn how to throw trash. Press the right mouse button to throw the trash you've picked up into the bin.",
-        "Amazing! Whenever you're ready, you can press the 'Next' button to continue.",
+        "Great job! Now, let's learn how to toss trash. Hold right click and aim towards the red bin.",
+        "Amazing! To progress, throw trash into each colored bin.",
+        "Head to the flashing symbol on the map to continue your cleanup journey.",
     };
 
     public override void _Ready()
@@ -41,7 +42,7 @@ public partial class TutorialStuff : MarginContainer
     }
 
     public int GetTutorialStep()
-	{
+    {
         return _step;
-	}
+    }
 }

@@ -44,3 +44,5 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.00143571, 1.02596,
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_xh6s6")
 animation = &"Warning_Sign"
+frame = 1
+frame_progress = 0.120782

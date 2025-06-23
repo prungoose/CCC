@@ -18,7 +18,6 @@ public partial class MajorObstacle1 : StaticBody3D
 	public override void _Ready()
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
-		_anim.Play("Warning_Sign");
 
 		var parent = GetParent().GetParent().GetParent().GetNode<Control>("UI");
 		popUp = parent.GetNode<Label>("Popupmsg");
@@ -29,13 +28,17 @@ public partial class MajorObstacle1 : StaticBody3D
 	{
 		if (Position.DistanceTo(_player.GlobalPosition) < 5)
 		{
+			if ((int)_ui.Call("GetTutorialStep") == 4)
+			{
+				_ui.Call("NextTutorialStep");
+			}
 			if (popupExists == false)
 			{
 				popupExists = true;
 				_ui.Call("Pop", "Hello");
 			}
 		}
-		else 
+		else
 		{
 			if (popupExists)
 			{
@@ -47,6 +50,12 @@ public partial class MajorObstacle1 : StaticBody3D
 
 	private void _DealWith(string type)
 	{
+
+	}
+
+	public void StartAnimation()
+	{
+		_anim.Play("Warning_Sign");
 
 	}
 
