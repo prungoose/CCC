@@ -59,7 +59,11 @@ public partial class TrashBin : Node3D
 			_SFX.Play();
 			_player.Call("IncTrashID");
 
-			if (_trashCount >= 2 && (int)_ui.Call("GetTutorialStep") == 2)
+			if (_trashId == 1 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 2)
+			{
+				_ui.Call("NextTutorialStep");
+			}
+			if (_trashId == 4 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 3)
 			{
 				_ui.Call("NextTutorialStep");
 			}
