@@ -19,6 +19,7 @@ public partial class UI : Control
 	private Label _currentTrashLabel;
 
 	private bool _tankStepCompleted = false;
+	private bool _movementStepCompleted = false;
 
 
 	public override void _Ready()
@@ -103,13 +104,19 @@ public partial class UI : Control
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", 0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
 
-	public void OnBeaconReached(Node3D body, Node3D beacon)
+	public void OnBeaconReached(Node3D body)
 	{
-		// GD.Print($"  beacon: {beacon?.Name}, type: {beacon?.GetType()}");
 		if (body is CharacterBody3D)
 		{
-			NextTutorialStep();
-			beacon.QueueFree();
+			if (_tutorialStuff.Visible && !_movementStepCompleted)
+			{
+				_movementStepCompleted = true;
+				NextTutorialStep();
+			}
+			else if (!_tutorialStuff.Visible)
+			{
+				_movementStepCompleted = true;
+			}
 		}
 	}
 	public void NextTutorialStep()
