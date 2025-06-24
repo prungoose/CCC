@@ -38,7 +38,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
         if (_heldTrash == null && _targetTrash != null)
         {
-            if (!_targetTrash.IsInsideTree())
+            if (!IsInstanceValid(_targetTrash))
             {
                 _targetTrash = null;
                 return;
@@ -54,6 +54,8 @@ public partial class RaccoonAgent : CharacterBody3D
                 DropTrash();
         }
     }
+
+
     private void MoveTo(Vector3 target, double delta)
     {
         Vector3 flatTarget = new Vector3(target.X, GlobalPosition.Y, target.Z);
@@ -69,6 +71,7 @@ public partial class RaccoonAgent : CharacterBody3D
         if (_heldTrash != null) return;
         _targetTrash = FindNearbyTrash();
     }
+
 
     private RigidBody3D FindNearbyTrash()
     {
@@ -128,12 +131,20 @@ public partial class RaccoonAgent : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        if (_heldTrash == null && _targetTrash != null && _targetTrash.IsInsideTree())
+        if (_heldTrash == null && _targetTrash != null)
         {
-            if (GlobalPosition.DistanceTo(_targetTrash.GlobalPosition) < 1f)
+            if (IsInstanceValid(_targetTrash))
             {
-                PickupTrash(_targetTrash);
+                if (GlobalPosition.DistanceTo(_targetTrash.GlobalPosition) < 1f)
+                {
+                    PickupTrash(_targetTrash);
+                }
             }
+            else
+            {
+                _targetTrash = null;
+            }
+
         }
     }
 
