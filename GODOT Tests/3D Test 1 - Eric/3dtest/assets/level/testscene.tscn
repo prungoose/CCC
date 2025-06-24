@@ -226,6 +226,27 @@ mesh = SubResource("CapsuleMesh_a2nen")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
 shape = SubResource("CapsuleShape3D_iw0pl")
 
+[node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+
+[node name="Trashbin1" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3835, 0.5, 1.13117)
+_trashId = 1
+
+[node name="MeshInstance3D2" parent="SubViewportContainer/SubViewport/Level/Bins/Trashbin1/StaticBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030776, -0.00886154, 0.0195179)
+
+[node name="Trashbin2" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5148, 0.5, 4.76888)
+_trashId = 2
+
+[node name="Trashbin3" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8126, 0.5, 8.51359)
+_trashId = 3
+
+[node name="Trashbin4" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0939, 0.5, 12.2147)
+_trashId = 4
+
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
@@ -270,28 +291,9 @@ _ui = NodePath("../../UI")
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
 
-[node name="Trashbin1" parent="." instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3835, 0.5, 1.13117)
-_trashId = 1
-
-[node name="MeshInstance3D2" parent="Trashbin1/StaticBody3D" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030776, -0.00886154, 0.0195179)
-
-[node name="Trashbin2" parent="." instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5148, 0.5, 4.76888)
-_trashId = 2
-
-[node name="Trashbin3" parent="." instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8126, 0.5, 8.51359)
-_trashId = 3
-
-[node name="Trashbin4" parent="." instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0939, 0.5, 12.2147)
-_trashId = 4
-
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
 
-[editable path="Trashbin1"]
-[editable path="Trashbin2"]
-[editable path="Trashbin3"]
-[editable path="Trashbin4"]
+[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin1"]
+[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin2"]
+[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin3"]
+[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin4"]

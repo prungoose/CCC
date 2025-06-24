@@ -153,6 +153,8 @@ public partial class UI : Control
 			if (_tutorialStuff.Visible && !_movementStepCompleted)
 			{
 				_movementStepCompleted = true;
+				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/Beacon");
+				beacon.QueueFree();
 				NextTutorialStep();
 			}
 			else if (!_tutorialStuff.Visible)
@@ -160,6 +162,7 @@ public partial class UI : Control
 				_movementStepCompleted = true;
 			}
 		}
+
 	}
 	public void NextTutorialStep()
 	{
