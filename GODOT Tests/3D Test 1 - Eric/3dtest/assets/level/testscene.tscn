@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=33 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
+[ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://assets/level/RaccoonAgent.cs" id="5_a2nen"]
 [ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle1.tscn" id="5_bofc0"]
 [ext_resource type="Shader" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
@@ -43,6 +44,10 @@ size = Vector3(50, 1, 50)
 albedo_texture = ExtResource("1_4nu0a")
 uv1_scale = Vector3(-0.25, -0.25, -0.25)
 uv1_triplanar = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bofc0"]
 render_priority = 0
@@ -205,6 +210,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_jotil")
 skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
+
+[node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("Player")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
+script = ExtResource("5_a2nen")
+Player = NodePath("../../Player")
+
+[node name="SearchTimer" type="Timer" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
+wait_time = 1.5
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
+mesh = SubResource("CapsuleMesh_a2nen")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
+shape = SubResource("CapsuleShape3D_iw0pl")
 
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")

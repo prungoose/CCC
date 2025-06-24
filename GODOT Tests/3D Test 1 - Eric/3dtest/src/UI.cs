@@ -116,7 +116,7 @@ public partial class UI : Control
 				Task.Delay(1000).ContinueWith(_ => noPop());
 
 				_powerLineHazard.Call("StopAnimation");
-				if (GetTutorialStep() == 10)
+				if (GetTutorialStep() == 9)
 				{
 					NextTutorialStep();
 					_powerLineHazard.Call("StopAnimation");
