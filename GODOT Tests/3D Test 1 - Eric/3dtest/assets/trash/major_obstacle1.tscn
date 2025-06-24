@@ -41,3 +41,4 @@ visible = false
 billboard = 1
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_xh6s6")
+animation = &"Warning_Sign"

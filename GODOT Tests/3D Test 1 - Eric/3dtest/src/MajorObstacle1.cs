@@ -31,22 +31,22 @@ public partial class MajorObstacle1 : StaticBody3D
 			if ((int)_ui.Call("GetTutorialStep") == 4)
 			{
 				_ui.Call("NextTutorialStep");
-				StopAnimation();
+				// StopAnimation();
 			}
-			if (popupExists == false)
-			{
-				popupExists = true;
-				_ui.Call("Pop", "Hello");
-			}
+			// if (popupExists == false)
+			// {
+			// 	popupExists = true;
+			// 	_ui.Call("Pop", "Hello");
+			// }
 		}
-		else
-		{
-			if (popupExists)
-			{
-				popupExists = false;
-				_ui.Call("noPop");
-			}
-		}
+		// else
+		// {
+		// 	if (popupExists)
+		// 	{
+		// 		popupExists = false;
+		// 		_ui.Call("noPop");
+		// 	}
+		// }
 	}
 
 	private void _DealWith(string type)

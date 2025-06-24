@@ -21,15 +21,29 @@ public partial class UI : Control
 	private bool _tankStepCompleted = false;
 	private bool _movementStepCompleted = false;
 
+	private Control _infoSection;
+	private RichTextLabel _infoHeading;
+	private RichTextLabel _infoText;
+
+	// Hazards
+	private StaticBody3D _powerLineHazard;
+
 
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
-		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Label");
+		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Dial Screen/Label");
 		_tank = GetNode<ProgressBar>("ProgressBar");
 		popUp = GetNode<Label>("Popupmsg");
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 		_currentTrashLabel = GetNode<Label>("ProgressBar/Label");
+
+		_infoSection = GetNode<Control>("Info Section");
+		_infoHeading = GetNode<RichTextLabel>("Info Section/Heading");
+		_infoText = GetNode<RichTextLabel>("Info Section/Text");
+		_infoSection.Visible = false;
+
+		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
 	}
 
 	public override void _Process(double delta)
@@ -51,6 +65,12 @@ public partial class UI : Control
 		_tween?.CustomStep(0.3);
 		if (isPhoneOpen)
 		{
+			// Tutorial Progression
+			if (GetTutorialStep() == 5)
+			{
+				NextTutorialStep();
+			}
+
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
@@ -89,8 +109,30 @@ public partial class UI : Control
 		}
 		else
 		{
+			GD.Print("Dialed: " + _phonetext);
+			if (_phonetext == "↑→↓←")
+			{
+				Pop("Power Company Dispatched!");
+				Task.Delay(1000).ContinueWith(_ => noPop());
+
+				_powerLineHazard.Call("StopAnimation");
+				if (GetTutorialStep() == 10)
+				{
+					NextTutorialStep();
+					_powerLineHazard.Call("StopAnimation");
+				}
+
+			}
+			else
+			{
+				Pop("Unknown Code: " + _phonetext);
+				Task.Delay(1000).ContinueWith(_ => noPop());
+
+			}
+
 			_phonetext = "";
-			//here 
+
+			// Exectute the command
 		}
 		_wiggle();
 	}
@@ -129,7 +171,18 @@ public partial class UI : Control
 		return (int)_tutorialStuff.Call("GetTutorialStep");
 	}
 
+	public void ShowInfoSection(string heading, string text)
+	{
+		_infoHeading.Text = heading;
+		_infoText.Text = text;
+		_infoSection.Visible = true;
+	}
 
-
+	private void HideInfoSection()
+	{
+		_infoSection.Visible = false;
+		_infoHeading.Text = "";
+		_infoText.Text = "";
+	}
 
 }
