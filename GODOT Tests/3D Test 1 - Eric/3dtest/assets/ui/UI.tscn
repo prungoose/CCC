@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="7_d8c6n"]
 [ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="8_d2ctu"]
-[ext_resource type="Texture2D" uid="uid://dt5lkcsl20vo" path="res://assets/ui/chat_bubble.png" id="9_d2ctu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
 font_size = 50
@@ -84,6 +83,19 @@ corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_left = 100
 shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cufnj"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+shadow_size = 3
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -340,17 +352,17 @@ flip_h = true
 
 [node name="Chat Bubble" type="TextureRect" parent="Tutorial Stuff/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("9_d2ctu")
 expand_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Tutorial Stuff/HBoxContainer/Chat Bubble"]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 14.0
-offset_right = 444.0
-offset_bottom = 178.0
+offset_left = -4.0
+offset_top = -1.0
+offset_right = 439.0
+offset_bottom = 195.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_cufnj")
 text = "Here is some sample text"
 
 [node name="Info Section" type="Control" parent="."]
