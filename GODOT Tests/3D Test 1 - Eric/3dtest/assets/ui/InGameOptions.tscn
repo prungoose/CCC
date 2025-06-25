@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=19 format=3 uid="uid://cyh4mgfebq10y"]
 
 [ext_resource type="Script" uid="uid://ckvctlfd3hh4u" path="res://assets/ui/BacktoGameButton.cs" id="1_2fkgi"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
+[ext_resource type="Script" uid="uid://dhy7fpl3d10gu" path="res://assets/ui/SFXSliderforIGOptions.cs" id="3_wgxot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7lg"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -199,6 +200,9 @@ theme_override_constants/center_grabber = 0
 theme_override_styles/slider = SubResource("StyleBoxLine_6ifhe")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_6lw4i")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 process_mode = 3
@@ -207,6 +211,10 @@ size_flags_vertical = 3
 theme_override_styles/slider = SubResource("StyleBoxLine_6ifhe")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_6lw4i")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("3_wgxot")
 
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 process_mode = 3
@@ -251,4 +259,5 @@ text = "<"
 script = ExtResource("1_2fkgi")
 parent = NodePath("../Adjustments")
 
+[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
 [connection signal="pressed" from="BacktoGameButton" to="BacktoGameButton" method="BacktoGame"]

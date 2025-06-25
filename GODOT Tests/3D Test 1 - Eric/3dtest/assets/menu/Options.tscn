@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=17 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
+[ext_resource type="Script" uid="uid://r40631o23wyo" path="res://assets/menu/SfXslider.cs" id="3_f5wrm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -211,7 +212,9 @@ theme_override_constants/center_grabber = 0
 theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
@@ -219,7 +222,10 @@ size_flags_vertical = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
-value = 50.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("3_f5wrm")
 
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 layout_mode = 2
@@ -266,3 +272,4 @@ popup/item_3/text = "2:00"
 popup/item_3/id = 0
 
 [connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]
+[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
