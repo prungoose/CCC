@@ -23,6 +23,7 @@ public partial class Controller : CharacterBody3D
 	[Export] public PackedScene _thrown_trash;
 	[Export] public PackedScene _trajtarget_scene;
 	[Export] public Control _ui;
+	[Export] public PackedScene _thrown_beacon;
 	public int _tankpercentage = 0;
 	private Node3D _head;
 	private AnimatedSprite3D _anim;
@@ -35,10 +36,12 @@ public partial class Controller : CharacterBody3D
 	bool is_sucking = false;
 	bool is_blowing = false;
 	bool is_moving = true;
+	bool beacon_ready = false;
 	float _throw_strength = 0;
 	private int _status = 0;
 	private AudioStreamPlayer vacSFX;
 	private int _currentTrashID = 1;
+	int beacon_id = 0;
 
 	public override void _Ready()
 	{
@@ -212,7 +215,7 @@ public partial class Controller : CharacterBody3D
 		}
 
 		// start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking && _tankpercentage >= 25 && !phone)
+		if (Input.IsActionJustPressed("m2") && !is_sucking && (_tankpercentage >= 25 | beacon_ready) && !phone)
 		{
 			is_blowing = true;
 			_trajnode.Show();
@@ -235,7 +238,20 @@ public partial class Controller : CharacterBody3D
 		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
 		{
 			_trajnode.Hide();
-			var yeet = _thrown_trash.Instantiate<RigidBody3D>();
+
+			RigidBody3D yeet;
+			if (beacon_ready)
+			{
+				yeet = _thrown_beacon.Instantiate<RigidBody3D>();
+				yeet.Call("SetBeaconID", beacon_id);    //implement
+				beacon_ready = false;
+			}
+			else
+			{
+				yeet = _thrown_trash.Instantiate<RigidBody3D>();
+				_tankpercentage -= 25;
+			}
+
 			GetTree().CurrentScene.AddChild(yeet);
 			yeet.GlobalPosition = GlobalPosition + new Godot.Vector3(0, 1, 0);
 			var yeetvelocity = new Godot.Vector3(0, 3.5f, -3.5f) + (new Godot.Vector3(0, 1, -1) * _throw_strength * _throw_strength / 2500);
@@ -244,7 +260,6 @@ public partial class Controller : CharacterBody3D
 			yeet.AngularVelocity = yeetrotation.Rotated(Godot.Vector3.Up, _head.Rotation.Y);
 			is_blowing = false;
 			_throw_strength = 0;
-			_tankpercentage -= 25;
 			_trajpath.Curve.ClearPoints();
 			if (_trajtarget != null)
 				_trajtarget.Hide();
@@ -369,6 +384,12 @@ public partial class Controller : CharacterBody3D
 		{
 			_currentTrashID = 1;
 		}
+	}
+
+	private void ReadyBeacon(int id)
+	{
+		beacon_ready = true;
+		beacon_id = id;
 	}
 
 }

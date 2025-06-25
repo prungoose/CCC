@@ -1,0 +1,118 @@
+[gd_scene load_steps=18 format=3 uid="uid://dehxjhb5ukc3g"]
+
+[ext_resource type="Script" uid="uid://ern722h687j1" path="res://assets/player/Beacon.cs" id="1_8obva"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cqkhh"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weuih"]
+albedo_color = Color(1, 0.335514, 0.269596, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8obva"]
+material = SubResource("StandardMaterial3D_weuih")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.795
+
+[sub_resource type="Curve" id="Curve_weuih"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282974, 0.833027), 0.0, 0.0, 0, 0, Vector2(0.431655, 0.850917), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kysm2"]
+curve = SubResource("Curve_weuih")
+
+[sub_resource type="Gradient" id="Gradient_8obva"]
+offsets = PackedFloat32Array(0, 0.88491)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_weuih"]
+gradient = SubResource("Gradient_8obva")
+
+[sub_resource type="Curve" id="Curve_kysm2"]
+_data = [Vector2(0.407674, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_m0r6o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o40p0"]
+_data = [Vector2(0.285372, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_e78u0"]
+curve_x = SubResource("Curve_kysm2")
+curve_y = SubResource("Curve_m0r6o")
+curve_z = SubResource("Curve_o40p0")
+
+[sub_resource type="Curve" id="Curve_8obva"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235012, 0.821101), 0.785273, 0.785273, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_weuih"]
+curve = SubResource("Curve_8obva")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8obva"]
+direction = Vector3(0, 1, 0)
+spread = 4.0
+initial_velocity_min = 13.19
+initial_velocity_max = 13.19
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_e78u0")
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_weuih")
+color_ramp = SubResource("GradientTexture1D_weuih")
+alpha_curve = SubResource("CurveTexture_kysm2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8obva"]
+render_priority = 2
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.335514, 0.269596, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_weuih"]
+material = SubResource("StandardMaterial3D_8obva")
+radius = 1.0
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_8obva")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cqkhh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_8obva")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+omni_range = 0.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+omni_range = 0.5
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+top_level = true
+emitting = false
+amount = 32
+speed_scale = 0.3
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_8obva")
+draw_pass_1 = SubResource("SphereMesh_weuih")
+
+[connection signal="body_entered" from="." to="." method="_body_entered"]

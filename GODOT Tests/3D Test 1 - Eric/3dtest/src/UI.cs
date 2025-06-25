@@ -110,6 +110,8 @@ public partial class UI : Control
 		else
 		{
 			GD.Print("Dialed: " + _phonetext);
+
+			//Power company: ID 1
 			if (_phonetext == "↑→↓←")
 			{
 				Pop("Power Company Dispatched!");
@@ -122,7 +124,13 @@ public partial class UI : Control
 					_powerLineHazard.Call("StopAnimation");
 				}
 
+				//call something to player here to get a beacon
+				_player.Call("ReadyBeacon", 1);
+
 			}
+
+			//More agencies go here with their own code
+
 			else
 			{
 				Pop("Unknown Code: " + _phonetext);

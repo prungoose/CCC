@@ -49,7 +49,7 @@ public partial class MajorObstacle1 : StaticBody3D
 		// }
 	}
 
-	private void _DealWith(string type)
+	private void DealWith(string type)
 	{
 
 	}

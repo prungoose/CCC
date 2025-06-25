@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=34 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
 [ext_resource type="PackedScene" uid="uid://b83ge5vg8o8bc" path="res://assets/trash/thrown_trash.tscn" id="10_a4lti"]
 [ext_resource type="PackedScene" uid="uid://dx8ow0dtwewfy" path="res://assets/trash/throw_target.tscn" id="11_pr11n"]
+[ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_iw0pl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
 
@@ -95,11 +96,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(960, 540)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
@@ -199,7 +199,7 @@ skeleton = NodePath("../../StaticBody3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
 [node name="StaticBody3D5" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry"]
-transform = Transform3D(-0.00234315, 0.0499271, -0.00133938, 6.27857e-05, -0.00133792, -0.049982, -0.049945, -0.00234399, 2.25488e-10, -4.00262, 4.84316, -0.849921)
+transform = Transform3D(-0.00234315, 0.0499271, -0.00133938, 6.27857e-05, -0.00133792, -0.049982, -0.049945, -0.00234399, 2.25488e-10, 11.8551, 2.9783, 1.18604)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -286,6 +286,7 @@ _vacuumzone = ExtResource("7_suvuw")
 _thrown_trash = ExtResource("10_a4lti")
 _trajtarget_scene = ExtResource("11_pr11n")
 _ui = NodePath("../../UI")
+_thrown_beacon = ExtResource("15_iw0pl")
 
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2

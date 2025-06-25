@@ -26,7 +26,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" groups=["major_obstacle"]]
 script = ExtResource("1_0jk1x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -42,3 +42,6 @@ billboard = 1
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_xh6s6")
 animation = &"Warning_Sign"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

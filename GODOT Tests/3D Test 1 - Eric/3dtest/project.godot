@@ -29,6 +29,7 @@ project/assembly_name="3DTest"
 cleanable_vacuum=""
 ground=""
 thrown=""
+major_obstacle=""
 
 [input]
 
