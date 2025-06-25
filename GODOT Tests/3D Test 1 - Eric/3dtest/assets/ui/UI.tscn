@@ -292,15 +292,6 @@ shortcut = SubResource("Shortcut_um4x4")
 text = "M"
 script = ExtResource("3_ki1gq")
 
-[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
-process_mode = 2
-visible = false
-layout_mode = 1
-
-[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
-visible = false
-layout_mode = 1
-
 [node name="Popupmsg" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1100.0
@@ -406,6 +397,15 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 23
 text = "Heres a bunch of useful information about this agency."
 fit_content = true
+
+[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
+process_mode = 2
+visible = false
+layout_mode = 1
+
+[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Power Company" to="Phone" method="InfoButtonPressed"]
 [connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Fire Department" to="Phone" method="InfoButtonPressed"]
