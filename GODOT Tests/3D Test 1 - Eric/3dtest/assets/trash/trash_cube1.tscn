@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxrtgnf4acr63"]
+[gd_scene load_steps=4 format=3 uid="uid://dxrtgnf4acr63"]
+
+[ext_resource type="Texture2D" uid="uid://ww7uln05l322" path="res://assets/icon.svg" id="1_mlipg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mawog"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -6,12 +8,21 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_b56k5"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="RigidBody3D2" type="RigidBody3D"]
-collision_layer = 2
+[node name="RigidBody3D2" type="RigidBody3D" groups=["cleanable_vacuum"]]
+collision_layer = 4
+collision_mask = 15
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mawog")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_b56k5")
 skeleton = NodePath("../../RigidBody3D2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0055
+billboard = 2
+render_priority = 1
+texture = ExtResource("1_mlipg")
