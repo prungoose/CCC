@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=23 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="1_22xga"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="7_d8c6n"]
 [ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="8_d2ctu"]
+[ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
 font_size = 50
@@ -406,6 +407,11 @@ layout_mode = 1
 [node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
 visible = false
 layout_mode = 1
+
+[node name="TextBubbleSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_e7p23")
+volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Power Company" to="Phone" method="InfoButtonPressed"]
 [connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Fire Department" to="Phone" method="InfoButtonPressed"]

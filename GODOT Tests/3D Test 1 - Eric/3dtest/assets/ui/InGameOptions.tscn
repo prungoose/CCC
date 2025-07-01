@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=20 format=3 uid="uid://cyh4mgfebq10y"]
 
 [ext_resource type="Script" uid="uid://ckvctlfd3hh4u" path="res://assets/ui/BacktoGameButton.cs" id="1_2fkgi"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
 [ext_resource type="Script" uid="uid://dhy7fpl3d10gu" path="res://assets/ui/SFXSliderforIGOptions.cs" id="3_wgxot"]
+[ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="5_6ifhe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7lg"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -259,5 +260,11 @@ text = "<"
 script = ExtResource("1_2fkgi")
 parent = NodePath("../Adjustments")
 
+[node name="IGSampleSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6ifhe")
+volume_db = -6.0
+bus = &"SFX"
+
+[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="stopAdjustVol"]
 [connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
 [connection signal="pressed" from="BacktoGameButton" to="BacktoGameButton" method="BacktoGame"]

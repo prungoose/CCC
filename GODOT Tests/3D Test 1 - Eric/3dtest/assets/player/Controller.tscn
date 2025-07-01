@@ -675,14 +675,14 @@ spot_angle_attenuation = 0.00124469
 
 [node name="VacSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("5_ire6c")
-volume_db = -6.0
+volume_db = -15.0
 pitch_scale = 0.8
 max_polyphony = 10
 bus = &"SFX"
 
 [node name="WalkSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("8_uhyoe")
-volume_db = -6.0
+volume_db = -25.0
 pitch_scale = 0.8
 max_polyphony = 10
 bus = &"SFX"

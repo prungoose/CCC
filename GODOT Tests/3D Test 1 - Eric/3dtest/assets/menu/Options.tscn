@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=18 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
 [ext_resource type="Script" uid="uid://r40631o23wyo" path="res://assets/menu/SfXslider.cs" id="3_f5wrm"]
+[ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -271,5 +272,11 @@ popup/item_2/id = 1
 popup/item_3/text = "2:00"
 popup/item_3/id = 0
 
+[node name="SampleSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3tk4e")
+volume_db = -6.0
+bus = &"SFX"
+
 [connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]
+[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="stopAdjustVol"]
 [connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]

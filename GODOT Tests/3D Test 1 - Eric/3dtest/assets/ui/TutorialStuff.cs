@@ -5,6 +5,7 @@ public partial class TutorialStuff : MarginContainer
 {
     [Export] public RichTextLabel TutorialText;
     [Export] public Control TutorialUI;
+    private AudioStreamPlayer TextBubbleSFX;
 
     private int _step = 0;
 
@@ -25,6 +26,7 @@ public partial class TutorialStuff : MarginContainer
 
     public override void _Ready()
     {
+        TextBubbleSFX = GetParent().GetNode<AudioStreamPlayer>("TextBubbleSFX");
         ShowStep(_step);
     }
 
@@ -32,6 +34,7 @@ public partial class TutorialStuff : MarginContainer
     {
         if (step < _messages.Count)
         {
+            TextBubbleSFX.Play();
             TutorialText.Text = _messages[step];
             TutorialUI.Visible = true;
         }

@@ -5,10 +5,12 @@ public partial class CutsceneText : RichTextLabel
 {
     private int textPos = 0;
     private bool typeStart = false;
+    private AudioStreamPlayer CutsceneSFX;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        CutsceneSFX = GetParent().GetParent().GetNode<AudioStreamPlayer>("CutsceneSFX");
         GD.Print("preSequenceText ready: ", Name, " | In tree: ", IsInsideTree());
         // Set the text to be displayed
         // Show the text
@@ -35,6 +37,7 @@ public partial class CutsceneText : RichTextLabel
                 text = text[1..];
                 this.Text = "";
                 textPos = 0;
+                CutsceneSFX.Play();
             }
             else if ((Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1")) && text.Length == 1)
                 GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
