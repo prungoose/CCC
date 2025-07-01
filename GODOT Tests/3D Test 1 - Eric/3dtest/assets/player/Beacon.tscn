@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ern722h687j1" path="res://assets/player/Beacon.cs" id="1_8obva"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cqkhh"]
-radius = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weuih"]
 albedo_color = Color(1, 0.335514, 0.269596, 1)
 
@@ -13,6 +10,9 @@ material = SubResource("StandardMaterial3D_weuih")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.795
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8obva"]
+points = PackedVector3Array(0.108214, 0.40381, -0.0305668, -0.10631, -0.40381, -0.0431871, -0.10631, -0.40381, 0.0451129, -0.10631, 0.40381, -0.0431871, -0.0305668, 0.40381, 0.108214, 0.0829737, -0.40381, 0.0829737, 0.0451129, -0.40381, -0.10631, -0.0431871, 0.40381, -0.10631, 0.0829737, 0.40381, 0.0829737, -0.0305668, -0.40381, 0.108214, 0.108214, -0.40381, -0.0305668, -0.0936892, 0.40381, 0.0703534, 0.0703534, 0.40381, -0.0936892, -0.0684277, -0.40381, -0.0936892, 0.0324926, -0.40381, 0.108214, 0.108214, -0.40381, 0.0324926, 0.0829737, -0.40381, -0.081048, -0.081048, -0.40381, 0.0829737, 0.0324926, 0.40381, 0.108214, 0.108214, 0.40381, 0.0324926, -0.0936892, 0.40381, -0.0684277, -0.0431871, -0.40381, -0.10631, -0.10631, 0.40381, 0.0451129, 0.0451129, 0.40381, -0.10631, -0.0936892, -0.40381, -0.0684277, -0.0684277, 0.40381, -0.0936892, -0.081048, 0.40381, 0.0829737, 0.0829737, 0.40381, -0.081048, -0.0936892, -0.40381, 0.0703534, 0.0703534, -0.40381, -0.0936892)
 
 [sub_resource type="Curve" id="Curve_weuih"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282974, 0.833027), 0.0, 0.0, 0, 0, Vector2(0.431655, 0.850917), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -70,13 +70,16 @@ alpha_curve = SubResource("CurveTexture_kysm2")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8obva"]
 render_priority = 2
 transparency = 3
-alpha_hash_scale = 2.0
+alpha_hash_scale = 0.1
 alpha_antialiasing_mode = 0
 shading_mode = 0
-disable_ambient_light = true
-disable_fog = true
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 0.335514, 0.269596, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_weuih"]
 material = SubResource("StandardMaterial3D_8obva")
@@ -88,11 +91,11 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_8obva")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_cqkhh")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_8obva")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_8obva")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

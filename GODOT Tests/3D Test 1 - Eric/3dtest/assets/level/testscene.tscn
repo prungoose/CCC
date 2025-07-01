@@ -120,6 +120,7 @@ _spawn = ExtResource("8_suvuw")
 
 [node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.37172, 1.49288, 8.80009)
+_hazard_id = 1
 _ui = NodePath("../../../UI")
 _player = NodePath("../../Player")
 

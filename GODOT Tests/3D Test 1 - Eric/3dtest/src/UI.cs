@@ -115,7 +115,7 @@ public partial class UI : Control
 			if (_phonetext == "↑→↓←")
 			{
 				Pop("Power Company Dispatched!");
-				Task.Delay(1000).ContinueWith(_ => noPop());
+				//Task.Delay(1000).ContinueWith(_ => noPop());
 
 				_powerLineHazard.Call("StopAnimation");
 				if (GetTutorialStep() == 9)
@@ -134,7 +134,7 @@ public partial class UI : Control
 			else
 			{
 				Pop("Unknown Code: " + _phonetext);
-				Task.Delay(1000).ContinueWith(_ => noPop());
+				//Task.Delay(1000).ContinueWith(_ => noPop());
 
 			}
 

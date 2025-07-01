@@ -243,7 +243,7 @@ public partial class Controller : CharacterBody3D
 			if (beacon_ready)
 			{
 				yeet = _thrown_beacon.Instantiate<RigidBody3D>();
-				yeet.Call("SetBeaconID", beacon_id);    //implement
+				yeet.Call("SetBeaconID", beacon_id);
 				beacon_ready = false;
 			}
 			else
