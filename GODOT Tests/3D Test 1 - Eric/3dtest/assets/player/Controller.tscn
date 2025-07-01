@@ -1,9 +1,13 @@
-[gd_scene load_steps=74 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=78 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bnavsdne3ftc8" path="res://assets/player/spritesheet.png" id="2_hsahs"]
 [ext_resource type="Texture2D" uid="uid://byf0pv06hej6t" path="res://assets/player/run_spritesheet2.png" id="3_apjbu"]
 [ext_resource type="Texture2D" uid="uid://d33iihj7b1e1f" path="res://assets/player/vaccuum_spritesheet3.png" id="4_k44c5"]
+[ext_resource type="AudioStream" uid="uid://brw87o0pc18u6" path="res://assets/Audios/VacuumStart.wav" id="5_ire6c"]
+[ext_resource type="AudioStream" uid="uid://cnw4y8h6uxwif" path="res://assets/Audios/VacuumContinue.mp3" id="8_ire6c"]
+[ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="8_uhyoe"]
+[ext_resource type="AudioStream" uid="uid://bxcfr5os76qdw" path="res://assets/Audios/FWOOMP.wav" id="9_apgsg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 0.784766, 1)
@@ -615,7 +619,9 @@ alpha_scissor_threshold = 0.025
 alpha_hash_scale = 0.0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"e_idle"
+animation = &"e_run"
+frame = 2
+frame_progress = 0.417336
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
@@ -665,8 +671,30 @@ spot_range = 25.0
 spot_angle = 3.55
 spot_angle_attenuation = 0.00124469
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="VacSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_ire6c")
 volume_db = -6.0
 pitch_scale = 0.8
-max_polyphony = 4
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="WalkSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_uhyoe")
+volume_db = -6.0
+pitch_scale = 0.8
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="FWOOMPSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("9_apgsg")
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="VacLoopSFX" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_ire6c")
+volume_db = -6.0
+pitch_scale = 0.8
+max_polyphony = 10
 bus = &"SFX"

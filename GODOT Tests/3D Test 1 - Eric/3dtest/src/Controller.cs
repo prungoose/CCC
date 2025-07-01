@@ -39,7 +39,10 @@ public partial class Controller : CharacterBody3D
 	bool beacon_ready = false;
 	float _throw_strength = 0;
 	private int _status = 0;
-	private AudioStreamPlayer vacSFX;
+	private AudioStreamPlayer VacSFX;
+	private AudioStreamPlayer VacLoopSFX;
+	private AudioStreamPlayer WalkSFX;
+	private AudioStreamPlayer FWOOMPSFX;
 	private int _currentTrashID = 1;
 	int beacon_id = 0;
 
@@ -52,7 +55,10 @@ public partial class Controller : CharacterBody3D
 		_trajpathmesh.Polygon = _makecirclepolygon();
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
 		_trajnode = GetNode<Node3D>("Trajectory");
-		vacSFX = GetNode<AudioStreamPlayer>("SFX");
+		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
+		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
+		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
+		FWOOMPSFX = GetNode<AudioStreamPlayer>("Sounds/FWOOMPSFX");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -107,12 +113,11 @@ public partial class Controller : CharacterBody3D
 			Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 			Godot.Vector3 dir = new Godot.Vector3(inputdir.X, 0, inputdir.Y);
 			dir = new Basis(Godot.Vector3.Up, _campivot.Rotation.Y + Mathf.DegToRad(-45)) * dir;
-			if (!dir.IsZeroApprox() && !vacSFX.Playing && !is_sucking && !is_blowing)
+			if (!dir.IsZeroApprox() && !WalkSFX.Playing && !is_sucking && !is_blowing)
 			{
-				vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/wanpeesWalk.wav");
-				vacSFX.VolumeDb = -15f;
-				vacSFX.PitchScale = 1f;
-				vacSFX.Play();
+				WalkSFX.VolumeDb = -15f;
+				WalkSFX.PitchScale = 1f;
+				WalkSFX.Play();
 			}
 
 
@@ -182,12 +187,9 @@ public partial class Controller : CharacterBody3D
 
 			// if vacuuming, rotate the vacuum zone in the direction of the mouse
 			_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
-			if (!vacSFX.Playing)
+			if (!VacLoopSFX.Playing)
 			{
-				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyInhale.mp3");
-				vacSFX.VolumeDb = -25f;
-				vacSFX.PitchScale = 0.8f;
-				vacSFX.Play();
+				VacLoopSFX.Play();
 			}
 
 			//stop vacuuming
@@ -196,11 +198,9 @@ public partial class Controller : CharacterBody3D
 				_vacuum.QueueFree();
 				_vacuum = null;
 				is_sucking = false;
-				vacSFX.Stop();
-				vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStop.mp3");
-				vacSFX.VolumeDb = -25f;
-				vacSFX.PitchScale = 0.8f;
-				vacSFX.Play();
+				VacLoopSFX.Stop();
+				VacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/VacuumStop.wav");
+				VacSFX.Play();
 			}
 		}
 		else if (Input.IsActionJustPressed("m1") && !is_blowing && !phone)
@@ -208,10 +208,8 @@ public partial class Controller : CharacterBody3D
 			_vacuum = _vacuumzone.Instantiate<Area3D>();
 			AddChild(_vacuum);
 			is_sucking = true;
-			vacSFX.Stream = GD.Load<AudioStreamMP3>("res://assets/Audios/KirbyStart.mp3");
-			vacSFX.VolumeDb = -25f;
-			vacSFX.PitchScale = 0.8f;
-			vacSFX.Play();
+			VacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/VacuumStart.wav");
+			VacSFX.Play();
 		}
 
 		// start a throw
@@ -263,10 +261,7 @@ public partial class Controller : CharacterBody3D
 			_trajpath.Curve.ClearPoints();
 			if (_trajtarget != null)
 				_trajtarget.Hide();
-			vacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/FWOOMP.wav");
-			vacSFX.VolumeDb = 0f;
-			vacSFX.PitchScale = 1.0f;
-			vacSFX.Play();
+			FWOOMPSFX.Play();
 		}
 	}
 

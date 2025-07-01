@@ -19,7 +19,7 @@ public partial class Vacuumzone : Area3D
 		_bodies = new List<RigidBody3D>();
 		_fasthitbox = GetNode<Area3D>("fast");
 		pickupSFX = GetNode<AudioStreamPlayer>("SFX");
-		pickupSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/PickupTrash.wav");
+		pickupSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/Pop.wav");
 	}
 
 
