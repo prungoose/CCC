@@ -79,5 +79,9 @@ public partial class MajorObstacle1 : StaticBody3D
 		_anim.Visible = false;
 	}
 
+	public bool GetDealtWithStatus()
+	{
+		return _dealt_with;
+	}
 
 }

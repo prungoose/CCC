@@ -1,15 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=36 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
+[ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
-[ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube1.tscn" id="2_iw0pl"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://assets/level/RaccoonAgent.cs" id="5_a2nen"]
 [ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle1.tscn" id="5_bofc0"]
 [ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
-[ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="7_ofhqe"]
 [ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="7_suvuw"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
@@ -17,14 +16,38 @@
 [ext_resource type="PackedScene" uid="uid://dx8ow0dtwewfy" path="res://assets/trash/throw_target.tscn" id="11_pr11n"]
 [ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_iw0pl"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8mdrg"]
+[sub_resource type="Gradient" id="Gradient_wpr57"]
 
-[sub_resource type="Sky" id="Sky_jotil"]
-sky_material = SubResource("ProceduralSkyMaterial_8mdrg")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_04qkv"]
+gradient = SubResource("Gradient_wpr57")
+fill_to = Vector2(0.880342, 0.17094)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wpr57"]
+sky_top_color = Color(0.231083, 0.823115, 1, 1)
+sky_horizon_color = Color(0.865339, 0.898616, 0.988049, 1)
+sky_curve = 0.0891914
+ground_bottom_color = Color(0.437837, 0.807646, 1, 1)
+ground_horizon_color = Color(0.860473, 0.905449, 0.998009, 1)
+
+[sub_resource type="Sky" id="Sky_04qkv"]
+sky_material = SubResource("ProceduralSkyMaterial_wpr57")
 
 [sub_resource type="Environment" id="Environment_44gc5"]
 background_mode = 2
-sky = SubResource("Sky_jotil")
+sky = SubResource("Sky_04qkv")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.4
+tonemap_white = 1.69
+glow_enabled = true
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_04qkv")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wpr57"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 35.0
+dof_blur_far_transition = 15.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bofc0"]
 
@@ -50,7 +73,7 @@ uv1_triplanar = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bofc0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iw0pl"]
 render_priority = 0
 shader = ExtResource("7_fsm2l")
 shader_parameter/depth_threshold = 0.05
@@ -62,27 +85,27 @@ shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
 shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_pr11n"]
-material = SubResource("ShaderMaterial_bofc0")
+material = SubResource("ShaderMaterial_iw0pl")
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asog6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpr57"]
 albedo_color = Color(0.162066, 0.162066, 0.162066, 1)
 emission_enabled = true
 emission = Color(0, 0.441908, 0.81526, 1)
 emission_energy_multiplier = 5.04
 
 [sub_resource type="BoxMesh" id="BoxMesh_mawog"]
-material = SubResource("StandardMaterial3D_asog6")
+material = SubResource("StandardMaterial3D_wpr57")
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofhqe"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04qkv"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(0, 0.992157, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ofhqe"]
-material = SubResource("StandardMaterial3D_ofhqe")
+material = SubResource("StandardMaterial3D_04qkv")
 top_radius = 0.32
 height = 0.155
 
@@ -104,22 +127,22 @@ render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_44gc5")
+camera_attributes = SubResource("CameraAttributesPractical_wpr57")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 8.34669, 0)
+light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 0.0
 shadow_caster_mask = 4294967293
+sky_mode = 1
+
+[node name="Map" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_wpr57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.45665, 0)
 
 [node name="Level" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="trash spawner" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91717, 2.15227, -0.968252)
-script = ExtResource("7_ofhqe")
-_spawn = ExtResource("2_iw0pl")
-
 [node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.37172, 1.49288, 8.80009)
+transform = Transform3D(1.91417, 0, 2.30997, 0, 3, 0, -2.30997, 0, 1.91417, -8.41548, 1.49288, 11.8765)
 _hazard_id = 1
 _ui = NodePath("../../../UI")
 _player = NodePath("../../Player")
@@ -161,57 +184,6 @@ layers = 3
 mesh = SubResource("BoxMesh_jotil")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry"]
-transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 1, -3)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_jotil")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_jotil")
-surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry"]
-transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 2.47089, 1, -3)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_jotil")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
-surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
-
-[node name="StaticBody3D4" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry"]
-transform = Transform3D(-0.00100741, 0.0214657, 0.0451465, -0.00211646, 0.0450969, -0.0214893, -0.049945, -0.00234399, 2.36863e-10, -4.00262, 0.44303, -0.849921)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_jotil")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
-surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
-
-[node name="StaticBody3D5" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Level/Level geometry"]
-transform = Transform3D(-0.00234315, 0.0499271, -0.00133938, 6.27857e-05, -0.00133792, -0.049982, -0.049945, -0.00234399, 2.25488e-10, 11.8551, 2.9783, 1.18604)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_jotil")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/StaticBody3D5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_jotil")
-skeleton = NodePath("../../StaticBody3D2")
-surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
-
 [node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("Player")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
 script = ExtResource("5_a2nen")
@@ -230,22 +202,22 @@ shape = SubResource("CapsuleShape3D_iw0pl")
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
 [node name="Trashbin1" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3835, 0.5, 1.13117)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61134, 0.5, 3.94089)
 _trashId = 1
 
 [node name="MeshInstance3D2" parent="SubViewportContainer/SubViewport/Level/Bins/Trashbin1/StaticBody3D" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030776, -0.00886154, 0.0195179)
 
 [node name="Trashbin2" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5148, 0.5, 4.76888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2476, 0.5, 10.2493)
 _trashId = 2
 
 [node name="Trashbin3" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8126, 0.5, 8.51359)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3365, 0.499998, -1.65701)
 _trashId = 3
 
 [node name="Trashbin4" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0939, 0.5, 12.2147)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82197, 0.5, -16.2403)
 _trashId = 4
 
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
@@ -261,13 +233,13 @@ size = 15.0
 mesh = SubResource("QuadMesh_pr11n")
 
 [node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
+visible = false
 script = ExtResource("3_ofhqe")
 _player = NodePath("../../Player")
 _mousetarget = NodePath("../../MouseTarget")
 _distance = 0.15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/CameraTarget"]
-visible = false
 mesh = SubResource("BoxMesh_mawog")
 
 [node name="MouseTarget" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_camera", "_player")]
@@ -280,7 +252,7 @@ _player = NodePath("../Player")
 mesh = SubResource("CylinderMesh_ofhqe")
 
 [node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461197, 0.0141516, -0.0109234)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
 _headtarget = NodePath("../MouseTarget")
 _campivot = NodePath("../Camera")
 _vacuumzone = ExtResource("7_suvuw")
