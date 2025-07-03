@@ -137,13 +137,27 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("2_e7p23")
 
-[node name="Agencies Screen" type="Control" parent="Phone"]
+[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
+position = Vector2(-471, 538)
+scale = Vector2(0.470608, 0.470608)
+texture = ExtResource("3_e7p23")
+
+[node name="Sprite2D" type="Sprite2D" parent="Phone/PhoneSprite"]
+position = Vector2(5.68433, -64.3794)
+scale = Vector2(2.31622, 2.14016)
+texture = ExtResource("3_2glbg")
+
+[node name="Agencies Screen" type="Control" parent="Phone/PhoneSprite"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -150.869
+offset_top = 69.0361
+offset_right = -110.869
+offset_bottom = 109.036
+rotation = -0.261799
+scale = Vector2(7.96662, 7.96662)
 
-[node name="Power Company" type="Button" parent="Phone/Agencies Screen"]
+[node name="Power Company" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
 layout_mode = 0
 offset_left = 7.76358
 offset_top = -93.6804
@@ -153,7 +167,7 @@ rotation = 0.260054
 theme_override_font_sizes/font_size = 8
 text = "Power Company"
 
-[node name="Fire Department" type="Button" parent="Phone/Agencies Screen"]
+[node name="Fire Department" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
 layout_mode = 0
 offset_left = 2.07029
 offset_top = -73.4951
@@ -163,7 +177,7 @@ rotation = 0.260054
 theme_override_font_sizes/font_size = 8
 text = "Fire Department"
 
-[node name="EMS" type="Button" parent="Phone/Agencies Screen"]
+[node name="EMS" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
 layout_mode = 0
 offset_left = -3.623
 offset_top = -52.7923
@@ -173,13 +187,17 @@ rotation = 0.260054
 theme_override_font_sizes/font_size = 8
 text = "EMS"
 
-[node name="Hazards Screen" type="Control" parent="Phone"]
+[node name="Hazards Screen" type="Control" parent="Phone/PhoneSprite"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -150.869
+offset_top = 69.0361
+offset_right = -110.869
+offset_bottom = 109.036
+rotation = -0.261799
+scale = Vector2(7.96662, 7.96662)
 
-[node name="Power" type="Button" parent="Phone/Hazards Screen"]
+[node name="Power" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
 layout_mode = 0
 offset_left = 7.76358
 offset_top = -93.6804
@@ -190,7 +208,7 @@ theme_override_font_sizes/font_size = 8
 text = "Powerline
 "
 
-[node name="Chemical Spill" type="Button" parent="Phone/Hazards Screen"]
+[node name="Chemical Spill" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
 layout_mode = 0
 offset_left = 2.07029
 offset_top = -73.4951
@@ -201,7 +219,7 @@ theme_override_font_sizes/font_size = 8
 text = "Chemical Spill
 "
 
-[node name="Fallen Tree" type="Button" parent="Phone/Hazards Screen"]
+[node name="Fallen Tree" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
 layout_mode = 0
 offset_left = -3.623
 offset_top = -52.7923
@@ -212,43 +230,43 @@ theme_override_font_sizes/font_size = 8
 text = "Fallen Tree
 "
 
-[node name="Agencies Button" type="Button" parent="Phone"]
-offset_left = 16.5623
-offset_top = -117.489
-offset_right = 36.5623
-offset_bottom = -93.489
-rotation = 0.260054
+[node name="Agencies Button" type="Button" parent="Phone/PhoneSprite"]
+offset_left = -115.676
+offset_top = -180.617
+offset_right = -95.6756
+offset_bottom = -156.617
+scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "A"
 
-[node name="Hazards Button" type="Button" parent="Phone"]
-offset_left = 37.7827
-offset_top = -111.795
-offset_right = 57.7827
-offset_bottom = -87.795
-rotation = 0.260054
+[node name="Hazards Button" type="Button" parent="Phone/PhoneSprite"]
+offset_left = -70.5837
+offset_top = -168.518
+offset_right = -50.5837
+offset_bottom = -144.518
+scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "H"
 
-[node name="Dial Button" type="Button" parent="Phone"]
-offset_left = 59.0031
-offset_top = -106.102
-offset_right = 79.0031
-offset_bottom = -82.1021
-rotation = 0.260054
+[node name="Dial Button" type="Button" parent="Phone/PhoneSprite"]
+offset_left = -25.4924
+offset_top = -156.421
+offset_right = -5.49244
+offset_bottom = -132.421
+scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "D"
 
-[node name="Dial Screen" type="Control" parent="Phone"]
+[node name="Dial Screen" type="Control" parent="Phone/PhoneSprite"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 7.0
-offset_top = -95.0
-offset_right = 79.0
-offset_bottom = -16.0
-rotation = 0.260054
+offset_left = -135.994
+offset_top = -132.83
+offset_right = -63.9942
+offset_bottom = -53.8302
+scale = Vector2(7.96662, 7.96662)
 
-[node name="Label" type="Label" parent="Phone/Dial Screen"]
+[node name="Label" type="Label" parent="Phone/PhoneSprite/Dial Screen"]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 218.0
@@ -257,16 +275,6 @@ scale = Vector2(0.33148, 0.317913)
 label_settings = SubResource("LabelSettings_6u48x")
 autowrap_mode = 1
 clip_text = true
-
-[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
-position = Vector2(-471, 538)
-scale = Vector2(0.470608, 0.470608)
-texture = ExtResource("3_e7p23")
-
-[node name="Sprite2D" type="Sprite2D" parent="Phone/PhoneSprite"]
-position = Vector2(5.68433, -64.3794)
-scale = Vector2(2.31622, 2.14016)
-texture = ExtResource("3_2glbg")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -435,14 +443,14 @@ stream = ExtResource("11_e7p23")
 volume_db = -6.0
 bus = &"SFX"
 
-[connection signal="pressed" from="Phone/Agencies Screen/Power Company" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Agencies Screen/Fire Department" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Agencies Screen/EMS" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Hazards Screen/Power" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Hazards Screen/Chemical Spill" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Hazards Screen/Fallen Tree" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/Agencies Button" to="Phone" method="AgenciesTabPressed"]
-[connection signal="pressed" from="Phone/Hazards Button" to="Phone" method="HazardsTabPressed"]
-[connection signal="pressed" from="Phone/Dial Button" to="Phone" method="DispatchTabPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Power Company" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Fire Department" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/EMS" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Power" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Chemical Spill" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Fallen Tree" to="Phone" method="InfoButtonPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Agencies Button" to="Phone" method="AgenciesTabPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Hazards Button" to="Phone" method="HazardsTabPressed"]
+[connection signal="pressed" from="Phone/PhoneSprite/Dial Button" to="Phone" method="DispatchTabPressed"]
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="Paused"]
 [connection signal="pressed" from="Info Section/Close" to="." method="HideInfoSection"]
