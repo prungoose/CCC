@@ -36,23 +36,16 @@ public partial class TrashBin : Node3D
 		switch (_trashId)
 		{
 			case 1: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .39f, .32f, 1f)); break; //red
-			case 2: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .67f, .89f, 1f)); break; //blue
-			case 3: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .75f, .15f, 1f)); break; //green
-			case 4: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .73f, 0f, 1f)); break; //yellow
+			case 2: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .75f, .15f, 1f)); break; //green
+			case 3: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .73f, 0f, 1f)); break; //yellow
+			case 4: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .67f, .89f, 1f)); break; //blue
 		}
 	}
 
 
 	public override void _Process(double delta)
 	{
-		if ((int)_player.Call("GetCurrentTrashID") == _trashId)
-		{
-			_particles.Emitting = true;
-		}
-		else
-		{
-			_particles.Emitting = false;
-		}
+
 	}
 
 	void _body_entered(Node3D body)
@@ -63,8 +56,6 @@ public partial class TrashBin : Node3D
 			body.QueueFree();
 			_SFX.PitchScale = (float)GD.RandRange(0.8, 2.0); ;
 			_SFX.Play();
-			_player.Call("IncTrashID");
-
 			if (_trashId == 1 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 2)
 			{
 				_ui.Call("NextTutorialStep");

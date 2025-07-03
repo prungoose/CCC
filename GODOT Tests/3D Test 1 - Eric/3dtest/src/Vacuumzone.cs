@@ -4,20 +4,21 @@ using System.Collections.Generic;
 
 public partial class Vacuumzone : Area3D
 {
-
+	[Export] private float _deletedistance = 1.5f;
 	private CharacterBody3D _player;
 	private List<RigidBody3D> _bodies;
-	private Area3D _fasthitbox;
-	private float _timeactive;
-	[Export] private float _deletedistance = 1.5f;
+	private Area3D _suckhitbox;
+	private GpuParticles3D _particles;
 	private AudioStreamPlayer pickupSFX;
-
+	private bool _active = false;
+	private float _time_active = 0;
 
 	public override void _Ready()
 	{
 		_player = GetParent<CharacterBody3D>();
 		_bodies = new List<RigidBody3D>();
-		_fasthitbox = GetNode<Area3D>("fast");
+		_suckhitbox = GetNode<Area3D>("suck");
+		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
 		pickupSFX = GetNode<AudioStreamPlayer>("SFX");
 		pickupSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/Pop.wav");
 	}
@@ -25,50 +26,69 @@ public partial class Vacuumzone : Area3D
 
 	public override void _Process(double delta)
 	{
-		_timeactive += (float)delta;
-		if ((int)_player.Call("_gettankpercent") == 100 | _timeactive < 0.5)
-		{
-			_fasthitbox.Gravity = 0;
-		}
-		else
-		{
-			_fasthitbox.Gravity = 40;
-		}
+		if(_active) _time_active += (float)delta;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		
+		if (!_active) return;
+
 		for (int i = 0; i < _bodies.Count; i++)
 		{
 			RigidBody3D body = _bodies[i];
-			Vector3 vec = body.GlobalPosition - _player.GlobalPosition;
-			if (vec.Length() <= _deletedistance && (int)_player.Call("_gettankpercent") < 100)
+			if (body.IsInGroup("cleanable_vacuum"))
 			{
-				if (body.IsInGroup("cleanable_vacuum"))
+				int trash_id = (int)_bodies[i].Call("_GetTrashID");
+				int playerpercentage = (int)_player.Call("_GetTankPercentage", trash_id);
+				if (playerpercentage < 40 && _time_active > 0.2)
 				{
+					_player.Call("_IncTank", trash_id);
+					var tween = GetTree().CreateTween();
+					tween.TweenProperty(body, "global_position", _player.GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
+					tween.Finished += () => body.QueueFree();
+					tween.Finished += () => _PlaySuckSFX();
 					_bodies.Remove(body);
-					body.QueueFree();
-					_player.Call("_addpercent", 1);
-					pickupSFX.PitchScale = (float)GD.RandRange(0.7, 1.0);
-					pickupSFX.VolumeDb = -10f;
-					pickupSFX.Play();
 				}
-
 			}
+
 		}
-		
+
 	}
 
-	private void _on_body_entered(Node3D body)
+	private void _suck_entered(Node3D body)
 	{
-		_bodies.Add((RigidBody3D)body);
+		if (body.IsInGroup("cleanable_vacuum"))
+		{
+			_bodies.Add((RigidBody3D)body);
+		}
 	}
 
-	private void _on_body_exited(Node3D body)
+	private void _suck_exited(Node3D body)
 	{
-		_bodies.Remove((RigidBody3D)body);
+		if (body.IsInGroup("cleanable_vacuum"))
+		{
+			_bodies.Remove((RigidBody3D)body);
+		}
 	}
-	
-	
+
+	private void _PlaySuckSFX()
+	{
+		pickupSFX.PitchScale = (float)GD.RandRange(0.7, 1.0);
+		pickupSFX.Play();
+	}
+
+	private void _Activate()
+	{
+		_active = true;
+		Gravity = 30;
+		_particles.Emitting = true;
+	}
+
+	private void _Deactivate()
+	{
+		_active = false;
+		_time_active = 0;
+		Gravity = 0;
+		_particles.Emitting = false;
+	}
 }

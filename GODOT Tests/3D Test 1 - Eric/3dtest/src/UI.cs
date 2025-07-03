@@ -16,7 +16,6 @@ public partial class UI : Control
 	private Label popUp;
 	private string _phonetext;
 	private MarginContainer _tutorialStuff;
-	private Label _currentTrashLabel;
 
 	private bool _tankStepCompleted = false;
 	private bool _movementStepCompleted = false;
@@ -28,15 +27,22 @@ public partial class UI : Control
 	// Hazards
 	private StaticBody3D _powerLineHazard;
 
+	// Tanks
+	private ProgressBar _tank1;
+	private ProgressBar _tank2;
+	private ProgressBar _tank3;
+	private ProgressBar _tank4;
 
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Dial Screen/Label");
-		_tank = GetNode<ProgressBar>("ProgressBar");
+		_tank1 = GetNode<ProgressBar>("Tanks/Tank1");
+		_tank2 = GetNode<ProgressBar>("Tanks/Tank2");
+		_tank3 = GetNode<ProgressBar>("Tanks/Tank3");
+		_tank4 = GetNode<ProgressBar>("Tanks/Tank4");
 		popUp = GetNode<Label>("Popupmsg");
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
-		_currentTrashLabel = GetNode<Label>("ProgressBar/Label");
 
 		_infoSection = GetNode<Control>("Info Section");
 		_infoHeading = GetNode<RichTextLabel>("Info Section/Heading");
@@ -49,11 +55,14 @@ public partial class UI : Control
 	public override void _Process(double delta)
 	{
 		_phonedisplay.Text = _phonetext;
-		_tank.Value = (float)_player.Call("_gettankpercent");
-		_currentTrashLabel.Text = (string)_player.Call("GetCurrentTrashID");
+
+		_tank1.Value = (int)_player.Call("_GetTankPercentage", 1);
+		_tank2.Value = (int)_player.Call("_GetTankPercentage", 2);
+		_tank3.Value = (int)_player.Call("_GetTankPercentage", 3);
+		_tank4.Value = (int)_player.Call("_GetTankPercentage", 4);
 
 		// Go to next step in tutorial first time tank reaches 50%
-		if ((float)_player.Call("_gettankpercent") >= 50 && _tutorialStuff.Visible && !_tankStepCompleted)
+		if ((float)_player.Call("_GetTankPercentage", 1) >= 50 && _tutorialStuff.Visible && !_tankStepCompleted)
 		{
 			_tankStepCompleted = true;
 			NextTutorialStep();
@@ -196,4 +205,38 @@ public partial class UI : Control
 		_infoText.Text = "";
 	}
 
+	private void _UpdateThrown(int id)
+	{
+		ProgressBar[] tanks = [_tank1, _tank2, _tank3, _tank4];
+		id -= 1;
+
+		for (int i = 0; i < 4; i++)
+		{
+			ProgressBar target = tanks[i];
+
+			float XTarget = 80f;
+			float YTarget = 200f;
+			float duration = .25f;
+			if (i == id)
+			{
+				XTarget = 100f;
+				YTarget = 240f;
+			}
+			Vector2 initial = target.CustomMinimumSize;
+			Vector2 final = new Vector2(XTarget, YTarget);
+			if ((initial - final).IsZeroApprox()) continue;
+
+			var tween1 = GetTree().CreateTween();
+			var tween2 = GetTree().CreateTween();
+			tween1.TweenMethod(
+				Callable.From<float>(x => target.CustomMinimumSize = new Vector2(x, target.CustomMinimumSize.Y)),
+				initial.X, final.X, duration
+			).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.InOut);
+			tween2.TweenMethod(
+				Callable.From<float>(y => target.CustomMinimumSize = new Vector2(target.CustomMinimumSize.X, y)),
+				initial.Y, final.Y, duration
+			).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.InOut);
+
+		}
+	} 
 }

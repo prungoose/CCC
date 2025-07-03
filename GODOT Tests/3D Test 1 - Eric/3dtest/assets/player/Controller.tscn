@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=80 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://bnavsdne3ftc8" path="res://assets/player/spritesheet.png" id="2_hsahs"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://cnw4y8h6uxwif" path="res://assets/Audios/VacuumContinue.mp3" id="8_ire6c"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="8_uhyoe"]
 [ext_resource type="AudioStream" uid="uid://bxcfr5os76qdw" path="res://assets/Audios/FWOOMP.wav" id="9_apgsg"]
+[ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="9_xplcw"]
+[ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="10_xplcw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 0.784766, 1)
@@ -597,8 +599,6 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 10.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_ire6c"]
-
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 2
 floor_constant_speed = true
@@ -689,6 +689,13 @@ pitch_scale = 0.8
 max_polyphony = 10
 bus = &"SFX"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.10422, 0)
-mesh = SubResource("BoxMesh_ire6c")
+[node name="Vacuum" parent="." instance=ExtResource("9_xplcw")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+spring_length = 20.0
+
+[node name="Decal" type="Decal" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(1, 0.22, 1)
+texture_albedo = ExtResource("10_xplcw")

@@ -71,12 +71,11 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 8.0
 billboard_keep_scale = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_dqtvc"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_dqtvc"]
 material = SubResource("StandardMaterial3D_1cglt")
-radius = 0.06
-height = 0.12
-radial_segments = 31
-rings = 4
+top_radius = 0.05
+bottom_radius = 0.0
+height = 0.49
 
 [node name="Trashbin1" type="Node3D"]
 script = ExtResource("1_dqtvc")
@@ -119,10 +118,9 @@ bus = &"SFX"
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.804959, 0)
 cast_shadow = 0
-emitting = false
 amount = 256
-trail_lifetime = 0.72
+transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_dqtvc")
-draw_pass_1 = SubResource("SphereMesh_dqtvc")
+draw_pass_1 = SubResource("CylinderMesh_dqtvc")
 
 [connection signal="body_entered" from="Area3D" to="." method="_body_entered"]

@@ -14,8 +14,6 @@ public partial class MouseTarget : Node3D
 
 	public override void _Process(double delta)
 	{
-		if ((int)_player.Call("_getstatus") != 0) return;
-
 		var result = GetMouseGroundPos();
 		if (result != null)
 		{

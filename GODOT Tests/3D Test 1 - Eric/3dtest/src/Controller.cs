@@ -19,7 +19,6 @@ public partial class Controller : CharacterBody3D
 	[Export] private float _pushforce = 5f;
 	[Export] public Node3D _headtarget;
 	[Export] public Node3D _campivot;
-	[Export] public PackedScene _vacuumzone;
 	[Export] public PackedScene _thrown_trash;
 	[Export] public PackedScene _trajtarget_scene;
 	[Export] public Control _ui;
@@ -43,14 +42,20 @@ public partial class Controller : CharacterBody3D
 	private AudioStreamPlayer VacLoopSFX;
 	private AudioStreamPlayer WalkSFX;
 	private AudioStreamPlayer FWOOMPSFX;
-	private int _currentTrashID = 1;
-	int beacon_id = 0;
+	private int _beacon_id = 0;
+
+	private int _thrown_id = 0;
+	private int _tank1 = 0;
+	private int _tank2 = 0;
+	private int _tank3 = 0;
+	private int _tank4 = 0;
 
 	public override void _Ready()
 	{
 		AddToGroup("player");
 		_head = GetNode<Node3D>("Head");
 		_anim = GetNode<AnimatedSprite3D>("WorldModel/AnimatedSprite3D");
+		_vacuum = GetNode<Area3D>("Vacuum");
 		_trajpathmesh = GetNode<CsgPolygon3D>("Trajectory/CSGPolygon3D");
 		_trajpathmesh.Polygon = _makecirclepolygon();
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
@@ -72,6 +77,7 @@ public partial class Controller : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
+		_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		_HandleAnimations();
 		_HandleControls((float)delta);
 		//GD.Print("fps: ", Engine.GetFramesPerSecond());
@@ -83,17 +89,32 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventKey keyEvent && keyEvent.Pressed && phone)
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
 		{
-			switch (keyEvent.PhysicalKeycode)
+			if (phone)
 			{
-				case Key.W: _ui.Call("_dial", '↑'); break;
-				case Key.S: _ui.Call("_dial", '↓'); break;
-				case Key.A: _ui.Call("_dial", '←'); break;
-				case Key.D: _ui.Call("_dial", '→'); break;
-				case Key.Space: _ui.Call("_dial", ' '); break;
+				switch (keyEvent.PhysicalKeycode)
+				{
+					case Key.W: _ui.Call("_dial", '↑'); break;
+					case Key.S: _ui.Call("_dial", '↓'); break;
+					case Key.A: _ui.Call("_dial", '←'); break;
+					case Key.D: _ui.Call("_dial", '→'); break;
+					case Key.Space: _ui.Call("_dial", ' '); break;
+				}
 			}
+			else
+			{
+				switch (keyEvent.PhysicalKeycode)
+				{
+					case Key.Key1: SwitchThrown(1); break;
+					case Key.Key2: SwitchThrown(2); break;
+					case Key.Key3: SwitchThrown(3); break;
+					case Key.Key4: SwitchThrown(4); break;
+				}
+			}
+
 		}
+
 	}
 
 	private void _HandleMovement(float delta)
@@ -174,19 +195,17 @@ public partial class Controller : CharacterBody3D
 			phone = !phone;
 			_ui.Call("_updatephone", phone);
 			// get rid of vacuum if it is out
-			if (_vacuum != null)
+			if (is_sucking)
 			{
-				_vacuum.QueueFree();
-				_vacuum = null;
+				_vacuum.Call("_Deactivate");
 				is_sucking = false;
 			}
 		}
 
-		if (_vacuum != null)
+		if (is_sucking)
 		{
-
 			// if vacuuming, rotate the vacuum zone in the direction of the mouse
-			_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+
 			if (!VacLoopSFX.Playing)
 			{
 				VacLoopSFX.Play();
@@ -195,8 +214,7 @@ public partial class Controller : CharacterBody3D
 			//stop vacuuming
 			if (Input.IsActionJustReleased("m1"))
 			{
-				_vacuum.QueueFree();
-				_vacuum = null;
+				_vacuum.Call("_Deactivate");
 				is_sucking = false;
 				VacLoopSFX.Stop();
 				VacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/VacuumStop.wav");
@@ -205,15 +223,14 @@ public partial class Controller : CharacterBody3D
 		}
 		else if (Input.IsActionJustPressed("m1") && !is_blowing && !phone)
 		{ // start vacuuming
-			_vacuum = _vacuumzone.Instantiate<Area3D>();
-			AddChild(_vacuum);
+			_vacuum.Call("_Activate");
 			is_sucking = true;
 			VacSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/VacuumStart.wav");
 			VacSFX.Play();
 		}
 
 		// start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking && (_tankpercentage >= 25 | beacon_ready) && !phone)
+		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready) && !phone)
 		{
 			is_blowing = true;
 			_trajnode.Show();
@@ -241,13 +258,13 @@ public partial class Controller : CharacterBody3D
 			if (beacon_ready)
 			{
 				yeet = _thrown_beacon.Instantiate<RigidBody3D>();
-				yeet.Call("SetBeaconID", beacon_id);
+				yeet.Call("SetBeaconID", _beacon_id);
 				beacon_ready = false;
 			}
 			else
 			{
 				yeet = _thrown_trash.Instantiate<RigidBody3D>();
-				_tankpercentage -= 25;
+				_Remove20FromTankPercentage(_thrown_id);
 			}
 
 			GetTree().CurrentScene.AddChild(yeet);
@@ -265,14 +282,39 @@ public partial class Controller : CharacterBody3D
 		}
 	}
 
-	private void _addpercent(int value) { _tankpercentage += value; }
+	private void _IncTank(int tank_no)
+	{
+		switch (tank_no)
+		{
+			case 1: _tank1++; break;
+			case 2: _tank2++; break;
+			case 3: _tank3++; break;
+			case 4: _tank4++; break;
+		}
+	}
 
-	private int _gettankpercent() { return _tankpercentage; }
+	private int _GetTankPercentage(int tank_no)
+	{
+		switch (tank_no)
+		{
+			case 1: return _tank1;
+			case 2: return _tank2;
+			case 3: return _tank3;
+			case 4: return _tank4;
+		}
+		return 0;
+	}
 
-	// 0 = normal, 1 = in minigame, 
-	private int _getstatus() { return _status; }
-
-	private void _changestatus(int s) { _status = s; }
+	private void _Remove20FromTankPercentage(int tank_no)
+	{
+		switch (tank_no)
+		{
+			case 1: _tank1 -= 20; break;
+			case 2: _tank2 -= 20; break;
+			case 3: _tank3 -= 20; break;
+			case 4: _tank4 -= 20; break;
+		}
+	}
 
 	private void _drawthrowtrajectory()
 	{
@@ -367,24 +409,24 @@ public partial class Controller : CharacterBody3D
 		return circ;
 	}
 
-	private int GetCurrentTrashID()
-	{
-		return _currentTrashID;
-	}
-
-	private void IncTrashID()
-	{
-		_currentTrashID++;
-		if (_currentTrashID == 5)
-		{
-			_currentTrashID = 1;
-		}
-	}
-
 	private void ReadyBeacon(int id)
 	{
 		beacon_ready = true;
-		beacon_id = id;
+		_beacon_id = id;
+	}
+
+	private void SwitchThrown(int id)
+	{
+		if (!(is_blowing && _GetTankPercentage(id) < 20))
+		{
+			_thrown_id = id;
+		}
+		_ui.Call("_UpdateThrown", _thrown_id);
+	}
+
+	private int GetCurrentThrowing()
+	{
+		return _thrown_id;
 	}
 
 }
