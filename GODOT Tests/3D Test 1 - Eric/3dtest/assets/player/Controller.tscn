@@ -612,7 +612,7 @@ shape = SubResource("BoxShape3D_hsahs")
 [node name="WorldModel" type="Node3D" parent="."]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="WorldModel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.853468, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19517, 0)
 layers = 2
 pixel_size = 0.012
 billboard = 1
@@ -692,10 +692,11 @@ bus = &"SFX"
 [node name="Vacuum" parent="." instance=ExtResource("9_xplcw")]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-spring_length = 20.0
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+spring_length = 4.0
 
 [node name="Decal" type="Decal" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 size = Vector3(1, 0.22, 1)
 texture_albedo = ExtResource("10_xplcw")
+cull_mask = 1048573

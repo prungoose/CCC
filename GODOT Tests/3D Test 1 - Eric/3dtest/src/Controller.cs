@@ -68,18 +68,20 @@ public partial class Controller : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+
+		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
+		_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);
+		_HandleControls((float)delta);
 
 	}
 
 	public override void _Process(double delta)
 	{
-		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
-		_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+
 		_HandleAnimations();
-		_HandleControls((float)delta);
 		//GD.Print("fps: ", Engine.GetFramesPerSecond());
 	}
 

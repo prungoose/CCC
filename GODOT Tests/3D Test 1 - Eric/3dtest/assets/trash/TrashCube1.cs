@@ -21,8 +21,11 @@ public partial class TrashCube1 : RigidBody3D
 
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
+	{
+	}
+
+	public override void _PhysicsProcess(double delta)
 	{
 		GetNode<SpringArm3D>("SpringArm3D").GlobalRotation = new Godot.Vector3(Mathf.DegToRad(90), 0, 0);
 	}

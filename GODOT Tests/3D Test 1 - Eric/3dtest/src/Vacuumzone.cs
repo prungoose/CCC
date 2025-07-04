@@ -8,7 +8,8 @@ public partial class Vacuumzone : Area3D
 	private CharacterBody3D _player;
 	private List<RigidBody3D> _bodies;
 	private Area3D _suckhitbox;
-	private GpuParticles3D _particles;
+	private GpuParticles3D _particles1;
+	private GpuParticles3D _particles2;
 	private AudioStreamPlayer pickupSFX;
 	private bool _active = false;
 	private float _time_active = 0;
@@ -18,7 +19,8 @@ public partial class Vacuumzone : Area3D
 		_player = GetParent<CharacterBody3D>();
 		_bodies = new List<RigidBody3D>();
 		_suckhitbox = GetNode<Area3D>("suck");
-		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
+		_particles1 = GetNode<GpuParticles3D>("GPUParticles3D");
+		_particles2 = GetNode<GpuParticles3D>("GPUParticles3D2");
 		pickupSFX = GetNode<AudioStreamPlayer>("SFX");
 		pickupSFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/Pop.wav");
 	}
@@ -81,7 +83,8 @@ public partial class Vacuumzone : Area3D
 	{
 		_active = true;
 		Gravity = 30;
-		_particles.Emitting = true;
+		_particles1.Emitting = true;
+		_particles2.Emitting = true;
 	}
 
 	private void _Deactivate()
@@ -89,6 +92,7 @@ public partial class Vacuumzone : Area3D
 		_active = false;
 		_time_active = 0;
 		Gravity = 0;
-		_particles.Emitting = false;
+		_particles1.Emitting = false;
+		_particles2.Emitting = false;
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://go1ix51gk6xl"]
+[gd_scene load_steps=24 format=3 uid="uid://go1ix51gk6xl"]
 
 [ext_resource type="Script" uid="uid://c1pb4ne1uxk7k" path="res://src/Vacuumzone.cs" id="1_jmqnw"]
 
@@ -52,11 +52,18 @@ radial_segments = 8
 points = PackedVector3Array(0, 1.75, -4, 0, 1.04973, -3.60063, -2.8285, 1.75, -2.8285, 2.82772, 1.75, -2.8285, -1.69773, -1.05007, -1.69773, -2.54581, 1.04973, -2.54581, 2.54503, 1.04973, -2.54581, 1.69695, -1.05007, -1.69773, 0, -1.75, -2, -3.60063, 1.04973, 0, -4, 1.75, 0, 4, 1.75, 0, -1.41425, -1.75, -1.41425, -2, -1.75, 0, 1.41347, -1.75, -1.41425, 2, -1.75, 0, -1.69773, -1.05007, 1.69695, -2.54581, 1.04973, 2.54503, -2.8285, 1.75, 2.82772, 2.82772, 1.75, 2.82772, 2.54503, 1.04973, 2.54503, 1.69695, -1.05007, 1.69695, -1.41425, -1.75, 1.41347, 1.41347, -1.75, 1.41347, 0, -1.75, 2, 0, 1.75, 4)
 
 [sub_resource type="Curve" id="Curve_pxoxk"]
-_data = [Vector2(0.315245, 0.00550008), 0.0, 0.0, 0, 0, Vector2(0.653747, 0.103), 0.533592, 0.533592, 0, 0, Vector2(0.826873, 0.3045), -0.0628876, -0.0628876, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0.315245, 0.00550008), 0.0, 0.0, 0, 0, Vector2(0.653747, 0.103), 0.533592, 0.533592, 0, 0, Vector2(0.826873, 0.3045), -0.0628876, -0.0628876, 0, 0, Vector2(0.901679, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="CurveTexture" id="CurveTexture_ul6ya"]
 curve = SubResource("Curve_pxoxk")
+
+[sub_resource type="Curve" id="Curve_stw8l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.459207, 0), 0.0, 0.0, 0, 0, Vector2(0.613054, 0.468917), 0.0, 0.0, 0, 0, Vector2(0.69697, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_v8rqv"]
+curve = SubResource("Curve_stw8l")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxoxk"]
 emission_shape_scale = Vector3(1.65, 1, 0.19)
@@ -69,6 +76,14 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 0.15
 alpha_curve = SubResource("CurveTexture_ul6ya")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+turbulence_noise_speed_random = 0.1
+turbulence_influence_min = 0.0
+turbulence_influence_max = 1.0
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+turbulence_influence_over_life = SubResource("CurveTexture_v8rqv")
 
 [sub_resource type="Curve" id="Curve_ul6ya"]
 _data = [Vector2(0.0143198, 0), 0.0, 0.0, 0, 0, Vector2(0.393795, 0.4947), 1.02251, 1.02251, 0, 0, Vector2(0.727924, 0.744982), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -88,9 +103,33 @@ sections = 45
 section_segments = 1
 curve = SubResource("Curve_ul6ya")
 
+[sub_resource type="Curve" id="Curve_2wc8s"]
+_data = [Vector2(0.613909, 1), 0.0, 0.0, 0, 0, Vector2(0.697842, 0.188991), -6.63119, -6.63119, 0, 0, Vector2(0.781775, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_stw8l"]
+curve = SubResource("Curve_2wc8s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v8rqv"]
+emission_shape_scale = Vector3(1.65, 1, 0.19)
+emission_shape = 1
+emission_sphere_radius = 3.55
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.15
+alpha_curve = SubResource("CurveTexture_stw8l")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+turbulence_noise_scale = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_q5e4o"]
+material = SubResource("StandardMaterial3D_pxoxk")
+
 [node name="Area3D" type="Area3D"]
-collision_layer = 4
-collision_mask = 12
+collision_mask = 2
 gravity_space_override = 1
 gravity_point = true
 gravity_point_center = Vector3(0, 1, -1)
@@ -126,8 +165,7 @@ shape = SubResource("ConvexPolygonShape3D_ul6ya")
 
 [node name="suck" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-collision_layer = 4
-collision_mask = 4
+collision_mask = 2
 priority = 1
 gravity_point = true
 gravity_point_unit_distance = 10.0
@@ -146,19 +184,29 @@ shape = SubResource("ConvexPolygonShape3D_pxoxk")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.84226)
-cast_shadow = 0
 emitting = false
-amount = 32
-lifetime = 0.42
+amount = 48
+lifetime = 0.52
 speed_scale = 2.5
-transform_align = 3
+transform_align = 2
 trail_enabled = true
-trail_lifetime = 0.07
+trail_lifetime = 0.32
 process_material = SubResource("ParticleProcessMaterial_pxoxk")
 draw_pass_1 = SubResource("RibbonTrailMesh_ul6ya")
 
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.93702)
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.84226)
+emitting = false
+amount = 48
+lifetime = 0.52
+speed_scale = 2.5
+transform_align = 2
+trail_lifetime = 0.32
+process_material = SubResource("ParticleProcessMaterial_v8rqv")
+draw_pass_1 = SubResource("SphereMesh_q5e4o")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.90524)
 strength = 95.11
 attenuation = 1.56917
 radius = 16.05

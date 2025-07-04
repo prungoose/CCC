@@ -12,7 +12,7 @@ public partial class MouseTarget : Node3D
 	{
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		var result = GetMouseGroundPos();
 		if (result != null)
@@ -35,7 +35,7 @@ public partial class MouseTarget : Node3D
 			To = to,
 			CollideWithAreas = false,
 			CollideWithBodies = true,
-			CollisionMask = 1 << 1
+			CollisionMask = 1 << 2
 		};
 
 		query.Exclude = new Godot.Collections.Array<Rid> { _player.GetRid() };

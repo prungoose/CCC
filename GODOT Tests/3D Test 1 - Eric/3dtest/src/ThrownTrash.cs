@@ -16,12 +16,15 @@ public partial class ThrownTrash : RigidBody3D
 
 	public override void _Process(double delta)
 	{
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
 		GetNode<SpringArm3D>("SpringArm3D").GlobalRotation = new Godot.Vector3(Mathf.DegToRad(90), 0, 0);
 	}
 
 	private void _collision(Node body)
 	{
-
 		_bounces++;
 		if (_bounces >= 2)
 		{
