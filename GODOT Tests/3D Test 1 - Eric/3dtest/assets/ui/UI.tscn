@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=41 format=4 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="Script" uid="uid://dai70evwdplev" path="res://assets/ui/Phone.cs" id="2_e7p23"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
+[ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="5_j234e"]
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="7_d8c6n"]
 [ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="8_d2ctu"]
@@ -1954,28 +1955,28 @@ text = "Fallen Tree
 "
 
 [node name="Agencies Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = -115.676
-offset_top = -180.617
-offset_right = -95.6756
-offset_bottom = -156.617
+offset_left = -286.863
+offset_top = -129.62
+offset_right = -266.862
+offset_bottom = -105.62
 scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "A"
 
 [node name="Hazards Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = -70.5837
-offset_top = -168.518
-offset_right = -50.5837
-offset_bottom = -144.518
+offset_left = -80.7465
+offset_top = -131.744
+offset_right = -60.7465
+offset_bottom = -107.744
 scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "H"
 
 [node name="Dial Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = -25.4924
-offset_top = -156.421
-offset_right = -5.49244
-offset_bottom = -132.421
+offset_left = 116.87
+offset_top = -131.744
+offset_right = 136.87
+offset_bottom = -107.744
 scale = Vector2(7.96662, 7.96662)
 theme_override_font_sizes/font_size = 11
 text = "D"
@@ -1983,21 +1984,27 @@ text = "D"
 [node name="Dial Screen" type="Control" parent="Phone/PhoneSprite"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -135.994
-offset_top = -132.83
-offset_right = -63.9942
-offset_bottom = -53.8302
+offset_left = -285.0
+offset_top = -674.0
+offset_right = -213.0
+offset_bottom = -611.0
 scale = Vector2(7.96662, 7.96662)
 
 [node name="Label" type="Label" parent="Phone/PhoneSprite/Dial Screen"]
 layout_mode = 0
-offset_top = 2.0
-offset_right = 218.0
-offset_bottom = 247.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 217.0
+offset_bottom = 197.0
 scale = Vector2(0.33148, 0.317913)
 label_settings = SubResource("LabelSettings_6u48x")
 autowrap_mode = 1
 clip_text = true
+
+[node name="PhoneSFX" type="AudioStreamPlayer" parent="Phone"]
+stream = ExtResource("5_j234e")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
@@ -2074,7 +2081,7 @@ expand_mode = 3
 layout_mode = 0
 offset_left = -4.0
 offset_top = -1.0
-offset_right = 439.0
+offset_right = 513.0
 offset_bottom = 195.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 26

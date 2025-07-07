@@ -27,7 +27,7 @@ public partial class OptionsButton : Button
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
-		_tween.TweenProperty(this, "scale", new Vector2(this.Scale.X*1.2f, this.Scale.Y*1.2f), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		_tween.TweenProperty(this, "scale", new Vector2(this.Scale.X * 1.2f, this.Scale.Y * 1.2f), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 	}
 
 	private void Nothovered()

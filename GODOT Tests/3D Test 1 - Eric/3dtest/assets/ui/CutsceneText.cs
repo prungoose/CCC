@@ -3,18 +3,23 @@ using System;
 
 public partial class CutsceneText : RichTextLabel
 {
+    private Tween _tween;
     private int textPos = 0;
     private bool typeStart = false;
     private AudioStreamPlayer CutsceneSFX;
+    private RichTextLabel BottomTip;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        BottomTip = GetParent().GetNode<RichTextLabel>("Bottom Tip");
         CutsceneSFX = GetParent().GetParent().GetNode<AudioStreamPlayer>("CutsceneSFX");
         GD.Print("preSequenceText ready: ", Name, " | In tree: ", IsInsideTree());
         // Set the text to be displayed
         // Show the text
         Show();
+        BottomTip.Modulate = new Color(1,1,1, 0);
+
     }
 
     // Text to be displayed in the visual novel.
@@ -38,6 +43,7 @@ public partial class CutsceneText : RichTextLabel
                 this.Text = "";
                 textPos = 0;
                 CutsceneSFX.Play();
+                BottomTip.Modulate = new Color(1,1,1, 0);
             }
             else if ((Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1")) && text.Length == 1)
                 GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
@@ -56,6 +62,15 @@ public partial class CutsceneText : RichTextLabel
         else if (textPos >= text.Length) // go here once it goes over the amount typed (when it's done typing)
         {
             textPos = -1; // blocks typing until the person presses m1 or jump
+            FadeIn();
         }
+    }
+
+    public void FadeIn()
+    {
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+        _tween.TweenProperty(BottomTip, "modulate:a", 1, 1f);
+        _tween.Play();
     }
 }

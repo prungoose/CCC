@@ -12,7 +12,7 @@ public partial class TutorialStuff : MarginContainer
     private List<string> _messages = new()
     {
         "Welcome! Move around using WASD. Try heading over to the blue beacon over there!",
-        "By using left click, you can pick up trash. Try filling your tank to 50% by picking up trash!",
+        "By using left click, you can pick up trash. Try filling any of the four tanks to 50% by picking up trash!",
         "Great job! Now, let's learn how to toss trash. Hold right click and aim towards the red bin.",
         "Amazing! To progress, throw trash into each colored bin.",
         "Head to the flashing symbol on the map to continue your cleanup journey.",

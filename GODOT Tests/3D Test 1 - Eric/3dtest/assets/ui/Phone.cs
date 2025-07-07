@@ -24,6 +24,7 @@ public partial class Phone : Control
     // Agencies
     private Button _PowerCompanyButton;
     private Button _FireDepartmentButton;
+    private AudioStreamPlayer PhoneSFX;
 
 
 
@@ -53,6 +54,7 @@ public partial class Phone : Control
 
         _UI = GetParent().GetParent().GetNode<Control>("UI");
 
+        PhoneSFX = GetNode<AudioStreamPlayer>("PhoneSFX");
     }
 
     private void AgenciesTabPressed()
@@ -64,6 +66,8 @@ public partial class Phone : Control
         _agenciesScreen.Visible = true;
         _hazardsScreen.Visible = false;
         _dispatchScreen.Visible = false;
+
+        PhoneSFX.Play();
     }
 
     private void HazardsTabPressed()
@@ -75,6 +79,8 @@ public partial class Phone : Control
         _agenciesScreen.Visible = false;
         _hazardsScreen.Visible = true;
         _dispatchScreen.Visible = false;
+
+        PhoneSFX.Play();
     }
 
     private void DispatchTabPressed()
@@ -83,6 +89,8 @@ public partial class Phone : Control
         _agenciesScreen.Visible = false;
         _hazardsScreen.Visible = false;
         _dispatchScreen.Visible = true;
+
+        PhoneSFX.Play();
     }
 
     private void InfoButtonPressed()
@@ -111,6 +119,6 @@ public partial class Phone : Control
             _UI.Call("ShowInfoSection", "Fire Department", "The fire department is responsible for handling fires and other emergencies. They can help you with any fire-related issues.");
         }
 
-
+        PhoneSFX.Play();
     }
 }

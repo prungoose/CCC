@@ -33,6 +33,8 @@ public partial class UI : Control
 	private ProgressBar _tank3;
 	private ProgressBar _tank4;
 
+	private AudioStreamPlayer PhoneSFX;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -50,6 +52,8 @@ public partial class UI : Control
 		_infoSection.Visible = false;
 
 		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
+
+		PhoneSFX = _phone.GetNode<AudioStreamPlayer>("PhoneSFX");
 	}
 
 	public override void _Process(double delta)
@@ -152,6 +156,7 @@ public partial class UI : Control
 			// Exectute the command
 		}
 		_wiggle();
+		PhoneSFX.Play();
 	}
 
 	public void _wiggle()

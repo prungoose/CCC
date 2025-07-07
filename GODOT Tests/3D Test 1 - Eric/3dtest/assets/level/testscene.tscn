@@ -270,25 +270,21 @@ _player = NodePath("../SubViewport/Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 1
 
 [node name="GreenSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 2
 
 [node name="YellowSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 3
 
 [node name="BlueSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 4
 
 [node name="RandSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
