@@ -21,11 +21,11 @@ public partial class TrashSpawner : Node3D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		while (acc > min) {
+		while (acc > min && GetChildCount() < 30) {
 			var spawn = _spawn.Instantiate<RigidBody3D>();
 			AddChild(spawn);
 			spawn.Call("_ChangeToType", type);
-			acc -= min;
+			acc = 0;
 		}
 		acc += (float)delta;
 	}

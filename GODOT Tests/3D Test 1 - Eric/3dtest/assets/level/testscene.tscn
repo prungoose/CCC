@@ -182,6 +182,7 @@ shape = SubResource("BoxShape3D_jotil")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727954, -0.569995, 0.000700474)
+visible = false
 layers = 3
 mesh = SubResource("BoxMesh_jotil")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
@@ -232,6 +233,7 @@ fov = 22.5
 size = 15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
+visible = false
 mesh = SubResource("QuadMesh_pr11n")
 
 [node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
@@ -270,21 +272,25 @@ _player = NodePath("../SubViewport/Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
+type = 1
 
 [node name="GreenSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
+type = 2
 
 [node name="YellowSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
+type = 3
 
 [node name="BlueSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
+type = 4
 
 [node name="RandSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)

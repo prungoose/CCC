@@ -26,7 +26,7 @@ public partial class ThrownTrash : RigidBody3D
 	private void _collision(Node body)
 	{
 		_bounces++;
-		if (_bounces >= 2)
+		if (_bounces == 2)
 		{
 			for (int i = 0; i < 20; i++)
 			{
@@ -34,8 +34,6 @@ public partial class ThrownTrash : RigidBody3D
 			}
 			QueueFree();
 		}
-
-
 	}
 
 	private void _spawntrash()

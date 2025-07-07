@@ -171,19 +171,33 @@ public partial class Controller : CharacterBody3D
 
 	private void _HandleAnimations()
 	{
-		var frame = _anim.Frame;
-		var prog = _anim.FrameProgress;
+		int frame;
+		float prog;
 
 		// play the right animation based on player input
 		Godot.Vector2 inputdir = Input.GetVector("move_left", "move_right", "move_down", "move_up").Normalized();
+		if (!inputdir.IsZeroApprox() | is_sucking | is_blowing)
+		{
+			frame = _anim.Frame;
+			prog = _anim.FrameProgress;
+		}
+		else
+		{
+			frame = 0;
+			prog = 0;
+		}
 
 		String[] dirs = { "sw", "s", "se", "e", "ne", "n", "nw", "w", "sw", "s", "se" };
+
 		if (!phone && (is_sucking | is_blowing))
+		{
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_suck");
+		}
 		else if (!inputdir.IsZeroApprox() && !phone)
 			_anim.Play(dirs[(int)Mathf.RadToDeg(inputdir.Angle()) / 45 + 3] + "_run");
 		else
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_idle");
+			
 		_anim.SetFrameAndProgress(frame, prog);
 	}
 
@@ -330,11 +344,13 @@ public partial class Controller : CharacterBody3D
 		foreach (Godot.Vector3 i in result) { curve.AddPoint(i); }
 		_trajpath.Curve = curve;
 
-		if (_trajtarget == null)
+		if (_trajtarget != null)
 		{
-			_trajtarget = _trajtarget_scene.Instantiate<MeshInstance3D>();
-			GetTree().CurrentScene.AddChild(_trajtarget);
+			_trajtarget.QueueFree();
+			_trajtarget = null;
 		}
+		_trajtarget = _trajtarget_scene.Instantiate<MeshInstance3D>();
+		GetTree().CurrentScene.AddChild(_trajtarget);
 		_trajtarget.GlobalPosition = curve.GetPointPosition(curve.PointCount - 1);
 		_trajtarget.Show();
 	}
