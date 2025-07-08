@@ -66,7 +66,7 @@ public partial class UI : Control
 		_tank4.Value = (int)_player.Call("_GetTankPercentage", 4);
 
 		// Go to next step in tutorial first time tank reaches 50%
-		if ((float)_player.Call("_GetTankPercentage", 1) >= 50 && _tutorialStuff.Visible && !_tankStepCompleted)
+		if ((float)_player.Call("_GetTankPercentage", 1) >= 20 && !_tankStepCompleted)
 		{
 			_tankStepCompleted = true;
 			NextTutorialStep();
@@ -172,16 +172,12 @@ public partial class UI : Control
 	{
 		if (body is CharacterBody3D)
 		{
-			if (_tutorialStuff.Visible && !_movementStepCompleted)
+			if (!_movementStepCompleted)
 			{
 				_movementStepCompleted = true;
 				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/Beacon");
 				beacon.QueueFree();
 				NextTutorialStep();
-			}
-			else if (!_tutorialStuff.Visible)
-			{
-				_movementStepCompleted = true;
 			}
 		}
 

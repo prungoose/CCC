@@ -187,21 +187,6 @@ layers = 3
 mesh = SubResource("BoxMesh_jotil")
 surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
-[node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("Player")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
-script = ExtResource("5_a2nen")
-Player = NodePath("../../Player")
-
-[node name="SearchTimer" type="Timer" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
-wait_time = 1.5
-autostart = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
-mesh = SubResource("CapsuleMesh_a2nen")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/RaccoonAgent"]
-shape = SubResource("CapsuleShape3D_iw0pl")
-
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
 [node name="Trashbin1" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
@@ -223,6 +208,52 @@ _trashId = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82197, 0.5, -16.2403)
 _trashId = 4
 
+[node name="Spawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+
+[node name="RedSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
+script = ExtResource("16_iw0pl")
+_spawn = ExtResource("17_wpr57")
+type = 1
+
+[node name="GreenSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
+script = ExtResource("16_iw0pl")
+_spawn = ExtResource("17_wpr57")
+type = 2
+
+[node name="YellowSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
+script = ExtResource("16_iw0pl")
+_spawn = ExtResource("17_wpr57")
+type = 3
+
+[node name="BlueSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
+script = ExtResource("16_iw0pl")
+_spawn = ExtResource("17_wpr57")
+type = 4
+
+[node name="RandSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
+script = ExtResource("16_iw0pl")
+_spawn = ExtResource("17_wpr57")
+
+[node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
+script = ExtResource("5_a2nen")
+Player = NodePath("../Player")
+
+[node name="SearchTimer" type="Timer" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
+wait_time = 1.5
+autostart = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
+mesh = SubResource("CapsuleMesh_a2nen")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
+shape = SubResource("CapsuleShape3D_iw0pl")
+
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
@@ -233,7 +264,6 @@ fov = 22.5
 size = 15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
-visible = false
 mesh = SubResource("QuadMesh_pr11n")
 
 [node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
@@ -267,35 +297,6 @@ _thrown_beacon = ExtResource("15_iw0pl")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
-
-[node name="RedSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
-script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
-type = 1
-
-[node name="GreenSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
-script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
-type = 2
-
-[node name="YellowSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
-script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
-type = 3
-
-[node name="BlueSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
-script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
-type = 4
-
-[node name="RandSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
-script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
 

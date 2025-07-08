@@ -544,6 +544,7 @@ emission_energy_multiplier = 10.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 2
+collision_mask = 9
 floor_constant_speed = true
 platform_on_leave = 2
 script = ExtResource("1_s7e8h")
@@ -559,12 +560,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19517, 0)
 layers = 2
 pixel_size = 0.012
 billboard = 1
-alpha_cut = 1
-alpha_scissor_threshold = 0.565
-alpha_hash_scale = 0.0
-alpha_antialiasing_mode = 2
-alpha_antialiasing_edge = 0.3
 texture_filter = 0
+render_priority = 1
 sprite_frames = SubResource("SpriteFrames_pidqv")
 animation = &"e_idle"
 
