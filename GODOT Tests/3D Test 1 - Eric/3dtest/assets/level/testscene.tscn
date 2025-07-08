@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=39 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
+[ext_resource type="Script" uid="uid://cpv32mp33kteq" path="res://assets/level/AmbianceSFX.cs" id="1_04qkv"]
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dx8ow0dtwewfy" path="res://assets/trash/throw_target.tscn" id="11_pr11n"]
 [ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_iw0pl"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="16_iw0pl"]
+[ext_resource type="AudioStream" uid="uid://b88r37dtfg52l" path="res://assets/Audios/Ambiance.wav" id="17_04qkv"]
 [ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube1.tscn" id="17_wpr57"]
 
 [sub_resource type="Gradient" id="Gradient_wpr57"]
@@ -111,6 +113,7 @@ top_radius = 0.32
 height = 0.155
 
 [node name="MainRoot" type="Node3D" groups=["cleanable_vacuum"]]
+script = ExtResource("1_04qkv")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -297,6 +300,10 @@ _thrown_beacon = ExtResource("15_iw0pl")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
+
+[node name="AmbianceSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_04qkv")
+bus = &"Ambiance"
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
 

@@ -1,15 +1,14 @@
 using Godot;
 using System;
 
-public partial class SfXslider : HSlider
+public partial class VolumeSlider : HSlider
 {
-	private int sfx_index;
-
+	private int main_index;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		sfx_index = AudioServer.GetBusIndex("SFX");
-		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb((float)this.Value));
+		main_index = AudioServer.GetBusIndex("Main");
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb((float)this.Value));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +18,6 @@ public partial class SfXslider : HSlider
 
 	public void adjustVol(float value)
 	{
-		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(value));
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb(value));
 	}
 }

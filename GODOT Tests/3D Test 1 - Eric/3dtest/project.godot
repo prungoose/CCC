@@ -15,6 +15,10 @@ run/main_scene="uid://bp8fj6wujphhr"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+Global="*res://assets/Audios/Global Music/Global.tscn"
+
 [display]
 
 window/size/viewport_width=1920

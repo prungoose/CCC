@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b5v1su5ewfqbd"
+path="res://.godot/imported/7. mirth.wav-542eb82d3864d648f3252ea1e05030c9.sample"
+
+[deps]
+
+source_file="res://assets/Audios/Global Music/7. mirth.wav"
+dest_files=["res://.godot/imported/7. mirth.wav-542eb82d3864d648f3252ea1e05030c9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
