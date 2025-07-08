@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3cf23g70skln"
+path="res://.godot/imported/5. chachuu.wav-062611124b6182c645dd51c5c005bb3c.sample"
+
+[deps]
+
+source_file="res://assets/Audios/Global Music/5. chachuu.wav"
+dest_files=["res://.godot/imported/5. chachuu.wav-062611124b6182c645dd51c5c005bb3c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

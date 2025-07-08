@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=19 format=3 uid="uid://cm5rd518ga13s"]
 
-[ext_resource type="Script" uid="uid://ctci6qrpvuf2h" path="res://assets/menu/MainMenuButton.cs" id="1_1fypi"]
+[ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://assets/menu/Options.cs" id="1_xygxo"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
 [ext_resource type="Script" uid="uid://r40631o23wyo" path="res://assets/menu/SfXslider.cs" id="3_f5wrm"]
+[ext_resource type="Script" uid="uid://b8vp6gbcqpj82" path="res://assets/menu/VolumeSlider.cs" id="3_wtj14"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
@@ -93,6 +94,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xygxo")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -119,7 +121,7 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sxq6w")
 
-[node name="MainMenuButton" type="Button" parent="." node_paths=PackedStringArray("parent")]
+[node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 1
 offset_left = 134.0
 offset_top = 58.0
@@ -137,8 +139,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xygxo")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
 shortcut = SubResource("Shortcut_sxq6w")
 text = "<"
-script = ExtResource("1_1fypi")
-parent = NodePath("../Adjustments")
 
 [node name="OptionsLabel" type="Label" parent="."]
 layout_mode = 1
@@ -216,6 +216,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
 max_value = 1.0
 step = 0.01
 value = 1.0
+script = ExtResource("3_wtj14")
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
@@ -277,6 +278,7 @@ stream = ExtResource("4_3tk4e")
 volume_db = -6.0
 bus = &"SFX"
 
-[connection signal="pressed" from="MainMenuButton" to="MainMenuButton" method="_MainMenuButtonPressed"]
-[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="stopAdjustVol"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_MainMenuButtonPressed"]
+[connection signal="value_changed" from="Adjustments/VolumeSlider" to="Adjustments/VolumeSlider" method="adjustVol"]
+[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustVol"]
 [connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
