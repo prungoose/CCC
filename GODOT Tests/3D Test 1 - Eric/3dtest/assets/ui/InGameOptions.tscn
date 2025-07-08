@@ -1,11 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=22 format=3 uid="uid://cyh4mgfebq10y"]
 
-[ext_resource type="Script" uid="uid://ckvctlfd3hh4u" path="res://assets/ui/BacktoGameButton.cs" id="1_2fkgi"]
+[ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://assets/ui/InGameOptions.cs" id="1_i5ekm"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
 [ext_resource type="Script" uid="uid://cjwjy0n6bjnhw" path="res://assets/ui/IGVolumeSlider.cs" id="3_6lw4i"]
 [ext_resource type="Script" uid="uid://dhy7fpl3d10gu" path="res://assets/ui/SFXSliderforIGOptions.cs" id="3_wgxot"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="5_6ifhe"]
+[ext_resource type="Script" uid="uid://86xmu7ukr8ft" path="res://assets/ui/IGAmbianceSlider.cs" id="5_i5ekm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7lg"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -91,7 +92,7 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_q2ip2"]
 events = [SubResource("InputEventKey_2fkgi")]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("parent")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -99,6 +100,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_i5ekm")
+parent = NodePath("Adjustments")
 
 [node name="Background" type="Panel" parent="."]
 process_mode = 3
@@ -176,6 +179,15 @@ theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
 horizontal_alignment = 1
 
+[node name="Ambiance" type="Label" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("2_qx56b")
+theme_override_font_sizes/font_size = 60
+text = "Ambiance"
+horizontal_alignment = 1
+
 [node name="Language" type="Label" parent="VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -189,9 +201,9 @@ horizontal_alignment = 1
 process_mode = 3
 layout_mode = 0
 offset_left = 774.0
-offset_top = 183.0
+offset_top = 213.0
 offset_right = 1716.0
-offset_bottom = 891.0
+offset_bottom = 935.0
 theme_override_constants/separation = 160
 
 [node name="VolumeSlider" type="HSlider" parent="Adjustments"]
@@ -219,6 +231,19 @@ step = 0.01
 value = 1.0
 script = ExtResource("3_wgxot")
 
+[node name="AmbianceSlider" type="HSlider" parent="Adjustments"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_6ifhe")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_6lw4i")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("5_i5ekm")
+
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 process_mode = 3
 layout_mode = 2
@@ -240,7 +265,7 @@ popup/item_0/id = 1
 popup/item_1/text = "English"
 popup/item_1/id = 0
 
-[node name="BacktoGameButton" type="Button" parent="." node_paths=PackedStringArray("parent")]
+[node name="BacktoGameButton" type="Button" parent="."]
 process_mode = 3
 layout_mode = 0
 offset_left = 134.0
@@ -259,15 +284,20 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_6lw4i")
 theme_override_styles/normal = SubResource("StyleBoxFlat_i5ekm")
 shortcut = SubResource("Shortcut_q2ip2")
 text = "<"
-script = ExtResource("1_2fkgi")
-parent = NodePath("../Adjustments")
 
 [node name="IGSampleSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_6ifhe")
 volume_db = -6.0
 bus = &"SFX"
 
+[node name="IGSampleAMB" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6ifhe")
+volume_db = -6.0
+bus = &"Ambiance"
+
 [connection signal="value_changed" from="Adjustments/VolumeSlider" to="Adjustments/VolumeSlider" method="adjustVol"]
-[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="stopAdjustVol"]
+[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustSFX"]
 [connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
-[connection signal="pressed" from="BacktoGameButton" to="BacktoGameButton" method="BacktoGame"]
+[connection signal="drag_ended" from="Adjustments/AmbianceSlider" to="." method="stopAdjustAMB"]
+[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="Adjustments/AmbianceSlider" method="adjustVol"]
+[connection signal="pressed" from="BacktoGameButton" to="." method="BacktoGame"]

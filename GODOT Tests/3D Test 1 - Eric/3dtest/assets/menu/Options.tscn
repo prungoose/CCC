@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=20 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://assets/menu/Options.cs" id="1_xygxo"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
 [ext_resource type="Script" uid="uid://r40631o23wyo" path="res://assets/menu/SfXslider.cs" id="3_f5wrm"]
 [ext_resource type="Script" uid="uid://b8vp6gbcqpj82" path="res://assets/menu/VolumeSlider.cs" id="3_wtj14"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
+[ext_resource type="Script" uid="uid://ytfur06c7wll" path="res://assets/menu/AmbianceSlider.cs" id="5_xygxo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -87,7 +88,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="Options" type="Control"]
+[node name="Options" type="Control" node_paths=PackedStringArray("parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,6 +96,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xygxo")
+parent = NodePath("Adjustments")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -163,12 +165,12 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 214.0
-offset_top = -306.0
+offset_top = -328.0
 offset_right = 750.0
-offset_bottom = 390.0
+offset_bottom = 423.0
 grow_vertical = 2
 size_flags_horizontal = 0
-theme_override_constants/separation = 110
+theme_override_constants/separation = 80
 
 [node name="Volume" type="Label" parent="Labels"]
 layout_mode = 2
@@ -182,6 +184,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
+horizontal_alignment = 1
+
+[node name="Ambiance" type="Label" parent="Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_font_sizes/font_size = 60
+text = "Ambiance"
 horizontal_alignment = 1
 
 [node name="Language" type="Label" parent="Labels"]
@@ -201,9 +210,9 @@ horizontal_alignment = 1
 [node name="Adjustments" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 774.0
-offset_top = 271.0
+offset_top = 245.0
 offset_right = 1716.0
-offset_bottom = 907.0
+offset_bottom = 943.0
 theme_override_constants/separation = 120
 
 [node name="VolumeSlider" type="HSlider" parent="Adjustments"]
@@ -228,6 +237,18 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 script = ExtResource("3_f5wrm")
+
+[node name="AmbianceSlider" type="HSlider" parent="Adjustments"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/center_grabber = 0
+theme_override_styles/slider = SubResource("StyleBoxLine_1fypi")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_sxq6w")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("5_xygxo")
 
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 layout_mode = 2
@@ -278,7 +299,14 @@ stream = ExtResource("4_3tk4e")
 volume_db = -6.0
 bus = &"SFX"
 
+[node name="SampleAMB" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3tk4e")
+volume_db = -6.0
+bus = &"Ambiance"
+
 [connection signal="pressed" from="MainMenuButton" to="." method="_MainMenuButtonPressed"]
 [connection signal="value_changed" from="Adjustments/VolumeSlider" to="Adjustments/VolumeSlider" method="adjustVol"]
-[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustVol"]
+[connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustSFX"]
 [connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
+[connection signal="drag_ended" from="Adjustments/AmbianceSlider" to="." method="stopAdjustAMB"]
+[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="Adjustments/AmbianceSlider" method="adjustVol"]
