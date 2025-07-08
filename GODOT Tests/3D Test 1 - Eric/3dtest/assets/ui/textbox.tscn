@@ -105,9 +105,12 @@ offset_left = 350.0
 offset_top = -21.0
 offset_right = 382.0
 offset_bottom = -3.0
+mouse_default_cursor_shape = 2
 theme_override_styles/hover = SubResource("StyleBoxFlat_obbyq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_vwjde")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vwjde")
+action_mode = 0
+keep_pressed_outside = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer"]
 scale = Vector2(0.26, 0.26)

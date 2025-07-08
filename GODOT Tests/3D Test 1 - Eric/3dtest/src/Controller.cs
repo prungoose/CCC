@@ -208,6 +208,7 @@ public partial class Controller : CharacterBody3D
 		// pull up phone
 		if (Input.IsActionJustPressed("phone") && !is_blowing && !is_sucking)
 		{
+			_campivot.Call("_ToggleZoom");
 			phone = !phone;
 			_ui.Call("_updatephone", phone);
 			// get rid of vacuum if it is out

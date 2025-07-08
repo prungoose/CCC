@@ -1,14 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=21 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
-[ext_resource type="Script" uid="uid://dai70evwdplev" path="res://assets/ui/Phone.cs" id="2_e7p23"]
-[ext_resource type="Texture2D" uid="uid://dlr6f83dmgy1c" path="res://assets/ui/catback.png" id="3_2glbg"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
-[ext_resource type="Texture2D" uid="uid://cvsf6x7te6k0a" path="res://assets/ui/phone.png" id="3_e7p23"]
 [ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
+[ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/phone.tscn" id="4_cufnj"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
-[ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="5_j234e"]
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="14_rts35"]
@@ -34,11 +31,6 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
-font_size = 50
-outline_size = 15
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u48x"]
 
@@ -192,164 +184,12 @@ max_value = 40.0
 fill_mode = 3
 show_percentage = false
 
-[node name="Phone" type="Control" parent="."]
+[node name="Phone" parent="." instance=ExtResource("4_cufnj")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -668.0
-offset_top = 433.0
-offset_right = -667.0
-offset_bottom = 434.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("2_e7p23")
-
-[node name="PhoneSprite" type="Sprite2D" parent="Phone"]
-scale = Vector2(0.470608, 0.470608)
-texture = ExtResource("3_e7p23")
-
-[node name="Sprite2D" type="Sprite2D" parent="Phone/PhoneSprite"]
-position = Vector2(5.68433, -64.3794)
-scale = Vector2(2.31622, 2.14016)
-texture = ExtResource("3_2glbg")
-
-[node name="Agencies Screen" type="Control" parent="Phone/PhoneSprite"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -150.869
-offset_top = 69.0361
-offset_right = -110.869
-offset_bottom = 109.036
-rotation = -0.261799
-scale = Vector2(7.96662, 7.96662)
-
-[node name="Power Company" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
-layout_mode = 0
-offset_left = 7.76358
-offset_top = -93.6804
-offset_right = 79.7636
-offset_bottom = -73.6804
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "Power Company"
-
-[node name="Fire Department" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
-layout_mode = 0
-offset_left = 2.07029
-offset_top = -73.4951
-offset_right = 74.0703
-offset_bottom = -53.4951
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "Fire Department"
-
-[node name="EMS" type="Button" parent="Phone/PhoneSprite/Agencies Screen"]
-layout_mode = 0
-offset_left = -3.623
-offset_top = -52.7923
-offset_right = 68.377
-offset_bottom = -32.7923
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "EMS"
-
-[node name="Hazards Screen" type="Control" parent="Phone/PhoneSprite"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -150.869
-offset_top = 69.0361
-offset_right = -110.869
-offset_bottom = 109.036
-rotation = -0.261799
-scale = Vector2(7.96662, 7.96662)
-
-[node name="Power" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
-layout_mode = 0
-offset_left = 7.76358
-offset_top = -93.6804
-offset_right = 79.7636
-offset_bottom = -73.6804
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "Powerline
-"
-
-[node name="Chemical Spill" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
-layout_mode = 0
-offset_left = 2.07029
-offset_top = -73.4951
-offset_right = 74.0703
-offset_bottom = -53.4951
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "Chemical Spill
-"
-
-[node name="Fallen Tree" type="Button" parent="Phone/PhoneSprite/Hazards Screen"]
-layout_mode = 0
-offset_left = -3.623
-offset_top = -52.7923
-offset_right = 68.377
-offset_bottom = -32.7923
-rotation = 0.260054
-theme_override_font_sizes/font_size = 8
-text = "Fallen Tree
-"
-
-[node name="Agencies Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = -286.863
-offset_top = -129.62
-offset_right = -266.862
-offset_bottom = -105.62
-scale = Vector2(7.96662, 7.96662)
-theme_override_font_sizes/font_size = 11
-text = "A"
-
-[node name="Hazards Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = -80.7465
-offset_top = -131.744
-offset_right = -60.7465
-offset_bottom = -107.744
-scale = Vector2(7.96662, 7.96662)
-theme_override_font_sizes/font_size = 11
-text = "H"
-
-[node name="Dial Button" type="Button" parent="Phone/PhoneSprite"]
-offset_left = 116.87
-offset_top = -131.744
-offset_right = 136.87
-offset_bottom = -107.744
-scale = Vector2(7.96662, 7.96662)
-theme_override_font_sizes/font_size = 11
-text = "D"
-
-[node name="Dial Screen" type="Control" parent="Phone/PhoneSprite"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -285.0
-offset_top = -674.0
-offset_right = -213.0
-offset_bottom = -611.0
-scale = Vector2(7.96662, 7.96662)
-
-[node name="Label" type="Label" parent="Phone/PhoneSprite/Dial Screen"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = 217.0
-offset_bottom = 197.0
-scale = Vector2(0.33148, 0.317913)
-label_settings = SubResource("LabelSettings_6u48x")
-autowrap_mode = 1
-clip_text = true
-
-[node name="PhoneSFX" type="AudioStreamPlayer" parent="Phone"]
-stream = ExtResource("5_j234e")
-volume_db = -10.0
-bus = &"SFX"
+offset_left = -732.0
+offset_top = 471.0
+offset_right = -732.0
+offset_bottom = 471.0
 
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
@@ -455,14 +295,5 @@ stream = ExtResource("11_e7p23")
 volume_db = -6.0
 bus = &"SFX"
 
-[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Power Company" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/Fire Department" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Agencies Screen/EMS" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Power" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Chemical Spill" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Hazards Screen/Fallen Tree" to="Phone" method="InfoButtonPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Agencies Button" to="Phone" method="AgenciesTabPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Hazards Button" to="Phone" method="HazardsTabPressed"]
-[connection signal="pressed" from="Phone/PhoneSprite/Dial Button" to="Phone" method="DispatchTabPressed"]
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="Paused"]
 [connection signal="pressed" from="Info Section/Close" to="." method="HideInfoSection"]

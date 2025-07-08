@@ -1,0 +1,185 @@
+[gd_scene load_steps=6 format=3 uid="uid://7ghxngbd3bft"]
+
+[ext_resource type="Script" uid="uid://dai70evwdplev" path="res://assets/ui/Phone.cs" id="1_0ox6e"]
+[ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_0ox6e"]
+[ext_resource type="Texture2D" uid="uid://dlr6f83dmgy1c" path="res://assets/ui/catback.png" id="3_es7qe"]
+[ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_8xw5c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6u48x"]
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Phone" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_0ox6e")
+
+[node name="PhoneSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_0ox6e")
+
+[node name="PhoneBackground" type="Sprite2D" parent="PhoneSprite"]
+show_behind_parent = true
+position = Vector2(4.5, 1.5)
+scale = Vector2(1.49662, 1.30156)
+texture = ExtResource("3_es7qe")
+
+[node name="Agencies Screen" type="Control" parent="PhoneSprite"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -150.869
+offset_top = 69.0361
+offset_right = -110.869
+offset_bottom = 109.036
+rotation = -0.261799
+scale = Vector2(7.96662, 7.96662)
+
+[node name="Power Company" type="Button" parent="PhoneSprite/Agencies Screen"]
+layout_mode = 0
+offset_left = 7.76358
+offset_top = -93.6804
+offset_right = 79.7636
+offset_bottom = -73.6804
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "Power Company"
+
+[node name="Fire Department" type="Button" parent="PhoneSprite/Agencies Screen"]
+layout_mode = 0
+offset_left = 2.07029
+offset_top = -73.4951
+offset_right = 74.0703
+offset_bottom = -53.4951
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "Fire Department"
+
+[node name="EMS" type="Button" parent="PhoneSprite/Agencies Screen"]
+layout_mode = 0
+offset_left = -3.623
+offset_top = -52.7923
+offset_right = 68.377
+offset_bottom = -32.7923
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "EMS"
+
+[node name="Hazards Screen" type="Control" parent="PhoneSprite"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -150.869
+offset_top = 69.0361
+offset_right = -110.869
+offset_bottom = 109.036
+rotation = -0.261799
+scale = Vector2(7.96662, 7.96662)
+
+[node name="Power" type="Button" parent="PhoneSprite/Hazards Screen"]
+layout_mode = 0
+offset_left = 7.76358
+offset_top = -93.6804
+offset_right = 79.7636
+offset_bottom = -73.6804
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "Powerline
+"
+
+[node name="Chemical Spill" type="Button" parent="PhoneSprite/Hazards Screen"]
+layout_mode = 0
+offset_left = 2.07029
+offset_top = -73.4951
+offset_right = 74.0703
+offset_bottom = -53.4951
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "Chemical Spill
+"
+
+[node name="Fallen Tree" type="Button" parent="PhoneSprite/Hazards Screen"]
+layout_mode = 0
+offset_left = -3.623
+offset_top = -52.7923
+offset_right = 68.377
+offset_bottom = -32.7923
+rotation = 0.260054
+theme_override_font_sizes/font_size = 8
+text = "Fallen Tree
+"
+
+[node name="Agencies Button" type="Button" parent="PhoneSprite"]
+visible = false
+offset_left = -286.863
+offset_top = -129.62
+offset_right = -266.862
+offset_bottom = -105.62
+scale = Vector2(7.96662, 7.96662)
+theme_override_font_sizes/font_size = 11
+text = "A"
+
+[node name="Hazards Button" type="Button" parent="PhoneSprite"]
+visible = false
+offset_left = -80.7465
+offset_top = -131.744
+offset_right = -60.7465
+offset_bottom = -107.744
+scale = Vector2(7.96662, 7.96662)
+theme_override_font_sizes/font_size = 11
+text = "H"
+
+[node name="Dial Button" type="Button" parent="PhoneSprite"]
+visible = false
+offset_left = 116.87
+offset_top = -131.744
+offset_right = 136.87
+offset_bottom = -107.744
+scale = Vector2(7.96662, 7.96662)
+theme_override_font_sizes/font_size = 11
+text = "D"
+
+[node name="Dial Screen" type="Control" parent="PhoneSprite"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -285.0
+offset_top = -674.0
+offset_right = -213.0
+offset_bottom = -611.0
+scale = Vector2(7.96662, 7.96662)
+
+[node name="Label" type="Label" parent="PhoneSprite/Dial Screen"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 217.0
+offset_bottom = 197.0
+scale = Vector2(0.33148, 0.317913)
+label_settings = SubResource("LabelSettings_6u48x")
+autowrap_mode = 1
+clip_text = true
+
+[node name="PhoneSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8xw5c")
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="PhoneSprite/Agencies Screen/Power Company" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Agencies Screen/Fire Department" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Agencies Screen/EMS" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Hazards Screen/Power" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Hazards Screen/Chemical Spill" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Hazards Screen/Fallen Tree" to="." method="InfoButtonPressed"]
+[connection signal="pressed" from="PhoneSprite/Agencies Button" to="." method="AgenciesTabPressed"]
+[connection signal="pressed" from="PhoneSprite/Hazards Button" to="." method="HazardsTabPressed"]
+[connection signal="pressed" from="PhoneSprite/Dial Button" to="." method="DispatchTabPressed"]

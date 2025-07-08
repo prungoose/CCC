@@ -50,7 +50,7 @@ public partial class TrashBin : Node3D
 
 	}
 
-	void _body_entered(RigidBody3D body)
+	void _body_entered(CollisionObject3D body)
 	{
 		if (body.IsInGroup("thrown") && (int)body.Call("GetThrownTrashID") == _trashId)
 		{
