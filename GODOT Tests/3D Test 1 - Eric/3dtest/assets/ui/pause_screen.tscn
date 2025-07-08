@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmfwxtxydwese"]
+[gd_scene load_steps=23 format=3 uid="uid://bmfwxtxydwese"]
 
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_p7ktw"]
+[ext_resource type="Texture2D" uid="uid://cdfp8wkly552l" path="res://assets/menu/Resume_Button_Hover.png" id="2_htskl"]
 [ext_resource type="Script" uid="uid://cwh20xf1vxbye" path="res://assets/ui/ResumeButton.cs" id="2_mg1la"]
+[ext_resource type="Texture2D" uid="uid://1vrepp1xtysa" path="res://assets/menu/Resume_Button.png" id="3_3pt0r"]
 [ext_resource type="Script" uid="uid://dug6advdwnfns" path="res://assets/ui/QuitLevelButton.cs" id="3_42rq1"]
 [ext_resource type="Script" uid="uid://cmwxxildyoaa1" path="res://assets/ui/InGameOptionsButton.cs" id="3_a7jig"]
 [ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="3_f4b01"]
@@ -10,23 +12,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42rq1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg1la"]
-bg_color = Color(0.868985, 0.868985, 0.868985, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fub31"]
+texture = ExtResource("2_htskl")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42rq1"]
-bg_color = Color(0.693429, 0.69343, 0.693429, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_phwk8"]
+texture = ExtResource("2_htskl")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7jig"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 7
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u0n5j"]
+texture = ExtResource("3_3pt0r")
 
 [sub_resource type="InputEventKey" id="InputEventKey_a7jig"]
 device = -1
@@ -45,6 +38,24 @@ texture = ExtResource("3_f4b01")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pt0r"]
 texture = ExtResource("4_jxqms")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg1la"]
+bg_color = Color(0.868985, 0.868985, 0.868985, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42rq1"]
+bg_color = Color(0.693429, 0.69343, 0.693429, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7jig"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 7
 
 [node name="PauseScreen" type="Control"]
 layout_mode = 3
@@ -87,11 +98,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_42rq1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_mg1la")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_42rq1")
-theme_override_styles/normal = SubResource("StyleBoxFlat_a7jig")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fub31")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_phwk8")
+theme_override_styles/normal = SubResource("StyleBoxTexture_u0n5j")
 shortcut = SubResource("Shortcut_e3e87")
-text = "Resume"
 script = ExtResource("2_mg1la")
 
 [node name="InGameOptionsButton" type="Button" parent="Container"]
