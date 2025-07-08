@@ -49,7 +49,6 @@ public partial class Textbox : Control
 				TypeText();
 			}
 		}
-		//GD.Print(_text.Text);
 	}
 
 	private void PopUp(string[] text, int caller_id)
@@ -60,14 +59,16 @@ public partial class Textbox : Control
 			_popup_queue.Enqueue(t);
 			return;
 		}
- 		var x = GD.RandRange(-50, 50);
+		var x = GD.RandRange(-50, 50);
 		var y = GD.RandRange(-120, 50);
 		Position = _initalpos + new Godot.Vector2(x, y);
+		_text.Text = "";
 		_text_pos = 0;
 		_active = true;
 		_text_bin = text;
 		_bin_progress = 0;
-		_sprite.Frame = caller_id;
+		if (caller_id == 0) _sprite.Hide();
+		else { _sprite.Show(); _sprite.Frame = caller_id; }
 		_timer.WaitTime = 3 + text[0].Length * .05f;
 		_timer.Start();
 		Tween tween = GetTree().CreateTween();
@@ -94,7 +95,7 @@ public partial class Textbox : Control
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "scale", new Godot.Vector2(0, 0), .15f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 		tween.Finished += () => _active = false;
-		tween.Finished += () => _text.Text = "";
+		//tween.Finished += () => _text.Text = "";
 		
 
 	}

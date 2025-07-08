@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpiqgw426s24"]
+[gd_scene load_steps=14 format=3 uid="uid://cpiqgw426s24"]
 
 [ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://assets/ui/Textbox.cs" id="1_5wdy1"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="1_aqvb0"]
+[ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="3_g1w8g"]
 [ext_resource type="Texture2D" uid="uid://emtut8a80gn6" path="res://assets/cutscene characters/Mayumarosprite_1.png" id="3_k7pxp"]
 [ext_resource type="Texture2D" uid="uid://t61h0xhd0p5a" path="res://assets/cutscene characters/tutorial_sprite.png" id="3_obbyq"]
 [ext_resource type="Texture2D" uid="uid://bk7kl7vcljpbg" path="res://assets/cutscene characters/Mayumarosprite_2.png" id="4_g1w8g"]
@@ -38,6 +39,9 @@ region = Rect2(0, 0, 500, 500)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_s421u")
 }, {
 "duration": 1.0,
@@ -57,7 +61,7 @@ anchors_preset = 0
 script = ExtResource("1_5wdy1")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(300, 200)
+custom_minimum_size = Vector2(400, 200)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -97,9 +101,9 @@ layout_mode = 2
 
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/Control"]
 layout_mode = 2
-offset_left = 250.0
+offset_left = 350.0
 offset_top = -21.0
-offset_right = 282.0
+offset_right = 382.0
 offset_bottom = -3.0
 theme_override_styles/hover = SubResource("StyleBoxFlat_obbyq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_vwjde")
@@ -108,6 +112,12 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_vwjde")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer"]
 scale = Vector2(0.26, 0.26)
 sprite_frames = SubResource("SpriteFrames_fafr0")
+frame = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/AnimatedSprite2D"]
+show_behind_parent = true
+scale = Vector2(0.442308, 0.442308)
+texture = ExtResource("3_g1w8g")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

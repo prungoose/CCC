@@ -13,6 +13,7 @@ public partial class TrashBin : Node3D
 	private MeshInstance3D _mesh;
 	private AudioStreamPlayer _SFX;
 	private GpuParticles3D _particles;
+	private GpuParticles3D _splode_particles;
 
 	private StaticBody3D _majorObstacle;
 
@@ -27,6 +28,7 @@ public partial class TrashBin : Node3D
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
 		_mesh = GetNode<MeshInstance3D>("StaticBody3D/BinColorMesh");
 		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
+		_splode_particles = GetNode<GpuParticles3D>("GPUParticles3D2");
 
 		// For starting animation in tutorial sequence
 		_majorObstacle = GetTree().CurrentScene.GetNode<StaticBody3D>("SubViewportContainer/SubViewport/Level/Major Obstacle");
@@ -48,14 +50,19 @@ public partial class TrashBin : Node3D
 
 	}
 
-	void _body_entered(Node3D body)
+	void _body_entered(RigidBody3D body)
 	{
 		if (body.IsInGroup("thrown") && (int)body.Call("GetThrownTrashID") == _trashId)
 		{
+			_splode_particles.Restart();
 			_trashCount++;
-			body.QueueFree();
-			_SFX.PitchScale = (float)GD.RandRange(0.8, 2.0); ;
-			_SFX.Play();
+			var tween = GetTree().CreateTween();
+			tween.TweenProperty(body, "global_position", GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
+			_SFX.PitchScale = (float)GD.RandRange(0.8, 1.2); ;
+			body.CollisionMask = 0;
+			tween.Finished += () => body.QueueFree();
+			tween.Finished += () => _SFX.Play();
+			tween.Finished += () => _splode_particles.Emitting = true;
 			if (_trashId == 1 && _trashCount > 0 && (int)_ui.Call("GetTutorialStep") == 2)
 			{
 				_ui.Call("NextTutorialStep");

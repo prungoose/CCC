@@ -11,11 +11,11 @@ public partial class TutorialStuff : MarginContainer
     private string[][] _messages =
     [
         ["Welcome! Move around using [b]WASD[/b].", "Try heading over to the blue beacon over there!"],
-        ["By using [b][color=cyan]Left Click[/color][/b], you can pick up trash. Try filling any of the four tanks to 50% by picking up trash!"],
-        ["Great job! Now, let's learn how to toss trash. Hold [b]Right Click[/b] and aim towards the red bin."],
-        ["Amazing! To progress, throw trash into each colored bin."],
+        ["By using [b][color=misty_rose]Left Click[/color][/b], you can vacuum trash. Try filling any of the four tanks to 50% by vacuuming trash!"],
+        ["Great job! Now, let's learn how to toss trash.", "Use [b][color=misty_rose]1-4[/color][/b] to select the type of trash you want to toss.", "Then, hold [b][color=misty_rose]Right Click[/color][/b] to charge up a throw.", "Finally, release the button to toss a bag of the selected trash!", "Your tank holds [b][color=light_coral]Combustibles[/color][/b], [b][color=medium_sea_green]Plastics[/color][/b], [b][color=cornflower_blue]Cans & Glass Bottles[/color][/b], and [b][color=yellow]PET Bottles[/color][/b].", "Try throwing a bag of [b][color=light_coral]Combustibles[/color][/b] into the correct trash bin!"],
+        ["Amazing! To progress, toss trash into each colored bin."],
         ["Head to the flashing symbol on the map to continue your cleanup journey."],
-        ["This area represents a major hazard. Open your phone with [b]'F'[/b] to learn more about it."],
+        ["This area represents a major hazard.", "Open your phone with [b]'F'[/b] to learn more about it."],
         ["Navigate to the 'Hazards' tab in your phone to search all possible hazards."],
         ["Now cick on the 'Powerline' hazard to learn more about it."],
         ["Now click the 'Agencies' tab in your phone to learn about the agencies that can help you."],
@@ -34,7 +34,7 @@ public partial class TutorialStuff : MarginContainer
     {
         if (step < _messages.Length)
         {
-            _textbox.Call("PopUp", _messages[step], 0);
+            _textbox.Call("PopUp", _messages[step], 1);
         }
     }
 
