@@ -37,7 +37,6 @@ public partial class CutsceneText : RichTextLabel
         {
             val = (float)CF.GetValue("playersettings", "sfx");
             AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(val));
-            GD.Print("eles block");
         }
 
     }

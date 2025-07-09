@@ -38,6 +38,8 @@ public partial class UI : Control
 	private PanelContainer _debugpanel;
 	private RichTextLabel _debugtext;
 
+	private Control _pauseScreen;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -63,6 +65,8 @@ public partial class UI : Control
 		{
 			_debugpanel.Hide();
 		}
+
+		_pauseScreen = GetNode<Control>("PauseScreen");
 	}
 
 	public override void _Process(double delta)
