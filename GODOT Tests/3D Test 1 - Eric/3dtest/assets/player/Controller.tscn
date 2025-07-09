@@ -13,6 +13,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 0.784766, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
+height = 1.52642
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1j3r"]
 atlas = ExtResource("2_uhyoe")
 region = Rect2(880, 0, 176, 176)
@@ -531,9 +534,6 @@ animations = [{
 [sub_resource type="PrismMesh" id="PrismMesh_hsahs"]
 size = Vector3(1, 0.405, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
-height = 1.52642
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k44c5"]
 render_priority = 1
 transparency = 1
@@ -553,6 +553,10 @@ script = ExtResource("1_s7e8h")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40262, 0)
 shape = SubResource("BoxShape3D_hsahs")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+shape = SubResource("CapsuleShape3D_rlquk")
+
 [node name="WorldModel" type="Node3D" parent="."]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="WorldModel"]
@@ -563,20 +567,16 @@ billboard = 1
 texture_filter = 0
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"e_idle"
+animation = &"e_run"
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+visible = false
 mesh = SubResource("PrismMesh_hsahs")
 skeleton = NodePath("../../WorldModel")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
-shape = SubResource("CapsuleShape3D_rlquk")
 
 [node name="Trajectory" type="Node3D" parent="."]
 top_level = true
@@ -613,7 +613,6 @@ bus = &"SFX"
 [node name="WalkSFX" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("8_uhyoe")
 volume_db = -25.0
-pitch_scale = 0.8
 max_polyphony = 10
 bus = &"SFX"
 
@@ -629,14 +628,29 @@ pitch_scale = 0.8
 max_polyphony = 10
 bus = &"SFX"
 
-[node name="Vacuum" parent="." instance=ExtResource("9_xplcw")]
+[node name="LightPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
+[node name="Light" type="SpotLight3D" parent="LightPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0.453795)
+light_energy = 0.1
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_size = 100.0
+light_specular = 0.0
+spot_range = 8.467
+spot_attenuation = 0.0
+spot_angle = 30.0
+spot_angle_attenuation = 0.00240461
+
+[node name="ShadowArm" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 spring_length = 4.0
 
-[node name="Decal" type="Decal" parent="SpringArm3D"]
+[node name="Decal" type="Decal" parent="ShadowArm"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 size = Vector3(1, 0.22, 1)
 texture_albedo = ExtResource("10_xplcw")
 cull_mask = 1048573
+
+[node name="Vacuum" parent="." instance=ExtResource("9_xplcw")]

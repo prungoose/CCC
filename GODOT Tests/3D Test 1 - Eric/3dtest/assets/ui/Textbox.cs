@@ -69,7 +69,7 @@ public partial class Textbox : Control
 		_bin_progress = 0;
 		if (caller_id == 0) _sprite.Hide();
 		else { _sprite.Show(); _sprite.Frame = caller_id; }
-		_timer.WaitTime = 3 + text[0].Length * .05f;
+		_timer.WaitTime = 3 + text[0].Length * .04f;
 		_timer.Start();
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "scale", new Godot.Vector2(1, 1), .35f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
@@ -78,16 +78,15 @@ public partial class Textbox : Control
 	private void Continue()
 	{
 		if (!_active) return;
-		_text_pos = 0;
-		_text.Text = "";
 		_bin_progress++;
 		if (_bin_progress >= _text_bin.Length) PopAway();
 		else
 		{
-			_timer.WaitTime = 2 + _text_bin[_bin_progress].Length * .05f;
+			_timer.WaitTime = 2 + _text_bin[_bin_progress].Length * .04f;
 			_timer.Start();
+			_text_pos = 0;
+			_text.Text = "";
 		}
-
 	}
 
 	private void PopAway()
@@ -95,9 +94,6 @@ public partial class Textbox : Control
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "scale", new Godot.Vector2(0, 0), .15f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 		tween.Finished += () => _active = false;
-		//tween.Finished += () => _text.Text = "";
-		
-
 	}
 
 	private void TypeText()

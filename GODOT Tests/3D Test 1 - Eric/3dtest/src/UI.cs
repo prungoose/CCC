@@ -13,7 +13,6 @@ public partial class UI : Control
 	private Control _phone;
 	private ProgressBar _tank;
 	private Label _phonedisplay;
-	private Label popUp;
 	private string _phonetext;
 	private MarginContainer _tutorialStuff;
 
@@ -43,7 +42,6 @@ public partial class UI : Control
 		_tank2 = GetNode<ProgressBar>("Tanks/Tank2");
 		_tank3 = GetNode<ProgressBar>("Tanks/Tank3");
 		_tank4 = GetNode<ProgressBar>("Tanks/Tank4");
-		popUp = GetNode<Label>("Popupmsg");
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 
 		_infoSection = GetNode<Control>("Info Section");
@@ -100,23 +98,8 @@ public partial class UI : Control
 			_phonetext = "";
 		}
 	}
-	public void Pop(string message)
-	{
-		_tween?.Kill();
-		//_tween?.CustomStep(0.3);
-		_tween = GetTree().CreateTween();
-		_tween.TweenProperty(popUp, "scale", new Vector2(1, 1), .2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
-		popUp.Text = message;
-	}
 
-	public void noPop()
-	{
-		_tween?.Kill();
-		//_tween?.CustomStep(0.3);
-		_tween = GetTree().CreateTween();
-		_tween.TweenProperty(popUp, "scale", new Vector2(0, 0), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 
-	}
 
 	public void _dial(char c)
 	{
@@ -131,33 +114,16 @@ public partial class UI : Control
 			//Power company: ID 1
 			if (_phonetext == "↑→↓←")
 			{
-				Pop("Power Company Dispatched!");
-				//Task.Delay(1000).ContinueWith(_ => noPop());
-
-				_powerLineHazard.Call("StopAnimation");
 				if (GetTutorialStep() == 9)
 				{
 					NextTutorialStep();
-					_powerLineHazard.Call("StopAnimation");
 				}
-
-				//call something to player here to get a beacon
 				_player.Call("ReadyBeacon", 1);
-
 			}
 
 			//More agencies go here with their own code
 
-			else
-			{
-				Pop("Unknown Code: " + _phonetext);
-				//Task.Delay(1000).ContinueWith(_ => noPop());
-
-			}
-
 			_phonetext = "";
-
-			// Exectute the command
 		}
 		_wiggle();
 		PhoneSFX.Play();
@@ -167,10 +133,10 @@ public partial class UI : Control
 	{
 		_wiggletween?.Kill();
 		_wiggletween = GetTree().CreateTween();
-		var init = _phone.Rotation;
+		var init = Mathf.RadToDeg(_phone.Rotation);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init - 5.0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init + 5.0f, 0.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
-		_wiggletween.TweenProperty(_phone, "rotation_degrees", init, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		_wiggletween.TweenProperty(_phone, "rotation_degrees", init	, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
 
 	public void OnBeaconReached(Node3D body)

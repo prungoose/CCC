@@ -11,7 +11,7 @@ public partial class TrashBin : Node3D
 	private Control _ui;
 	private CharacterBody3D _player;
 	private MeshInstance3D _mesh;
-	private AudioStreamPlayer _SFX;
+	private AudioStreamPlayer3D _SFX;
 	private GpuParticles3D _particles;
 	private GpuParticles3D _splode_particles;
 
@@ -22,7 +22,7 @@ public partial class TrashBin : Node3D
 
 	public override void _Ready()
 	{
-		_SFX = GetNode<AudioStreamPlayer>("SFX"); ;
+		_SFX = GetNode<AudioStreamPlayer3D>("SFX"); ;
 		_SFX.Stream = GD.Load<AudioStreamWav>("res://assets/Audios/THWOOM.wav");
 		_ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");

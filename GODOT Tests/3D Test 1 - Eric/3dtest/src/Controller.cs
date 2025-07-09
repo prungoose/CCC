@@ -31,6 +31,7 @@ public partial class Controller : CharacterBody3D
 	private Path3D _trajpath;
 	private Node3D _trajnode;
 	private MeshInstance3D _trajtarget;
+	private Node3D _lightpivot;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -60,6 +61,7 @@ public partial class Controller : CharacterBody3D
 		_trajpathmesh.Polygon = _makecirclepolygon();
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
 		_trajnode = GetNode<Node3D>("Trajectory");
+		_lightpivot = GetNode<Node3D>("LightPivot");
 		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
@@ -70,7 +72,9 @@ public partial class Controller : CharacterBody3D
 	{
 
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
-		_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
+		_vacuum.Rotation = y_rotate;
+		_lightpivot.Rotation = y_rotate;
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=38 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://cpv32mp33kteq" path="res://assets/level/AmbianceSFX.cs" id="1_04qkv"]
@@ -46,11 +46,6 @@ glow_enabled = true
 volumetric_fog_sky_affect = 0.0
 adjustment_enabled = true
 adjustment_color_correction = SubResource("GradientTexture2D_04qkv")
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wpr57"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 35.0
-dof_blur_far_transition = 15.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bofc0"]
 
@@ -126,12 +121,16 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+scaling_3d_mode = 1
+scaling_3d_scale = 0.8
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_44gc5")
-camera_attributes = SubResource("CameraAttributesPractical_wpr57")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 8.34669, 0)
@@ -303,6 +302,7 @@ _player = NodePath("../SubViewport/Player")
 
 [node name="AmbianceSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_04qkv")
+mix_target = 1
 bus = &"Ambiance"
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
