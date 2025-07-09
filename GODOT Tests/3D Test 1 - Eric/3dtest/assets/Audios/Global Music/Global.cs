@@ -54,7 +54,6 @@ public partial class Global : Node
 		{
 			val = (float)CF.GetValue("playersettings", "vol");
 			AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb(val));
-			GD.Print("eles block");
 		}
 	}
 

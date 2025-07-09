@@ -12,9 +12,26 @@ public partial class Options : Control
 	private OptionButton timebutton;
 	public ConfigFile CF = new ConfigFile();
 	[Export] public VBoxContainer parent;
+
+	private int main_index;
+	private int sfx_index;
+	private int ambiance_index;
+
+	private Label volLabel;
+	private Label sfxLabel;
+	private Label ambLabel;
+	private Label langLabel;
+	private Label timeLabel;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var parentLabel = GetNode<VBoxContainer>("Labels");
+		volLabel = parentLabel.GetNode<Label>("Volume");
+		sfxLabel = parentLabel.GetNode<Label>("Sound Effects");
+		ambLabel = parentLabel.GetNode<Label>("Ambiance");
+		langLabel = parentLabel.GetNode<Label>("Language");
+		timeLabel = parentLabel.GetNode<Label>("Timer");
+
 		SampleSFX = GetNode<AudioStreamPlayer>("SampleSFX");
 		SampleAMB = GetNode<AudioStreamPlayer>("SampleAMB");
 
@@ -26,12 +43,31 @@ public partial class Options : Control
 		langbutton = parent.GetNode<OptionButton>("LanguageButton");
 		timebutton = parent.GetNode<OptionButton>("TimerButton");
 
+		ambiance_index = AudioServer.GetBusIndex("Ambiance");
+		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb((float)ambslider.Value));
+		sfx_index = AudioServer.GetBusIndex("SFX");
+		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb((float)sfxslider.Value));
+		main_index = AudioServer.GetBusIndex("Main");
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb((float)volslider.Value));
+
 		Load();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+	public void adjustVol(float value)
+	{
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb(value));
+	}
+	public void adjustSFX(float value)
+	{
+		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(value));
+	}
+	public void adjustAMB(float value)
+	{
+		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb(value));
 	}
 
 	public void stopAdjustSFX(bool value)
@@ -66,8 +102,8 @@ public partial class Options : Control
 			volslider.Value = (float)CF.GetValue("playersettings", "vol", volslider.Value);
 			sfxslider.Value = (float)CF.GetValue("playersettings", "sfx", sfxslider.Value);
 			ambslider.Value = (float)CF.GetValue("playersettings", "amb", ambslider.Value);
-			langbutton.Selected = (int)CF.GetValue("playersettings", "lang", langbutton.Selected);
-			timebutton.Selected = (int)CF.GetValue("playersettings", "time", timebutton.Selected);
+			langbutton.Selected = (int)CF.GetValue("playersettings", "lang", langbutton.Selected); // 1 = Eng, 0 = Jap
+			timebutton.Selected = (int)CF.GetValue("playersettings", "time", timebutton.Selected); // 3 = 2:00, 2 = 1:30, 1 = 1:00, 0 = 0:30
 		}
 	}
 
@@ -75,5 +111,26 @@ public partial class Options : Control
 	{
 		Save();
 		GetTree().ChangeSceneToFile("res://assets/menu/MainMenu.tscn");
+	}
+
+	private void LangSelected(int lang)
+	{
+		if (lang == 1)
+		{
+			volLabel.Text = "Volume";
+			sfxLabel.Text = "Sound Effects";
+			ambLabel.Text = "Ambiance";
+			langLabel.Text = "Language";
+			timeLabel.Text = "Timer";
+		}
+		else if (lang == 0)
+		{
+			volLabel.Text = "音量";
+			sfxLabel.Text = "効果音";
+			ambLabel.Text = "雰囲気";
+			langLabel.Text = "言語";
+			timeLabel.Text = "時間";
+		}
+
 	}
 }

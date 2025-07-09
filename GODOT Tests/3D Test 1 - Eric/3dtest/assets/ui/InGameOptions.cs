@@ -12,6 +12,10 @@ public partial class InGameOptions : Control
 	private AudioStreamPlayer SampleSFX;
 	private AudioStreamPlayer SampleAMB;
 
+	private int main_index;
+	private int sfx_index;
+	private int ambiance_index;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -25,6 +29,13 @@ public partial class InGameOptions : Control
 		ambslider = parent.GetNode<HSlider>("AmbianceSlider");
 		langbutton = parent.GetNode<OptionButton>("LanguageButton");
 
+		main_index = AudioServer.GetBusIndex("Main");
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb((float)volslider.Value));
+		sfx_index = AudioServer.GetBusIndex("SFX");
+		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb((float)sfxslider.Value));
+		ambiance_index = AudioServer.GetBusIndex("Ambiance");
+		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb((float)ambslider.Value));
+
 		Load();
 	}
 
@@ -33,6 +44,20 @@ public partial class InGameOptions : Control
 	{
 
 	}
+	public void adjustVol(float value)
+	{
+		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb(value));
+	}
+	public void adjustSFX(float value)
+	{
+		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(value));
+		//GD.Print(Mathf.LinearToDb(value));
+	}
+	public void adjustAMB(float value)
+	{
+		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb(value));
+	}
+
 	public void stopAdjustSFX(bool value)
 	{
 		SampleSFX.Play();

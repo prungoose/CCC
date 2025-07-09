@@ -72,9 +72,9 @@ script = ExtResource("2_n5d6s")
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 729.0
-offset_top = 518.0
+offset_top = 520.0
 offset_right = 1192.0
-offset_bottom = 684.0
+offset_bottom = 686.0
 pivot_offset = Vector2(226, 78)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -92,9 +92,9 @@ script = ExtResource("2_toexd")
 [node name="OptionsButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 729.0
-offset_top = 704.0
+offset_top = 720.0
 offset_right = 1192.0
-offset_bottom = 870.0
+offset_bottom = 886.0
 pivot_offset = Vector2(228, 77)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -112,9 +112,9 @@ script = ExtResource("3_hheb7")
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 784.0
-offset_top = 896.0
+offset_top = 920.0
 offset_right = 1134.0
-offset_bottom = 1021.0
+offset_bottom = 1045.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(177, 58)
