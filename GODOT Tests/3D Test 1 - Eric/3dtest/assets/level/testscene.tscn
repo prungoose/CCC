@@ -1,7 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
-[ext_resource type="Script" uid="uid://cpv32mp33kteq" path="res://assets/level/AmbianceSFX.cs" id="1_04qkv"]
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
@@ -18,6 +17,7 @@
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="16_iw0pl"]
 [ext_resource type="AudioStream" uid="uid://b88r37dtfg52l" path="res://assets/Audios/Ambiance.wav" id="17_04qkv"]
 [ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube1.tscn" id="17_wpr57"]
+[ext_resource type="AudioStream" uid="uid://efphq3x1xrqr" path="res://assets/Audios/Glubglub.mp3" id="18_04qkv"]
 
 [sub_resource type="Gradient" id="Gradient_wpr57"]
 
@@ -108,7 +108,6 @@ top_radius = 0.32
 height = 0.155
 
 [node name="MainRoot" type="Node3D" groups=["cleanable_vacuum"]]
-script = ExtResource("1_04qkv")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -296,14 +295,28 @@ _trajtarget_scene = ExtResource("11_pr11n")
 _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_iw0pl")
 
+[node name="AudioListener3D2" type="AudioListener3D" parent="SubViewportContainer/SubViewport/Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.60002, 0)
+current = true
+
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
 
-[node name="AmbianceSFX" type="AudioStreamPlayer" parent="."]
+[node name="Ambiance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_04qkv")
+autoplay = true
 mix_target = 1
 bus = &"Ambiance"
+
+[node name="WaterSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37935, 0)
+stream = ExtResource("18_04qkv")
+volume_db = -15.0
+autoplay = true
+max_distance = 7.0
+panning_strength = 0.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
 

@@ -8,17 +8,34 @@ public partial class CutsceneText : RichTextLabel
     private bool typeStart = false;
     private AudioStreamPlayer CutsceneSFX;
     private RichTextLabel BottomTip;
+    
+    public ConfigFile CF = new ConfigFile();
+    private float val;
+	private int sfx_index;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        sfx_index = AudioServer.GetBusIndex("SFX");
+
         BottomTip = GetParent().GetNode<RichTextLabel>("Bottom Tip");
         CutsceneSFX = GetParent().GetParent().GetNode<AudioStreamPlayer>("CutsceneSFX");
         GD.Print("preSequenceText ready: ", Name, " | In tree: ", IsInsideTree());
         // Set the text to be displayed
         // Show the text
         Show();
-        BottomTip.Modulate = new Color(1,1,1, 0);
+        BottomTip.Modulate = new Color(1, 1, 1, 0);
+
+        if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
+		}
+		else
+		{
+			val = (float)CF.GetValue("playersettings", "sfx");
+			AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(val));
+			GD.Print("eles block");
+		}
 
     }
 
