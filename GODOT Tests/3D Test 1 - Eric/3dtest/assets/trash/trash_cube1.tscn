@@ -90,7 +90,7 @@ sprite_frames = SubResource("SpriteFrames_uuau7")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-spring_length = 20.0
+spring_length = 10.0
 
 [node name="Decal" type="Decal" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

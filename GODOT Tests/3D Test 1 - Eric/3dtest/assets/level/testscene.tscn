@@ -1,6 +1,5 @@
-[gd_scene load_steps=36 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=33 format=3 uid="uid://bc07qh3pxn6kk"]
 
-[ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
@@ -21,7 +20,7 @@
 
 [sub_resource type="Gradient" id="Gradient_wpr57"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_04qkv"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpr57"]
 gradient = SubResource("Gradient_wpr57")
 fill_to = Vector2(0.880342, 0.17094)
 
@@ -45,7 +44,7 @@ tonemap_white = 1.69
 glow_enabled = true
 volumetric_fog_sky_affect = 0.0
 adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture2D_04qkv")
+adjustment_color_correction = SubResource("GradientTexture2D_wpr57")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bofc0"]
 
@@ -57,17 +56,9 @@ emission = Color(0.141176, 0.788235, 1, 1)
 emission_energy_multiplier = 6.03
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jotil"]
-size = Vector3(50, 1, 50)
+size = Vector3(255.876, 1, 179.104)
 
-[sub_resource type="BoxMesh" id="BoxMesh_jotil"]
-size = Vector3(50, 1, 50)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_612pj"]
-albedo_texture = ExtResource("1_4nu0a")
-uv1_scale = Vector3(-0.25, -0.25, -0.25)
-uv1_triplanar = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iw0pl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1ht6"]
 render_priority = 0
 shader = ExtResource("7_fsm2l")
 shader_parameter/depth_threshold = 0.05
@@ -79,27 +70,27 @@ shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
 shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_pr11n"]
-material = SubResource("ShaderMaterial_iw0pl")
+material = SubResource("ShaderMaterial_r1ht6")
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpr57"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljpjc"]
 albedo_color = Color(0.162066, 0.162066, 0.162066, 1)
 emission_enabled = true
 emission = Color(0, 0.441908, 0.81526, 1)
 emission_energy_multiplier = 5.04
 
 [sub_resource type="BoxMesh" id="BoxMesh_mawog"]
-material = SubResource("StandardMaterial3D_wpr57")
+material = SubResource("StandardMaterial3D_ljpjc")
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04qkv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1enne"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(0, 0.992157, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ofhqe"]
-material = SubResource("StandardMaterial3D_04qkv")
+material = SubResource("StandardMaterial3D_1enne")
 top_radius = 0.32
 height = 0.155
 
@@ -119,8 +110,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-vrs_mode = 3
+canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 size = Vector2i(1920, 1080)
@@ -130,7 +120,7 @@ render_target_update_mode = 4
 environment = SubResource("Environment_44gc5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.720805, 0.693138, 0, -0.693138, 0.720805, 0, 8.34669, 0)
+transform = Transform3D(0.5, -0.612372, 0.612372, 0, 0.707107, 0.707107, -0.866025, -0.353553, 0.353553, 0, 8.34669, 0)
 light_specular = 0.0
 shadow_enabled = true
 shadow_caster_mask = 4294967293
@@ -142,7 +132,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.45665, 0)
 [node name="Level" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
-transform = Transform3D(1.91417, 0, 2.30997, 0, 3, 0, -2.30997, 0, 1.91417, -8.41548, 1.49288, 11.8765)
+transform = Transform3D(1.91417, 0, 2.30997, 0, 3, 0, -2.30997, 0, 1.91417, 0.322026, 1.49288, -5.90925)
 _hazard_id = 1
 _ui = NodePath("../../../UI")
 _player = NodePath("../../Player")
@@ -176,15 +166,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.458606, 0)
 collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0819, -0.5, -4.57977)
 shape = SubResource("BoxShape3D_jotil")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Level geometry/Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0727954, -0.569995, 0.000700474)
-visible = false
-layers = 3
-mesh = SubResource("BoxMesh_jotil")
-surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
@@ -192,19 +175,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_612pj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61134, 0.5, 3.94089)
 _trashId = 1
 
-[node name="MeshInstance3D2" parent="SubViewportContainer/SubViewport/Level/Bins/Trashbin1/StaticBody3D" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030776, -0.00886154, 0.0195179)
-
 [node name="Trashbin2" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2476, 0.5, 10.2493)
 _trashId = 2
 
 [node name="Trashbin3" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3365, 0.499998, -1.65701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0423, 0.499998, -1.13122)
 _trashId = 3
 
 [node name="Trashbin4" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82197, 0.5, -16.2403)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73348, 0.5, -37.6778)
 _trashId = 4
 
 [node name="Spawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
@@ -310,8 +290,3 @@ _player = NodePath("../SubViewport/Player")
 debug = true
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
-
-[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin1"]
-[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin2"]
-[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin3"]
-[editable path="SubViewportContainer/SubViewport/Level/Bins/Trashbin4"]
