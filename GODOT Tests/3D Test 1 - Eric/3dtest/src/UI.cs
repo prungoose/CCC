@@ -34,6 +34,10 @@ public partial class UI : Control
 
 	private AudioStreamPlayer PhoneSFX;
 
+	[Export] bool debug = false;
+	private PanelContainer _debugpanel;
+	private RichTextLabel _debugtext;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -52,6 +56,13 @@ public partial class UI : Control
 		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
 
 		PhoneSFX = _phone.GetNode<AudioStreamPlayer>("PhoneSFX");
+
+		_debugpanel = GetNode<PanelContainer>("DebugPanel");
+		_debugtext = _debugpanel.GetNode<RichTextLabel>("MarginContainer/MarginContainer/RichTextLabel");
+		if (!debug)
+		{
+			_debugpanel.Hide();
+		}
 	}
 
 	public override void _Process(double delta)
@@ -68,6 +79,11 @@ public partial class UI : Control
 		{
 			_tankStepCompleted = true;
 			NextTutorialStep();
+		}
+
+		if (debug)
+		{
+			_debugtext.Text = "FPS: " + Engine.GetFramesPerSecond() + "\nMemory: " + (OS.GetStaticMemoryUsage() / 1024) + " KB";
 		}
 	}
 

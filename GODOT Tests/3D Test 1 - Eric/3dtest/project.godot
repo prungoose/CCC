@@ -19,10 +19,6 @@ config/icon="res://assets/icon.svg"
 
 Global="*res://assets/Audios/Global Music/Global.tscn"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/viewport_width=1920
