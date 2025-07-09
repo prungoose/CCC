@@ -22,6 +22,7 @@ public partial class Options : Control
 	private Label ambLabel;
 	private Label langLabel;
 	private Label timeLabel;
+	private Label OptionsTitle;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -31,6 +32,7 @@ public partial class Options : Control
 		ambLabel = parentLabel.GetNode<Label>("Ambiance");
 		langLabel = parentLabel.GetNode<Label>("Language");
 		timeLabel = parentLabel.GetNode<Label>("Timer");
+		OptionsTitle = GetNode<Label>("OptionsLabel");
 
 		SampleSFX = GetNode<AudioStreamPlayer>("SampleSFX");
 		SampleAMB = GetNode<AudioStreamPlayer>("SampleAMB");
@@ -122,6 +124,7 @@ public partial class Options : Control
 			ambLabel.Text = "Ambiance";
 			langLabel.Text = "Language";
 			timeLabel.Text = "Timer";
+			OptionsTitle.Text = "Options";
 		}
 		else if (lang == 0)
 		{
@@ -129,7 +132,8 @@ public partial class Options : Control
 			sfxLabel.Text = "効果音";
 			ambLabel.Text = "雰囲気";
 			langLabel.Text = "言語";
-			timeLabel.Text = "時間";
+			timeLabel.Text = "タイマー";
+			OptionsTitle.Text = "設定";
 		}
 
 	}

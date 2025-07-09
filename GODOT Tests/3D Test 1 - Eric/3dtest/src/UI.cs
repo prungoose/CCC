@@ -38,6 +38,8 @@ public partial class UI : Control
 	private PanelContainer _debugpanel;
 	private RichTextLabel _debugtext;
 
+	private Control _pauseScreen;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -63,6 +65,8 @@ public partial class UI : Control
 		{
 			_debugpanel.Hide();
 		}
+
+		_pauseScreen = GetNode<Control>("PauseScreen");
 	}
 
 	public override void _Process(double delta)
@@ -153,7 +157,7 @@ public partial class UI : Control
 		var init = Mathf.RadToDeg(Mathf.DegToRad(8));
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init - 5.0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init + 5.0f, 0.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
-		_wiggletween.TweenProperty(_phone, "rotation_degrees", init	, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		_wiggletween.TweenProperty(_phone, "rotation_degrees", init, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 	}
 
 	public void OnBeaconReached(Node3D body)
@@ -227,5 +231,11 @@ public partial class UI : Control
 			).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.InOut);
 
 		}
-	} 
+	}
+	
+	public void Paused()
+	{
+		GetTree().Paused = true;
+		_pauseScreen.Show();
+	}
 }

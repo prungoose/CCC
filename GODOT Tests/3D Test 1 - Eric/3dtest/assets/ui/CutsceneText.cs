@@ -12,10 +12,13 @@ public partial class CutsceneText : RichTextLabel
     public ConfigFile CF = new ConfigFile();
     private float val;
 	private int sfx_index;
+    [Export] SceneTransition _transitionscene;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _transitionscene = GetNode<SceneTransition>("/root/SceneTransition");
+
         sfx_index = AudioServer.GetBusIndex("SFX");
 
         BottomTip = GetParent().GetNode<RichTextLabel>("Bottom Tip");
@@ -27,15 +30,14 @@ public partial class CutsceneText : RichTextLabel
         BottomTip.Modulate = new Color(1, 1, 1, 0);
 
         if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
-		{
-			AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
-		}
-		else
-		{
-			val = (float)CF.GetValue("playersettings", "sfx");
-			AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(val));
-			GD.Print("eles block");
-		}
+        {
+            AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
+        }
+        else
+        {
+            val = (float)CF.GetValue("playersettings", "sfx");
+            AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(val));
+        }
 
     }
 
@@ -60,10 +62,11 @@ public partial class CutsceneText : RichTextLabel
                 this.Text = "";
                 textPos = 0;
                 CutsceneSFX.Play();
-                BottomTip.Modulate = new Color(1,1,1, 0);
+                BottomTip.Modulate = new Color(1, 1, 1, 0);
             }
             else if ((Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1")) && text.Length == 1)
-                GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
+                _transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
+                //GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
         }
         TypeText(text[0]);
     }

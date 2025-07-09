@@ -8,11 +8,15 @@ public partial class StartButton : Button
 	private Vector2 originalScale = Godot.Vector2.One;
 	private Vector2 hoverScale = new Godot.Vector2(1.2f, 1.2f);
 	private float _animationTime = 0.15f;
-	
+
+	[Export] SceneTransition _transitionscene;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_pauseScreen = GetParent<Control>();
+		_transitionscene = GetNode<SceneTransition>("/root/SceneTransition");
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +26,7 @@ public partial class StartButton : Button
 
 	private void _StartButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://assets/ui/cutscene.tscn");
+		_transitionscene.Call("ChangeScene", "res://assets/ui/cutscene.tscn");
 		_pauseScreen.Hide();
 	}
 
