@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Global="*res://assets/Audios/Global Music/Global.tscn"
+SceneTransition="*res://assets/level/sceneTransition.tscn"
 
 [debug]
 
