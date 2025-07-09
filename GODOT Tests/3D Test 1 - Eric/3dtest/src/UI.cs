@@ -79,16 +79,13 @@ public partial class UI : Control
 		_tank4.Value = (int)_player.Call("_GetTankPercentage", 4);
 
 		// Go to next step in tutorial first time tank reaches 50%
-		if ((float)_player.Call("_GetTankPercentage", 1) >= 20 && !_tankStepCompleted)
-		{
-			_tankStepCompleted = true;
-			NextTutorialStep();
-		}
+		if (GetTutorialStep() == 1)
+			for (int i = 1; i < 5; i++)
+				if ((int)_player.Call("_GetTankPercentage", i) >= 20) NextTutorialStep();
 
 		if (debug)
-		{
 			_debugtext.Text = "FPS: " + Engine.GetFramesPerSecond() + "\nMemory: " + (OS.GetStaticMemoryUsage() / 1024) + " KB";
-		}
+
 	}
 
 	public void _updatephone(bool isPhoneOpen)

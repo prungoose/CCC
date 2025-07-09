@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://cklsw1rjdbip0"]
 
-[ext_resource type="Script" uid="uid://2d0ln8rt8j5k" path="res://assets/trash/TrashBin.cs" id="1_dqtvc"]
+[ext_resource type="Script" uid="uid://2d0ln8rt8j5k" path="res://src/TrashBin.cs" id="1_dqtvc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m2ov1"]
 size = Vector3(0.8, 1, 0.8)

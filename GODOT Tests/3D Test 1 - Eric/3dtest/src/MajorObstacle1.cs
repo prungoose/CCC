@@ -13,18 +13,24 @@ public partial class MajorObstacle1 : StaticBody3D
 	[Export] private float _movespeed = 10;
 	[Export] public Control _ui;
 	[Export] public CharacterBody3D _player;
-	public Label popUp;
-	public AnimatedSprite3D _anim;
+	private Label popUp;
+	private AnimatedSprite3D _anim;
 	private Node3D _tape;
+	private MeshInstance3D _proxmesh;
+	private ShaderMaterial _shader;
 
 	public override void _Ready()
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 		_tape = GetNode<Node3D>("tape");
+		_proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
+		_shader = (ShaderMaterial)_proxmesh.GetActiveMaterial(0);
 	}
 
 	public override void _Process(double delta)
 	{
+		_shader.SetShaderParameter("character_position", _player.GlobalPosition);
+
 		if (Position.DistanceTo(_player.GlobalPosition) < 5)
 		{
 			if ((int)_ui.Call("GetTutorialStep") == 4)

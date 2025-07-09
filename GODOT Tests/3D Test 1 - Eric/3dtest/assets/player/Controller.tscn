@@ -1,8 +1,8 @@
-[gd_scene load_steps=71 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=72 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
-[ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/run_spritesheet2_blue.png" id="2_uhyoe"]
-[ext_resource type="Texture2D" uid="uid://bnq6n2m0nkdym" path="res://assets/player/vaccuum_spritesheet3_blue.png" id="3_u26f6"]
+[ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="2_uhyoe"]
+[ext_resource type="Texture2D" uid="uid://bnq6n2m0nkdym" path="res://assets/player/sprites_vacuum_blue.png" id="3_u26f6"]
 [ext_resource type="AudioStream" uid="uid://brw87o0pc18u6" path="res://assets/Audios/VacuumStart.wav" id="5_ire6c"]
 [ext_resource type="AudioStream" uid="uid://cnw4y8h6uxwif" path="res://assets/Audios/VacuumContinue.mp3" id="8_ire6c"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="8_uhyoe"]
@@ -534,6 +534,8 @@ animations = [{
 [sub_resource type="PrismMesh" id="PrismMesh_hsahs"]
 size = Vector3(1, 0.405, 1)
 
+[sub_resource type="Curve3D" id="Curve3D_apgsg"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k44c5"]
 render_priority = 1
 transparency = 1
@@ -582,6 +584,7 @@ skeleton = NodePath("../../WorldModel")
 top_level = true
 
 [node name="Path3D" type="Path3D" parent="Trajectory"]
+curve = SubResource("Curve3D_apgsg")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Trajectory"]
 layers = 2

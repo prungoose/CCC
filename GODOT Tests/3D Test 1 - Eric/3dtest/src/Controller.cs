@@ -349,6 +349,7 @@ public partial class Controller : CharacterBody3D
 		foreach (Godot.Vector3 i in result) { curve.AddPoint(i); }
 		_trajpath.Curve = curve;
 
+
 		if (_trajtarget != null)
 		{
 			_trajtarget.QueueFree();

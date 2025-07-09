@@ -44,6 +44,7 @@ public partial class Vacuumzone : Area3D
 				int playerpercentage = (int)_player.Call("_GetTankPercentage", trash_id);
 				if (playerpercentage < 40 && _time_active > 0.2)
 				{
+					body.CollisionLayer = 0;
 					_player.Call("_IncTank", trash_id);
 					var tween = GetTree().CreateTween();
 					tween.TweenProperty(body, "global_position", _player.GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
