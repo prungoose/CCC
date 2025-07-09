@@ -30,7 +30,7 @@ void vertex() {
 void fragment() {
 	float depth = get_depth(SCREEN_UV, INV_PROJECTION_MATRIX);
 	vec3 normal = texture(normal_texture, SCREEN_UV).xyz * 2.0 - 1.0;
-	vec2 texel_size = 1.0 / vec2(640,480);
+	vec2 texel_size = 1.0 / vec2(320,240);
 
 	vec2 uvs[4];
 	uvs[0] = vec2(SCREEN_UV.x, min(1.0 - 0.001, SCREEN_UV.y + texel_size.y));
