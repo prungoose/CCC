@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=40 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://cpv32mp33kteq" path="res://assets/level/AmbianceSFX.cs" id="1_04qkv"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://assets/level/RaccoonAgent.cs" id="5_a2nen"]
 [ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle1.tscn" id="5_bofc0"]
-[ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
+[ext_resource type="Shader" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
 [ext_resource type="PackedScene" uid="uid://b83ge5vg8o8bc" path="res://assets/trash/thrown_trash.tscn" id="10_a4lti"]
@@ -75,6 +75,8 @@ uv1_triplanar = true
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04qkv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw0pl"]
 render_priority = 0
@@ -147,7 +149,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.45665, 0)
 
 [node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
 transform = Transform3D(1.91417, 0, 2.30997, 0, 3, 0, -2.30997, 0, 1.91417, -8.41548, 1.49288, 11.8765)
-_hazard_id = 1
 _ui = NodePath("../../../UI")
 _player = NodePath("../../Player")
 
@@ -217,25 +218,21 @@ _trashId = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 1
 
 [node name="GreenSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 2
 
 [node name="YellowSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 3
 
 [node name="BlueSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
-type = 4
 
 [node name="RandSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
@@ -256,6 +253,9 @@ mesh = SubResource("CapsuleMesh_a2nen")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
 shape = SubResource("CapsuleShape3D_iw0pl")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
+sprite_frames = SubResource("SpriteFrames_04qkv")
 
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")

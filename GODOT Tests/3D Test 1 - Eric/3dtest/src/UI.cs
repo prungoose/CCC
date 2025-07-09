@@ -197,6 +197,8 @@ public partial class UI : Control
 		return (int)_tutorialStuff.Call("GetTutorialStep");
 	}
 
+
+	// Should be replaced be internal phone logic
 	public void ShowInfoSection(string heading, string text)
 	{
 		_infoHeading.Text = heading;
@@ -244,5 +246,5 @@ public partial class UI : Control
 			).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.InOut);
 
 		}
-	} 
+	}
 }

@@ -115,6 +115,33 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
+[node name="Progress Bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+offset_left = 563.0
+offset_top = 27.0
+offset_right = 1470.0
+offset_bottom = 107.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+step = 0.1
+value = 20.0
+
+[node name="Timeclock" type="Timer" parent="."]
+
+[node name="Timelabel" type="RichTextLabel" parent="Timeclock"]
+offset_left = 1685.0
+offset_top = 39.0
+offset_right = 1787.0
+offset_bottom = 105.0
+theme_override_fonts/normal_font = ExtResource("3_bscbh")
+theme_override_font_sizes/normal_font_size = 50
+text = "1:47"
+fit_content = true
+
 [node name="Tanks" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(400, 300)
 layout_direction = 2
