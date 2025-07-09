@@ -21,12 +21,8 @@ public partial class MajorObstacle1 : StaticBody3D
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 		_tape = GetNode<Node3D>("tape");
-
-		var parent = GetParent().GetParent().GetParent().GetNode<Control>("UI");
-		popUp = parent.GetNode<Label>("Popupmsg");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Position.DistanceTo(_player.GlobalPosition) < 5)
@@ -34,22 +30,8 @@ public partial class MajorObstacle1 : StaticBody3D
 			if ((int)_ui.Call("GetTutorialStep") == 4)
 			{
 				_ui.Call("NextTutorialStep");
-				// StopAnimation();
 			}
-			// if (popupExists == false)
-			// {
-			// 	popupExists = true;
-			// 	_ui.Call("Pop", "Hello");
-			// }
 		}
-		// else
-		// {
-		// 	if (popupExists)
-		// 	{
-		// 		popupExists = false;
-		// 		_ui.Call("noPop");
-		// 	}
-		// }
 	}
 
 	private void DealWith(int id)
@@ -62,8 +44,6 @@ public partial class MajorObstacle1 : StaticBody3D
 			_tape.Show();
 			tween.TweenProperty(_tape, "position", _tape.Position + Godot.Vector3.Down * 50, 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
 		}
-
-
 	}
 
 	public void StartAnimation()

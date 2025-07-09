@@ -67,10 +67,6 @@ albedo_texture = ExtResource("1_4nu0a")
 uv1_scale = Vector3(-0.25, -0.25, -0.25)
 uv1_triplanar = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw0pl"]
 render_priority = 0
 shader = ExtResource("7_fsm2l")
@@ -106,6 +102,10 @@ emission = Color(0, 0.992157, 0, 1)
 material = SubResource("StandardMaterial3D_04qkv")
 top_radius = 0.32
 height = 0.155
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
 
 [node name="MainRoot" type="Node3D" groups=["cleanable_vacuum"]]
 
@@ -240,6 +240,68 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
 script = ExtResource("16_iw0pl")
 _spawn = ExtResource("17_wpr57")
 
+[node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Audio"]
+stream = ExtResource("17_04qkv")
+volume_db = -10.0
+autoplay = true
+mix_target = 1
+bus = &"Ambiance"
+
+[node name="WaterSFX" type="AudioStreamPlayer3D" parent="SubViewportContainer/SubViewport/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37935, 0)
+stream = ExtResource("18_04qkv")
+autoplay = true
+panning_strength = 0.5
+bus = &"Ambiance"
+
+[node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
+script = ExtResource("2_8px8m")
+_target = NodePath("CameraTarget")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Camera"]
+transform = Transform3D(0.707107, 0.385118, -0.59303, 0, 0.838671, 0.544639, 0.707107, -0.385118, 0.59303, -20, 20, 20)
+fov = 22.5
+size = 15.0
+far = 1000.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
+mesh = SubResource("QuadMesh_pr11n")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+current = true
+
+[node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
+visible = false
+script = ExtResource("3_ofhqe")
+_player = NodePath("../../Player")
+_mousetarget = NodePath("../MouseTarget")
+_distance = 0.15
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/CameraTarget"]
+mesh = SubResource("BoxMesh_mawog")
+
+[node name="MouseTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_camera", "_player")]
+top_level = true
+visible = false
+script = ExtResource("4_suvuw")
+_camera = NodePath("../Camera3D")
+_player = NodePath("../../Player")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/MouseTarget"]
+mesh = SubResource("CylinderMesh_ofhqe")
+
+[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+_headtarget = NodePath("../Camera/MouseTarget")
+_campivot = NodePath("../Camera")
+_thrown_trash = ExtResource("10_a4lti")
+_trajtarget_scene = ExtResource("11_pr11n")
+_ui = NodePath("../../UI")
+_thrown_beacon = ExtResource("15_iw0pl")
+
 [node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
 script = ExtResource("5_a2nen")
@@ -255,68 +317,9 @@ mesh = SubResource("CapsuleMesh_a2nen")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/RaccoonAgent"]
 shape = SubResource("CapsuleShape3D_iw0pl")
 
-[node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
-script = ExtResource("2_8px8m")
-_target = NodePath("CameraTarget")
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Camera"]
-transform = Transform3D(0.707107, 0.385118, -0.59303, 0, 0.838671, 0.544639, 0.707107, -0.385118, 0.59303, -20, 20, 20)
-fov = 22.5
-size = 15.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/Camera3D"]
-mesh = SubResource("QuadMesh_pr11n")
-
-[node name="CameraTarget" type="Node3D" parent="SubViewportContainer/SubViewport/Camera" node_paths=PackedStringArray("_player", "_mousetarget")]
-visible = false
-script = ExtResource("3_ofhqe")
-_player = NodePath("../../Player")
-_mousetarget = NodePath("../../MouseTarget")
-_distance = 0.15
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/CameraTarget"]
-mesh = SubResource("BoxMesh_mawog")
-
-[node name="MouseTarget" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_camera", "_player")]
-visible = false
-script = ExtResource("4_suvuw")
-_camera = NodePath("../Camera/Camera3D")
-_player = NodePath("../Player")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/MouseTarget"]
-mesh = SubResource("CylinderMesh_ofhqe")
-
-[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
-_headtarget = NodePath("../MouseTarget")
-_campivot = NodePath("../Camera")
-_thrown_trash = ExtResource("10_a4lti")
-_trajtarget_scene = ExtResource("11_pr11n")
-_ui = NodePath("../../UI")
-_thrown_beacon = ExtResource("15_iw0pl")
-
-[node name="AudioListener3D2" type="AudioListener3D" parent="SubViewportContainer/SubViewport/Player"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.60002, 0)
-current = true
-
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
-
-[node name="Ambiance" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_04qkv")
-autoplay = true
-mix_target = 1
-bus = &"Ambiance"
-
-[node name="WaterSFX" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37935, 0)
-stream = ExtResource("18_04qkv")
-volume_db = -15.0
-autoplay = true
-max_distance = 7.0
-panning_strength = 0.0
-bus = &"SFX"
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
 

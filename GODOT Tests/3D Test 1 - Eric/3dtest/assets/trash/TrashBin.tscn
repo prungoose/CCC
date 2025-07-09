@@ -177,5 +177,7 @@ process_material = SubResource("ParticleProcessMaterial_ff1ya")
 draw_pass_1 = SubResource("BoxMesh_dqtvc")
 
 [node name="SFX" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.5
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area3D" to="." method="_body_entered"]

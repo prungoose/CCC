@@ -132,8 +132,9 @@ public partial class UI : Control
 	public void _wiggle()
 	{
 		_wiggletween?.Kill();
+		_wiggletween?.CustomStep(0.2);
 		_wiggletween = GetTree().CreateTween();
-		var init = Mathf.RadToDeg(_phone.Rotation);
+		var init = Mathf.RadToDeg(Mathf.DegToRad(8));
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init - 5.0f, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init + 5.0f, 0.1f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
 		_wiggletween.TweenProperty(_phone, "rotation_degrees", init	, 0.05f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
