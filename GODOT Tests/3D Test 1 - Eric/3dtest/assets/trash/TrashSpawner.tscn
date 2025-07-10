@@ -3,6 +3,6 @@
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="1_jmhtt"]
 [ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube.tscn" id="2_rmon3"]
 
-[node name="RTrashSpawner" type="Node3D"]
+[node name="RandTrashSpawner" type="Node3D"]
 script = ExtResource("1_jmhtt")
 _trash_scene = ExtResource("2_rmon3")

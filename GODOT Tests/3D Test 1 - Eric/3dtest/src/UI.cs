@@ -31,6 +31,7 @@ public partial class UI : Control
 	private ProgressBar _tank2;
 	private ProgressBar _tank3;
 	private ProgressBar _tank4;
+	private ProgressBar[] _tanks;
 
 	private AudioStreamPlayer PhoneSFX;
 
@@ -40,14 +41,20 @@ public partial class UI : Control
 
 	private Control _pauseScreen;
 
+	private Camera3D _minimapcam;
+	private Node3D _minimapworldpivot;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
 		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Dial Screen/Label");
+
 		_tank1 = GetNode<ProgressBar>("Tanks/Tank1");
 		_tank2 = GetNode<ProgressBar>("Tanks/Tank2");
 		_tank3 = GetNode<ProgressBar>("Tanks/Tank3");
 		_tank4 = GetNode<ProgressBar>("Tanks/Tank4");
+		_tanks = [_tank1, _tank2, _tank3, _tank4];
+
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 
 		_infoSection = GetNode<Control>("Info Section");
@@ -67,6 +74,9 @@ public partial class UI : Control
 		}
 
 		_pauseScreen = GetNode<Control>("PauseScreen");
+
+		_minimapcam = GetNode<Camera3D>("SubViewportContainer/SubViewport/Camera3D");
+		_minimapworldpivot = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Camera");
 	}
 
 	public override void _Process(double delta)
@@ -77,6 +87,7 @@ public partial class UI : Control
 		_tank2.Value = (int)_player.Call("_GetTankPercentage", 2);
 		_tank3.Value = (int)_player.Call("_GetTankPercentage", 3);
 		_tank4.Value = (int)_player.Call("_GetTankPercentage", 4);
+		UpdateTankColors();
 
 		// Go to next step in tutorial first time tank reaches 50%
 		if (GetTutorialStep() == 1)
@@ -87,6 +98,12 @@ public partial class UI : Control
 			_debugtext.Text = "FPS: " + Engine.GetFramesPerSecond() + "\nMemory: " + (OS.GetStaticMemoryUsage() / 1024) + " KB";
 
 	}
+
+    public override void _PhysicsProcess(double delta)
+    {
+		_minimapcam.Rotation = new Godot.Vector3(Mathf.DegToRad(-90), _minimapworldpivot.Rotation.Y, 0);
+    }
+
 
 	public void _updatephone(bool isPhoneOpen)
 	{
@@ -229,10 +246,18 @@ public partial class UI : Control
 
 		}
 	}
-	
+
 	public void Paused()
 	{
 		GetTree().Paused = true;
 		_pauseScreen.Show();
+	}
+
+	public void UpdateTankColors()
+	{
+		foreach (ProgressBar t in _tanks)
+		{
+			//eventually add something so that tank background changes when throwable ready
+		}
 	}
 }

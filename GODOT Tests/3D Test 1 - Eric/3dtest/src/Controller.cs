@@ -32,6 +32,8 @@ public partial class Controller : CharacterBody3D
 	private Node3D _trajnode;
 	private MeshInstance3D _trajtarget;
 	private Node3D _lightpivot;
+	private ShapeCast3D _stepray;
+	private Node3D _stepraypivot;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -62,6 +64,8 @@ public partial class Controller : CharacterBody3D
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
 		_trajnode = GetNode<Node3D>("Trajectory");
 		_lightpivot = GetNode<Node3D>("LightPivot");
+		_stepray = GetNode<ShapeCast3D>("StepRayPivot/StepRay");
+		_stepraypivot = GetNode<Node3D>("StepRayPivot");
 		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
@@ -151,11 +155,20 @@ public partial class Controller : CharacterBody3D
 			if (dir != Godot.Vector3.Zero)
 			{
 				_velocity = _velocity.Lerp(dir * _movespeed, (float)delta * _accel);
+				_stepraypivot.Rotation = new Godot.Vector3(0, Godot.Vector3.Forward.SignedAngleTo(dir, Godot.Vector3.Up), 0);
+				if (_stepray.IsColliding())
+				{
+
+					var height = (_stepray.GetCollisionPoint(0)- GlobalPosition).Y;
+					GlobalTranslate(new Godot.Vector3(0, height, 0));
+				}
 			}
 			else _velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
 			_velocity.Y -= 100 * (float)delta;
 			Velocity = _velocity;
 		}
+
+
 		MoveAndSlide();
 	}
 

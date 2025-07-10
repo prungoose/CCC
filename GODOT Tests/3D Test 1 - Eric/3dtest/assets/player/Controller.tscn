@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=73 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="2_uhyoe"]
@@ -11,10 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="10_xplcw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
-size = Vector3(1, 0.784766, 1)
+size = Vector3(1, 0.215137, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
-height = 1.52642
+height = 1.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1j3r"]
 atlas = ExtResource("2_uhyoe")
@@ -544,6 +544,9 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 10.0
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_apgsg"]
+length = 0.25
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 9
@@ -552,11 +555,11 @@ platform_on_leave = 2
 script = ExtResource("1_s7e8h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40262, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11781, 0)
 shape = SubResource("BoxShape3D_hsahs")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_rlquk")
 
 [node name="WorldModel" type="Node3D" parent="."]
@@ -657,3 +660,11 @@ texture_albedo = ExtResource("10_xplcw")
 cull_mask = 1048573
 
 [node name="Vacuum" parent="." instance=ExtResource("9_xplcw")]
+
+[node name="StepRayPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="StepRay" type="ShapeCast3D" parent="StepRayPivot"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, -0.484937)
+shape = SubResource("SeparationRayShape3D_apgsg")
+target_position = Vector3(0, 0.02, 0)

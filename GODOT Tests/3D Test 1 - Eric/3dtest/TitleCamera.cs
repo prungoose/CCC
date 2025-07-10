@@ -20,14 +20,12 @@ public partial class TitleCamera : Camera3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		
+
 		var pos = GetMouseCollidePos();
-		if (pos != null)
-		{
-			_camtarget.GlobalPosition = _anchor.Position.Lerp((Godot.Vector3)pos, .25f);
-			_camtargetbody.LinearVelocity = (_camtarget.GlobalPosition - _camtargetbody.GlobalPosition) * _followspeed;
-			LookAt(_camtargetbody.GlobalPosition);
-		}
+		if (pos == null) pos = new Godot.Vector3(0, 40, 0);
+		_camtarget.GlobalPosition = _anchor.Position.Lerp((Godot.Vector3)pos, .25f);
+		_camtargetbody.LinearVelocity = (_camtarget.GlobalPosition - _camtargetbody.GlobalPosition) * _followspeed;
+		LookAt(_camtargetbody.GlobalPosition);
 	}
 
 	private Vector3? GetMouseCollidePos()
