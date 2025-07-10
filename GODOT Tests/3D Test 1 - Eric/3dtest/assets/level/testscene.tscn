@@ -275,6 +275,5 @@ Player = NodePath("../Player")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
-debug = true
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
