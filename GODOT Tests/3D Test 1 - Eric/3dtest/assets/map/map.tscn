@@ -1,8 +1,8 @@
 [gd_scene load_steps=26 format=3 uid="uid://d1pe32eowvpbh"]
-[gd_scene load_steps=3 format=3 uid="uid://d1pe32eowvpbh"]
 
 [ext_resource type="MeshLibrary" uid="uid://2hhoh2k5h22a" path="res://assets/map/tiles/tiles.tres" id="1_ur8lv"]
 [ext_resource type="PackedScene" uid="uid://42kw7qsc3ree" path="res://assets/map/deco/tree_A.gltf" id="2_7wfk8"]
+[ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_yyc58"]
 [ext_resource type="PackedScene" uid="uid://ba44w2gvyfr8m" path="res://assets/map/deco/tree_E.gltf" id="3_vqmbg"]
 [ext_resource type="PackedScene" uid="uid://d0l2hlmbvcv71" path="res://assets/map/deco/tree_B.gltf" id="4_2jt87"]
 [ext_resource type="PackedScene" uid="uid://d277rg0alk5gn" path="res://assets/map/deco/tree_D.gltf" id="5_tg2vj"]
@@ -24,9 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bvatm5q4cxlup" path="res://assets/map/deco/car_police.gltf" id="21_7xplb"]
 [ext_resource type="PackedScene" uid="uid://1112v77xkvg2" path="res://assets/map/deco/car_sedan.gltf" id="22_tpay8"]
 [ext_resource type="PackedScene" uid="uid://bep8gn27lvx6e" path="res://assets/map/deco/car_hatchback.gltf" id="23_vixgd"]
-[ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="24_d4jxa"]
 [ext_resource type="PackedScene" uid="uid://bu3qpde4uruht" path="res://assets/map/deco/firehydrant.gltf" id="25_lpjpo"]
-[ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_yyc58"]
 
 [node name="Map" type="Node3D"]
 
@@ -752,9 +750,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35966, 1.13104, -17.9)
 [node name="car_hatchback2" parent="." instance=ExtResource("23_vixgd")]
 transform = Transform3D(0.970528, 0, 0.24099, 0, 1, 0, -0.24099, 0, 0.970528, 15.8, 1.21023, 3.56602)
 
-[node name="car_stationwagon2" parent="." instance=ExtResource("24_d4jxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2893, 1.13104, 1.4561)
-
 [node name="car_taxi4" parent="." instance=ExtResource("20_qalbb")]
 transform = Transform3D(0.768138, 0, 0.640284, 0, 1, 0, -0.640284, 0, 0.768138, 14.6333, 1.13104, -2.85978)
 
@@ -782,7 +777,7 @@ transform = Transform3D(0.978086, 0, 0.208202, 0, 1, 0, -0.208202, 0, 0.978086, 
 [node name="car_police5" parent="." instance=ExtResource("21_7xplb")]
 transform = Transform3D(-0.760859, 0, 0.648917, 0, 1, 0, -0.648917, 0, -0.760859, 18.7961, 1.13104, -3.34857)
 
-[node name="car_stationwagon3" parent="." instance=ExtResource("24_d4jxa")]
+[node name="car_stationwagon3" parent="." instance=ExtResource("2_yyc58")]
 transform = Transform3D(0.0622853, 0, -0.998058, 0, 1, 0, 0.998058, 0, 0.0622853, 19.4281, 1.12577, 7.13716)
 
 [node name="car_sedan4" parent="." instance=ExtResource("22_tpay8")]
@@ -971,5 +966,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.952, 1.1, -13.6542)
 [node name="trash_B57" parent="." instance=ExtResource("12_8r1wy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1333, 1.1, -13.8084)
 
-[node name="car_stationwagon2" parent="." instance=ExtResource("2_yyc58")]
+[node name="car_stationwagon4" parent="." instance=ExtResource("2_yyc58")]
 transform = Transform3D(0.93636, 0, -0.351041, 0, 1, 0, 0.351041, 0, 0.93636, 7.26927, 1.13104, 0.371556)
