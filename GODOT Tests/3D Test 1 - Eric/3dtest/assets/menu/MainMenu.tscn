@@ -1,7 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=26 format=3 uid="uid://bp8fj6wujphhr"]
 
 [ext_resource type="Texture2D" uid="uid://c0wqekvabgq3m" path="res://assets/menu/Title_Finished.png" id="1_hheb7"]
-[ext_resource type="Texture2D" uid="uid://cy458jcxk2rcc" path="res://assets/menu/Screenshot 2025-07-10 111808.png" id="1_x8w13"]
 [ext_resource type="Texture2D" uid="uid://c4g28pgjeawrx" path="res://assets/menu/Start_Button_Hover.png" id="2_jfoks"]
 [ext_resource type="Script" uid="uid://cn8mnasqkyfig" path="res://src/Title.cs" id="2_n5d6s"]
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="2_sewyn"]
@@ -141,14 +140,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_we4v7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_iuqd3")
 icon_alignment = 1
 script = ExtResource("3_aid4m")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-modulate = Color(0.726732, 0.726732, 0.726732, 1)
-billboard = 1
-texture = ExtResource("1_x8w13")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.054997, 0, 6.75701)
 
 [connection signal="mouse_entered" from="StartButton" to="StartButton" method="hovered"]
 [connection signal="mouse_exited" from="StartButton" to="StartButton" method="Nothovered"]
