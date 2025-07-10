@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://dmbvspbhvyrrk"]
+
+[ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_1xr1c"]
+[ext_resource type="PackedScene" uid="uid://bp8fj6wujphhr" path="res://assets/menu/MainMenu.tscn" id="1_fnlyl"]
+[ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="2_pkhjh"]
+[ext_resource type="Script" uid="uid://cve6evv8j4w1" path="res://TitleCamera.cs" id="3_tu0on"]
+
+[sub_resource type="Gradient" id="Gradient_pkhjh"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpr57"]
+gradient = SubResource("Gradient_pkhjh")
+fill_to = Vector2(0.880342, 0.17094)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1xr1c"]
+sky_top_color = Color(0.231083, 0.823115, 1, 1)
+sky_horizon_color = Color(0.865339, 0.898616, 0.988049, 1)
+sky_curve = 0.0891914
+ground_bottom_color = Color(0.437837, 0.807646, 1, 1)
+ground_horizon_color = Color(0.860473, 0.905449, 0.998009, 1)
+
+[sub_resource type="Sky" id="Sky_04qkv"]
+sky_material = SubResource("ProceduralSkyMaterial_1xr1c")
+
+[sub_resource type="Environment" id="Environment_tu0on"]
+background_mode = 2
+sky = SubResource("Sky_04qkv")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.4
+tonemap_white = 1.69
+glow_enabled = true
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture2D_wpr57")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1xr1c"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 15.0
+radial_segments = 29
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tu0on"]
+size = Vector3(1, 100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tu0on"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tu0on"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("1_1xr1c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleMenu" parent="." instance=ExtResource("1_fnlyl")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.437069, 0.217591, -0.872711, 0, 0.970296, 0.241922, 0.899428, -0.105736, 0.424086, -30.5409, 30.9383, 10.7212)
+fov = 31.5
+size = 49.01
+script = ExtResource("3_tu0on")
+
+[node name="Map" parent="." instance=ExtResource("2_pkhjh")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.612372, 0.612373, 0, 0.707107, 0.707106, -0.866025, -0.353553, 0.353554, 0, 8.34669, 0)
+light_specular = 0.0
+shadow_enabled = true
+shadow_caster_mask = 4294967293
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tu0on")
+
+[node name="MouseStuff" type="Node3D" parent="."]
+transform = Transform3D(0.437069, 0.217591, -0.872711, 0, 0.970296, 0.241921, 0.899428, -0.105736, 0.424086, -30.5409, 30.9383, 10.7212)
+
+[node name="Collider" type="StaticBody3D" parent="MouseStuff"]
+transform = Transform3D(0.437069, -7.45058e-09, 0.899428, 0.217591, 0.970296, -0.105736, -0.872711, 0.241921, 0.424086, -0.000224113, -0.000289917, -6.86646e-05)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MouseStuff/Collider"]
+visible = false
+mesh = SubResource("CylinderMesh_1xr1c")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="MouseStuff/Collider"]
+transform = Transform3D(0.966354, 0, 0.257217, 0, 1, 0, -0.257217, 0, 0.966354, 11.9388, 0, -2.07459)
+shape = SubResource("BoxShape3D_tu0on")
+
+[node name="Anchor" type="Node3D" parent="MouseStuff"]
+transform = Transform3D(1, 3.72529e-08, -2.98023e-08, 0, 1, 1.63913e-07, 0, -1.86265e-08, 1, 0.394898, 25.9972, -6.62787)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MouseStuff/Anchor"]
+mesh = SubResource("BoxMesh_tu0on")
+
+[node name="CamTarget" type="Node3D" parent="MouseStuff"]
+transform = Transform3D(1, 1.49012e-08, 0, 0, 1, 0, 2.98023e-08, 0, 1, -1.90735e-06, 1.90735e-06, 9.53674e-07)
+top_level = true
+
+[node name="CamTargetBody" type="RigidBody3D" parent="MouseStuff"]
+transform = Transform3D(1, 7.45058e-09, -2.98023e-08, 0, 1, 2.98023e-08, 0, 2.23517e-08, 1, 2.97006, 26.8627, -7.2587)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MouseStuff/CamTargetBody"]
+shape = SubResource("SphereShape3D_tu0on")
+disabled = true
