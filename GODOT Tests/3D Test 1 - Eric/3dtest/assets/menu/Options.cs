@@ -90,7 +90,7 @@ public partial class Options : Control
 		CF.SetValue("playersettings", "lang", langbutton.Selected);
 		CF.SetValue("playersettings", "time", timebutton.Selected);
 		CF.Save(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg");
-		GD.Print(OS.GetUserDataDir());
+		//GD.Print(OS.GetUserDataDir());
 	}
 
 	public void Load()
