@@ -19,7 +19,7 @@
 
 [sub_resource type="Gradient" id="Gradient_wpr57"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpr57"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iw0pl"]
 gradient = SubResource("Gradient_wpr57")
 fill_to = Vector2(0.880342, 0.17094)
 
@@ -30,12 +30,12 @@ sky_curve = 0.0891914
 ground_bottom_color = Color(0.437837, 0.807646, 1, 1)
 ground_horizon_color = Color(0.860473, 0.905449, 0.998009, 1)
 
-[sub_resource type="Sky" id="Sky_04qkv"]
+[sub_resource type="Sky" id="Sky_wpr57"]
 sky_material = SubResource("ProceduralSkyMaterial_wpr57")
 
 [sub_resource type="Environment" id="Environment_44gc5"]
 background_mode = 2
-sky = SubResource("Sky_04qkv")
+sky = SubResource("Sky_wpr57")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.4
@@ -43,7 +43,7 @@ tonemap_white = 1.69
 glow_enabled = true
 volumetric_fog_sky_affect = 0.0
 adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture2D_wpr57")
+adjustment_color_correction = SubResource("GradientTexture2D_iw0pl")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bofc0"]
 
