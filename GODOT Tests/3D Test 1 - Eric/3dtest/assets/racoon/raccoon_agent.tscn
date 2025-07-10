@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcgqxkucyl1uq"]
 
-[ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://assets/level/RaccoonAgent.cs" id="1_yq413"]
+[ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://src/RaccoonAgent.cs" id="1_yq413"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
 

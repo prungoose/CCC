@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/phone.tscn" id="4_cufnj"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
-[ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://src/TutorialStuff.cs" id="7_cufnj"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="14_rts35"]
 [ext_resource type="PackedScene" uid="uid://cpiqgw426s24" path="res://assets/ui/textbox.tscn" id="15_870eb"]

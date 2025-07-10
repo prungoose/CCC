@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://cyh4mgfebq10y"]
 
-[ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://assets/ui/InGameOptions.cs" id="1_i5ekm"]
+[ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://src/InGameOptions.cs" id="1_i5ekm"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="5_6ifhe"]

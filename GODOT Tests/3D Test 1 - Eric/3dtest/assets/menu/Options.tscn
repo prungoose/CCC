@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cm5rd518ga13s"]
 
-[ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://assets/menu/Options.cs" id="1_xygxo"]
+[ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://src/Options.cs" id="1_xygxo"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
 

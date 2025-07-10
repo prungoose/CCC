@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dehxjhb5ukc3g"]
 
-[ext_resource type="Script" uid="uid://ern722h687j1" path="res://assets/player/Beacon.cs" id="1_8obva"]
+[ext_resource type="Script" uid="uid://ern722h687j1" path="res://src/Beacon.cs" id="1_8obva"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weuih"]
 albedo_color = Color(1, 0.335514, 0.269596, 1)

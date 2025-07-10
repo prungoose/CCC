@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://n8u7og81agdi"]
+
+[ext_resource type="Script" uid="uid://b4h8si7mv3xng" path="res://src/MajorObstacle1.cs" id="1_0jk1x"]
+[ext_resource type="Texture2D" uid="uid://1obcxb848no4" path="res://assets/ui/warning_icon.png" id="2_qcs8f"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_enbpq"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="4_k578h"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_jyq6q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6n1xx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enbpq"]
+region = Rect2(1056, 352, 352, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xh6s6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qcs8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enbpq")
+}],
+"loop": true,
+"name": &"Warning_Sign",
+"speed": 4.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_enbpq"]
+height = 1.0
+radius = 1.1
+
+[sub_resource type="Gradient" id="Gradient_k578h"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fdygd"]
+gradient = SubResource("Gradient_k578h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k578h"]
+render_priority = 1
+shader = ExtResource("4_k578h")
+shader_parameter/scroll_texture = SubResource("GradientTexture1D_fdygd")
+shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
+shader_parameter/fade_distance = 5.0
+shader_parameter/character_position = Vector3(1.1, 0, 0)
+shader_parameter/tile_x = 50.0
+shader_parameter/tile_y = 1.0
+shader_parameter/scroll_speed_x = 2.0
+shader_parameter/scroll_speed_y = 0.05
+shader_parameter/rotation_degrees = 15.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_50h5o"]
+material = SubResource("ShaderMaterial_k578h")
+outer_radius = 1.1
+rings = 32
+ring_segments = 3
+
+[node name="StaticBody3D" type="StaticBody3D" groups=["major_obstacle"]]
+script = ExtResource("1_0jk1x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_jyq6q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6n1xx")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.00143571, 1.02596, 0.0433283)
+visible = false
+billboard = 1
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_xh6s6")
+animation = &"Warning_Sign"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="tape" parent="." instance=ExtResource("4_enbpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.5, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_enbpq")
+
+[node name="ProximityWarning" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("TorusMesh_50h5o")
