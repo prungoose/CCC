@@ -133,7 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27641, 0.5, -3.92291)
 _trashId = 1
 
 [node name="Trashbin2" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2476, 0.5, 10.2493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.93009, 0.5, 17.6066)
 _trashId = 2
 
 [node name="Trashbin3" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
@@ -141,8 +141,64 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8212, 0.499998, -25.2494)
 _trashId = 3
 
 [node name="Trashbin4" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.73788, 0.5, -55.5229)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5951, 0.500001, -57.5216)
 _trashId = 4
+
+[node name="Trashbin5" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.228, 0.474288, 18.1777)
+_trashId = 4
+
+[node name="Trashbin6" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.3618, 0.433002, -10.7834)
+_trashId = 1
+
+[node name="Trashbin7" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5475, 0.433, -42.4546)
+_trashId = 2
+
+[node name="Trashbin8" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.4285, 0.433002, -70.2583)
+_trashId = 3
+
+[node name="Trashbin9" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.3642, 0.432996, -81.3583)
+_trashId = 4
+
+[node name="Trashbin10" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6229, 0.433006, -42.8429)
+_trashId = 1
+
+[node name="Trashbin11" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5585, 0.433006, -21.2773)
+_trashId = 3
+
+[node name="Trashbin12" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.62, 0.432959, -8.9511)
+_trashId = 4
+
+[node name="Trashbin13" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.8948, 0.433, -84.129)
+_trashId = 1
+
+[node name="Trashbin14" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.4013, 0.433002, 28.4752)
+_trashId = 1
+
+[node name="Trashbin15" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.9031, 0.432996, 5.19231)
+_trashId = 2
+
+[node name="Trashbin16" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(0.940774, 0, -0.339033, 0, 1, 0, 0.339033, 0, 0.940774, 82.2567, 1.77688, 24.6077)
+_trashId = 3
+
+[node name="Trashbin17" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.6637, 0.433, 8.72377)
+_trashId = 1
+
+[node name="Trashbin18" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.2431, 0.796582, -18.2469)
+_trashId = 3
 
 [node name="Spawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

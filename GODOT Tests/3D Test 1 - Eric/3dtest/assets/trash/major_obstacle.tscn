@@ -80,6 +80,7 @@ one_shot = true
 
 [node name="tape" parent="." instance=ExtResource("4_enbpq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.5, 0)
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_layer = 8

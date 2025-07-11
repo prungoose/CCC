@@ -24,25 +24,26 @@ public partial class TrashSpawner : Node3D
 		if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 50) _TimeSinceLastSpawn += (float)delta;
 
 		//spawn if player > x distance away, more than a minute since last spawn, spawner has <5 remaining trash
-		if (_TimeSinceLastSpawn > 50 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 50 && GetChildCount() < 5 && enabled)
+		if (_TimeSinceLastSpawn > 100 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 50 && GetChildCount() < 5 && enabled)
 		{
-			_SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
-			_TimeSinceLastSpawn = 0;
+			var r = GD.Randf();
+			if (r > .75) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
+			else _TimeSinceLastSpawn = 120f;
+			_TimeSinceLastSpawn -= 100;
 		}
 
 	}
 
 	void _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling()
 	{
-		//gamble for which types of trash to spawn, how many, and in what ratio (all random). trash types are 1,2,3, and 4
-
-		int total_amnt_to_spawn = GD.RandRange(30, 70);
+		//gamble for which types of trash to spawn, how many, and in what ratio (all random). trash types are 1,2,3,4
+		int total_amnt_to_spawn = GD.RandRange(30, 50);
 
 		int total_types_to_spawn;
 		var r = GD.Randf();
-		if (r < .4) total_types_to_spawn = 4;
-		else if (r < .7) total_types_to_spawn = 3;
-		else if (r < .9) total_types_to_spawn = 2;
+		if (r < .7) total_types_to_spawn = 4;
+		else if (r < .85) total_types_to_spawn = 3;
+		else if (r < .95) total_types_to_spawn = 2;
 		else total_types_to_spawn = 1;
 
 		List<int> types = new List<int>();
