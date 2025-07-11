@@ -16,6 +16,8 @@ public partial class TrashBin : Node3D
 	private GpuParticles3D _splode_particles;
 	private StaticBody3D _majorObstacle;
 
+	private Sprite3D _minimapsprite;
+
 	public override void _Ready()
 	{
 		_SFX = GetNode<AudioStreamPlayer3D>("SFX"); ;
@@ -25,6 +27,7 @@ public partial class TrashBin : Node3D
 		_mesh = GetNode<MeshInstance3D>("StaticBody3D/BinColorMesh");
 		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
 		_splode_particles = GetNode<GpuParticles3D>("GPUParticles3D2");
+		_minimapsprite = GetNode<Sprite3D>("Sprite3D");
 
 		// For starting animation in tutorial sequence
 		_majorObstacle = GetTree().CurrentScene.GetNode<StaticBody3D>("SubViewportContainer/SubViewport/Level/Major Obstacle");
@@ -33,10 +36,10 @@ public partial class TrashBin : Node3D
 		_mesh.SetSurfaceOverrideMaterial(0, m);
 		switch (_trashId)
 		{
-			case 1: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .39f, .32f, 1f)); break; //red
-			case 2: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .75f, .15f, 1f)); break; //green
-			case 3: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .73f, 0f, 1f)); break; //yellow
-			case 4: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .67f, .89f, 1f)); break; //blue
+			case 1: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .39f, .32f, 1f)); _minimapsprite.Modulate = new Color(.99f, .39f, .32f, 1f); break; //red
+			case 2: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .75f, .15f, 1f)); _minimapsprite.Modulate = new Color(0f, .75f, .15f, 1f); break; //green
+			case 3: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(.99f, .73f, 0f, 1f)); _minimapsprite.Modulate = new Color(.99f, .73f, 0f, 1f); break; //yellow
+			case 4: _mesh.GetSurfaceOverrideMaterial(0).Set("albedo_color", new Color(0f, .67f, .89f, 1f)); _minimapsprite.Modulate = new Color(0f, .67f, .89f, 1f); break; //blue
 		}
 	}
 

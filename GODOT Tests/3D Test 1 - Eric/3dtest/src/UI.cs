@@ -41,8 +41,7 @@ public partial class UI : Control
 
 	private Control _pauseScreen;
 
-	private Camera3D _minimapcam;
-	private Node3D _minimapworldpivot;
+	private Control _minimap;
 
 	public override void _Ready()
 	{
@@ -75,8 +74,7 @@ public partial class UI : Control
 
 		_pauseScreen = GetNode<Control>("PauseScreen");
 
-		_minimapcam = GetNode<Camera3D>("SubViewportContainer/SubViewport/Camera3D");
-		_minimapworldpivot = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Camera");
+		_minimap = GetNode<Control>("Minimap");
 	}
 
 	public override void _Process(double delta)
@@ -99,12 +97,6 @@ public partial class UI : Control
 
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-		_minimapcam.Rotation = new Godot.Vector3(Mathf.DegToRad(-90), _minimapworldpivot.Rotation.Y, 0);
-    }
-
-
 	public void _updatephone(bool isPhoneOpen)
 	{
 		_tween?.CustomStep(0.3);
@@ -118,17 +110,29 @@ public partial class UI : Control
 
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
+
+			//occur first
+			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + 600), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
+			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for a delay
+			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for setparallel
+			//occur after first tween is done
 			_tween.SetParallel();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_tween.TweenProperty(_phone, "rotation", Mathf.DegToRad(8), .4f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			
 		}
 		else
 		{
 			_tween?.Kill();
 			_tween = GetTree().CreateTween();
+
+			//occur first
 			_tween.SetParallel();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y + 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
-			_tween.TweenProperty(_phone, "rotation", 0, .4f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			_tween.TweenProperty(_phone, "rotation", 0, .3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			_tween.SetParallel(false);
+			//occur second
+			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + - 600), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_phonetext = "";
 		}
 	}
