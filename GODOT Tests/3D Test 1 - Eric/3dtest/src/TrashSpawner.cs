@@ -7,6 +7,7 @@ public partial class TrashSpawner : Node3D
 
 
 	[Export] private PackedScene _trash_scene;
+	[Export] bool enabled = true;
 	private Timer _timer;
 	private CharacterBody3D _player;
 
@@ -15,17 +16,15 @@ public partial class TrashSpawner : Node3D
 	public override void _Ready()
 	{
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
-		_SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
+		if(enabled) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
 	}
 
 	public override void _Process(double delta)
 	{
 		if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 50) _TimeSinceLastSpawn += (float)delta;
-		//GD.Print("time since spawn: ", _TimeSinceLastSpawn);
-		//GD.Print("player distance : ", GlobalPosition.DistanceTo(_player.GlobalPosition));
 
 		//spawn if player > x distance away, more than a minute since last spawn, spawner has <5 remaining trash
-		if (_TimeSinceLastSpawn > 50 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 50 && GetChildCount() < 5)
+		if (_TimeSinceLastSpawn > 50 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 50 && GetChildCount() < 5 && enabled)
 		{
 			_SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
 			_TimeSinceLastSpawn = 0;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=75 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="2_uhyoe"]
@@ -8,7 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="8_uhyoe"]
 [ext_resource type="AudioStream" uid="uid://bxcfr5os76qdw" path="res://assets/Audios/FWOOMP.wav" id="9_apgsg"]
 [ext_resource type="PackedScene" uid="uid://go1ix51gk6xl" path="res://assets/player/vacuumzone.tscn" id="9_xplcw"]
+[ext_resource type="Texture2D" uid="uid://cabv8uwds750s" path="res://assets/ui/sprite_map_mod.png" id="10_uhyoe"]
 [ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="10_xplcw"]
+[ext_resource type="Texture2D" uid="uid://c0xnbjb4bphpv" path="res://assets/ui/sprite_map_outline.png" id="11_u26f6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
 size = Vector3(1, 0.215137, 1)
@@ -668,3 +670,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, -0.484937)
 shape = SubResource("SeparationRayShape3D_apgsg")
 target_position = Vector3(0, 0.02, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 20, 0)
+layers = 32
+billboard = 1
+texture_filter = 0
+render_priority = 3
+texture = ExtResource("10_uhyoe")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, -1.09278e-07, -2.5, 0, 2.5, -1.09278e-07, 0, 20, 0)
+layers = 32
+billboard = 1
+texture_filter = 0
+render_priority = 3
+texture = ExtResource("11_u26f6")

@@ -1,37 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmbvspbhvyrrk"]
+[gd_scene load_steps=9 format=3 uid="uid://dmbvspbhvyrrk"]
 
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_1xr1c"]
 [ext_resource type="PackedScene" uid="uid://bp8fj6wujphhr" path="res://assets/menu/MainMenu.tscn" id="1_fnlyl"]
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="2_pkhjh"]
 [ext_resource type="Script" uid="uid://cve6evv8j4w1" path="res://TitleCamera.cs" id="3_tu0on"]
-
-[sub_resource type="Gradient" id="Gradient_pkhjh"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpr57"]
-gradient = SubResource("Gradient_pkhjh")
-fill_to = Vector2(0.880342, 0.17094)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1xr1c"]
-sky_top_color = Color(0.231083, 0.823115, 1, 1)
-sky_horizon_color = Color(0.865339, 0.898616, 0.988049, 1)
-sky_curve = 0.0891914
-ground_bottom_color = Color(0.437837, 0.807646, 1, 1)
-ground_horizon_color = Color(0.860473, 0.905449, 0.998009, 1)
-
-[sub_resource type="Sky" id="Sky_04qkv"]
-sky_material = SubResource("ProceduralSkyMaterial_1xr1c")
-
-[sub_resource type="Environment" id="Environment_tu0on"]
-background_mode = 2
-sky = SubResource("Sky_04qkv")
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.4
-tonemap_white = 1.69
-glow_enabled = true
-volumetric_fog_sky_affect = 0.0
-adjustment_enabled = true
-adjustment_color_correction = SubResource("GradientTexture2D_wpr57")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1xr1c"]
 top_radius = 10.0
@@ -75,9 +47,6 @@ light_specular = 0.0
 shadow_enabled = true
 shadow_caster_mask = 4294967293
 sky_mode = 1
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_tu0on")
 
 [node name="MouseStuff" type="Node3D" parent="."]
 transform = Transform3D(0.437069, 0.217591, -0.872711, 0, 0.970296, 0.241921, 0.899428, -0.105736, 0.424086, -30.5409, 30.9383, 10.7212)

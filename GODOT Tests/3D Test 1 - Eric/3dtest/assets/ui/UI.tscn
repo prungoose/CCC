@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=22 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
@@ -6,30 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://src/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="PackedScene" uid="uid://b3ubdifkuxj2m" path="res://assets/ui/minimap.tscn" id="10_cufnj"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="14_rts35"]
 [ext_resource type="PackedScene" uid="uid://cpiqgw426s24" path="res://assets/ui/textbox.tscn" id="15_870eb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2glbg"]
-bg_color = Color(0.341176, 0.905882, 0.572549, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j234e"]
-bg_color = Color(0.912999, 0.760481, 0.380776, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rts35"]
-bg_color = Color(0.353482, 0.594633, 0.981411, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u48x"]
 
@@ -345,6 +325,27 @@ cache/0/5/0/underline_position = 0.0
 cache/0/5/0/underline_thickness = 0.0
 cache/0/5/0/scale = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2glbg"]
+bg_color = Color(0.341176, 0.905882, 0.572549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j234e"]
+bg_color = Color(0.912999, 0.760481, 0.380776, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rts35"]
+bg_color = Color(0.353482, 0.594633, 0.981411, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -370,175 +371,6 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Tanks" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(400, 300)
-layout_direction = 2
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -453.0
-offset_top = -280.0
-offset_right = -53.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset = Vector2(200, 0)
-alignment = 1
-
-[node name="Tank1" type="ProgressBar" parent="Tanks"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-max_value = 40.0
-fill_mode = 3
-show_percentage = false
-
-[node name="CenterContainer" type="CenterContainer" parent="Tanks/Tank1"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -100.0
-offset_right = 40.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Tank1Label" type="Label" parent="Tanks/Tank1/CenterContainer"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Tank2" type="ProgressBar" parent="Tanks"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/fill = SubResource("StyleBoxFlat_2glbg")
-max_value = 40.0
-fill_mode = 3
-show_percentage = false
-
-[node name="CenterContainer" type="CenterContainer" parent="Tanks/Tank2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -100.0
-offset_right = 40.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Tank2Label" type="Label" parent="Tanks/Tank2/CenterContainer"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Tank3" type="ProgressBar" parent="Tanks"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/fill = SubResource("StyleBoxFlat_j234e")
-max_value = 40.0
-fill_mode = 3
-show_percentage = false
-
-[node name="CenterContainer" type="CenterContainer" parent="Tanks/Tank3"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -100.0
-offset_right = 40.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Tank3Label" type="Label" parent="Tanks/Tank3/CenterContainer"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-text = "3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Tank4" type="ProgressBar" parent="Tanks"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/fill = SubResource("StyleBoxFlat_rts35")
-max_value = 40.0
-fill_mode = 3
-show_percentage = false
-
-[node name="CenterContainer" type="CenterContainer" parent="Tanks/Tank4"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -100.0
-offset_right = 40.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Tank4Label" type="Label" parent="Tanks/Tank4/CenterContainer"]
-custom_minimum_size = Vector2(80, 200)
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
-text = "4"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Phone" parent="." instance=ExtResource("4_cufnj")]
 layout_mode = 1
 offset_left = -732.0
@@ -548,6 +380,7 @@ offset_bottom = 471.0
 
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
+visible = false
 layout_mode = 1
 offset_left = 39.0
 offset_top = 38.0
@@ -564,10 +397,10 @@ shortcut = SubResource("Shortcut_um4x4")
 text = "M"
 
 [node name="Textbox" parent="." instance=ExtResource("15_870eb")]
-offset_left = 350.0
-offset_top = 530.0
-offset_right = 350.0
-offset_bottom = 530.0
+offset_left = 401.0
+offset_top = 364.0
+offset_right = 401.0
+offset_bottom = 364.0
 
 [node name="Tutorial Stuff" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -676,21 +509,185 @@ theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 fit_content = true
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="Minimap" parent="." instance=ExtResource("10_cufnj")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = -145.0
+offset_right = 224.0
+offset_bottom = -145.0
+grow_vertical = 0
+
+[node name="Tanks" type="HBoxContainer" parent="Minimap"]
+custom_minimum_size = Vector2(400, 300)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 193.0
+offset_top = -142.0
+offset_right = 593.0
+offset_bottom = 158.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(200, 0)
+alignment = 1
+
+[node name="Tank1" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
 layout_mode = 2
-offset_left = 65.0
-offset_top = 695.0
-offset_right = 577.0
-offset_bottom = 1038.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0)
-size = 10.0
+[node name="Tank1Label" type="Label" parent="Minimap/Tanks/Tank1/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank2" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_2glbg")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank2Label" type="Label" parent="Minimap/Tanks/Tank2/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank3" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_j234e")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank3Label" type="Label" parent="Minimap/Tanks/Tank3/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank4" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_rts35")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank4Label" type="Label" parent="Minimap/Tanks/Tank4/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]
 [connection signal="pressed" from="Info Section/Close" to="." method="HideInfoSection"]

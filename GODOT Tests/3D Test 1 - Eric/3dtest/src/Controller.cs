@@ -454,10 +454,8 @@ public partial class Controller : CharacterBody3D
 
 	private void SwitchThrown(int id)
 	{
-		if (!(is_blowing && _GetTankPercentage(id) < 20))
-		{
-			_thrown_id = id;
-		}
+		if (id == _thrown_id) _thrown_id = 0;
+		else if (!(is_blowing && _GetTankPercentage(id) < 20)) _thrown_id = id;
 		_ui.Call("_UpdateThrown", _thrown_id);
 	}
 

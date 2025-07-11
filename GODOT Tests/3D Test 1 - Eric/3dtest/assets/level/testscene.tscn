@@ -129,7 +129,7 @@ debug_fill = false
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
 [node name="Trashbin1" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61134, 0.5, 3.94089)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27641, 0.5, -3.92291)
 _trashId = 1
 
 [node name="Trashbin2" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
@@ -189,7 +189,8 @@ script = ExtResource("2_8px8m")
 _target = NodePath("CameraTarget")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Camera"]
-transform = Transform3D(0.707107, 0.385118, -0.59303, 0, 0.838671, 0.544639, 0.707107, -0.385118, 0.59303, -20, 20, 20)
+transform = Transform3D(0.607249, 0.330731, -0.509282, 0, 0.720233, 0.467725, 0.607249, -0.330731, 0.509282, -20, 20, 20)
+cull_mask = 31775
 fov = 22.5
 size = 35.0
 far = 1000.0
@@ -237,5 +238,6 @@ Player = NodePath("../Player")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("9_8wjkr")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
+debug = true
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
