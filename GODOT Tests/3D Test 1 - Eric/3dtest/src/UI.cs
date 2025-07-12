@@ -19,10 +19,6 @@ public partial class UI : Control
 	private bool _tankStepCompleted = false;
 	private bool _movementStepCompleted = false;
 
-	private Control _infoSection;
-	private RichTextLabel _infoHeading;
-	private RichTextLabel _infoText;
-
 	// Hazards
 	private StaticBody3D _powerLineHazard;
 
@@ -55,11 +51,6 @@ public partial class UI : Control
 		_tanks = [_tank1, _tank2, _tank3, _tank4];
 
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
-
-		_infoSection = GetNode<Control>("Info Section");
-		_infoHeading = GetNode<RichTextLabel>("Info Section/Heading");
-		_infoText = GetNode<RichTextLabel>("Info Section/Text");
-		_infoSection.Visible = false;
 
 		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
 
@@ -115,11 +106,11 @@ public partial class UI : Control
 			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + 600), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for a delay
 			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for setparallel
-			//occur after first tween is done
+																																			 //occur after first tween is done
 			_tween.SetParallel();
 			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_tween.TweenProperty(_phone, "rotation", Mathf.DegToRad(8), .4f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-			
+
 		}
 		else
 		{
@@ -132,7 +123,7 @@ public partial class UI : Control
 			_tween.TweenProperty(_phone, "rotation", 0, .3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_tween.SetParallel(false);
 			//occur second
-			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + - 600), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + -600), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_phonetext = "";
 		}
 	}
@@ -147,8 +138,6 @@ public partial class UI : Control
 		}
 		else
 		{
-			GD.Print("Dialed: " + _phonetext);
-
 			//Power company: ID 1
 			if (_phonetext == "↑→↓←")
 			{
@@ -161,6 +150,7 @@ public partial class UI : Control
 
 			//More agencies go here with their own code
 
+			//Reset phone text
 			_phonetext = "";
 		}
 		_wiggle();
@@ -200,20 +190,6 @@ public partial class UI : Control
 	public int GetTutorialStep()
 	{
 		return (int)_tutorialStuff.Call("GetTutorialStep");
-	}
-
-	public void ShowInfoSection(string heading, string text)
-	{
-		_infoHeading.Text = heading;
-		_infoText.Text = text;
-		_infoSection.Visible = true;
-	}
-
-	private void HideInfoSection()
-	{
-		_infoSection.Visible = false;
-		_infoHeading.Text = "";
-		_infoText.Text = "";
 	}
 
 	private void _UpdateThrown(int id)

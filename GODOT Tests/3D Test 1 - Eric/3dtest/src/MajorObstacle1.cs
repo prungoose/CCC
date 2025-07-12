@@ -14,16 +14,16 @@ public partial class MajorObstacle1 : StaticBody3D
 	[Export] public Control _ui;
 	[Export] public CharacterBody3D _player;
 	private Label popUp;
-	private AnimatedSprite3D _anim;
-	private AnimatedSprite3D _overheadanim;
+	private AnimatedSprite3D _sprite;
+	private AnimatedSprite3D _minimapsprite;
 	private Node3D _tape;
 	private MeshInstance3D _proxmesh;
 	private ShaderMaterial _shader;
 
 	public override void _Ready()
 	{
-		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
-		_overheadanim = GetNode<AnimatedSprite3D>("AnimatedSprite3D2");
+		_sprite = GetNode<AnimatedSprite3D>("Sprite");
+		_minimapsprite = GetNode<AnimatedSprite3D>("MinimapSprite");
 		_tape = GetNode<Node3D>("tape");
 		_proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
 		_shader = (ShaderMaterial)_proxmesh.GetActiveMaterial(0);
@@ -56,19 +56,19 @@ public partial class MajorObstacle1 : StaticBody3D
 
 	public void StartAnimation()
 	{
-		_anim.Visible = true;
-		_anim.Play("Warning_Sign");
-		_overheadanim.Visible = true;
-		_overheadanim.Play("Warning_Sign");
+		_sprite.Visible = true;
+		_sprite.Play("Warning_Sign");
+		_minimapsprite.Visible = true;
+		_minimapsprite.Play("Warning_Sign");
 
 	}
 
 	public void StopAnimation()
 	{
-		_anim.Stop();
-		_anim.Visible = false;
-		_overheadanim.Stop();
-		_overheadanim.Visible = false;
+		_sprite.Stop();
+		_sprite.Visible = false;
+		_minimapsprite.Stop();
+		_minimapsprite.Visible = false;
 	}
 
 	public bool GetDealtWithStatus()

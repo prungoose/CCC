@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8dqjg1c7vvfj"
-path="res://.godot/imported/trashbags spritesheet.png-48b23a85c63c0c5ebf9303e319b400e0.ctex"
+uid="uid://cu27e2nvkylve"
+path="res://.godot/imported/Mizuki_2.png-89131de1b7b9380e6cd6ce407cee391b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trash/trashbags spritesheet.png"
-dest_files=["res://.godot/imported/trashbags spritesheet.png-48b23a85c63c0c5ebf9303e319b400e0.ctex"]
+source_file="res://assets/cutscene characters/Mizuki_2.png"
+dest_files=["res://.godot/imported/Mizuki_2.png-89131de1b7b9380e6cd6ce407cee391b.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
