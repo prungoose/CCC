@@ -1,12 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=19 format=3 uid="uid://cyh4mgfebq10y"]
 
-[ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://assets/ui/InGameOptions.cs" id="1_i5ekm"]
+[ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://src/InGameOptions.cs" id="1_i5ekm"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
-[ext_resource type="Script" uid="uid://cjwjy0n6bjnhw" path="res://assets/ui/IGVolumeSlider.cs" id="3_6lw4i"]
-[ext_resource type="Script" uid="uid://dhy7fpl3d10gu" path="res://assets/ui/SFXSliderforIGOptions.cs" id="3_wgxot"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="5_6ifhe"]
-[ext_resource type="Script" uid="uid://86xmu7ukr8ft" path="res://assets/ui/IGAmbianceSlider.cs" id="5_i5ekm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn7lg"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -217,7 +214,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("3_6lw4i")
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 process_mode = 3
@@ -229,7 +225,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("3_wgxot")
 
 [node name="AmbianceSlider" type="HSlider" parent="Adjustments"]
 process_mode = 3
@@ -242,7 +237,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_i5ekm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("5_i5ekm")
 
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 process_mode = 3
@@ -260,7 +254,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_qx56b")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qx56b")
 selected = 1
 item_count = 2
-popup/item_0/text = "Japanese"
+popup/item_0/text = "日本"
 popup/item_0/id = 1
 popup/item_1/text = "English"
 popup/item_1/id = 0
@@ -295,9 +289,9 @@ stream = ExtResource("5_6ifhe")
 volume_db = -6.0
 bus = &"Ambiance"
 
-[connection signal="value_changed" from="Adjustments/VolumeSlider" to="Adjustments/VolumeSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/VolumeSlider" to="." method="adjustVol"]
 [connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustSFX"]
-[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="." method="adjustSFX"]
 [connection signal="drag_ended" from="Adjustments/AmbianceSlider" to="." method="stopAdjustAMB"]
-[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="Adjustments/AmbianceSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="." method="adjustAMB"]
 [connection signal="pressed" from="BacktoGameButton" to="." method="BacktoGame"]

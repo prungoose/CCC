@@ -1,11 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cm5rd518ga13s"]
+[gd_scene load_steps=17 format=3 uid="uid://cm5rd518ga13s"]
 
-[ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://assets/menu/Options.cs" id="1_xygxo"]
+[ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://src/Options.cs" id="1_xygxo"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
-[ext_resource type="Script" uid="uid://r40631o23wyo" path="res://assets/menu/SfXslider.cs" id="3_f5wrm"]
-[ext_resource type="Script" uid="uid://b8vp6gbcqpj82" path="res://assets/menu/VolumeSlider.cs" id="3_wtj14"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
-[ext_resource type="Script" uid="uid://ytfur06c7wll" path="res://assets/menu/AmbianceSlider.cs" id="5_xygxo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
 bg_color = Color(0.741176, 0.811765, 0.843137, 1)
@@ -155,7 +152,7 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_sxq6w")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
-text = "Options"
+text = " Options "
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -225,7 +222,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("3_wtj14")
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
@@ -236,7 +232,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("3_f5wrm")
 
 [node name="AmbianceSlider" type="HSlider" parent="Adjustments"]
 layout_mode = 2
@@ -248,7 +243,6 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_f5wrm")
 max_value = 1.0
 step = 0.01
 value = 1.0
-script = ExtResource("5_xygxo")
 
 [node name="LanguageButton" type="OptionButton" parent="Adjustments"]
 layout_mode = 2
@@ -265,7 +259,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
 selected = 1
 item_count = 2
-popup/item_0/text = "Japanese"
+popup/item_0/text = "日本"
 popup/item_0/id = 1
 popup/item_1/text = "English"
 popup/item_1/id = 0
@@ -305,8 +299,9 @@ volume_db = -6.0
 bus = &"Ambiance"
 
 [connection signal="pressed" from="MainMenuButton" to="." method="_MainMenuButtonPressed"]
-[connection signal="value_changed" from="Adjustments/VolumeSlider" to="Adjustments/VolumeSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/VolumeSlider" to="." method="adjustVol"]
 [connection signal="drag_ended" from="Adjustments/SoundEffectsSlider" to="." method="stopAdjustSFX"]
-[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="Adjustments/SoundEffectsSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/SoundEffectsSlider" to="." method="adjustSFX"]
 [connection signal="drag_ended" from="Adjustments/AmbianceSlider" to="." method="stopAdjustAMB"]
-[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="Adjustments/AmbianceSlider" method="adjustVol"]
+[connection signal="value_changed" from="Adjustments/AmbianceSlider" to="." method="adjustAMB"]
+[connection signal="item_selected" from="Adjustments/LanguageButton" to="." method="LangSelected"]

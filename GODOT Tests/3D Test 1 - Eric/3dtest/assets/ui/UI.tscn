@@ -1,36 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=22 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
-[ext_resource type="Script" uid="uid://cd6svw254decc" path="res://assets/ui/PauseButton.cs" id="3_ki1gq"]
 [ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/phone.tscn" id="4_cufnj"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
-[ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://assets/ui/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://src/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="PackedScene" uid="uid://b3ubdifkuxj2m" path="res://assets/ui/minimap.tscn" id="10_cufnj"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="14_rts35"]
 [ext_resource type="PackedScene" uid="uid://cpiqgw426s24" path="res://assets/ui/textbox.tscn" id="15_870eb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2glbg"]
-bg_color = Color(0.341176, 0.905882, 0.572549, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j234e"]
-bg_color = Color(0.912999, 0.760481, 0.380776, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rts35"]
-bg_color = Color(0.353482, 0.594633, 0.981411, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u48x"]
 
@@ -78,17 +57,294 @@ keycode = 4194305
 resource_local_to_scene = true
 events = [SubResource("InputEventKey_um4x4")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bscbh"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_left = 100
-shadow_size = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cufnj"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_cufnj"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/36/0/ascent = 0.0
+cache/0/36/0/descent = 0.0
+cache/0/36/0/underline_position = 0.0
+cache/0/36/0/underline_thickness = 0.0
+cache/0/36/0/scale = 1.0
+cache/0/61/0/ascent = 0.0
+cache/0/61/0/descent = 0.0
+cache/0/61/0/underline_position = 0.0
+cache/0/61/0/underline_thickness = 0.0
+cache/0/61/0/scale = 1.0
+cache/0/76/0/ascent = 0.0
+cache/0/76/0/descent = 0.0
+cache/0/76/0/underline_position = 0.0
+cache/0/76/0/underline_thickness = 0.0
+cache/0/76/0/scale = 1.0
+cache/0/106/0/ascent = 0.0
+cache/0/106/0/descent = 0.0
+cache/0/106/0/underline_position = 0.0
+cache/0/106/0/underline_thickness = 0.0
+cache/0/106/0/scale = 1.0
+cache/0/146/0/ascent = 0.0
+cache/0/146/0/descent = 0.0
+cache/0/146/0/underline_position = 0.0
+cache/0/146/0/underline_thickness = 0.0
+cache/0/146/0/scale = 1.0
+cache/0/191/0/ascent = 0.0
+cache/0/191/0/descent = 0.0
+cache/0/191/0/underline_position = 0.0
+cache/0/191/0/underline_thickness = 0.0
+cache/0/191/0/scale = 1.0
+cache/0/236/0/ascent = 0.0
+cache/0/236/0/descent = 0.0
+cache/0/236/0/underline_position = 0.0
+cache/0/236/0/underline_thickness = 0.0
+cache/0/236/0/scale = 1.0
+cache/0/286/0/ascent = 0.0
+cache/0/286/0/descent = 0.0
+cache/0/286/0/underline_position = 0.0
+cache/0/286/0/underline_thickness = 0.0
+cache/0/286/0/scale = 1.0
+cache/0/356/0/ascent = 0.0
+cache/0/356/0/descent = 0.0
+cache/0/356/0/underline_position = 0.0
+cache/0/356/0/underline_thickness = 0.0
+cache/0/356/0/scale = 1.0
+cache/0/406/0/ascent = 0.0
+cache/0/406/0/descent = 0.0
+cache/0/406/0/underline_position = 0.0
+cache/0/406/0/underline_thickness = 0.0
+cache/0/406/0/scale = 1.0
+cache/0/451/0/ascent = 0.0
+cache/0/451/0/descent = 0.0
+cache/0/451/0/underline_position = 0.0
+cache/0/451/0/underline_thickness = 0.0
+cache/0/451/0/scale = 1.0
+cache/0/481/0/ascent = 0.0
+cache/0/481/0/descent = 0.0
+cache/0/481/0/underline_position = 0.0
+cache/0/481/0/underline_thickness = 0.0
+cache/0/481/0/scale = 1.0
+cache/0/511/0/ascent = 0.0
+cache/0/511/0/descent = 0.0
+cache/0/511/0/underline_position = 0.0
+cache/0/511/0/underline_thickness = 0.0
+cache/0/511/0/scale = 1.0
+cache/0/531/0/ascent = 0.0
+cache/0/531/0/descent = 0.0
+cache/0/531/0/underline_position = 0.0
+cache/0/531/0/underline_thickness = 0.0
+cache/0/531/0/scale = 1.0
+cache/0/551/0/ascent = 0.0
+cache/0/551/0/descent = 0.0
+cache/0/551/0/underline_position = 0.0
+cache/0/551/0/underline_thickness = 0.0
+cache/0/551/0/scale = 1.0
+cache/0/571/0/ascent = 0.0
+cache/0/571/0/descent = 0.0
+cache/0/571/0/underline_position = 0.0
+cache/0/571/0/underline_thickness = 0.0
+cache/0/571/0/scale = 1.0
+cache/0/591/0/ascent = 0.0
+cache/0/591/0/descent = 0.0
+cache/0/591/0/underline_position = 0.0
+cache/0/591/0/underline_thickness = 0.0
+cache/0/591/0/scale = 1.0
+cache/0/601/0/ascent = 0.0
+cache/0/601/0/descent = 0.0
+cache/0/601/0/underline_position = 0.0
+cache/0/601/0/underline_thickness = 0.0
+cache/0/601/0/scale = 1.0
+cache/0/606/0/ascent = 0.0
+cache/0/606/0/descent = 0.0
+cache/0/606/0/underline_position = 0.0
+cache/0/606/0/underline_thickness = 0.0
+cache/0/606/0/scale = 1.0
+cache/0/576/0/ascent = 0.0
+cache/0/576/0/descent = 0.0
+cache/0/576/0/underline_position = 0.0
+cache/0/576/0/underline_thickness = 0.0
+cache/0/576/0/scale = 1.0
+cache/0/536/0/ascent = 0.0
+cache/0/536/0/descent = 0.0
+cache/0/536/0/underline_position = 0.0
+cache/0/536/0/underline_thickness = 0.0
+cache/0/536/0/scale = 1.0
+cache/0/501/0/ascent = 0.0
+cache/0/501/0/descent = 0.0
+cache/0/501/0/underline_position = 0.0
+cache/0/501/0/underline_thickness = 0.0
+cache/0/501/0/scale = 1.0
+cache/0/456/0/ascent = 0.0
+cache/0/456/0/descent = 0.0
+cache/0/456/0/underline_position = 0.0
+cache/0/456/0/underline_thickness = 0.0
+cache/0/456/0/scale = 1.0
+cache/0/411/0/ascent = 0.0
+cache/0/411/0/descent = 0.0
+cache/0/411/0/underline_position = 0.0
+cache/0/411/0/underline_thickness = 0.0
+cache/0/411/0/scale = 1.0
+cache/0/366/0/ascent = 0.0
+cache/0/366/0/descent = 0.0
+cache/0/366/0/underline_position = 0.0
+cache/0/366/0/underline_thickness = 0.0
+cache/0/366/0/scale = 1.0
+cache/0/321/0/ascent = 0.0
+cache/0/321/0/descent = 0.0
+cache/0/321/0/underline_position = 0.0
+cache/0/321/0/underline_thickness = 0.0
+cache/0/321/0/scale = 1.0
+cache/0/291/0/ascent = 0.0
+cache/0/291/0/descent = 0.0
+cache/0/291/0/underline_position = 0.0
+cache/0/291/0/underline_thickness = 0.0
+cache/0/291/0/scale = 1.0
+cache/0/261/0/ascent = 0.0
+cache/0/261/0/descent = 0.0
+cache/0/261/0/underline_position = 0.0
+cache/0/261/0/underline_thickness = 0.0
+cache/0/261/0/scale = 1.0
+cache/0/241/0/ascent = 0.0
+cache/0/241/0/descent = 0.0
+cache/0/241/0/underline_position = 0.0
+cache/0/241/0/underline_thickness = 0.0
+cache/0/241/0/scale = 1.0
+cache/0/216/0/ascent = 0.0
+cache/0/216/0/descent = 0.0
+cache/0/216/0/underline_position = 0.0
+cache/0/216/0/underline_thickness = 0.0
+cache/0/216/0/scale = 1.0
+cache/0/196/0/ascent = 0.0
+cache/0/196/0/descent = 0.0
+cache/0/196/0/underline_position = 0.0
+cache/0/196/0/underline_thickness = 0.0
+cache/0/196/0/scale = 1.0
+cache/0/171/0/ascent = 0.0
+cache/0/171/0/descent = 0.0
+cache/0/171/0/underline_position = 0.0
+cache/0/171/0/underline_thickness = 0.0
+cache/0/171/0/scale = 1.0
+cache/0/141/0/ascent = 0.0
+cache/0/141/0/descent = 0.0
+cache/0/141/0/underline_position = 0.0
+cache/0/141/0/underline_thickness = 0.0
+cache/0/141/0/scale = 1.0
+cache/0/111/0/ascent = 0.0
+cache/0/111/0/descent = 0.0
+cache/0/111/0/underline_position = 0.0
+cache/0/111/0/underline_thickness = 0.0
+cache/0/111/0/scale = 1.0
+cache/0/51/0/ascent = 0.0
+cache/0/51/0/descent = 0.0
+cache/0/51/0/underline_position = 0.0
+cache/0/51/0/underline_thickness = 0.0
+cache/0/51/0/scale = 1.0
+cache/0/31/0/ascent = 0.0
+cache/0/31/0/descent = 0.0
+cache/0/31/0/underline_position = 0.0
+cache/0/31/0/underline_thickness = 0.0
+cache/0/31/0/scale = 1.0
+cache/0/11/0/ascent = 0.0
+cache/0/11/0/descent = 0.0
+cache/0/11/0/underline_position = 0.0
+cache/0/11/0/underline_thickness = 0.0
+cache/0/11/0/scale = 1.0
+cache/0/1/0/ascent = 0.0
+cache/0/1/0/descent = 0.0
+cache/0/1/0/underline_position = 0.0
+cache/0/1/0/underline_thickness = 0.0
+cache/0/1/0/scale = 1.0
+cache/0/41/0/ascent = 0.0
+cache/0/41/0/descent = 0.0
+cache/0/41/0/underline_position = 0.0
+cache/0/41/0/underline_thickness = 0.0
+cache/0/41/0/scale = 1.0
+cache/0/66/0/ascent = 0.0
+cache/0/66/0/descent = 0.0
+cache/0/66/0/underline_position = 0.0
+cache/0/66/0/underline_thickness = 0.0
+cache/0/66/0/scale = 1.0
+cache/0/81/0/ascent = 0.0
+cache/0/81/0/descent = 0.0
+cache/0/81/0/underline_position = 0.0
+cache/0/81/0/underline_thickness = 0.0
+cache/0/81/0/scale = 1.0
+cache/0/86/0/ascent = 0.0
+cache/0/86/0/descent = 0.0
+cache/0/86/0/underline_position = 0.0
+cache/0/86/0/underline_thickness = 0.0
+cache/0/86/0/scale = 1.0
+cache/0/91/0/ascent = 0.0
+cache/0/91/0/descent = 0.0
+cache/0/91/0/underline_position = 0.0
+cache/0/91/0/underline_thickness = 0.0
+cache/0/91/0/scale = 1.0
+cache/0/71/0/ascent = 0.0
+cache/0/71/0/descent = 0.0
+cache/0/71/0/underline_position = 0.0
+cache/0/71/0/underline_thickness = 0.0
+cache/0/71/0/scale = 1.0
+cache/0/56/0/ascent = 0.0
+cache/0/56/0/descent = 0.0
+cache/0/56/0/underline_position = 0.0
+cache/0/56/0/underline_thickness = 0.0
+cache/0/56/0/scale = 1.0
+cache/0/46/0/ascent = 0.0
+cache/0/46/0/descent = 0.0
+cache/0/46/0/underline_position = 0.0
+cache/0/46/0/underline_thickness = 0.0
+cache/0/46/0/scale = 1.0
+cache/0/26/0/ascent = 0.0
+cache/0/26/0/descent = 0.0
+cache/0/26/0/underline_position = 0.0
+cache/0/26/0/underline_thickness = 0.0
+cache/0/26/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+cache/0/6/0/ascent = 0.0
+cache/0/6/0/descent = 0.0
+cache/0/6/0/underline_position = 0.0
+cache/0/6/0/underline_thickness = 0.0
+cache/0/6/0/scale = 1.0
+cache/0/5/0/ascent = 0.0
+cache/0/5/0/descent = 0.0
+cache/0/5/0/underline_position = 0.0
+cache/0/5/0/underline_thickness = 0.0
+cache/0/5/0/scale = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2glbg"]
+bg_color = Color(0.341176, 0.905882, 0.572549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j234e"]
+bg_color = Color(0.912999, 0.760481, 0.380776, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rts35"]
+bg_color = Color(0.353482, 0.594633, 0.981411, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -221,10 +477,10 @@ offset_bottom = 471.0
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
 layout_mode = 1
-offset_left = 39.0
-offset_top = 38.0
-offset_right = 89.0
-offset_bottom = 88.0
+offset_left = -71.0
+offset_top = 13.0
+offset_right = -21.0
+offset_bottom = 63.0
 focus_mode = 1
 theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_font_sizes/font_size = 20
@@ -234,28 +490,12 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_um4x4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ie8hw")
 shortcut = SubResource("Shortcut_um4x4")
 text = "M"
-script = ExtResource("3_ki1gq")
-
-[node name="Popupmsg" type="Label" parent="."]
-layout_mode = 0
-offset_left = 1100.0
-offset_top = 145.0
-offset_right = 1394.0
-offset_bottom = 352.0
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(291, 203)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_bscbh")
-text = "Pop up"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Textbox" parent="." instance=ExtResource("15_870eb")]
-offset_left = 350.0
-offset_top = 530.0
-offset_right = 350.0
-offset_bottom = 530.0
+offset_left = 401.0
+offset_top = 364.0
+offset_right = 401.0
+offset_bottom = 364.0
 
 [node name="Tutorial Stuff" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -308,19 +548,244 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Heres a bunch of useful information about this agency."
 fit_content = true
 
-[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
-process_mode = 2
-visible = false
-layout_mode = 1
-
-[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
-visible = false
-layout_mode = 1
-
 [node name="TextBubbleSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_e7p23")
 volume_db = -6.0
 bus = &"SFX"
 
-[connection signal="pressed" from="PauseButton" to="PauseButton" method="Paused"]
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugPanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 34.0
+offset_right = -46.0
+offset_bottom = 234.0
+grow_horizontal = 0
+theme = ExtResource("14_rts35")
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugPanel"]
+layout_mode = 2
+theme = ExtResource("14_rts35")
+
+[node name="Panel" type="Panel" parent="DebugPanel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("14_rts35")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cufnj")
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DebugPanel/MarginContainer/MarginContainer"]
+z_index = 999
+layout_mode = 2
+theme = ExtResource("14_rts35")
+theme_override_fonts/normal_font = SubResource("FontFile_cufnj")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+fit_content = true
+
+[node name="Minimap" parent="." instance=ExtResource("10_cufnj")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = -145.0
+offset_right = 224.0
+offset_bottom = -145.0
+grow_vertical = 0
+
+[node name="Tanks" type="HBoxContainer" parent="Minimap"]
+custom_minimum_size = Vector2(400, 300)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 193.0
+offset_top = -142.0
+offset_right = 593.0
+offset_bottom = 158.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(200, 0)
+alignment = 1
+
+[node name="Tank1" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank1Label" type="Label" parent="Minimap/Tanks/Tank1/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank2" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_2glbg")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank2Label" type="Label" parent="Minimap/Tanks/Tank2/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank3" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_j234e")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank3Label" type="Label" parent="Minimap/Tanks/Tank3/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tank4" type="ProgressBar" parent="Minimap/Tanks"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/fill = SubResource("StyleBoxFlat_rts35")
+max_value = 40.0
+fill_mode = 3
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Minimap/Tanks/Tank4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tank4Label" type="Label" parent="Minimap/Tanks/Tank4/CenterContainer"]
+custom_minimum_size = Vector2(80, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
+process_mode = 2
+visible = false
+z_index = 998
+layout_mode = 1
+
+[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
+visible = false
+z_index = 999
+layout_mode = 1
+
+[connection signal="pressed" from="PauseButton" to="." method="Paused"]
 [connection signal="pressed" from="Info Section/Close" to="." method="HideInfoSection"]

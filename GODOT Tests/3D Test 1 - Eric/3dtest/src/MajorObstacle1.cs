@@ -13,43 +13,33 @@ public partial class MajorObstacle1 : StaticBody3D
 	[Export] private float _movespeed = 10;
 	[Export] public Control _ui;
 	[Export] public CharacterBody3D _player;
-	public Label popUp;
-	public AnimatedSprite3D _anim;
+	private Label popUp;
+	private AnimatedSprite3D _anim;
+	private AnimatedSprite3D _overheadanim;
 	private Node3D _tape;
+	private MeshInstance3D _proxmesh;
+	private ShaderMaterial _shader;
 
 	public override void _Ready()
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
+		_overheadanim = GetNode<AnimatedSprite3D>("AnimatedSprite3D2");
 		_tape = GetNode<Node3D>("tape");
-
-		var parent = GetParent().GetParent().GetParent().GetNode<Control>("UI");
-		popUp = parent.GetNode<Label>("Popupmsg");
+		_proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
+		_shader = (ShaderMaterial)_proxmesh.GetActiveMaterial(0);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		_shader.SetShaderParameter("character_position", _player.GlobalPosition);
+
 		if (Position.DistanceTo(_player.GlobalPosition) < 5)
 		{
 			if ((int)_ui.Call("GetTutorialStep") == 4)
 			{
 				_ui.Call("NextTutorialStep");
-				// StopAnimation();
 			}
-			// if (popupExists == false)
-			// {
-			// 	popupExists = true;
-			// 	_ui.Call("Pop", "Hello");
-			// }
 		}
-		// else
-		// {
-		// 	if (popupExists)
-		// 	{
-		// 		popupExists = false;
-		// 		_ui.Call("noPop");
-		// 	}
-		// }
 	}
 
 	private void DealWith(int id)
@@ -62,14 +52,14 @@ public partial class MajorObstacle1 : StaticBody3D
 			_tape.Show();
 			tween.TweenProperty(_tape, "position", _tape.Position + Godot.Vector3.Down * 50, 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
 		}
-
-
 	}
 
 	public void StartAnimation()
 	{
 		_anim.Visible = true;
 		_anim.Play("Warning_Sign");
+		_overheadanim.Visible = true;
+		_overheadanim.Play("Warning_Sign");
 
 	}
 
@@ -77,6 +67,8 @@ public partial class MajorObstacle1 : StaticBody3D
 	{
 		_anim.Stop();
 		_anim.Visible = false;
+		_overheadanim.Stop();
+		_overheadanim.Visible = false;
 	}
 
 	public bool GetDealtWithStatus()

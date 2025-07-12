@@ -1,11 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://bp8fj6wujphhr"]
+[gd_scene load_steps=26 format=3 uid="uid://bp8fj6wujphhr"]
 
 [ext_resource type="Texture2D" uid="uid://c0wqekvabgq3m" path="res://assets/menu/Title_Finished.png" id="1_hheb7"]
 [ext_resource type="Texture2D" uid="uid://c4g28pgjeawrx" path="res://assets/menu/Start_Button_Hover.png" id="2_jfoks"]
-[ext_resource type="Script" uid="uid://cn8mnasqkyfig" path="res://assets/menu/Title.cs" id="2_n5d6s"]
-[ext_resource type="Script" uid="uid://ydjvpr3yqgfm" path="res://assets/menu/StartButton.cs" id="2_toexd"]
-[ext_resource type="Script" uid="uid://dl7nh8sxdxxae" path="res://assets/menu/ExitButton.cs" id="3_aid4m"]
-[ext_resource type="Script" uid="uid://b0esanefjn1cc" path="res://assets/menu/OptionsButton.cs" id="3_hheb7"]
+[ext_resource type="Script" uid="uid://cn8mnasqkyfig" path="res://src/Title.cs" id="2_n5d6s"]
+[ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="2_sewyn"]
+[ext_resource type="Script" uid="uid://ydjvpr3yqgfm" path="res://src/StartButton.cs" id="2_toexd"]
+[ext_resource type="Script" uid="uid://dl7nh8sxdxxae" path="res://src/ExitButton.cs" id="3_aid4m"]
+[ext_resource type="Script" uid="uid://b0esanefjn1cc" path="res://src/OptionsButton.cs" id="3_hheb7"]
 [ext_resource type="Texture2D" uid="uid://bx6eejr3kjepe" path="res://assets/menu/Start_Button.png" id="3_n5d6s"]
 [ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="5_p340a"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="6_4528w"]
@@ -58,6 +59,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Blur" type="ColorRect" parent="."]
+material = ExtResource("2_sewyn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Title" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -72,9 +82,9 @@ script = ExtResource("2_n5d6s")
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 729.0
-offset_top = 518.0
+offset_top = 520.0
 offset_right = 1192.0
-offset_bottom = 684.0
+offset_bottom = 686.0
 pivot_offset = Vector2(226, 78)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -92,9 +102,9 @@ script = ExtResource("2_toexd")
 [node name="OptionsButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 729.0
-offset_top = 704.0
+offset_top = 720.0
 offset_right = 1192.0
-offset_bottom = 870.0
+offset_bottom = 886.0
 pivot_offset = Vector2(228, 77)
 size_flags_vertical = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -112,9 +122,9 @@ script = ExtResource("3_hheb7")
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 2
 offset_left = 784.0
-offset_top = 896.0
+offset_top = 920.0
 offset_right = 1134.0
-offset_bottom = 1021.0
+offset_bottom = 1045.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(177, 58)

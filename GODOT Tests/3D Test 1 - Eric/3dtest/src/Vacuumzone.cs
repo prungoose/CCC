@@ -40,15 +40,17 @@ public partial class Vacuumzone : Area3D
 			RigidBody3D body = _bodies[i];
 			if (body.IsInGroup("cleanable_vacuum"))
 			{
+				body.ApplyCentralForce(Godot.Vector3.Up * 0.001f); //to wkae the body up
 				int trash_id = (int)_bodies[i].Call("_GetTrashID");
 				int playerpercentage = (int)_player.Call("_GetTankPercentage", trash_id);
 				if (playerpercentage < 40 && _time_active > 0.2)
 				{
+					body.CollisionLayer = 0;
 					_player.Call("_IncTank", trash_id);
 					var tween = GetTree().CreateTween();
 					tween.TweenProperty(body, "global_position", _player.GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
 					tween.Finished += () => body.QueueFree();
-					tween.Finished += () => _PlaySuckSFX();
+					_PlaySuckSFX();
 					_bodies.Remove(body);
 				}
 			}

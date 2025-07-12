@@ -31,6 +31,9 @@ public partial class Controller : CharacterBody3D
 	private Path3D _trajpath;
 	private Node3D _trajnode;
 	private MeshInstance3D _trajtarget;
+	private Node3D _lightpivot;
+	private ShapeCast3D _stepray;
+	private Node3D _stepraypivot;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -60,6 +63,9 @@ public partial class Controller : CharacterBody3D
 		_trajpathmesh.Polygon = _makecirclepolygon();
 		_trajpath = GetNode<Path3D>("Trajectory/Path3D");
 		_trajnode = GetNode<Node3D>("Trajectory");
+		_lightpivot = GetNode<Node3D>("LightPivot");
+		_stepray = GetNode<ShapeCast3D>("StepRayPivot/StepRay");
+		_stepraypivot = GetNode<Node3D>("StepRayPivot");
 		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
@@ -70,7 +76,9 @@ public partial class Controller : CharacterBody3D
 	{
 
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
-		_vacuum.Rotation = new Godot.Vector3(0, _head.Rotation.Y, 0);
+		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
+		_vacuum.Rotation = y_rotate;
+		_lightpivot.Rotation = y_rotate;
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);
@@ -147,11 +155,20 @@ public partial class Controller : CharacterBody3D
 			if (dir != Godot.Vector3.Zero)
 			{
 				_velocity = _velocity.Lerp(dir * _movespeed, (float)delta * _accel);
+				_stepraypivot.Rotation = new Godot.Vector3(0, Godot.Vector3.Forward.SignedAngleTo(dir, Godot.Vector3.Up), 0);
+				if (_stepray.IsColliding())
+				{
+
+					var height = (_stepray.GetCollisionPoint(0)- GlobalPosition).Y;
+					GlobalTranslate(new Godot.Vector3(0, height, 0));
+				}
 			}
 			else _velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
 			_velocity.Y -= 100 * (float)delta;
 			Velocity = _velocity;
 		}
+
+
 		MoveAndSlide();
 	}
 
@@ -345,6 +362,7 @@ public partial class Controller : CharacterBody3D
 		foreach (Godot.Vector3 i in result) { curve.AddPoint(i); }
 		_trajpath.Curve = curve;
 
+
 		if (_trajtarget != null)
 		{
 			_trajtarget.QueueFree();
@@ -436,10 +454,8 @@ public partial class Controller : CharacterBody3D
 
 	private void SwitchThrown(int id)
 	{
-		if (!(is_blowing && _GetTankPercentage(id) < 20))
-		{
-			_thrown_id = id;
-		}
+		if (id == _thrown_id) _thrown_id = 0;
+		else if (!(is_blowing && _GetTankPercentage(id) < 20)) _thrown_id = id;
 		_ui.Call("_UpdateThrown", _thrown_id);
 	}
 
