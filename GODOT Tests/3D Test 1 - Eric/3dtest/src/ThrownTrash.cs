@@ -5,6 +5,7 @@ public partial class ThrownTrash : RigidBody3D
 {
 	[Export] private PackedScene _trashscene;
 	private CharacterBody3D _player;
+	private Sprite3D _sprite;
 	private int _bounces;
 	private int _id;
 
@@ -12,6 +13,15 @@ public partial class ThrownTrash : RigidBody3D
 	{
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
 		_id = (int)_player.Call("GetCurrentThrowing");
+		_sprite = GetNode<Sprite3D>("Sprite3D");
+
+		switch (_id)
+		{
+			case 1: _sprite.Frame = 2; break;
+			case 2: _sprite.Frame = 1; break;
+			case 3: _sprite.Frame = 0; break;
+			case 4: _sprite.Frame = 3; break;
+		}
 	}
 
 	public override void _Process(double delta)
