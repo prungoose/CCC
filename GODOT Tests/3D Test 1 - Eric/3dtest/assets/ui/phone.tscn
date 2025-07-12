@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://7ghxngbd3bft"]
 
-[ext_resource type="Script" uid="uid://dai70evwdplev" path="res://src/Phone.cs" id="1_0ox6e"]
+[ext_resource type="Script" uid="uid://dai70evwdplev" path="res://assets/ui/Phone.cs" id="1_0ox6e"]
 [ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_0ox6e"]
 [ext_resource type="Texture2D" uid="uid://dlr6f83dmgy1c" path="res://assets/ui/catback.png" id="3_es7qe"]
 [ext_resource type="Texture2D" uid="uid://ccmxy7xmx7v2d" path="res://assets/ui/test_phone.png" id="4_6p58s"]

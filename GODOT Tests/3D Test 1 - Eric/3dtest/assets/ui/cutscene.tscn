@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dewmax538audw"]
 
 [ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="1_b0kbf"]
-[ext_resource type="Script" uid="uid://dn1ca42qw7ja1" path="res://src/CutsceneText.cs" id="2_kfutr"]
+[ext_resource type="Script" uid="uid://dn1ca42qw7ja1" path="res://assets/ui/CutsceneText.cs" id="2_kfutr"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="3_x3fml"]
 
 [node name="Cutscene" type="Control"]

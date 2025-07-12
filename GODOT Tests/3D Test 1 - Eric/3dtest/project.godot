@@ -11,28 +11,18 @@ config_version=5
 [application]
 
 config/name="3DTest"
-run/main_scene="uid://dmbvspbhvyrrk"
+run/main_scene="uid://bp8fj6wujphhr"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://assets/icon.svg"
-run/stretch/scale_mode="integer"
 
 [autoload]
 
 Global="*res://assets/Audios/Global Music/Global.tscn"
-SceneTransition="*res://assets/level/sceneTransition.tscn"
-
-[debug]
-
-settings/physics_interpolation/enable_warnings=false
-settings/stretch/scale_mode="fractional"
-settings/stretch/mode="disabled"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
-window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -106,12 +96,9 @@ m2={
 [physics]
 
 3d/run_on_separate_thread=true
-common/max_physics_steps_per_frame=2
-3d/physics_engine="Jolt Physics"
-jolt_physics_3d/simulation/velocity_steps=4
-3d/solver/solver_iterations=3
+common/physics_jitter_fix=0.0
+3d/solver/solver_iterations=4
 common/physics_interpolation=true
-3d/max_physics_steps_per_frame=2
 
 [rendering]
 

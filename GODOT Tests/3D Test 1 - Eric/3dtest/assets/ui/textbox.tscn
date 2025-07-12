@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cpiqgw426s24"]
 
-[ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://src/Textbox.cs" id="1_5wdy1"]
+[ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://assets/ui/Textbox.cs" id="1_5wdy1"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="1_aqvb0"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="3_g1w8g"]
 [ext_resource type="Texture2D" uid="uid://emtut8a80gn6" path="res://assets/cutscene characters/Mayumarosprite_1.png" id="3_k7pxp"]

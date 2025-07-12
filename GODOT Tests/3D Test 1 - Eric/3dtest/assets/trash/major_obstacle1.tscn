@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://n8u7og81agdi"]
+
+[ext_resource type="Script" uid="uid://b4h8si7mv3xng" path="res://src/MajorObstacle1.cs" id="1_0jk1x"]
+[ext_resource type="Texture2D" uid="uid://1obcxb848no4" path="res://assets/ui/warning_icon.png" id="2_qcs8f"]
+[ext_resource type="Texture2D" uid="uid://d33iihj7b1e1f" path="res://assets/player/vaccuum_spritesheet3.png" id="2_v0qbx"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_enbpq"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_jyq6q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6n1xx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enbpq"]
+atlas = ExtResource("2_v0qbx")
+region = Rect2(1056, 352, 352, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xh6s6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qcs8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enbpq")
+}],
+"loop": true,
+"name": &"Warning_Sign",
+"speed": 2.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_enbpq"]
+height = 0.742188
+radius = 1.1
+
+[node name="StaticBody3D" type="StaticBody3D" groups=["major_obstacle"]]
+script = ExtResource("1_0jk1x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_jyq6q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6n1xx")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.00143571, 1.02596, 0.0433283)
+visible = false
+billboard = 1
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_xh6s6")
+animation = &"Warning_Sign"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="tape" parent="." instance=ExtResource("4_enbpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.5, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_enbpq")

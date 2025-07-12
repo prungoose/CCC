@@ -160,7 +160,7 @@ mesh = SubResource("CylinderMesh_ul6ya")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 2, 0, -1, -8.74228e-08, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -3)
 shape = SubResource("ConvexPolygonShape3D_ul6ya")
 
 [node name="suck" type="Area3D" parent="."]
