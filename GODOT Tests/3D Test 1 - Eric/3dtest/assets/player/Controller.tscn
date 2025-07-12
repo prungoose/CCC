@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=74 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="2_uhyoe"]
@@ -12,10 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="10_xplcw"]
 [ext_resource type="Texture2D" uid="uid://c0xnbjb4bphpv" path="res://assets/ui/sprite_map_outline.png" id="11_u26f6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hsahs"]
-size = Vector3(1, 0.215137, 1)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
+radius = 0.35
 height = 1.2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1j3r"]
@@ -556,10 +554,6 @@ floor_constant_speed = true
 platform_on_leave = 2
 script = ExtResource("1_s7e8h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11781, 0)
-shape = SubResource("BoxShape3D_hsahs")
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_rlquk")
@@ -667,7 +661,7 @@ cull_mask = 1048573
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="StepRay" type="ShapeCast3D" parent="StepRayPivot"]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, -0.484937)
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, -0.367151)
 shape = SubResource("SeparationRayShape3D_apgsg")
 target_position = Vector3(0, 0.02, 0)
 

@@ -106,9 +106,12 @@ m2={
 [physics]
 
 3d/run_on_separate_thread=true
-common/physics_jitter_fix=0.0
-3d/solver/solver_iterations=4
+common/max_physics_steps_per_frame=2
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/velocity_steps=4
+3d/solver/solver_iterations=3
 common/physics_interpolation=true
+3d/max_physics_steps_per_frame=2
 
 [rendering]
 
