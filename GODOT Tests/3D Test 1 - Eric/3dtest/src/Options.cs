@@ -9,7 +9,7 @@ public partial class Options : Control
 	private HSlider sfxslider;
 	private HSlider ambslider;
 	private OptionButton langbutton;
-	private OptionButton timebutton;
+	//private OptionButton timebutton;
 	public ConfigFile CF = new ConfigFile();
 	[Export] public VBoxContainer parent;
 
@@ -21,7 +21,7 @@ public partial class Options : Control
 	private Label sfxLabel;
 	private Label ambLabel;
 	private Label langLabel;
-	private Label timeLabel;
+	//private Label timeLabel;
 	private Label OptionsTitle;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -31,7 +31,7 @@ public partial class Options : Control
 		sfxLabel = parentLabel.GetNode<Label>("Sound Effects");
 		ambLabel = parentLabel.GetNode<Label>("Ambiance");
 		langLabel = parentLabel.GetNode<Label>("Language");
-		timeLabel = parentLabel.GetNode<Label>("Timer");
+		//timeLabel = parentLabel.GetNode<Label>("Timer");
 		OptionsTitle = GetNode<Label>("OptionsLabel");
 
 		SampleSFX = GetNode<AudioStreamPlayer>("SampleSFX");
@@ -43,7 +43,7 @@ public partial class Options : Control
 		sfxslider = parent.GetNode<HSlider>("SoundEffectsSlider");
 		ambslider = parent.GetNode<HSlider>("AmbianceSlider");
 		langbutton = parent.GetNode<OptionButton>("LanguageButton");
-		timebutton = parent.GetNode<OptionButton>("TimerButton");
+		//timebutton = parent.GetNode<OptionButton>("TimerButton");
 
 		ambiance_index = AudioServer.GetBusIndex("Ambiance");
 		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb((float)ambslider.Value));
@@ -88,7 +88,7 @@ public partial class Options : Control
 		CF.SetValue("playersettings", "sfx", sfxslider.Value);
 		CF.SetValue("playersettings", "amb", ambslider.Value);
 		CF.SetValue("playersettings", "lang", langbutton.Selected);
-		CF.SetValue("playersettings", "time", timebutton.Selected);
+		//CF.SetValue("playersettings", "time", timebutton.Selected);
 		CF.Save(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg");
 		//GD.Print(OS.GetUserDataDir());
 	}
@@ -105,7 +105,7 @@ public partial class Options : Control
 			sfxslider.Value = (float)CF.GetValue("playersettings", "sfx", sfxslider.Value);
 			ambslider.Value = (float)CF.GetValue("playersettings", "amb", ambslider.Value);
 			langbutton.Selected = (int)CF.GetValue("playersettings", "lang", langbutton.Selected); // 1 = Eng, 0 = Jap
-			timebutton.Selected = (int)CF.GetValue("playersettings", "time", timebutton.Selected); // 3 = 2:00, 2 = 1:30, 1 = 1:00, 0 = 0:30
+			//timebutton.Selected = (int)CF.GetValue("playersettings", "time", timebutton.Selected); // 3 = 2:00, 2 = 1:30, 1 = 1:00, 0 = 0:30
 		}
 	}
 
@@ -123,7 +123,7 @@ public partial class Options : Control
 			sfxLabel.Text = "Sound Effects";
 			ambLabel.Text = "Ambiance";
 			langLabel.Text = "Language";
-			timeLabel.Text = "Timer";
+			//timeLabel.Text = "Timer";
 			OptionsTitle.Text = "Options";
 		}
 		else if (lang == 0)
@@ -132,7 +132,7 @@ public partial class Options : Control
 			sfxLabel.Text = "効果音";
 			ambLabel.Text = "雰囲気";
 			langLabel.Text = "言語";
-			timeLabel.Text = "タイマー";
+			//timeLabel.Text = "タイマー";
 			OptionsTitle.Text = "設定";
 		}
 

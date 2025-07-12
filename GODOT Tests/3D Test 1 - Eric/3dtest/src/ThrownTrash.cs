@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class ThrownTrash : RigidBody3D
 {
@@ -7,11 +8,13 @@ public partial class ThrownTrash : RigidBody3D
 	private CharacterBody3D _player;
 	private int _bounces;
 	private int _id;
+	private AudioStreamPlayer3D boingSFX;
 
 	public override void _Ready()
 	{
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
 		_id = (int)_player.Call("GetCurrentThrowing");
+		boingSFX = GetNode<AudioStreamPlayer3D>("BoingSFX");
 	}
 
 	public override void _Process(double delta)
@@ -25,6 +28,8 @@ public partial class ThrownTrash : RigidBody3D
 
 	private void _collision(Node body)
 	{
+		if (!boingSFX.Playing)
+			boingSFX.Play();
 		_bounces++;
 		if (_bounces == 2)
 		{
@@ -32,7 +37,7 @@ public partial class ThrownTrash : RigidBody3D
 			{
 				_spawntrash();
 			}
-			QueueFree();
+			boingSFX.Finished += () => QueueFree();
 		}
 	}
 

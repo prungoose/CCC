@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=28 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="2_8px8m"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle.tscn" id="5_bofc0"]
 [ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
+[ext_resource type="AudioStream" uid="uid://c635urq3msa13" path="res://assets/Audios/windingUp.wav" id="7_wpr57"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
 [ext_resource type="PackedScene" uid="uid://b83ge5vg8o8bc" path="res://assets/trash/thrown_trash.tscn" id="10_a4lti"]
@@ -204,10 +205,10 @@ _trashId = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="RTrashSpawner" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8042, -0.0569999, 12.0742)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742)
 
 [node name="RTrashSpawner2" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8654, -0.0570002, -13.0694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1663, -0.0570002, -13.0694)
 
 [node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
@@ -239,6 +240,10 @@ stream = ExtResource("18_04qkv")
 autoplay = true
 panning_strength = 0.5
 bus = &"Ambiance"
+
+[node name="windUpSFX" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Audio"]
+stream = ExtResource("7_wpr57")
+bus = &"SFX"
 
 [node name="Camera" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_target")]
 script = ExtResource("2_8px8m")
@@ -278,7 +283,7 @@ _player = NodePath("../../Player")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/MouseTarget"]
 mesh = SubResource("CylinderMesh_ofhqe")
 
-[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
+[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui", "windUpSFX") instance=ExtResource("5_8wjkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
 _headtarget = NodePath("../Camera/MouseTarget")
 _campivot = NodePath("../Camera")
@@ -286,6 +291,7 @@ _thrown_trash = ExtResource("10_a4lti")
 _trajtarget_scene = ExtResource("11_pr11n")
 _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_iw0pl")
+windUpSFX = NodePath("../Audio/windUpSFX")
 
 [node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player") instance=ExtResource("17_r1ht6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
