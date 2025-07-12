@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=39 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="Texture2D" uid="uid://cwfau62joqi1h" path="res://addons/godot-prototype-texture/PNG/checker_512x512/checker_white_512x512.png" id="1_4nu0a"]
 [ext_resource type="Script" uid="uid://cpv32mp33kteq" path="res://assets/level/AmbianceSFX.cs" id="1_04qkv"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_iw0pl"]
 [ext_resource type="Script" uid="uid://btbqhjcfcv1x5" path="res://src/TrashSpawner.cs" id="16_iw0pl"]
 [ext_resource type="AudioStream" uid="uid://b88r37dtfg52l" path="res://assets/Audios/Ambiance.wav" id="17_04qkv"]
-[ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube1.tscn" id="17_wpr57"]
 
 [sub_resource type="Gradient" id="Gradient_wpr57"]
 
@@ -217,27 +216,22 @@ _trashId = 4
 [node name="RedSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.439726, 2.51062, 9.36553)
 script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [node name="GreenSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3646, 2.51062, 2.90746)
 script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [node name="YellowSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.867, 1.10004, -0.0370133)
 script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [node name="BlueSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07995, 2.51062, -17.0475)
 script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [node name="RandSpawn" type="Node3D" parent="SubViewportContainer/SubViewport/Level/Spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3919, 2.51062, -12.7242)
 script = ExtResource("16_iw0pl")
-_spawn = ExtResource("17_wpr57")
 
 [node name="RaccoonAgent" type="CharacterBody3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)

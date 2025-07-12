@@ -13,7 +13,7 @@ font_size = 50
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Phone" type="Control" node_paths=PackedStringArray("_agenciesButton", "_hazardsButton", "_dispatchButton", "_agenciesScreen", "_hazardsScreen", "_dispatchScreen", "_homeScreen", "_hazardOptions", "_PowerlineButton", "_ChemicalSpillButton", "_agencyOptions", "_PowerCompanyButton", "_FireDepartmentButton", "_dialLabel", "_backButton", "_titleText", "_descriptionText")]
+[node name="Phone" type="Control" node_paths=PackedStringArray("_agenciesButton", "_hazardsButton", "_dispatchButton", "_agenciesScreen", "_hazardsScreen", "_dispatchScreen", "_homeScreen", "_hazardOptions", "_powerlineButton", "_chemicalSpillButton", "_agencyOptions", "_powerCompanyButton", "_fireDepartmentButton", "_dialLabel", "_backButton", "_titleText", "_descriptionText")]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -35,31 +35,20 @@ _hazardsScreen = NodePath("PhoneSprite/Hazards Screen")
 _dispatchScreen = NodePath("PhoneSprite/Dial Screen")
 _homeScreen = NodePath("PhoneSprite/Home Screen")
 _hazardOptions = NodePath("PhoneSprite/Hazards Screen/Options")
-_PowerlineButton = NodePath("PhoneSprite/Hazards Screen/Options/Power")
-_ChemicalSpillButton = NodePath("PhoneSprite/Hazards Screen/Options/Chemical Spill")
+_powerlineButton = NodePath("PhoneSprite/Hazards Screen/Options/Power")
+_chemicalSpillButton = NodePath("PhoneSprite/Hazards Screen/Options/Chemical Spill")
 _agencyOptions = NodePath("PhoneSprite/Agencies Screen/Options")
-_PowerCompanyButton = NodePath("PhoneSprite/Agencies Screen/Options/Power Company")
-_FireDepartmentButton = NodePath("PhoneSprite/Agencies Screen/Options/Fire Department")
+_powerCompanyButton = NodePath("PhoneSprite/Agencies Screen/Options/Power Company")
+_fireDepartmentButton = NodePath("PhoneSprite/Agencies Screen/Options/Fire Department")
 _dialLabel = NodePath("PhoneSprite/Dial Screen/Label")
-_backButton = NodePath("PhoneSprite/Back Button")
+_backButton = NodePath("PhoneSprite/Button")
 _titleText = NodePath("PhoneSprite/Title Display")
 _descriptionText = NodePath("PhoneSprite/Description Display")
 
 [node name="PhoneSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_0ox6e")
 
-[node name="Back Button" type="Button" parent="PhoneSprite"]
-z_index = 1
-offset_left = -207.0
-offset_top = -407.0
-offset_right = -27.0
-offset_bottom = -212.0
-scale = Vector2(0.3, 0.2)
-theme_override_font_sizes/font_size = 105
-text = "←"
-
 [node name="Title Display" type="RichTextLabel" parent="PhoneSprite"]
-visible = false
 offset_left = -215.0
 offset_top = -351.0
 offset_right = 202.0
@@ -67,12 +56,10 @@ offset_bottom = -299.0
 theme_override_font_sizes/normal_font_size = 34
 theme_override_font_sizes/bold_font_size = 10
 bbcode_enabled = true
-text = "Powerline"
 fit_content = true
 horizontal_alignment = 1
 
 [node name="Description Display" type="RichTextLabel" parent="PhoneSprite"]
-visible = false
 offset_left = -207.0
 offset_top = -292.0
 offset_right = 213.0
@@ -80,7 +67,6 @@ offset_bottom = 145.0
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 7
 bbcode_enabled = true
-text = "This "
 
 [node name="Agencies Screen" type="Control" parent="PhoneSprite"]
 visible = false
@@ -180,6 +166,7 @@ offset_right = 219.0
 offset_bottom = 410.0
 
 [node name="Hazards Button" type="Button" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 146.0
 offset_top = 48.0
 offset_right = 2554.0
@@ -190,6 +177,7 @@ icon = ExtResource("5_8xw5c")
 icon_alignment = 1
 
 [node name="Agencies Label" type="Label" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 45.0
 offset_top = 182.0
 offset_right = 114.0
@@ -198,6 +186,7 @@ text = "Agencies"
 horizontal_alignment = 1
 
 [node name="Hazards Label" type="Label" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 186.0
 offset_top = 178.0
 offset_right = 249.0
@@ -205,6 +194,7 @@ offset_bottom = 201.0
 text = "Hazards"
 
 [node name="Dial Button" type="Button" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 280.0
 offset_top = 47.0
 offset_right = 531.0
@@ -214,6 +204,7 @@ theme_override_font_sizes/font_size = 11
 icon = ExtResource("4_6p58s")
 
 [node name="Agencies Button" type="Button" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 51.0
 offset_right = 1167.0
@@ -224,6 +215,7 @@ icon = ExtResource("4_es7qe")
 icon_alignment = 1
 
 [node name="Dial Label" type="Label" parent="PhoneSprite/Home Screen"]
+layout_mode = 0
 offset_left = 329.0
 offset_top = 185.0
 offset_right = 369.0
@@ -255,9 +247,17 @@ clip_text = true
 
 [node name="PhoneBackground" type="Sprite2D" parent="PhoneSprite"]
 show_behind_parent = true
-position = Vector2(4.5, 1.5)
+position = Vector2(4.50003, 1.50003)
 scale = Vector2(1.49662, 1.30156)
 texture = ExtResource("3_es7qe")
+
+[node name="Button" type="Button" parent="PhoneSprite"]
+offset_left = -208.0
+offset_top = -407.0
+offset_right = -117.0
+offset_bottom = -344.0
+theme_override_font_sizes/font_size = 40
+text = "←"
 
 [node name="PhoneSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_8xw5c")
@@ -273,3 +273,4 @@ bus = &"SFX"
 [connection signal="pressed" from="PhoneSprite/Home Screen/Hazards Button" to="." method="HazardsTabPressed"]
 [connection signal="pressed" from="PhoneSprite/Home Screen/Dial Button" to="." method="DispatchTabPressed"]
 [connection signal="pressed" from="PhoneSprite/Home Screen/Agencies Button" to="." method="AgenciesTabPressed"]
+[connection signal="pressed" from="PhoneSprite/Button" to="." method="BackButtonPressed"]

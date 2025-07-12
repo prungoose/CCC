@@ -1,32 +1,28 @@
 using Godot;
 using System;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
 
 public partial class Phone : Control
 {
-
-
     // Application Buttons
     [Export] private Button _agenciesButton;
     [Export] private Button _hazardsButton;
     [Export] private Button _dispatchButton;
 
-    // Application Screens (For toggling visibility)
+    // Application Screens
     [Export] private Control _agenciesScreen;
     [Export] private Control _hazardsScreen;
     [Export] private Control _dispatchScreen;
     [Export] private Control _homeScreen;
 
-    // Hazards
+    // Hazard Info
     [Export] private Control _hazardOptions;
-    [Export] private Button _PowerlineButton;
-    [Export] private Button _ChemicalSpillButton;
+    [Export] private Button _powerlineButton;
+    [Export] private Button _chemicalSpillButton;
 
-    // Agencies
+    // Agency Info
     [Export] private Control _agencyOptions;
-    [Export] private Button _PowerCompanyButton;
-    [Export] private Button _FireDepartmentButton;
+    [Export] private Button _powerCompanyButton;
+    [Export] private Button _fireDepartmentButton;
 
     // Misc
     [Export] private Label _dialLabel;
@@ -34,152 +30,166 @@ public partial class Phone : Control
     [Export] private RichTextLabel _titleText;
     [Export] private RichTextLabel _descriptionText;
 
-    private Boolean _agencieInfoOpen = false;
-    private Boolean _hazardInfoOpen = false;
+    // Internal State
+    private bool _agencyInfoOpen = false;
+    private bool _hazardInfoOpen = false;
 
     // External
-    private Control _UI;
-    private AudioStreamPlayer PhoneSFX;
-
-
+    private Control _ui;
+    private AudioStreamPlayer _phoneSfx;
 
     public override void _Ready()
     {
+        // Initial screen visibility
         _agenciesScreen.Visible = false;
         _hazardsScreen.Visible = false;
         _dispatchScreen.Visible = false;
         _homeScreen.Visible = true;
         _backButton.Visible = false;
 
-        _UI = GetParent().GetParent().GetNode<Control>("UI");
-        PhoneSFX = GetNode<AudioStreamPlayer>("PhoneSFX");
+        // Fetch references
+        _ui = GetNodeOrNull<Control>("../../UI");
+        _phoneSfx = GetNodeOrNull<AudioStreamPlayer>("PhoneSFX");
+
+        if (_ui == null)
+            GD.PushWarning("UI node not found.");
+        if (_phoneSfx == null)
+            GD.PushWarning("PhoneSFX node not found.");
     }
+
+    private void PlaySfx() => _phoneSfx?.Play();
 
     private void AgenciesTabPressed()
     {
-        if ((int)_UI.Call("GetTutorialStep") == 8)
-        {
-            _UI.Call("NextTutorialStep");
-        }
-        _agenciesScreen.Visible = true;
-        _hazardsScreen.Visible = false;
-        _dispatchScreen.Visible = false;
-        _homeScreen.Visible = false;
-        _backButton.Visible = true;
+        if ((int)_ui?.Call("GetTutorialStep") == 8)
+            _ui.Call("NextTutorialStep");
 
-        PhoneSFX.Play();
+
+        ShowScreen(_agenciesScreen);
     }
 
     private void HazardsTabPressed()
     {
-        if ((int)_UI.Call("GetTutorialStep") == 6)
-        {
-            _UI.Call("NextTutorialStep");
-        }
-        _agenciesScreen.Visible = false;
-        _hazardsScreen.Visible = true;
-        _dispatchScreen.Visible = false;
-        _homeScreen.Visible = false;
-        _backButton.Visible = true;
+        if ((int)_ui?.Call("GetTutorialStep") == 6)
+            _ui.Call("NextTutorialStep");
 
 
-        PhoneSFX.Play();
+        ShowScreen(_hazardsScreen);
     }
 
     private void DispatchTabPressed()
     {
 
-        _agenciesScreen.Visible = false;
-        _hazardsScreen.Visible = false;
-        _dispatchScreen.Visible = true;
-        _homeScreen.Visible = false;
-        _backButton.Visible = true;
-
-
-        PhoneSFX.Play();
+        ShowScreen(_dispatchScreen);
     }
 
+    private void ShowScreen(Control screenToShow)
+    {
+        _agenciesScreen.Visible = false;
+        _hazardsScreen.Visible = false;
+        _dispatchScreen.Visible = false;
+        _homeScreen.Visible = false;
 
-    // Changing this to internal text on the phone directly
+        screenToShow.Visible = true;
+        _backButton.Visible = true;
+
+        if (screenToShow == _agenciesScreen)
+        {
+            _agencyOptions.Visible = true;
+            _hazardOptions.Visible = false;
+        }
+        else if (screenToShow == _hazardsScreen)
+        {
+            _hazardOptions.Visible = true;
+            _agencyOptions.Visible = false;
+        }
+        else
+        {
+            _agencyOptions.Visible = false;
+            _hazardOptions.Visible = false;
+        }
+
+        PlaySfx();
+    }
 
     private void InfoButtonPressed()
     {
-        GD.Print("Button Pressed");
-        if (_ChemicalSpillButton.IsPressed())
-        {
-            _titleText.Text = "Chemical Spill";
-            _descriptionText.Text = "Chemical spills can be extremely dangerous. They can cause fires, explosions, and environmental damage. Always call the appropriate agency to handle them.";
-            showInfoSection();
-        }
-        if (_PowerlineButton.IsPressed())
-        {
-            _titleText.Text = "Powerline";
-            _descriptionText.Text = "Powerlines are a major hazard that can cause serious damage if not handled properly. They can electrocute you and cause fires. Always call the appropriate agency to handle them.";
-            showInfoSection();
 
-            if ((int)_UI.Call("GetTutorialStep") == 7)
-            {
+        if (_chemicalSpillButton.IsPressed())
+        {
 
-                _UI.Call("NextTutorialStep");
-            }
-        }
-        if (_PowerCompanyButton.IsPressed())
-        {
-            _titleText.Text = "Power Company";
-            _descriptionText.Text = "The power company is responsible for maintaining the power grid and handling powerline hazards. They can help you with any power-related issues. The code is ↑→↓←";
-            showInfoSection();
-        }
-        if (_FireDepartmentButton.IsPressed())
-        {
-            _titleText.Text = "Fire Department";
-            _descriptionText.Text = "The fire department is responsible for handling fires and other emergencies. They can help you with any fire-related issues.";
-            showInfoSection();
+            SetInfo(
+                "Chemical Spill",
+                "Chemical spills can be extremely dangerous. They can cause fires, explosions, and environmental damage. Always call the appropriate agency to handle them."
+            );
+            ToggleHazardInfo();
         }
 
-        PhoneSFX.Play();
+        if (_powerlineButton.IsPressed())
+        {
+
+            SetInfo(
+                "Powerline",
+                "Powerlines are a major hazard that can cause serious damage if not handled properly. They can electrocute you and cause fires. Always call the appropriate agency to handle them."
+            );
+            ToggleHazardInfo();
+
+            if ((int)_ui?.Call("GetTutorialStep") == 7)
+                _ui.Call("NextTutorialStep");
+        }
+
+        if (_powerCompanyButton.IsPressed())
+        {
+
+            SetInfo(
+                "Power Company",
+                "The power company is responsible for maintaining the power grid and handling powerline hazards. They can help you with any power-related issues. The code is ↑→↓←"
+            );
+            ToggleAgencyInfo();
+        }
+
+        if (_fireDepartmentButton.IsPressed())
+        {
+
+            SetInfo(
+                "Fire Department",
+                "The fire department is responsible for handling fires and other emergencies. They can help you with any fire-related issues."
+            );
+            ToggleAgencyInfo();
+        }
+
+        PlaySfx();
     }
 
-    private void showInfoSection()
+    private void SetInfo(string title, string description)
     {
-        if (_agencieInfoOpen)
-        {
-            _agencyOptions.Visible = false;
-            _agencieInfoOpen = false;
-        }
-        else
-        {
-            _agencyOptions.Visible = true;
-            _agencieInfoOpen = true;
-        }
+        _titleText.Text = title;
+        _descriptionText.Text = description;
+    }
 
-        if (_hazardInfoOpen)
-        {
-            _hazardOptions.Visible = false;
-            _hazardInfoOpen = false;
-        }
-        else
-        {
-            _hazardOptions.Visible = true;
-            _hazardInfoOpen = true;
-        }
+    private void ToggleAgencyInfo()
+    {
+        _agencyOptions.Visible = false;
+    }
+
+    private void ToggleHazardInfo()
+    {
+        _hazardOptions.Visible = false;
     }
 
     private void BackButtonPressed()
     {
-        if (_agenciesScreen.Visible)
+        if (_agenciesScreen.Visible || _hazardsScreen.Visible || _dispatchScreen.Visible)
         {
             _agenciesScreen.Visible = false;
-            _homeScreen.Visible = true;
-        }
-        else if (_hazardsScreen.Visible)
-        {
             _hazardsScreen.Visible = false;
-            _homeScreen.Visible = true;
-        }
-        else if (_dispatchScreen.Visible)
-        {
             _dispatchScreen.Visible = false;
             _homeScreen.Visible = true;
+            _backButton.Visible = false;
+            _titleText.Text = "";
+            _descriptionText.Text = "";
         }
+
+        PlaySfx();
     }
 }
