@@ -380,7 +380,6 @@ offset_bottom = 471.0
 
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
-visible = false
 layout_mode = 1
 offset_left = 39.0
 offset_top = 38.0
@@ -453,15 +452,6 @@ theme_override_font_sizes/normal_font_size = 23
 text = "Heres a bunch of useful information about this agency."
 fit_content = true
 
-[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
-process_mode = 2
-visible = false
-layout_mode = 1
-
-[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
-visible = false
-layout_mode = 1
-
 [node name="TextBubbleSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_e7p23")
 volume_db = -6.0
@@ -502,6 +492,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="DebugPanel/MarginContainer/MarginContainer"]
+z_index = 999
 layout_mode = 2
 theme = ExtResource("14_rts35")
 theme_override_fonts/normal_font = SubResource("FontFile_cufnj")
@@ -688,6 +679,17 @@ theme_override_font_sizes/font_size = 36
 text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
+process_mode = 2
+visible = false
+z_index = 998
+layout_mode = 1
+
+[node name="IGOptions" parent="." instance=ExtResource("5_ie8hw")]
+visible = false
+z_index = 999
+layout_mode = 1
 
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]
 [connection signal="pressed" from="Info Section/Close" to="." method="HideInfoSection"]

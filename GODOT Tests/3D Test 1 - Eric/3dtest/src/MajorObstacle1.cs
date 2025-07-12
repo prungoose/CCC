@@ -15,6 +15,7 @@ public partial class MajorObstacle1 : StaticBody3D
 	[Export] public CharacterBody3D _player;
 	private Label popUp;
 	private AnimatedSprite3D _anim;
+	private AnimatedSprite3D _overheadanim;
 	private Node3D _tape;
 	private MeshInstance3D _proxmesh;
 	private ShaderMaterial _shader;
@@ -22,6 +23,7 @@ public partial class MajorObstacle1 : StaticBody3D
 	public override void _Ready()
 	{
 		_anim = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
+		_overheadanim = GetNode<AnimatedSprite3D>("AnimatedSprite3D2");
 		_tape = GetNode<Node3D>("tape");
 		_proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
 		_shader = (ShaderMaterial)_proxmesh.GetActiveMaterial(0);
@@ -56,6 +58,8 @@ public partial class MajorObstacle1 : StaticBody3D
 	{
 		_anim.Visible = true;
 		_anim.Play("Warning_Sign");
+		_overheadanim.Visible = true;
+		_overheadanim.Play("Warning_Sign");
 
 	}
 
@@ -63,6 +67,8 @@ public partial class MajorObstacle1 : StaticBody3D
 	{
 		_anim.Stop();
 		_anim.Visible = false;
+		_overheadanim.Stop();
+		_overheadanim.Visible = false;
 	}
 
 	public bool GetDealtWithStatus()
