@@ -1,10 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://bpspbjxvn1am1"]
+[gd_scene load_steps=37 format=3 uid="uid://bpspbjxvn1am1"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_a8uqt"]
 [ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="1_yjji7"]
 [ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_sobga"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_qpi7s"]
-[ext_resource type="Texture2D" uid="uid://1obcxb848no4" path="res://assets/ui/warning_icon.png" id="5_djutl"]
 
 [sub_resource type="Gradient" id="Gradient_k578h"]
 interpolation_mode = 1
@@ -181,7 +180,7 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_euxgu")
 radius = 1.0
 
-[node name="Hazard_0" type="Area3D" groups=["hazard"]]
+[node name="Hazard" type="Area3D" groups=["hazard"]]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 collision_mask = 2
 script = ExtResource("1_a8uqt")
@@ -204,13 +203,6 @@ shape = SubResource("CapsuleShape3D_qpi7s")
 [node name="tape" parent="." instance=ExtResource("4_qpi7s")]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
 visible = false
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-layers = 32
-pixel_size = 0.001
-billboard = 1
-render_priority = 1
-texture = ExtResource("5_djutl")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0.064, 0)

@@ -7,7 +7,7 @@ public partial class TrashSpawner : Node3D
 
 
 	[Export] private PackedScene _trash_scene;
-	[Export] bool enabled = true;
+	[Export] bool _enabled = true;
 	private Timer _timer;
 	private CharacterBody3D _player;
 
@@ -16,7 +16,7 @@ public partial class TrashSpawner : Node3D
 	public override void _Ready()
 	{
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
-		if(enabled) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
+		if (_enabled) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
 	}
 
 	public override void _Process(double delta)
@@ -24,7 +24,7 @@ public partial class TrashSpawner : Node3D
 		if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 50) _TimeSinceLastSpawn += (float)delta;
 
 		//spawn if player > x distance away, more than a minute since last spawn, spawner has <5 remaining trash
-		if (_TimeSinceLastSpawn > 100 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 50 && GetChildCount() < 5 && enabled)
+		if (_TimeSinceLastSpawn > 100 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 40 && GetChildCount() < 5 && _enabled)
 		{
 			var r = GD.Randf();
 			if (r > .75) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
@@ -75,7 +75,7 @@ public partial class TrashSpawner : Node3D
 			_SpawnATrash(id_to_spawn);
 		}
 	}
-	
+
 	private void _SpawnATrash(int id)
 	{
 		float radius = 5f;
@@ -93,4 +93,5 @@ public partial class TrashSpawner : Node3D
 		trash.LinearVelocity = new Vector3(x, y, z).Normalized() * (float)GD.RandRange(4f, 8f);
 		trash.Call("_ChangeToType", id);
 	}
+	
 }

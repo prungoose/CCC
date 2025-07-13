@@ -13,14 +13,14 @@ public partial class UI : Control
 	private Control _phone;
 	private ProgressBar _tank;
 	private Label _phonedisplay;
-	private string _phonetext;
+	private string _phonetext = "";
 	private MarginContainer _tutorialStuff;
 
 	private bool _tankStepCompleted = false;
 	private bool _movementStepCompleted = false;
 
 	// Hazards
-	private StaticBody3D _powerLineHazard;
+	private Node3D _tutorialHazard;
 
 	// Tanks
 	private ProgressBar _tank1;
@@ -52,7 +52,7 @@ public partial class UI : Control
 
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 
-		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
+		_tutorialHazard = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/HazSpawners/HazardSpawner");
 
 		PhoneSFX = _phone.GetNode<AudioStreamPlayer>("PhoneSFX");
 
@@ -132,11 +132,8 @@ public partial class UI : Control
 
 	public void _dial(char c)
 	{
-		if (c != ' ')
-		{
-			_phonetext += c;
-		}
-		else
+		if (c != ' ' && _phonetext.Length < 4) _phonetext += c;
+		else if (c == ' ')
 		{
 			//Fire Dept: ID 0
 			if (_phonetext == "↑→↓←")
