@@ -50,6 +50,7 @@ public partial class ThrownTrash : RigidBody3D
 			CollisionLayer = 0;
 			CollisionMask = 0;
 			Freeze = true;
+			GetNode<SpringArm3D>("SpringArm3D").Hide();
 			for (int i = 0; i < 20; i++) _spawntrash();
 			splodeSFX.Finished += () => QueueFree();
 		}

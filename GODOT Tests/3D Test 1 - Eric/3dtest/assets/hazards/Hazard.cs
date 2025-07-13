@@ -9,7 +9,7 @@ public partial class Hazard : Area3D
 	private ShaderMaterial _shader;
 	private CharacterBody3D _player;
 	private float _time_after_dealt_with = 0;
-	private Sprite3D _minimapsprite;
+
 
 	public override void _Ready()
 	{
@@ -17,7 +17,6 @@ public partial class Hazard : Area3D
 		var proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
 		_shader = (ShaderMaterial)proxmesh.GetActiveMaterial(0);
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
-		_minimapsprite = GetNode<Sprite3D>("Sprite3D");
 	}
 
 	public override void _Process(double delta)
@@ -58,4 +57,6 @@ public partial class Hazard : Area3D
 			}
 		}
 	}
+
+
 }

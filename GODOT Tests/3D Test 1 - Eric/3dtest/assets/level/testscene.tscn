@@ -121,6 +121,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0819, -0.5, -4.57977)
 shape = SubResource("BoxShape3D_jotil")
 debug_fill = false
 
+[node name="TrashSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
+
+[node name="RTrashSpawner4" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3356, -0.0569983, 16.6686)
+
+[node name="RTrashSpawner5" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.932, -0.0569983, -5.15188)
+
+[node name="RTrashSpawner6" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736, -0.0569983, -34.7662)
+
+[node name="RTrashSpawner7" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87682, -0.0570021, -51.8933)
+
+[node name="HazSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+
+[node name="HazardSpawner" parent="SubViewportContainer/SubViewport/Level/HazSpawners" instance=ExtResource("4_wpr57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2875, -0.0670004, -7.88094)
+_possible_types = PackedInt32Array(0)
+_enabled = true
+_tutorial = true
+
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 
 [node name="Trashbin1" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
@@ -194,32 +220,6 @@ _trashId = 1
 [node name="Trashbin18" parent="SubViewportContainer/SubViewport/Level/Bins" instance=ExtResource("10_a4dfg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.2431, 0.796582, -18.2469)
 _trashId = 3
-
-[node name="TrashSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
-
-[node name="RTrashSpawner4" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3356, -0.0569983, 16.6686)
-
-[node name="RTrashSpawner5" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.932, -0.0569983, -5.15188)
-
-[node name="RTrashSpawner6" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736, -0.0569983, -34.7662)
-
-[node name="RTrashSpawner7" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87682, -0.0570021, -51.8933)
-
-[node name="HazSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
-
-[node name="HazardSpawner" parent="SubViewportContainer/SubViewport/Level/HazSpawners" instance=ExtResource("4_wpr57")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2875, -0.0670004, -7.88094)
-_possible_types = PackedInt32Array(0)
-_enabled = true
-_tutorial = true
 
 [node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
