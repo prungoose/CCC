@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byblgrke0emy"]
+
+[ext_resource type="Script" uid="uid://dmibgekqd6ype" path="res://assets/hazards/Hazardspawner.cs" id="1_56ee6"]
+
+[node name="HazardSpawner" type="Node3D"]
+script = ExtResource("1_56ee6")

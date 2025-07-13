@@ -33,6 +33,7 @@ public partial class Controller : CharacterBody3D
 	private MeshInstance3D _trajtarget;
 	private Node3D _lightpivot;
 	private ShapeCast3D _stepray;
+	private ShapeCast3D _stepray2;
 	private Node3D _stepraypivot;
 	bool phone = false;
 	bool is_sucking = false;
@@ -53,6 +54,8 @@ public partial class Controller : CharacterBody3D
 	private int _tank3 = 0;
 	private int _tank4 = 0;
 
+	private int _active_hazard_count = 0;
+
 	public override void _Ready()
 	{
 		AddToGroup("player");
@@ -65,6 +68,7 @@ public partial class Controller : CharacterBody3D
 		_trajnode = GetNode<Node3D>("Trajectory");
 		_lightpivot = GetNode<Node3D>("LightPivot");
 		_stepray = GetNode<ShapeCast3D>("StepRayPivot/StepRay");
+		_stepray2 = GetNode<ShapeCast3D>("StepRayPivot/StepRay2");
 		_stepraypivot = GetNode<Node3D>("StepRayPivot");
 		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
@@ -74,7 +78,7 @@ public partial class Controller : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-
+		
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		_vacuum.Rotation = y_rotate;
@@ -158,9 +162,12 @@ public partial class Controller : CharacterBody3D
 				_stepraypivot.Rotation = new Godot.Vector3(0, Godot.Vector3.Forward.SignedAngleTo(dir, Godot.Vector3.Up), 0);
 				if (_stepray.IsColliding())
 				{
-
-					var height = (_stepray.GetCollisionPoint(0)- GlobalPosition).Y;
-					GlobalTranslate(new Godot.Vector3(0, height, 0));
+					var height = (_stepray.GetCollisionPoint(0) - GlobalPosition).Y;
+					GlobalTranslate(new Godot.Vector3(0, height * 4, 0));
+				}
+				if (_stepray2.IsColliding())
+				{
+					GlobalTranslate(new Godot.Vector3(0, .1f, 0));
 				}
 			}
 			else _velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);
@@ -214,7 +221,7 @@ public partial class Controller : CharacterBody3D
 			_anim.Play(dirs[(int)Mathf.RadToDeg(inputdir.Angle()) / 45 + 3] + "_run");
 		else
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_idle");
-			
+
 		_anim.SetFrameAndProgress(frame, prog);
 	}
 
@@ -462,6 +469,21 @@ public partial class Controller : CharacterBody3D
 	private int GetCurrentThrowing()
 	{
 		return _thrown_id;
+	}
+
+	private int GetActiveHazardCount()
+	{
+		return _active_hazard_count;
+	}
+
+	private void IncActiveHazardCount()
+	{
+		_active_hazard_count++;
+	}
+
+		private void DecActiveHazardCount()
+	{
+		_active_hazard_count--;
 	}
 
 }

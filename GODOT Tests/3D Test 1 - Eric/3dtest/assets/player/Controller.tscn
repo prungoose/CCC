@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://cw6evgdxg1kpf"]
+[gd_scene load_steps=75 format=3 uid="uid://cw6evgdxg1kpf"]
 
 [ext_resource type="Script" uid="uid://bb82jx1ot7n7u" path="res://src/Controller.cs" id="1_s7e8h"]
 [ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="2_uhyoe"]
@@ -545,7 +545,10 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 10.0
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_apgsg"]
-length = 0.25
+length = 0.295
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_uhyoe"]
+length = 0.033
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 2
@@ -663,6 +666,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="StepRay" type="ShapeCast3D" parent="StepRayPivot"]
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, -0.367151)
 shape = SubResource("SeparationRayShape3D_apgsg")
+target_position = Vector3(0, 0.02, 0)
+
+[node name="StepRay2" type="ShapeCast3D" parent="StepRayPivot"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, -0.265468, -0.150292)
+shape = SubResource("SeparationRayShape3D_uhyoe")
 target_position = Vector3(0, 0.02, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

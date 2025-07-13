@@ -26,7 +26,6 @@ shape = SubResource("SphereShape3D_d8ss7")
 layers = 2
 pixel_size = 0.0073
 billboard = 1
-alpha_cut = 3
 texture_filter = 0
 texture = ExtResource("3_qtvl6")
 hframes = 4

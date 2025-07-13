@@ -138,14 +138,14 @@ public partial class UI : Control
 		}
 		else
 		{
-			//Power company: ID 1
+			//Fire Dept: ID 0
 			if (_phonetext == "↑→↓←")
 			{
 				if (GetTutorialStep() == 9)
 				{
 					NextTutorialStep();
 				}
-				_player.Call("ReadyBeacon", 1);
+				_player.Call("ReadyBeacon", 0);
 			}
 
 			//More agencies go here with their own code

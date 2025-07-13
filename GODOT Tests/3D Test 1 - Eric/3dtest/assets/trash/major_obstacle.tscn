@@ -38,7 +38,7 @@ metadata/_snap_enabled = true
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fdygd"]
 gradient = SubResource("Gradient_k578h")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k578h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdygd"]
 render_priority = 1
 shader = ExtResource("4_k578h")
 shader_parameter/scroll_texture = SubResource("GradientTexture1D_fdygd")
@@ -52,13 +52,13 @@ shader_parameter/scroll_speed_y = 0.05
 shader_parameter/rotation_degrees = 15.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_50h5o"]
-material = SubResource("ShaderMaterial_k578h")
+material = SubResource("ShaderMaterial_fdygd")
 inner_radius = 1.0
 outer_radius = 1.4
 rings = 32
 ring_segments = 3
 
-[node name="StaticBody3D" type="StaticBody3D" groups=["major_obstacle"]]
+[node name="StaticBody3D" type="StaticBody3D" groups=["hazard"]]
 script = ExtResource("1_0jk1x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -81,7 +81,7 @@ billboard = 1
 render_priority = 2
 sprite_frames = SubResource("SpriteFrames_xh6s6")
 animation = &"Warning_Sign"
-frame_progress = 0.204075
+frame_progress = 0.44909
 
 [node name="BeaconHitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.455, 0)

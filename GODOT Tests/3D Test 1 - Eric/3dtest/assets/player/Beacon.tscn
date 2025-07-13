@@ -130,10 +130,9 @@ material = SubResource("StandardMaterial3D_kysm2")
 radius = 0.1
 height = 0.2
 
-[node name="RigidBody3D" type="RigidBody3D"]
-collision_layer = 0
+[node name="RigidBody3D" type="RigidBody3D" groups=["beacon"]]
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 3
 script = ExtResource("1_8obva")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -171,5 +170,3 @@ amount = 32
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_weuih")
 draw_pass_1 = SubResource("SphereMesh_kysm2")
-
-[connection signal="body_entered" from="." to="." method="_body_entered"]

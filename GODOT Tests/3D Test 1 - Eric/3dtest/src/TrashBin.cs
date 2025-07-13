@@ -46,19 +46,19 @@ public partial class TrashBin : Node3D
 
 	public override void _Process(double delta)
 	{
-
 	}
 
 	void _body_entered(CollisionObject3D body)
 	{
 		if (body.IsInGroup("thrown") && (int)body.Call("GetThrownTrashID") == _trashId)
 		{
+			body.CollisionLayer = 0;
+			body.CollisionMask = 0;
 			_splode_particles.Restart();
 			_trashCount++;
 			var tween = GetTree().CreateTween();
 			tween.TweenProperty(body, "global_position", GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
-			_SFX.PitchScale = (float)GD.RandRange(0.8, 1.2); ;
-			body.CollisionMask = 0;
+			_SFX.PitchScale = (float)GD.RandRange(0.8, 1.4); ;
 			tween.Finished += () => body.QueueFree();
 			tween.Finished += () => _SFX.Play();
 			tween.Finished += () => _splode_particles.Emitting = true;

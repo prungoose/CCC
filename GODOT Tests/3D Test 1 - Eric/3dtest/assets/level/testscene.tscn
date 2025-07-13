@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="3_ofhqe"]
 [ext_resource type="PackedScene" uid="uid://cv2hos6td6wwj" path="res://assets/trash/TrashSpawner.tscn" id="4_iw0pl"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="4_suvuw"]
+[ext_resource type="PackedScene" uid="uid://byblgrke0emy" path="res://assets/hazards/hazardspawner.tscn" id="4_wpr57"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="5_8wjkr"]
-[ext_resource type="PackedScene" uid="uid://n8u7og81agdi" path="res://assets/trash/major_obstacle.tscn" id="5_bofc0"]
 [ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="7_fsm2l"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="9_8wjkr"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="10_a4dfg"]
@@ -86,12 +86,6 @@ render_target_update_mode = 4
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4, -4.457, -4)
 
 [node name="Level" type="Node3D" parent="SubViewportContainer/SubViewport"]
-
-[node name="Major Obstacle" parent="SubViewportContainer/SubViewport/Level" node_paths=PackedStringArray("_ui", "_player") instance=ExtResource("5_bofc0")]
-transform = Transform3D(1.91417, 0, 2.30997, 0, 3, 0, -2.30997, 0, 1.91417, 12.9996, 1.49288, -9.52606)
-_hazard_id = 1
-_ui = NodePath("../../../UI")
-_player = NodePath("../../Player")
 
 [node name="Beacon" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.842568, 0, 6.03219)
@@ -200,29 +194,36 @@ _trashId = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.2431, 0.796582, -18.2469)
 _trashId = 3
 
-[node name="Spawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+[node name="TrashSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="RTrashSpawner" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8042, -0.0569999, 12.0742)
 
-[node name="RTrashSpawner2" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner2" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8654, -0.0570002, -13.0694)
 
-[node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
 
-[node name="RTrashSpawner4" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner4" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3356, -0.0569983, 16.6686)
 
-[node name="RTrashSpawner5" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner5" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.932, -0.0569983, -5.15188)
 
-[node name="RTrashSpawner6" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner6" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736, -0.0569983, -34.7662)
 
-[node name="RTrashSpawner7" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
+[node name="RTrashSpawner7" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87682, -0.0570021, -51.8933)
+
+[node name="HazSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
+
+[node name="HazardSpawner" parent="SubViewportContainer/SubViewport/Level/HazSpawners" instance=ExtResource("4_wpr57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2875, -0.0670004, -7.88094)
+_possible_types = PackedInt32Array(0)
+_active = true
 
 [node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
