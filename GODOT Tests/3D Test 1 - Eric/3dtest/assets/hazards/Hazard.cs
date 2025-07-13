@@ -48,7 +48,7 @@ public partial class Hazard : Area3D
 
 	void _BeaconEntered(Node3D body)
 	{
-		GD.Print("beacon enter");
+		if (_dealt_with) return;
 		if (body.IsInGroup("beacon"))
 		{
 			if ((int)body.Call("_GetBeaconID") == _id)

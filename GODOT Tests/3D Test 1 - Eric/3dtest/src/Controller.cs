@@ -46,7 +46,10 @@ public partial class Controller : CharacterBody3D
 	private AudioStreamPlayer VacLoopSFX;
 	private AudioStreamPlayer WalkSFX;
 	private AudioStreamPlayer FWOOMPSFX;
-	[Export] private AudioStreamPlayer windUpSFX;
+	private AudioStreamPlayer WindUpSFX;
+
+	private Node3D _beacon_pivot;
+	private Sprite3D _beacon_sprite;
 	private int _beacon_id = 0;
 
 	private int _thrown_id = 0;
@@ -75,6 +78,9 @@ public partial class Controller : CharacterBody3D
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
 		FWOOMPSFX = GetNode<AudioStreamPlayer>("Sounds/FWOOMPSFX");
+		WindUpSFX = GetNode<AudioStreamPlayer>("Sounds/WindUpSFX");
+		_beacon_pivot = GetNode<Node3D>("BeaconPivot");
+		_beacon_sprite = GetNode<Sprite3D>("BeaconPivot/BeaconSprite");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -84,6 +90,7 @@ public partial class Controller : CharacterBody3D
 		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		_vacuum.Rotation = y_rotate;
 		_lightpivot.Rotation = y_rotate;
+		_beacon_pivot.Rotation = 	new Godot.Vector3(0, Mathf.LerpAngle(_beacon_pivot.Rotation.Y, y_rotate.Y, .12f), 0);
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);
@@ -93,9 +100,7 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-
 		_HandleAnimations();
-		//GD.Print("fps: ", Engine.GetFramesPerSecond());
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -274,7 +279,7 @@ public partial class Controller : CharacterBody3D
 		// start a throw
 		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready) && !phone)
 		{
-			windUpSFX.Play();
+			WindUpSFX.Play();
 			is_blowing = true;
 			_trajnode.Show();
 			if (_trajtarget != null)
@@ -295,7 +300,7 @@ public partial class Controller : CharacterBody3D
 		//release a throw
 		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
 		{
-			windUpSFX.Stop();
+			WindUpSFX.Stop();
 			_trajnode.Hide();
 
 			RigidBody3D yeet;
@@ -304,6 +309,8 @@ public partial class Controller : CharacterBody3D
 				yeet = _thrown_beacon.Instantiate<RigidBody3D>();
 				yeet.Call("SetBeaconID", _beacon_id);
 				beacon_ready = false;
+				var tween = GetTree().CreateTween();
+				tween.TweenProperty(_beacon_pivot, "scale", Godot.Vector3.Zero, .12f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In);
 			}
 			else
 			{
@@ -460,6 +467,8 @@ public partial class Controller : CharacterBody3D
 	{
 		beacon_ready = true;
 		_beacon_id = id;
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(_beacon_pivot, "scale", new Godot.Vector3(1, 1, 1), .4f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 	}
 
 	private void SwitchThrown(int id)

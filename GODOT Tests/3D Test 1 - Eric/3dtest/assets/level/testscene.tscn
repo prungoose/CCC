@@ -198,12 +198,6 @@ _trashId = 3
 [node name="TrashSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="RTrashSpawner" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742)
-
-[node name="RTrashSpawner2" parent="SubViewportContainer/SubViewport/Level/Spawners" instance=ExtResource("4_iw0pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1663, -0.0570002, -13.0694)
-
 [node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/Level/TrashSpawners" instance=ExtResource("4_iw0pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
 
@@ -224,7 +218,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87682, -0.0570021, -51.8933
 [node name="HazardSpawner" parent="SubViewportContainer/SubViewport/Level/HazSpawners" instance=ExtResource("4_wpr57")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2875, -0.0670004, -7.88094)
 _possible_types = PackedInt32Array(0)
-_active = true
+_enabled = true
+_tutorial = true
 
 [node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
@@ -284,7 +279,7 @@ _player = NodePath("../../Player")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera/MouseTarget"]
 mesh = SubResource("CylinderMesh_ofhqe")
 
-[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui", "windUpSFX") instance=ExtResource("5_8wjkr")]
+[node name="Player" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("_headtarget", "_campivot", "_ui") instance=ExtResource("5_8wjkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
 _headtarget = NodePath("../Camera/MouseTarget")
 _campivot = NodePath("../Camera")
@@ -292,7 +287,6 @@ _thrown_trash = ExtResource("10_a4lti")
 _trajtarget_scene = ExtResource("11_pr11n")
 _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_iw0pl")
-windUpSFX = NodePath("../Audio/windUpSFX")
 
 [node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player") instance=ExtResource("17_r1ht6")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
@@ -302,5 +296,11 @@ Player = NodePath("../Player")
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
 debug = true
+
+[node name="SubViewportContainer_SubViewport_Level_Spawners#RTrashSpawner" parent="." instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742)
+
+[node name="SubViewportContainer_SubViewport_Level_Spawners#RTrashSpawner2" parent="." instance=ExtResource("4_iw0pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1663, -0.0570002, -13.0694)
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
