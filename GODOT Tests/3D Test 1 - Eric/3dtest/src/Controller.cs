@@ -46,6 +46,7 @@ public partial class Controller : CharacterBody3D
 	private AudioStreamPlayer VacLoopSFX;
 	private AudioStreamPlayer WalkSFX;
 	private AudioStreamPlayer FWOOMPSFX;
+	[Export] private AudioStreamPlayer windUpSFX;
 	private int _beacon_id = 0;
 
 	private int _thrown_id = 0;
@@ -273,6 +274,7 @@ public partial class Controller : CharacterBody3D
 		// start a throw
 		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready) && !phone)
 		{
+			windUpSFX.Play();
 			is_blowing = true;
 			_trajnode.Show();
 			if (_trajtarget != null)
@@ -293,6 +295,7 @@ public partial class Controller : CharacterBody3D
 		//release a throw
 		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
 		{
+			windUpSFX.Stop();
 			_trajnode.Hide();
 
 			RigidBody3D yeet;
