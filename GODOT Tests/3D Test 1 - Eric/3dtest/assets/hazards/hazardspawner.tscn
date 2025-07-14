@@ -1,17 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://byblgrke0emy"]
+[gd_scene load_steps=4 format=3 uid="uid://byblgrke0emy"]
 
 [ext_resource type="Script" uid="uid://dmibgekqd6ype" path="res://assets/hazards/Hazardspawner.cs" id="1_56ee6"]
-[ext_resource type="Texture2D" uid="uid://1obcxb848no4" path="res://assets/ui/warning_icon.png" id="2_hovwl"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_djutl"]
-atlas = ExtResource("2_hovwl")
-region = Rect2(0, 0, 2400, 2400)
+[ext_resource type="Texture2D" uid="uid://dw02ayedqfhb7" path="res://assets/ui/HQ_HAZARD_ICON.png" id="2_hovwl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hvvqt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_djutl")
+"texture": ExtResource("2_hovwl")
 }, {
 "duration": 1.0,
 "texture": null
@@ -27,7 +23,7 @@ script = ExtResource("1_56ee6")
 [node name="MinimapSprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 20, 0)
 layers = 32
-pixel_size = 0.0005
+pixel_size = 0.004
 billboard = 1
 texture_filter = 0
 render_priority = 1

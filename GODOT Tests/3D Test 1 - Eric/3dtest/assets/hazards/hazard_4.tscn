@@ -1,0 +1,123 @@
+[gd_scene load_steps=19 format=3 uid="uid://b6actpw1ujmo7"]
+
+[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_45ep6"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_jjh7j"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_pv4tb"]
+[ext_resource type="PackedScene" uid="uid://br02h05i3k6c5" path="res://assets/map/deco/pole.glb" id="4_45ep6"]
+
+[sub_resource type="Gradient" id="Gradient_r1awe"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bipf8"]
+gradient = SubResource("Gradient_r1awe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhcrq"]
+render_priority = 1
+shader = ExtResource("2_jjh7j")
+shader_parameter/scroll_texture = SubResource("GradientTexture1D_bipf8")
+shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
+shader_parameter/fade_distance = 5.0
+shader_parameter/character_position = Vector3(0, 0, 0)
+shader_parameter/tile_x = 50.0
+shader_parameter/tile_y = 1.0
+shader_parameter/scroll_speed_x = 0.0
+shader_parameter/scroll_speed_y = 0.0
+shader_parameter/rotation_degrees = 15.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_af5os"]
+material = SubResource("ShaderMaterial_mhcrq")
+inner_radius = 1.0
+outer_radius = 1.4
+rings = 32
+ring_segments = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_renle"]
+height = 0.55459
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rybyy"]
+radius = 1.2
+height = 2.8
+
+[sub_resource type="Gradient" id="Gradient_45ep6"]
+colors = PackedColorArray(0.982167, 0.793419, 0.484554, 1, 1, 0.867206, 0.100355, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jjh7j"]
+gradient = SubResource("Gradient_45ep6")
+
+[sub_resource type="Curve" id="Curve_jjh7j"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 8.64759), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_pv4tb"]
+curve = SubResource("Curve_jjh7j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_45ep6"]
+particle_flag_align_y = true
+direction = Vector3(-1, 0, 0)
+spread = 62.353
+initial_velocity_min = 3.88
+initial_velocity_max = 10.0
+color_initial_ramp = SubResource("GradientTexture1D_jjh7j")
+emission_curve = SubResource("CurveTexture_pv4tb")
+
+[sub_resource type="Curve" id="Curve_45ep6"]
+_data = [Vector2(0, 0.248555), 0.0, 2.84261, 0, 0, Vector2(0.0760234, 0.376301), 2.80357, 2.80357, 0, 0, Vector2(0.447368, 0.699422), 0.0, 0.0, 0, 0, Vector2(0.821638, 0.383815), -2.17456, -2.17456, 0, 0, Vector2(1, 0), -1.61445, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45ep6"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_jjh7j"]
+material = SubResource("StandardMaterial3D_45ep6")
+shape = 0
+size = 0.065
+sections = 25
+section_length = 0.01
+curve = SubResource("Curve_45ep6")
+
+[node name="Hazard" type="Area3D" groups=["hazard"]]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_45ep6")
+
+[node name="ProximityWarning" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_af5os")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177295, 0)
+shape = SubResource("CylinderShape3D_renle")
+
+[node name="PlayerHitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("CapsuleShape3D_rybyy")
+
+[node name="tape" parent="." instance=ExtResource("3_pv4tb")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
+visible = false
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0.064, 0)
+
+[node name="pole" parent="Model" instance=ExtResource("4_45ep6")]
+transform = Transform3D(0.113288, 0, 0.0528273, 0, 0.125, 0, -0.0528273, 0, 0.113288, 0, 0.562, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Model/pole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51758, -0.999741, 0.739252)
+amount_ratio = 0.5
+explosiveness = 0.65
+randomness = 0.65
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_45ep6")
+draw_pass_1 = SubResource("RibbonTrailMesh_jjh7j")
+
+[connection signal="body_entered" from="." to="." method="_BeaconEntered"]
