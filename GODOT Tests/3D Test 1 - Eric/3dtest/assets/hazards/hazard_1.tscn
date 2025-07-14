@@ -1,9 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://bpspbjxvn1am1"]
+[gd_scene load_steps=37 format=3 uid="uid://cyen7es8yitaj"]
 
-[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_a8uqt"]
-[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="1_yjji7"]
-[ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_sobga"]
-[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_qpi7s"]
+[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_r1awe"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_mhcrq"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_r7oiw"]
+[ext_resource type="PackedScene" uid="uid://bueced7uee81a" path="res://assets/map/deco/dumpster.gltf" id="4_r1awe"]
 
 [sub_resource type="Gradient" id="Gradient_r1awe"]
 interpolation_mode = 1
@@ -16,7 +16,7 @@ gradient = SubResource("Gradient_r1awe")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mhcrq"]
 render_priority = 1
-shader = ExtResource("1_yjji7")
+shader = ExtResource("2_mhcrq")
 shader_parameter/scroll_texture = SubResource("GradientTexture1D_76vpc")
 shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
 shader_parameter/fade_distance = 5.0
@@ -183,7 +183,7 @@ radius = 1.0
 [node name="Hazard" type="Area3D" groups=["hazard"]]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 collision_mask = 2
-script = ExtResource("1_a8uqt")
+script = ExtResource("1_r1awe")
 
 [node name="ProximityWarning" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
@@ -200,17 +200,18 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
 shape = SubResource("CapsuleShape3D_qpi7s")
 
-[node name="tape" parent="." instance=ExtResource("4_qpi7s")]
+[node name="tape" parent="." instance=ExtResource("3_r7oiw")]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
 visible = false
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0.064, 0)
 
-[node name="car_stationwagon2" parent="Model" instance=ExtResource("2_sobga")]
+[node name="dumpster" parent="Model" instance=ExtResource("4_r1awe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.061, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Model"]
-transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, -0.00838432, 0.141091, 0.268712)
+transform = Transform3D(0.999999, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, 0.999999, 0.0096089, 0.300724, 0.0236004)
 amount = 128
 process_material = SubResource("ParticleProcessMaterial_djutl")
 draw_pass_1 = SubResource("BoxMesh_nktmd")

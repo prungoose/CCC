@@ -99,7 +99,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_bofc0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Level/Beacon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00607383, 0.933789, 0.0207405)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.870901, 0.933789, 0.0207405)
 mesh = SubResource("CylinderMesh_a2nen")
 surface_material_override/0 = SubResource("StandardMaterial3D_bofc0")
 
@@ -143,7 +143,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87682, -0.0570021, -51.8933
 
 [node name="HazardSpawner" parent="SubViewportContainer/SubViewport/Level/HazSpawners" instance=ExtResource("4_wpr57")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2875, -0.0670004, -7.88094)
-_possible_types = PackedInt32Array(0)
+_possible_types = PackedInt32Array(0, 1)
 _enabled = true
 _tutorial = true
 

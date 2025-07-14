@@ -109,11 +109,11 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
 		{
 			if (phone)
 			{
-				switch (keyEvent.PhysicalKeycode)
+				switch (keyEvent.PhysicalKeycode )
 				{
 					case Key.W: _ui.Call("_dial", '↑'); break;
 					case Key.S: _ui.Call("_dial", '↓'); break;

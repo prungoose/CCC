@@ -1,0 +1,153 @@
+[gd_scene load_steps=24 format=3 uid="uid://df0vxbjb3i6m"]
+
+[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_hx2lr"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_wy577"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_okaqf"]
+
+[sub_resource type="Gradient" id="Gradient_r1awe"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_76vpc"]
+gradient = SubResource("Gradient_r1awe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhcrq"]
+render_priority = 1
+shader = ExtResource("2_wy577")
+shader_parameter/scroll_texture = SubResource("GradientTexture1D_76vpc")
+shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
+shader_parameter/fade_distance = 5.0
+shader_parameter/character_position = Vector3(0, 0, 0)
+shader_parameter/tile_x = 50.0
+shader_parameter/tile_y = 1.0
+shader_parameter/scroll_speed_x = 0.0
+shader_parameter/scroll_speed_y = 0.0
+shader_parameter/rotation_degrees = 15.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_ysqfc"]
+material = SubResource("ShaderMaterial_mhcrq")
+inner_radius = 1.0
+outer_radius = 1.4
+rings = 32
+ring_segments = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sobga"]
+height = 0.55459
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qpi7s"]
+radius = 1.2
+height = 2.8
+
+[sub_resource type="Curve" id="Curve_okaqf"]
+_data = [Vector2(0.0193548, 0), 0.0, -0.286702, 0, 0, Vector2(0.106452, 1), 0.0, 0.0, 0, 0, Vector2(0.519355, 0.788687), 0.0, 0.0, 0, 0, Vector2(0.990323, 0.154746), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_pyq1p"]
+curve = SubResource("Curve_okaqf")
+
+[sub_resource type="Gradient" id="Gradient_hx2lr"]
+colors = PackedColorArray(0, 0.484961, 0.945685, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wy577"]
+gradient = SubResource("Gradient_hx2lr")
+
+[sub_resource type="Gradient" id="Gradient_wy577"]
+colors = PackedColorArray(0.77084, 0.770839, 0.770839, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_okaqf"]
+gradient = SubResource("Gradient_wy577")
+
+[sub_resource type="Curve" id="Curve_wy577"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.64499), 0.0, -2.09623, 0, 0, Vector2(0.264516, 1.23927), 0.0, 0.0, 0, 0, Vector2(0.712903, 1.12094), 0.0, 0.0, 0, 0, Vector2(0.922581, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_okaqf"]
+curve = SubResource("Curve_wy577")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hx2lr"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 12.0
+flatness = 0.635
+initial_velocity_min = 2.8
+initial_velocity_max = 3.2
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_okaqf")
+color_ramp = SubResource("GradientTexture1D_okaqf")
+color_initial_ramp = SubResource("GradientTexture1D_wy577")
+alpha_curve = SubResource("CurveTexture_pyq1p")
+
+[sub_resource type="Curve" id="Curve_hx2lr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.119883, 0.0982659), 0.0, 0.0, 0, 0, Vector2(0.929825, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx2lr"]
+render_priority = 1
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_hx2lr"]
+material = SubResource("StandardMaterial3D_hx2lr")
+sections = 10
+section_length = 0.11
+curve = SubResource("Curve_hx2lr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wy577"]
+albedo_color = Color(0.404511, 0.404511, 0.404511, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hx2lr"]
+material = SubResource("StandardMaterial3D_wy577")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.145
+
+[node name="Hazard" type="Area3D" groups=["hazard"]]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_hx2lr")
+
+[node name="ProximityWarning" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_ysqfc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177295, 0)
+shape = SubResource("CylinderShape3D_sobga")
+
+[node name="PlayerHitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("CapsuleShape3D_qpi7s")
+
+[node name="tape" parent="." instance=ExtResource("3_okaqf")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
+visible = false
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0.064, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.74056e-06, 0, 0.00318682)
+amount = 64
+lifetime = 3.0
+transform_align = 3
+trail_enabled = true
+trail_lifetime = 1.86
+process_material = SubResource("ParticleProcessMaterial_hx2lr")
+draw_pass_1 = SubResource("RibbonTrailMesh_hx2lr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -5.74056e-06, 0, 0.00318682)
+mesh = SubResource("CylinderMesh_hx2lr")
+skeleton = NodePath("../GPUParticles3D")
+
+[connection signal="body_entered" from="." to="." method="_BeaconEntered"]

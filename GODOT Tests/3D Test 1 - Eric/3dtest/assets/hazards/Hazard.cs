@@ -41,7 +41,7 @@ public partial class Hazard : Area3D
 
 	void _UpdateID(int id)
 	{
-		if (id >= 5) id -= 5;
+		if (id % 2 == 1) id -= 1;	//bc 0,1 = fire, 2,3 = water, etc
 		_id = id;
 	}
 
