@@ -24,7 +24,7 @@ size = Vector3(0.65, 0.1, 0.65)
 size = Vector3(0.81, 0.8, 0.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u87gn"]
-size = Vector3(1, 0.75, 1)
+size = Vector3(1, 1.2832, 1)
 
 [sub_resource type="Curve" id="Curve_dqtvc"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.501292, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -125,7 +125,7 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_gcamg")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Trashbin1" type="Node3D"]
+[node name="Trashbin" type="Node3D"]
 script = ExtResource("1_dqtvc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -156,7 +156,7 @@ collision_mask = 2
 priority = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565782, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832384, 0)
 shape = SubResource("BoxShape3D_u87gn")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]

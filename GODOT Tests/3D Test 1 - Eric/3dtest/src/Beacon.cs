@@ -31,22 +31,15 @@ public partial class Beacon : RigidBody3D
 		_beacon_id = id;
 	}
 
-	void _body_entered(Node body)
+	int _GetBeaconID()
 	{
-		if (body.IsInGroup("major_obstacle") && !(bool)body.Call("GetDealtWithStatus"))
-		{
-			body.Call("DealWith", _beacon_id);
-			if ((bool)body.Call("GetDealtWithStatus"))
-			{
-				_primed = true;
-				_particles.Emitting = true;
+		return _beacon_id;
+	}
 
-			}
-		}
-		else if (body.IsInGroup("ground") && _primed)
-		{
-			Freeze = true;
-		}
+	void _DealtWithSomething()
+	{
+		_primed = true;
+		_particles.Emitting = true;
 	}
 
 	void TimerEnd()

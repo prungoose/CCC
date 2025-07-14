@@ -1,6 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://dehxjhb5ukc3g"]
+[gd_scene load_steps=28 format=3 uid="uid://dehxjhb5ukc3g"]
 
 [ext_resource type="Script" uid="uid://ern722h687j1" path="res://src/Beacon.cs" id="1_8obva"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8obva"]
+bounce = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weuih"]
 albedo_color = Color(1, 0.335514, 0.269596, 1)
@@ -18,7 +21,7 @@ points = PackedVector3Array(0.108214, 0.40381, -0.0305668, -0.10631, -0.40381, -
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282974, 0.833027), 0.0, 0.0, 0, 0, Vector2(0.431655, 0.850917), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_kysm2"]
+[sub_resource type="CurveTexture" id="CurveTexture_8obva"]
 curve = SubResource("Curve_weuih")
 
 [sub_resource type="Gradient" id="Gradient_8obva"]
@@ -40,7 +43,7 @@ point_count = 2
 _data = [Vector2(0.285372, 1), 0.0, 0.0, 0, 0]
 point_count = 1
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_e78u0"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kysm2"]
 curve_x = SubResource("Curve_kysm2")
 curve_y = SubResource("Curve_m0r6o")
 curve_z = SubResource("Curve_o40p0")
@@ -49,7 +52,7 @@ curve_z = SubResource("Curve_o40p0")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235012, 0.821101), 0.785273, 0.785273, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_weuih"]
+[sub_resource type="CurveTexture" id="CurveTexture_m0r6o"]
 curve = SubResource("Curve_8obva")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8obva"]
@@ -59,15 +62,15 @@ initial_velocity_min = 13.19
 initial_velocity_max = 13.19
 directional_velocity_min = 1.0
 directional_velocity_max = 1.0
-directional_velocity_curve = SubResource("CurveXYZTexture_e78u0")
+directional_velocity_curve = SubResource("CurveXYZTexture_kysm2")
 attractor_interaction_enabled = false
 scale_min = 0.8
 scale_max = 1.2
-scale_curve = SubResource("CurveTexture_weuih")
+scale_curve = SubResource("CurveTexture_m0r6o")
 color_ramp = SubResource("GradientTexture1D_weuih")
-alpha_curve = SubResource("CurveTexture_kysm2")
+alpha_curve = SubResource("CurveTexture_8obva")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8obva"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o40p0"]
 render_priority = 2
 transparency = 3
 alpha_hash_scale = 0.1
@@ -82,7 +85,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_weuih"]
-material = SubResource("StandardMaterial3D_8obva")
+material = SubResource("StandardMaterial3D_o40p0")
 radius = 1.0
 
 [sub_resource type="Curve" id="Curve_e78u0"]
@@ -130,10 +133,11 @@ material = SubResource("StandardMaterial3D_kysm2")
 radius = 0.1
 height = 0.2
 
-[node name="RigidBody3D" type="RigidBody3D"]
-collision_layer = 0
+[node name="RigidBody3D" type="RigidBody3D" groups=["beacon"]]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_8obva")
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 3
 script = ExtResource("1_8obva")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -171,5 +175,3 @@ amount = 32
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_weuih")
 draw_pass_1 = SubResource("SphereMesh_kysm2")
-
-[connection signal="body_entered" from="." to="." method="_body_entered"]

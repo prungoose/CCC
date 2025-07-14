@@ -184,6 +184,7 @@ shape = SubResource("ConvexPolygonShape3D_pxoxk")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.84226)
+layers = 2
 emitting = false
 amount = 48
 lifetime = 0.52
@@ -196,6 +197,7 @@ draw_pass_1 = SubResource("RibbonTrailMesh_ul6ya")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.84226)
+layers = 2
 emitting = false
 amount = 48
 lifetime = 0.52

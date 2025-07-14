@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://dwpg72e2upi08"]
+
+[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_m76na"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_3p1ol"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_845jt"]
+
+[sub_resource type="Gradient" id="Gradient_r1awe"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_76vpc"]
+gradient = SubResource("Gradient_r1awe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhcrq"]
+render_priority = 1
+shader = ExtResource("2_3p1ol")
+shader_parameter/scroll_texture = SubResource("GradientTexture1D_76vpc")
+shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
+shader_parameter/fade_distance = 5.0
+shader_parameter/character_position = Vector3(0, 0, 0)
+shader_parameter/tile_x = 50.0
+shader_parameter/tile_y = 1.0
+shader_parameter/scroll_speed_x = 0.0
+shader_parameter/scroll_speed_y = 0.0
+shader_parameter/rotation_degrees = 15.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_ysqfc"]
+material = SubResource("ShaderMaterial_mhcrq")
+inner_radius = 1.0
+outer_radius = 1.4
+rings = 32
+ring_segments = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sobga"]
+height = 0.55459
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qpi7s"]
+radius = 1.2
+height = 2.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m76na"]
+albedo_color = Color(0.525101, 0.525101, 0.525101, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m76na"]
+material = SubResource("StandardMaterial3D_m76na")
+height = 0.041
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p1ol"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_845jt"]
+material = SubResource("StandardMaterial3D_3p1ol")
+top_radius = 0.46
+height = 0.041
+
+[node name="Hazard" type="Area3D" groups=["hazard"]]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_m76na")
+
+[node name="ProximityWarning" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_ysqfc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177295, 0)
+shape = SubResource("CylinderShape3D_sobga")
+
+[node name="PlayerHitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("CapsuleShape3D_qpi7s")
+
+[node name="tape" parent="." instance=ExtResource("3_845jt")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
+visible = false
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("CylinderMesh_m76na")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, 0)
+mesh = SubResource("CylinderMesh_845jt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.999726, 0.0164212, 0.0166759, -0.0144121, 0.993356, -0.114177, -0.0184401, 0.113906, 0.99332, -0.038808, 0.0570177, 0.520477)
+mesh = SubResource("CylinderMesh_m76na")
+
+[connection signal="body_entered" from="." to="." method="_BeaconEntered"]

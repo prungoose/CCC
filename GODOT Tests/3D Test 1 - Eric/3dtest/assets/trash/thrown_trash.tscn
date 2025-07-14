@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b83ge5vg8o8bc"]
+[gd_scene load_steps=9 format=3 uid="uid://b83ge5vg8o8bc"]
 
 [ext_resource type="Script" uid="uid://01mmpqfqelgx" path="res://src/ThrownTrash.cs" id="1_pm7ff"]
 [ext_resource type="PackedScene" uid="uid://dxrtgnf4acr63" path="res://assets/trash/trash_cube.tscn" id="2_rikpg"]
 [ext_resource type="Texture2D" uid="uid://b8dqjg1c7vvfj" path="res://assets/trash/trashbags spritesheet.png" id="3_qtvl6"]
 [ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="4_qtvl6"]
 [ext_resource type="AudioStream" uid="uid://c1w2o8djh5c28" path="res://assets/Audios/Boing.wav" id="5_0cdvw"]
+[ext_resource type="AudioStream" uid="uid://bejredod2y6oh" path="res://assets/trash/splode.mp3" id="6_fiu2w"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rikpg"]
 friction = 0.0
@@ -27,8 +28,8 @@ shape = SubResource("SphereShape3D_d8ss7")
 layers = 2
 pixel_size = 0.0073
 billboard = 1
-alpha_cut = 3
 texture_filter = 0
+render_priority = 1
 texture = ExtResource("3_qtvl6")
 hframes = 4
 vframes = 2
@@ -45,8 +46,11 @@ cull_mask = 1048573
 
 [node name="BoingSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_0cdvw")
-volume_db = -15.0
+volume_db = -25.0
 max_polyphony = 5
 bus = &"SFX"
+
+[node name="SplodeSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_fiu2w")
 
 [connection signal="body_entered" from="." to="." method="_collision"]

@@ -33,6 +33,7 @@ public partial class Controller : CharacterBody3D
 	private MeshInstance3D _trajtarget;
 	private Node3D _lightpivot;
 	private ShapeCast3D _stepray;
+	private ShapeCast3D _stepray2;
 	private Node3D _stepraypivot;
 	bool phone = false;
 	bool is_sucking = false;
@@ -45,7 +46,10 @@ public partial class Controller : CharacterBody3D
 	private AudioStreamPlayer VacLoopSFX;
 	private AudioStreamPlayer WalkSFX;
 	private AudioStreamPlayer FWOOMPSFX;
-	[Export] private AudioStreamPlayer windUpSFX;
+	private AudioStreamPlayer WindUpSFX;
+
+	private Node3D _beacon_pivot;
+	private Sprite3D _beacon_sprite;
 	private int _beacon_id = 0;
 
 	private int _thrown_id = 0;
@@ -53,6 +57,8 @@ public partial class Controller : CharacterBody3D
 	private int _tank2 = 0;
 	private int _tank3 = 0;
 	private int _tank4 = 0;
+
+	private int _active_hazard_count = 0;
 	bool _phonedialDisplayed = false;
 	private Button _phoneDialButton;
 
@@ -70,11 +76,15 @@ public partial class Controller : CharacterBody3D
 		_trajnode = GetNode<Node3D>("Trajectory");
 		_lightpivot = GetNode<Node3D>("LightPivot");
 		_stepray = GetNode<ShapeCast3D>("StepRayPivot/StepRay");
+		_stepray2 = GetNode<ShapeCast3D>("StepRayPivot/StepRay2");
 		_stepraypivot = GetNode<Node3D>("StepRayPivot");
 		VacSFX = GetNode<AudioStreamPlayer>("Sounds/VacSFX");
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
 		FWOOMPSFX = GetNode<AudioStreamPlayer>("Sounds/FWOOMPSFX");
+		WindUpSFX = GetNode<AudioStreamPlayer>("Sounds/WindUpSFX");
+		_beacon_pivot = GetNode<Node3D>("BeaconPivot");
+		_beacon_sprite = GetNode<Sprite3D>("BeaconPivot/BeaconSprite");
 
 		var parent = _ui.GetNode<Control>("Phone").GetNode<Control>("Dial");
 		_phoneDialButton = parent.GetNode<Button>("dialButton");
@@ -83,11 +93,12 @@ public partial class Controller : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-
+		
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		_vacuum.Rotation = y_rotate;
 		_lightpivot.Rotation = y_rotate;
+		_beacon_pivot.Rotation = 	new Godot.Vector3(0, Mathf.LerpAngle(_beacon_pivot.Rotation.Y, y_rotate.Y, .12f), 0);
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);
@@ -97,9 +108,7 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-
 		_HandleAnimations();
-		//GD.Print("fps: ", Engine.GetFramesPerSecond());
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -108,11 +117,11 @@ public partial class Controller : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
 		{
 			if (phone)
 			{
-				switch (keyEvent.PhysicalKeycode)
+				switch (keyEvent.PhysicalKeycode )
 				{
 					case Key.W: _ui.Call("_dial", '↑'); break;
 					case Key.S: _ui.Call("_dial", '↓'); break;
@@ -167,6 +176,12 @@ public partial class Controller : CharacterBody3D
 				_stepraypivot.Rotation = new Godot.Vector3(0, Godot.Vector3.Forward.SignedAngleTo(dir, Godot.Vector3.Up), 0);
 				if (_stepray.IsColliding())
 				{
+					var height = (_stepray.GetCollisionPoint(0) - GlobalPosition).Y;
+					GlobalTranslate(new Godot.Vector3(0, height * 4, 0));
+				}
+				if (_stepray2.IsColliding())
+				{
+					GlobalTranslate(new Godot.Vector3(0, .1f, 0));
 
 					var height = (_stepray.GetCollisionPoint(0) - GlobalPosition).Y;
 					GlobalTranslate(new Godot.Vector3(0, height, 0));
@@ -224,6 +239,7 @@ public partial class Controller : CharacterBody3D
 		else
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_idle");
 
+
 		_anim.SetFrameAndProgress(frame, prog);
 	}
 
@@ -275,7 +291,7 @@ public partial class Controller : CharacterBody3D
 		// start a throw
 		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready) && !phone)
 		{
-			windUpSFX.Play();
+			WindUpSFX.Play();
 			is_blowing = true;
 			_trajnode.Show();
 			if (_trajtarget != null)
@@ -296,7 +312,7 @@ public partial class Controller : CharacterBody3D
 		//release a throw
 		if (Input.IsActionJustReleased("m2") && is_blowing && !is_sucking)
 		{
-			windUpSFX.Stop();
+			WindUpSFX.Stop();
 			_trajnode.Hide();
 
 			RigidBody3D yeet;
@@ -305,6 +321,8 @@ public partial class Controller : CharacterBody3D
 				yeet = _thrown_beacon.Instantiate<RigidBody3D>();
 				yeet.Call("SetBeaconID", _beacon_id);
 				beacon_ready = false;
+				var tween = GetTree().CreateTween();
+				tween.TweenProperty(_beacon_pivot, "scale", Godot.Vector3.Zero, .12f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In);
 			}
 			else
 			{
@@ -461,6 +479,8 @@ public partial class Controller : CharacterBody3D
 	{
 		beacon_ready = true;
 		_beacon_id = id;
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(_beacon_pivot, "scale", new Godot.Vector3(1, 1, 1), .4f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 	}
 
 	private void SwitchThrown(int id)
@@ -473,6 +493,21 @@ public partial class Controller : CharacterBody3D
 	private int GetCurrentThrowing()
 	{
 		return _thrown_id;
+	}
+
+	private int GetActiveHazardCount()
+	{
+		return _active_hazard_count;
+	}
+
+	private void IncActiveHazardCount()
+	{
+		_active_hazard_count++;
+	}
+
+		private void DecActiveHazardCount()
+	{
+		_active_hazard_count--;
 	}
 
 	private void setHomeScreen(bool a)

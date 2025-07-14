@@ -1,0 +1,226 @@
+[gd_scene load_steps=37 format=3 uid="uid://bpspbjxvn1am1"]
+
+[ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_a8uqt"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="1_yjji7"]
+[ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_sobga"]
+[ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_qpi7s"]
+
+[sub_resource type="Gradient" id="Gradient_r1awe"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_76vpc"]
+gradient = SubResource("Gradient_r1awe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhcrq"]
+render_priority = 1
+shader = ExtResource("1_yjji7")
+shader_parameter/scroll_texture = SubResource("GradientTexture1D_76vpc")
+shader_parameter/color = Color(1, 0.300256, 0.234924, 1)
+shader_parameter/fade_distance = 5.0
+shader_parameter/character_position = Vector3(0, 0, 0)
+shader_parameter/tile_x = 50.0
+shader_parameter/tile_y = 1.0
+shader_parameter/scroll_speed_x = 0.0
+shader_parameter/scroll_speed_y = 0.0
+shader_parameter/rotation_degrees = 15.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_ysqfc"]
+material = SubResource("ShaderMaterial_mhcrq")
+inner_radius = 1.0
+outer_radius = 1.4
+rings = 32
+ring_segments = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sobga"]
+height = 0.55459
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qpi7s"]
+radius = 1.2
+height = 2.8
+
+[sub_resource type="Curve" id="Curve_nktmd"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r7oiw"]
+curve = SubResource("Curve_nktmd")
+
+[sub_resource type="Gradient" id="Gradient_djutl"]
+offsets = PackedFloat32Array(0.422535, 1)
+colors = PackedColorArray(0.996945, 6.23293e-06, 1.54018e-06, 1, 0.200551, 0.0646191, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_45kkd"]
+gradient = SubResource("Gradient_djutl")
+
+[sub_resource type="Gradient" id="Gradient_6lfcd"]
+offsets = PackedFloat32Array(0.264085, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nu6e1"]
+gradient = SubResource("Gradient_6lfcd")
+
+[sub_resource type="Curve" id="Curve_6lfcd"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(0.612903, 5), 0.0, 0.0, 0, 0, Vector2(0.748387, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wu3nn"]
+curve = SubResource("Curve_6lfcd")
+
+[sub_resource type="Curve" id="Curve_djutl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.16129, 1), 0.0, 0.0, 0, 0, Vector2(0.33871, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_8gj2k"]
+curve = SubResource("Curve_djutl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_djutl"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 0.1
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 70.3
+angle_curve = SubResource("CurveTexture_r7oiw")
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 0.1
+gravity = Vector3(0.415, 2.315, 0)
+attractor_interaction_enabled = false
+scale_min = 0.4
+scale_curve = SubResource("CurveTexture_8gj2k")
+color_ramp = SubResource("GradientTexture1D_nu6e1")
+color_initial_ramp = SubResource("GradientTexture1D_45kkd")
+emission_curve = SubResource("CurveTexture_wu3nn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnvim"]
+transparency = 3
+alpha_hash_scale = 0.02
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nktmd"]
+material = SubResource("StandardMaterial3D_hnvim")
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="Curve" id="Curve_r5pk1"]
+_data = [Vector2(0, 0.568921), 0.0, 0.0, 0, 0, Vector2(1, 0.0786736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_14257"]
+curve = SubResource("Curve_r5pk1")
+
+[sub_resource type="Gradient" id="Gradient_8rkkf"]
+offsets = PackedFloat32Array(0, 0.88491)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ts70p"]
+gradient = SubResource("Gradient_8rkkf")
+
+[sub_resource type="Curve" id="Curve_dhejq"]
+_data = [Vector2(0.407674, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_egut5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_sbh2x"]
+_data = [Vector2(0.285372, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_y6qes"]
+curve_x = SubResource("Curve_dhejq")
+curve_y = SubResource("Curve_egut5")
+curve_z = SubResource("Curve_sbh2x")
+
+[sub_resource type="Curve" id="Curve_wttc6"]
+_data = [Vector2(0, 0.222367), 0.0, 0.0, 0, 0, Vector2(0.235012, 0.821101), 0.785273, 0.785273, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5slak"]
+curve = SubResource("Curve_wttc6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fi06t"]
+direction = Vector3(0, 1, 0)
+spread = 4.0
+initial_velocity_min = 10.0
+initial_velocity_max = 11.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_y6qes")
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_5slak")
+color_ramp = SubResource("GradientTexture1D_ts70p")
+alpha_curve = SubResource("CurveTexture_14257")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2c83"]
+render_priority = 2
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_e8ewt"]
+material = SubResource("StandardMaterial3D_q2c83")
+radius = 1.0
+
+[node name="Hazard" type="Area3D" groups=["hazard"]]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_a8uqt")
+
+[node name="ProximityWarning" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_ysqfc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177295, 0)
+shape = SubResource("CylinderShape3D_sobga")
+
+[node name="PlayerHitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerHitbox"]
+shape = SubResource("CapsuleShape3D_qpi7s")
+
+[node name="tape" parent="." instance=ExtResource("4_qpi7s")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
+visible = false
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0.064, 0)
+
+[node name="car_stationwagon2" parent="Model" instance=ExtResource("2_sobga")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Model"]
+transform = Transform3D(0.999999, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 0.999999, -0.00838432, 0.141091, 0.268712)
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_djutl")
+draw_pass_1 = SubResource("BoxMesh_nktmd")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Model/GPUParticles3D"]
+transform = Transform3D(0.226577, 0, 0.105655, 0, 0.25, 0, -0.105655, 0, 0.226577, -0.000257492, 0.00178707, -0.00183463)
+amount = 32
+speed_scale = 0.3
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_fi06t")
+draw_pass_1 = SubResource("SphereMesh_e8ewt")
+
+[connection signal="body_entered" from="." to="." method="_BeaconEntered"]

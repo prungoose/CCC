@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpiqgw426s24"]
+[gd_scene load_steps=12 format=3 uid="uid://cpiqgw426s24"]
 
 [ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://src/Textbox.cs" id="1_5wdy1"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="1_aqvb0"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="3_g1w8g"]
 [ext_resource type="Texture2D" uid="uid://emtut8a80gn6" path="res://assets/cutscene characters/Mayumarosprite_1.png" id="3_k7pxp"]
-[ext_resource type="Texture2D" uid="uid://t61h0xhd0p5a" path="res://assets/cutscene characters/tutorial_sprite.png" id="3_obbyq"]
 [ext_resource type="Texture2D" uid="uid://bk7kl7vcljpbg" path="res://assets/cutscene characters/Mayumarosprite_2.png" id="4_g1w8g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obbyq"]
@@ -31,10 +30,6 @@ region = Rect2(0, 0, 500, 500)
 atlas = ExtResource("4_g1w8g")
 region = Rect2(0, 0, 500, 500)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i65hj"]
-atlas = ExtResource("3_obbyq")
-region = Rect2(0, 0, 500, 500)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_fafr0"]
 animations = [{
 "frames": [{
@@ -46,9 +41,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kvir3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i65hj")
 }],
 "loop": true,
 "name": &"default",

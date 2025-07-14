@@ -6,6 +6,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
     [Export] public float AvoidPlayerDistance = 5f;
     [Export] public CharacterBody3D Player;
+    [Export] private NavigationAgent3D _navAgent;
 
     private RigidBody3D _lastDroppedTrash;
     private bool _isFleeing = false;
@@ -158,6 +159,11 @@ public partial class RaccoonAgent : CharacterBody3D
         MoveAndSlide();
 
         _targetTrash = null;
+    }
+
+    private void updateTargetLocation(Vector3 target)
+    {
+        _navAgent.TargetPosition = target;
     }
 
 

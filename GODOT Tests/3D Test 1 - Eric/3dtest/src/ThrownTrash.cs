@@ -10,6 +10,7 @@ public partial class ThrownTrash : RigidBody3D
 	private int _bounces;
 	private int _id;
 	private AudioStreamPlayer3D boingSFX;
+	private AudioStreamPlayer3D splodeSFX;
 
 	public override void _Ready()
 	{
@@ -25,6 +26,7 @@ public partial class ThrownTrash : RigidBody3D
 			case 4: _sprite.Frame = 3; break;
 		}
 		boingSFX = GetNode<AudioStreamPlayer3D>("BoingSFX");
+		splodeSFX = GetNode<AudioStreamPlayer3D>("SplodeSFX");
 	}
 
 	public override void _Process(double delta)
@@ -38,17 +40,21 @@ public partial class ThrownTrash : RigidBody3D
 
 	private void _collision(Node body)
 	{
-		if (!boingSFX.Playing)
-			boingSFX.Play();
+		if (body.IsInGroup("cleanable_vacuum")) return;
 		_bounces++;
-		if (_bounces == 2)
+		if (_bounces == 1) boingSFX.Play();
+		else if (_bounces == 2)
 		{
-			for (int i = 0; i < 20; i++)
-			{
-				_spawntrash();
-			}
-			boingSFX.Finished += () => QueueFree();
+			splodeSFX.Play();
+			_sprite.Hide();
+			CollisionLayer = 0;
+			CollisionMask = 0;
+			Freeze = true;
+			GetNode<SpringArm3D>("SpringArm3D").Hide();
+			for (int i = 0; i < 20; i++) _spawntrash();
+			splodeSFX.Finished += () => QueueFree();
 		}
+
 	}
 
 	private void _spawntrash()
