@@ -12,7 +12,8 @@ public partial class UI : Control
 	private Tween _wiggletween;
 	private Control _phone;
 	private ProgressBar _tank;
-	private Label _phonedisplay;
+	private RichTextLabel _phonedisplay;
+	private Button _phonedisplayButton;
 	private string _phonetext;
 	private MarginContainer _tutorialStuff;
 
@@ -42,7 +43,8 @@ public partial class UI : Control
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
-		_phonedisplay = GetNode<Label>("Phone/PhoneSprite/Dial Screen/Label");
+		_phonedisplay = GetNode<RichTextLabel>("Phone/Dial/dialTextDisplay");
+		_phonedisplayButton = GetNode<Button>("Phone/Dial/dialButton");
 
 		_tank1 = GetNode<ProgressBar>("Minimap/Tanks/Tank1");
 		_tank2 = GetNode<ProgressBar>("Minimap/Tanks/Tank2");
@@ -54,7 +56,7 @@ public partial class UI : Control
 
 		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
 
-		PhoneSFX = _phone.GetNode<AudioStreamPlayer>("PhoneSFX");
+		PhoneSFX = GetNode<AudioStreamPlayer>("Phone/PhoneSFX");
 
 		_debugpanel = GetNode<PanelContainer>("DebugPanel");
 		_debugtext = _debugpanel.GetNode<RichTextLabel>("MarginContainer/MarginContainer/RichTextLabel");
@@ -70,7 +72,7 @@ public partial class UI : Control
 
 	public override void _Process(double delta)
 	{
-		_phonedisplay.Text = _phonetext;
+		//_phonedisplay.Text = _phonetext;
 
 		_tank1.Value = (int)_player.Call("_GetTankPercentage", 1);
 		_tank2.Value = (int)_player.Call("_GetTankPercentage", 2);
@@ -135,6 +137,15 @@ public partial class UI : Control
 		if (c != ' ')
 		{
 			_phonetext += c;
+			if (!_phonedisplayButton.Visible)
+			{
+				//_tween?.Kill();
+				_tween = GetTree().CreateTween();
+				//_tween.TweenProperty(_phonedisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+				_tween.TweenProperty(_phonedisplay, "size", new Vector2(410, 290), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+				_tween.Finished += () => _phonedisplayButton.Show();
+
+			}
 		}
 		else
 		{

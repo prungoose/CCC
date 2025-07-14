@@ -53,6 +53,10 @@ public partial class Controller : CharacterBody3D
 	private int _tank2 = 0;
 	private int _tank3 = 0;
 	private int _tank4 = 0;
+	bool _phonedialDisplayed = false;
+	private Button _phoneDialButton;
+
+	private bool _onhomescreen = true;
 
 	public override void _Ready()
 	{
@@ -71,6 +75,10 @@ public partial class Controller : CharacterBody3D
 		VacLoopSFX = GetNode<AudioStreamPlayer>("Sounds/VacLoopSFX");
 		WalkSFX = GetNode<AudioStreamPlayer>("Sounds/WalkSFX");
 		FWOOMPSFX = GetNode<AudioStreamPlayer>("Sounds/FWOOMPSFX");
+
+		var parent = _ui.GetNode<Control>("Phone").GetNode<Control>("Dial");
+		_phoneDialButton = parent.GetNode<Button>("dialButton");
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -160,7 +168,7 @@ public partial class Controller : CharacterBody3D
 				if (_stepray.IsColliding())
 				{
 
-					var height = (_stepray.GetCollisionPoint(0)- GlobalPosition).Y;
+					var height = (_stepray.GetCollisionPoint(0) - GlobalPosition).Y;
 					GlobalTranslate(new Godot.Vector3(0, height, 0));
 				}
 			}
@@ -215,7 +223,7 @@ public partial class Controller : CharacterBody3D
 			_anim.Play(dirs[(int)Mathf.RadToDeg(inputdir.Angle()) / 45 + 3] + "_run");
 		else
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_idle");
-			
+
 		_anim.SetFrameAndProgress(frame, prog);
 	}
 
@@ -224,7 +232,7 @@ public partial class Controller : CharacterBody3D
 		if (_status != 0) return;
 
 		// pull up phone
-		if (Input.IsActionJustPressed("phone") && !is_blowing && !is_sucking)
+		if (Input.IsActionJustPressed("phone") && !is_blowing && !is_sucking && _onhomescreen)
 		{
 			_campivot.Call("_ToggleZoom");
 			phone = !phone;
@@ -465,6 +473,11 @@ public partial class Controller : CharacterBody3D
 	private int GetCurrentThrowing()
 	{
 		return _thrown_id;
+	}
+
+	private void setHomeScreen(bool a)
+	{
+		_onhomescreen = a;
 	}
 
 }

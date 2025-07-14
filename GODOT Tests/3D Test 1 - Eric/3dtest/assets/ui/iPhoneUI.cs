@@ -1,0 +1,196 @@
+using Godot;
+using System;
+using System.Net;
+
+public partial class iPhoneUI : Control
+{
+	private Button _fireButton;
+	private Button _waterButton;
+	private Button _powerButton;
+	private Button _animalButton;
+	private Button _healthButton;
+	private Button _dialButton;
+
+	private RichTextLabel displayInfo;
+	private RichTextLabel dialDisplay;
+
+	private Control _ui;
+	private AudioStreamPlayer _phoneSfx;
+	private Tween _tween;
+
+	private CharacterBody3D _player;
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		_fireButton = GetNode<Control>("Fire").GetNode<Button>("fireButton");
+		_waterButton = GetNode<Control>("Water").GetNode<Button>("waterButton");
+		_powerButton = GetNode<Control>("Power").GetNode<Button>("powerButton");
+		_healthButton = GetNode<Control>("Health").GetNode<Button>("healthButton");
+		_dialButton = GetNode<Control>("Dial").GetNode<Button>("dialButton");
+
+		_ui = GetNodeOrNull<Control>("../../UI");
+		_phoneSfx = GetNodeOrNull<AudioStreamPlayer>("PhoneSFX");
+
+		displayInfo = GetNode<RichTextLabel>("displayInfo");
+		dialDisplay = GetNode<Control>("Dial").GetNode<RichTextLabel>("dialTextDisplay");
+
+		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+
+	private void firePressed()
+	{
+		_player.Call("setHomeScreen", false);
+		displayInfo.PivotOffset = new Vector2(70, 190);
+		displayInfo.Text = "The Fire Department responds to:\n• [b]Fires[/b]\n• [b]Rescue operations[/b]\n• [b]Hazardous spills[/b]\n\nThey have the training and equipment to handle life-threatening hazards quickly.\n\n[b]Agency Access Code:[/b] ↓ ← ↑ →";
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		GD.Print("done");
+	}
+	private void waterPressed()
+	{
+		_player.Call("setHomeScreen", false);
+		displayInfo.PivotOffset = new Vector2(215, 190);
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	}
+	private void powerPressed()
+	{
+		_player.Call("setHomeScreen", false);
+		displayInfo.PivotOffset = new Vector2(365, 190);
+		displayInfo.Text = "The Power Company maintains the [i]electric grid[/i] and responds to issues like [b]downed lines[/b], [b]blackouts[/b], or [b]transformer damage[/b].\n\n• Contact them for electrical hazards\n• Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+		if ((int)_ui?.Call("GetTutorialStep") == 7)
+			_ui.Call("NextTutorialStep");
+	}
+	private void animalPressed()
+	{
+		_player.Call("setHomeScreen", false);
+		displayInfo.PivotOffset = new Vector2(70, 340);
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	}
+	private void healthPressed()
+	{
+		_player.Call("setHomeScreen", false);
+		displayInfo.PivotOffset = new Vector2(215, 340);
+		displayInfo.Text = "Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+		//"Fallen trees can block roads and damage property or power lines.\n\nWhen you see one:\n• [b]Keep a safe distance[/b] from hanging wires\n• Call the appropriate agency\n• Do not attempt to move it yourself"
+		//"EMS provides [b]life-saving care[/b] in emergencies.\n\nThey respond to:\n• [i]Injuries[/i]\n• [i]Exposure to toxins[/i]\n• [i]Fainting or collapse[/i]\n\nCall EMS if someone is hurt or unconscious.\n\n[b]Agency Access Code:[/b] ↓ ↓ ↑ ↑"
+	}
+	private void dialPressed()
+	{
+		_dialButton.Hide();
+		_tween?.Kill();
+		_tween?.CustomStep(0.3);
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		//_tween.TweenProperty(dialDisplay, "size", new Vector2(1, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+		// displayInfo.PivotOffset = new Vector2(365, 340);
+		// _tween?.CustomStep(0.3);
+		// _tween?.Kill();
+		// _tween = GetTree().CreateTween();
+		// _tween.TweenProperty(dialDisplay, "position", new Vector2(-205, -270), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		// _tween.TweenProperty(dialDisplay, "size", new Vector2(415, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		// _tween.TweenProperty(dialDisplay, "size", new Vector2(415, 300), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	}
+
+	// private void appPressed()
+	// {
+	// 	// if (_fireButton.IsPressed())
+	// 	// {
+	// 	// 	displayInfo.PivotOffset = new Vector2(70, 190);
+	// 	// 	displayInfo.Text = "The Fire Department responds to:\n• [b]Fires[/b]\n• [b]Rescue operations[/b]\n• [b]Hazardous spills[/b]\n\nThey have the training and equipment to handle life-threatening hazards quickly.\n\n[b]Agency Access Code:[/b] ↓ ← ↑ →";
+	// 	// 	_tween?.CustomStep(0.3);
+	// 	// 	_tween?.Kill();
+	// 	// 	_tween = GetTree().CreateTween();
+	// 	// 	_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	// 	// }
+	// 	// if (_waterButton.IsPressed())
+	// 	// {
+	// 	// 	displayInfo.PivotOffset = new Vector2(215, 190);
+	// 	// 	_tween?.CustomStep(0.3);
+	// 	// 	_tween?.Kill();
+	// 	// 	_tween = GetTree().CreateTween();
+	// 	// 	_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	// 	// }
+	// 	// if (_powerButton.IsPressed())
+	// 	// {
+	// 	// 	displayInfo.PivotOffset = new Vector2(365, 190);
+	// 	// 	displayInfo.Text = "The Power Company maintains the [i]electric grid[/i] and responds to issues like [b]downed lines[/b], [b]blackouts[/b], or [b]transformer damage[/b].\n\n• Contact them for electrical hazards\n• Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
+	// 	// 	_tween?.CustomStep(0.3);
+	// 	// 	_tween?.Kill();
+	// 	// 	_tween = GetTree().CreateTween();
+	// 	// 	_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+	// 	// 	if ((int)_ui?.Call("GetTutorialStep") == 7)
+	// 	// 		_ui.Call("NextTutorialStep");
+	// 	// }
+	// 	// if (_animalButton.IsPressed())
+	// 	// {
+	// 	// 	displayInfo.PivotOffset = new Vector2(70, 340);
+	// 	// 	_tween?.CustomStep(0.3);
+	// 	// 	_tween?.Kill();
+	// 	// 	_tween = GetTree().CreateTween();
+	// 	// 	_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	// 	// }
+	// 	// if (_healthButton.IsPressed())
+	// 	// {
+	// 	// 	displayInfo.PivotOffset = new Vector2(215, 340);
+	// 	// 	displayInfo.Text = "Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
+	// 	// 	_tween?.CustomStep(0.3);
+	// 	// 	_tween?.Kill();
+	// 	// 	_tween = GetTree().CreateTween();
+	// 	// 	_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+	// 	// 	//"Fallen trees can block roads and damage property or power lines.\n\nWhen you see one:\n• [b]Keep a safe distance[/b] from hanging wires\n• Call the appropriate agency\n• Do not attempt to move it yourself"
+	// 	// 	//"EMS provides [b]life-saving care[/b] in emergencies.\n\nThey respond to:\n• [i]Injuries[/i]\n• [i]Exposure to toxins[/i]\n• [i]Fainting or collapse[/i]\n\nCall EMS if someone is hurt or unconscious.\n\n[b]Agency Access Code:[/b] ↓ ↓ ↑ ↑"
+	// 	// }
+	// 	// if (_dialButton.IsPressed())
+	// 	// {
+	// displayInfo.PivotOffset = new Vector2(365, 340);
+	// _tween?.CustomStep(0.3);
+	// _tween?.Kill();
+	// _tween = GetTree().CreateTween();
+	// _tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.3f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	// 	// }
+	// }
+
+	private void homePressed()
+	{
+		_player.Call("setHomeScreen", true);
+		displayInfo.Text = "";
+		_tween?.CustomStep(0.3);
+		_tween?.Kill();
+		_tween = GetTree().CreateTween();
+		_tween.TweenProperty(displayInfo, "scale", new Vector2(0, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+
+		// _dialButton.Hide();
+
+		// _tween?.Kill();
+		// _tween?.CustomStep(0.3);
+		// _tween = GetTree().CreateTween();
+		// _tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+	}
+	
+}

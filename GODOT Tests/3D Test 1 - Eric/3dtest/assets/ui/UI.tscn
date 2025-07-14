@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
-[ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/phone.tscn" id="4_cufnj"]
+[ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/newphone.tscn" id="4_cufnj"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://src/TutorialStuff.cs" id="7_cufnj"]

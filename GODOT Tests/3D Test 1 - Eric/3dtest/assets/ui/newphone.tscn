@@ -1,0 +1,297 @@
+[gd_scene load_steps=14 format=3 uid="uid://7ghxngbd3bft"]
+
+[ext_resource type="Script" uid="uid://c1lp2taogx252" path="res://assets/ui/iPhoneUI.cs" id="1_suae8"]
+[ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_jf7fs"]
+[ext_resource type="Texture2D" uid="uid://dlr6f83dmgy1c" path="res://assets/ui/catback.png" id="3_mnjly"]
+[ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_y157e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_suae8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gr0p4"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2bu7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjcv4"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suae8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y157e"]
+bg_color = Color(0.0632628, 0.883766, 0.0534876, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjly"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_y157e"]
+device = -1
+pressed = true
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_gr0p4"]
+events = [SubResource("InputEventKey_y157e")]
+
+[node name="Phone" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_suae8")
+
+[node name="BottomPhonePart" type="ColorRect" parent="."]
+z_index = 900
+layout_mode = 0
+offset_left = -215.0
+offset_top = 351.0
+offset_right = 231.0
+offset_bottom = 415.0
+color = Color(0.0352941, 0.0352941, 0.0352941, 1)
+
+[node name="Wallpaper" type="Sprite2D" parent="."]
+position = Vector2(5.00001, -32.5)
+scale = Vector2(1.48649, 1.19844)
+texture = ExtResource("3_mnjly")
+
+[node name="PhoneCover" type="Sprite2D" parent="."]
+z_index = 999
+texture = ExtResource("2_jf7fs")
+
+[node name="Fire" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fireButton" type="Button" parent="Fire"]
+layout_mode = 0
+offset_left = -195.0
+offset_top = -270.0
+offset_right = -95.0
+offset_bottom = -170.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="fireLabel" type="Label" parent="Fire"]
+layout_mode = 0
+offset_left = -195.0
+offset_top = -164.0
+offset_right = -95.0
+offset_bottom = -119.0
+text = "Fire Dept."
+horizontal_alignment = 1
+
+[node name="Water" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="waterButton" type="Button" parent="Water"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -270.0
+offset_right = 50.0
+offset_bottom = -170.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="waterLabel" type="Label" parent="Water"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -164.0
+offset_right = 50.0
+offset_bottom = -119.0
+text = "Plumbing"
+horizontal_alignment = 1
+
+[node name="Power" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="powerButton" type="Button" parent="Power"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = -270.0
+offset_right = 200.0
+offset_bottom = -170.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="powerLabel" type="Label" parent="Power"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = -164.0
+offset_right = 200.0
+offset_bottom = -119.0
+text = "Power Co."
+horizontal_alignment = 1
+
+[node name="Animal" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="animalButton" type="Button" parent="Animal"]
+layout_mode = 0
+offset_left = -195.0
+offset_top = -119.0
+offset_right = -95.0
+offset_bottom = -19.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="animalLabel" type="Label" parent="Animal"]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -14.0
+offset_right = -88.0
+offset_bottom = 31.0
+text = "Animal Control"
+horizontal_alignment = 1
+
+[node name="Health" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="healthButton" type="Button" parent="Health"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -119.0
+offset_right = 50.0
+offset_bottom = -19.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="healthLabel" type="Label" parent="Health"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -14.0
+offset_right = 50.0
+offset_bottom = 31.0
+text = "Health"
+horizontal_alignment = 1
+
+[node name="Dial" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="dialTextDisplay" type="RichTextLabel" parent="Dial"]
+layout_mode = 0
+offset_left = -204.0
+offset_top = -270.0
+offset_right = 206.0
+offset_bottom = -270.0
+pivot_offset = Vector2(204, 38)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_suae8")
+horizontal_alignment = 1
+
+[node name="dialButton" type="Button" parent="Dial"]
+visible = false
+layout_mode = 0
+offset_left = -95.0
+offset_top = -47.0
+offset_right = 100.0
+offset_bottom = 3.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y157e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y157e")
+theme_override_styles/normal = SubResource("StyleBoxFlat_y157e")
+text = "Dial"
+
+[node name="displayInfo" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -215.0
+offset_top = -416.0
+offset_right = 225.0
+offset_bottom = 351.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(70, 340)
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_mnjly")
+bbcode_enabled = true
+
+[node name="homeButton" type="Button" parent="."]
+z_index = 995
+layout_mode = 0
+offset_left = -50.0
+offset_top = 351.0
+offset_right = 50.0
+offset_bottom = 406.0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+shortcut = SubResource("Shortcut_gr0p4")
+text = "O"
+
+[node name="PhoneSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y157e")
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="Fire/fireButton" to="." method="firePressed"]
+[connection signal="pressed" from="Water/waterButton" to="." method="waterPressed"]
+[connection signal="pressed" from="Power/powerButton" to="." method="powerPressed"]
+[connection signal="pressed" from="Animal/animalButton" to="." method="animalPressed"]
+[connection signal="pressed" from="Health/healthButton" to="." method="healthPressed"]
+[connection signal="pressed" from="Dial/dialButton" to="." method="dialPressed"]
+[connection signal="pressed" from="homeButton" to="." method="homePressed"]
