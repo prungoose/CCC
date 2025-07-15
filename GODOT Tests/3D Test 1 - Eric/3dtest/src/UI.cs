@@ -40,6 +40,9 @@ public partial class UI : Control
 
 	private Control _minimap;
 
+	// Game Progress Bar
+	[Export] ProgressBar _gameCompletionBar;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -250,6 +253,21 @@ public partial class UI : Control
 		foreach (ProgressBar t in _tanks)
 		{
 			//eventually add something so that tank background changes when throwable ready
+		}
+	}
+
+	public void updateGameCompletionBar(float completion)
+	{
+		_gameCompletionBar.Value += completion;
+		if (_gameCompletionBar.Value >= 100)
+		{
+			_gameCompletionBar.Modulate = new Color(0.2f, 1f, 0.2f);
+			_gameCompletionBar.Value = 100;
+			// Trigger game completion logic here, e.g., show a victory screen or end level
+		}
+		else
+		{
+			_gameCompletionBar.Modulate = new Color(1f, 1f, 1f);
 		}
 	}
 }

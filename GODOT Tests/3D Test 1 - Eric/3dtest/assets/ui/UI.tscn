@@ -649,4 +649,16 @@ visible = false
 z_index = 999
 layout_mode = 1
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(80, 80)
+offset_left = 547.0
+offset_top = 24.0
+offset_right = 1380.0
+offset_bottom = 104.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]

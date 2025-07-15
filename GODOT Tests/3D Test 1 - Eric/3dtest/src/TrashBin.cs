@@ -73,6 +73,9 @@ public partial class TrashBin : Node3D
 				_ui.Call("NextTutorialStep");
 				_tutorial_hazard.Call("_PlayPulseAnim");
 			}
+
+			// Update Game Completion
+			_ui.Call("UpdateGameCompletion", 5);
 		}
 	}
 

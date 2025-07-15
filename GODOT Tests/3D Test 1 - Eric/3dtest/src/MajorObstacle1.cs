@@ -51,6 +51,7 @@ public partial class MajorObstacle1 : StaticBody3D
 			var tween = GetTree().CreateTween();
 			_tape.Show();
 			tween.TweenProperty(_tape, "position", _tape.Position + Godot.Vector3.Down * 50, 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
+			_ui.Call("UpdateGameCompletion", 10);
 		}
 	}
 
