@@ -89,6 +89,7 @@ render_target_update_mode = 4
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport"]
 navigation_mesh = SubResource("NavigationMesh_wpr57")
+enabled = false
 
 [node name="Map" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("1_wpr57")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 4, -4.457, -4)
@@ -131,14 +132,68 @@ debug_fill = false
 [node name="TrashSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
+[node name="RTrashSpawner" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0037, 1.23706, 3.09219)
+
+[node name="RTrashSpawner2" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2189, 1.23705, 23.1026)
+
+[node name="RTrashSpawner8" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.9376, 1.23705, 23.3594)
+
+[node name="RTrashSpawner9" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.9593, 1.23718, 23.5306)
+
+[node name="RTrashSpawner10" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.6861, 1.23705, 17.4532)
+
+[node name="RTrashSpawner11" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.659, 1.23705, 0.847224)
+
+[node name="RTrashSpawner12" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.0054, 1.23705, -14.9883)
+
+[node name="RTrashSpawner13" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.3452, 1.24902, -16.7859)
+
+[node name="RTrashSpawner14" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.7773, 1.23705, -1.46391)
+
+[node name="RTrashSpawner15" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.0696, 1.23705, -15.8218)
+
+[node name="RTrashSpawner16" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9189, 1.23705, -16.421)
+
+[node name="RTrashSpawner17" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6528, 1.23705, -29.7456)
+
+[node name="RTrashSpawner18" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3376, 1.23705, -48.6626)
+
+[node name="RTrashSpawner19" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.8721, 1.23705, -66.8878)
+
+[node name="RTrashSpawner20" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2648, 1.23705, -79.8986)
+
+[node name="RTrashSpawner21" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9753, 1.23705, -79.8986)
+
+[node name="RTrashSpawner22" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.7457, 1.23705, -64.4911)
+
+[node name="RTrashSpawner23" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.185, 1.23705, -39.3516)
+
 [node name="RTrashSpawner3" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76515, -0.0570021, -24.3927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.765, 0, -24.393)
 
 [node name="RTrashSpawner4" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3356, -0.0569983, 16.6686)
 
 [node name="RTrashSpawner5" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.932, -0.0569983, -5.15188)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.932, 0, -5.152)
 
 [node name="RTrashSpawner6" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/TrashSpawners" instance=ExtResource("2_04qkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736, -0.0569983, -34.7662)

@@ -21,7 +21,7 @@ public partial class UI : Control
 	private bool _movementStepCompleted = false;
 
 	// Hazards
-	private StaticBody3D _powerLineHazard;
+	private Node3D _tutorialHazard;
 
 	// Tanks
 	private ProgressBar _tank1;
@@ -54,7 +54,7 @@ public partial class UI : Control
 
 		_tutorialStuff = GetNode<MarginContainer>("Tutorial Stuff");
 
-		_powerLineHazard = GetParent().GetNode<StaticBody3D>("SubViewport/Level/Major Obstacle");
+		_tutorialHazard = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners/HazardSpawner");
 
 		PhoneSFX = GetNode<AudioStreamPlayer>("Phone/PhoneSFX");
 
@@ -156,7 +156,7 @@ public partial class UI : Control
 				{
 					NextTutorialStep();
 				}
-				_player.Call("ReadyBeacon", 1);
+				_player.Call("ReadyBeacon", 0);
 			}
 
 			//More agencies go here with their own code

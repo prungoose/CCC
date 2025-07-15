@@ -13,6 +13,7 @@ public partial class Hazardspawner : Node3D
 	private AnimatedSprite3D _minimapsprite;
 	private float _time_since_last;
 	private float _time_until_next = 100;
+	private bool _initial_spawn = false;
 
 	private Control _ui;
 
@@ -34,8 +35,16 @@ public partial class Hazardspawner : Node3D
 	public override void _Process(double delta)
 	{
 		if (!_enabled) return;
-		if (!_active && (bool)_player.Call("GetActiveHazardCount")) _time_since_last += (float)delta;
-		if (GlobalPosition.DistanceTo(_player.GlobalPosition) > 75 && !_active && _time_since_last >= _time_until_next)
+		if (_initial_spawn && !_active && (bool)_player.Call("GetActiveHazardCount")) _time_since_last += (float)delta;
+		if (!_initial_spawn)
+		{
+			if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 75)
+			{
+				_SpawnAHazard();
+				_initial_spawn = true;
+			}
+		}
+		else if (GlobalPosition.DistanceTo(_player.GlobalPosition) > 75 && !_active && _time_since_last >= _time_until_next)
 		{
 			var r = GD.Randf();
 			if (r > 0.75) _SpawnAHazard();
