@@ -34,6 +34,9 @@ corner_radius_bottom_left = 30
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjly"]
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suae8"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 30
@@ -49,9 +52,6 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjly"]
-bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_y157e"]
 device = -1
@@ -92,13 +92,11 @@ scale = Vector2(1.48649, 1.19844)
 texture = ExtResource("3_mnjly")
 
 [node name="PhoneCover" type="Sprite2D" parent="."]
-z_index = 999
+z_index = 900
 texture = ExtResource("2_jf7fs")
 
 [node name="Fire" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="fireButton" type="Button" parent="Fire"]
 layout_mode = 0
@@ -123,8 +121,6 @@ horizontal_alignment = 1
 [node name="Water" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="waterButton" type="Button" parent="Water"]
 layout_mode = 0
@@ -149,8 +145,6 @@ horizontal_alignment = 1
 [node name="Power" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="powerButton" type="Button" parent="Power"]
 layout_mode = 0
@@ -224,6 +218,22 @@ offset_bottom = 31.0
 text = "Health"
 horizontal_alignment = 1
 
+[node name="displayInfo" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -215.0
+offset_top = -416.0
+offset_right = 225.0
+offset_bottom = 351.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(70, 340)
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_mnjly")
+bbcode_enabled = true
+
 [node name="Dial" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -241,34 +251,18 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_suae8")
 horizontal_alignment = 1
 
-[node name="dialButton" type="Button" parent="Dial"]
+[node name="dialButton" type="Button" parent="Dial/dialTextDisplay"]
 visible = false
 layout_mode = 0
-offset_left = -95.0
-offset_top = -47.0
-offset_right = 100.0
-offset_bottom = 3.0
+offset_left = 109.0
+offset_top = 223.0
+offset_right = 304.0
+offset_bottom = 273.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y157e")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y157e")
 theme_override_styles/normal = SubResource("StyleBoxFlat_y157e")
 text = "Dial"
-
-[node name="displayInfo" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = -215.0
-offset_top = -416.0
-offset_right = 225.0
-offset_bottom = 351.0
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(70, 340)
-theme_override_font_sizes/bold_italics_font_size = 30
-theme_override_font_sizes/italics_font_size = 30
-theme_override_font_sizes/mono_font_size = 30
-theme_override_font_sizes/normal_font_size = 30
-theme_override_font_sizes/bold_font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_mnjly")
-bbcode_enabled = true
 
 [node name="homeButton" type="Button" parent="."]
 z_index = 995
@@ -293,5 +287,5 @@ bus = &"SFX"
 [connection signal="pressed" from="Power/powerButton" to="." method="powerPressed"]
 [connection signal="pressed" from="Animal/animalButton" to="." method="animalPressed"]
 [connection signal="pressed" from="Health/healthButton" to="." method="healthPressed"]
-[connection signal="pressed" from="Dial/dialButton" to="." method="dialPressed"]
+[connection signal="pressed" from="Dial/dialTextDisplay/dialButton" to="." method="dialPressed"]
 [connection signal="pressed" from="homeButton" to="." method="homePressed"]

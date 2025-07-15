@@ -44,7 +44,7 @@ public partial class UI : Control
 	{
 		_phone = GetNode<Control>("Phone");
 		_phonedisplay = GetNode<RichTextLabel>("Phone/Dial/dialTextDisplay");
-		_phonedisplayButton = GetNode<Button>("Phone/Dial/dialButton");
+		_phonedisplayButton = GetNode<Button>("Phone/Dial/dialTextDisplay/dialButton");
 
 		_tank1 = GetNode<ProgressBar>("Minimap/Tanks/Tank1");
 		_tank2 = GetNode<ProgressBar>("Minimap/Tanks/Tank2");
@@ -92,7 +92,7 @@ public partial class UI : Control
 
 	public void _updatephone(bool isPhoneOpen)
 	{
-		_tween?.CustomStep(0.8);
+		_tween?.CustomStep(1f);
 		if (isPhoneOpen)
 		{
 			// Tutorial Progression
@@ -105,12 +105,12 @@ public partial class UI : Control
 			_tween = GetTree().CreateTween();
 
 			//occur first
-			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + 600), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
+			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, 1535), 0.2f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for a delay
 			_tween.TweenProperty(_minimap, "scale", new Vector2(1, 1), 0.1f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In); //dummy tween for setparallel
 																																			 //occur after first tween is done
 			_tween.SetParallel();
-			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y - 1000), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, 551), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_tween.TweenProperty(_phone, "rotation", Mathf.DegToRad(8), .4f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 
 		}
@@ -121,11 +121,11 @@ public partial class UI : Control
 
 			//occur first
 			_tween.SetParallel();
-			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, _phone.Position.Y + 1000), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
+			_tween.TweenProperty(_phone, "position", new Vector2(_phone.Position.X, 1551), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.In);
 			_tween.TweenProperty(_phone, "rotation", 0, .3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_tween.SetParallel(false);
 			//occur second
-			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, _minimap.Position.Y + -600), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			_tween.TweenProperty(_minimap, "position", new Vector2(_minimap.Position.X, 935), 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 			_phonetext = "";
 		}
 	}
@@ -139,6 +139,7 @@ public partial class UI : Control
 			_phonetext += c;
 			if (!_phonedisplayButton.Visible)
 			{
+				_player.Call("setHomeScreen", false);
 				//_tween?.Kill();
 				_tween = GetTree().CreateTween();
 				//_tween.TweenProperty(_phonedisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);

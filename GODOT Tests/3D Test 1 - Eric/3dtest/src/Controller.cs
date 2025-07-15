@@ -87,18 +87,18 @@ public partial class Controller : CharacterBody3D
 		_beacon_sprite = GetNode<Sprite3D>("BeaconPivot/BeaconSprite");
 
 		var parent = _ui.GetNode<Control>("Phone").GetNode<Control>("Dial");
-		_phoneDialButton = parent.GetNode<Button>("dialButton");
+		_phoneDialButton = parent.GetNode<Button>("dialTextDisplay/dialButton");
 
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		
+
 		_head.LookAt(_headtarget.GlobalPosition, Godot.Vector3.Up);
 		Godot.Vector3 y_rotate = new Godot.Vector3(0, _head.Rotation.Y, 0);
 		_vacuum.Rotation = y_rotate;
 		_lightpivot.Rotation = y_rotate;
-		_beacon_pivot.Rotation = 	new Godot.Vector3(0, Mathf.LerpAngle(_beacon_pivot.Rotation.Y, y_rotate.Y, .12f), 0);
+		_beacon_pivot.Rotation = new Godot.Vector3(0, Mathf.LerpAngle(_beacon_pivot.Rotation.Y, y_rotate.Y, .12f), 0);
 		if (!phone && _status == 0)
 			_HandleMovement((float)delta);
 		_HandleCollisions((float)delta);
@@ -121,7 +121,7 @@ public partial class Controller : CharacterBody3D
 		{
 			if (phone)
 			{
-				switch (keyEvent.PhysicalKeycode )
+				switch (keyEvent.PhysicalKeycode)
 				{
 					case Key.W: _ui.Call("_dial", '↑'); break;
 					case Key.S: _ui.Call("_dial", '↓'); break;
@@ -505,7 +505,7 @@ public partial class Controller : CharacterBody3D
 		_active_hazard_count++;
 	}
 
-		private void DecActiveHazardCount()
+	private void DecActiveHazardCount()
 	{
 		_active_hazard_count--;
 	}
@@ -513,6 +513,11 @@ public partial class Controller : CharacterBody3D
 	private void setHomeScreen(bool a)
 	{
 		_onhomescreen = a;
+	}
+
+	private bool _getPhone()
+	{
+		return phone;
 	}
 
 }

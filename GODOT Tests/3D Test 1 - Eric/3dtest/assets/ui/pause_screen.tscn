@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmfwxtxydwese"]
+[gd_scene load_steps=24 format=3 uid="uid://bmfwxtxydwese"]
 
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_p7ktw"]
 [ext_resource type="Script" uid="uid://b52n6mw8yi825" path="res://src/PauseScreen.cs" id="1_phwk8"]
@@ -9,6 +9,18 @@
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="7_jxqms"]
 [ext_resource type="Texture2D" uid="uid://b1ipy74768n1y" path="res://assets/menu/EXIT_Pressed.png" id="8_fub31"]
 [ext_resource type="Texture2D" uid="uid://d1ry7wuldve26" path="res://assets/menu/EXIT.png" id="9_phwk8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htskl"]
+bg_color = Color(0.027451, 0.882353, 0.898039, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42rq1"]
 
@@ -71,13 +83,14 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -381.0
-offset_top = 199.0
-offset_right = 382.0
-offset_bottom = 375.0
+offset_left = -380.0
+offset_top = 125.0
+offset_right = 383.0
+offset_bottom = 352.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("7_jxqms")
 theme_override_font_sizes/font_size = 150
+theme_override_styles/normal = SubResource("StyleBoxFlat_htskl")
 text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
