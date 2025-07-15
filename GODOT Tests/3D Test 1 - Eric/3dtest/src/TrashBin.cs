@@ -30,7 +30,7 @@ public partial class TrashBin : Node3D
 		_minimapsprite = GetNode<Sprite3D>("Sprite3D");
 
 		// For starting animation in tutorial sequence
-		_tutorial_hazard = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/HazSpawners/HazardSpawner");
+		_tutorial_hazard = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners/HazardSpawner");
 
 		Material m = (Material)_mesh.GetSurfaceOverrideMaterial(0).Duplicate(true);
 		_mesh.SetSurfaceOverrideMaterial(0, m);

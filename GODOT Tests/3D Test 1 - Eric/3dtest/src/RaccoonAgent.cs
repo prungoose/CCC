@@ -3,76 +3,129 @@ using System;
 
 public partial class RaccoonAgent : CharacterBody3D
 {
-
+    [Export] public float Speed = 5f;
     [Export] public float AvoidPlayerDistance = 5f;
+    [Export] public float DropDistance = 5f;
+    [Export] public float DetectionRadius = 15f;
+    [Export] public float SabotageCrashRange = 1f;
+    [Export] public float StunDuration = 20f;
     [Export] public CharacterBody3D Player;
-    [Export] private NavigationAgent3D _navAgent;
+    [Export] public NavigationAgent3D NavAgent;
 
+    private Vector3 _currentTarget;
+    private RigidBody3D _targetTrash;
+    private RigidBody3D _heldTrash;
     private RigidBody3D _lastDroppedTrash;
     private bool _isFleeing = false;
-
-    [Export] public float Speed = 5f;
-    [Export] public float DropDistance = 5f;
-    private RigidBody3D _heldTrash;
-    private RigidBody3D _targetTrash;
-    private Vector3 _dropTarget;
+    private bool _isStunned = false;
+    private float _stunTimer = 0f;
     private Random _rand = new();
-    private Timer _searchTimer;
 
     public override void _Ready()
     {
-        _searchTimer = GetNode<Timer>("SearchTimer");
-        _searchTimer.Timeout += OnSearchTimeout;
+        NavAgent.PathDesiredDistance = 0.5f;
+        NavAgent.TargetDesiredDistance = 0.5f;
+        SetRandomWanderTarget();
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (_isStunned)
+        {
+            _stunTimer -= (float)delta;
+            if (_stunTimer <= 0f) _isStunned = false;
+            return;
+        }
+
         float distToPlayer = GlobalPosition.DistanceTo(Player.GlobalPosition);
 
         if (distToPlayer < AvoidPlayerDistance)
         {
-            FleeFromPlayer(delta);
+            if (_heldTrash != null)
+                DropTrash();
+
+            FleeFromPlayer();
             return;
         }
 
-        _isFleeing = false;
-
-        if (_heldTrash == null && _targetTrash != null)
+        if (_isFleeing)
         {
-            if (!IsInstanceValid(_targetTrash))
-            {
-                _targetTrash = null;
-                return;
-            }
-
-            MoveTo(_targetTrash.GlobalPosition, delta);
+            MoveTowards(NavAgent.GetNextPathPosition(), delta);
+            CheckCrashIntoBins();
+            return;
         }
-        else if (_heldTrash != null)
-        {
-            MoveTo(_dropTarget, delta);
 
-            if (GlobalPosition.DistanceTo(_dropTarget) < 1f)
+        // Trash interaction logic
+        if (_heldTrash != null)
+        {
+            MoveTowards(_currentTarget, delta);
+
+            if (GlobalPosition.DistanceTo(_currentTarget) < 1f)
                 DropTrash();
+        }
+        else
+        {
+            if (_targetTrash == null)
+                _targetTrash = FindNearbyTrash();
+
+            if (_targetTrash != null)
+            {
+                NavAgent.TargetPosition = _targetTrash.GlobalPosition;
+                MoveTowards(NavAgent.GetNextPathPosition(), delta);
+
+                if (GlobalPosition.DistanceTo(_targetTrash.GlobalPosition) < 1f)
+                    PickupTrash(_targetTrash);
+            }
+            else if (!NavAgent.IsNavigationFinished())
+            {
+                MoveTowards(NavAgent.GetNextPathPosition(), delta);
+            }
+            else
+            {
+                SetRandomWanderTarget();
+            }
         }
     }
 
-
-    private void MoveTo(Vector3 target, double delta)
+    private void MoveTowards(Vector3 target, double delta)
     {
-        Vector3 flatTarget = new Vector3(target.X, GlobalPosition.Y, target.Z);
-        Vector3 direction = (flatTarget - GlobalPosition).Normalized();
-
+        Vector3 direction = (target - GlobalPosition).Normalized();
         Velocity = direction * Speed;
         MoveAndSlide();
     }
 
-
-    private void OnSearchTimeout()
+    private void SetRandomWanderTarget()
     {
-        if (_heldTrash != null) return;
-        _targetTrash = FindNearbyTrash();
+        Vector3 randomOffset = new Vector3(
+            (float)(_rand.NextDouble() * 40 - 20),
+            0,
+            (float)(_rand.NextDouble() * 40 - 20)
+        );
+        NavAgent.TargetPosition = GlobalPosition + randomOffset;
     }
 
+    private void FleeFromPlayer()
+    {
+        _isFleeing = true;
+        Vector3 fleeDir = (GlobalPosition - Player.GlobalPosition).Normalized();
+        Vector3 target = GlobalPosition + fleeDir * 10f;
+        NavAgent.TargetPosition = target;
+    }
+
+    private void CheckCrashIntoBins()
+    {
+        foreach (var node in GetTree().GetNodesInGroup("trash_bins"))
+        {
+            if (node is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) < SabotageCrashRange)
+            {
+                GD.Print("Raccoon crashed into bin!");
+                // Trigger bin sabotage logic here
+                _isFleeing = false;
+                SetRandomWanderTarget();
+                break;
+            }
+        }
+    }
 
     private RigidBody3D FindNearbyTrash()
     {
@@ -83,10 +136,10 @@ public partial class RaccoonAgent : CharacterBody3D
         {
             if (node is RigidBody3D trash && trash.IsInsideTree() && trash != _lastDroppedTrash)
             {
-                float dist = trash.GlobalPosition.DistanceTo(GlobalPosition);
-                float distToPlayer = trash.GlobalPosition.DistanceTo(Player.GlobalPosition);
+                float dist = GlobalPosition.DistanceTo(trash.GlobalPosition);
+                float distToPlayer = Player.GlobalPosition.DistanceTo(trash.GlobalPosition);
 
-                if (dist < 15f && dist < closestDist && distToPlayer > 2.5f)
+                if (dist < DetectionRadius && distToPlayer > 2.5f && dist < closestDist)
                 {
                     closest = trash;
                     closestDist = dist;
@@ -106,16 +159,13 @@ public partial class RaccoonAgent : CharacterBody3D
         trash.Visible = false;
         trash.SetProcess(false);
 
-        _dropTarget = GlobalPosition + new Vector3(
-            (float)_rand.NextDouble() * 2f - 1f,
-            0,
-            (float)_rand.NextDouble() * 2f - 1f
-        ).Normalized() * DropDistance;
+        _currentTarget = GetTrashDropLocation();
+        NavAgent.TargetPosition = _currentTarget;
     }
 
     private void DropTrash()
     {
-        _heldTrash.GlobalPosition = _dropTarget;
+        _heldTrash.GlobalPosition = _currentTarget;
         _heldTrash.Freeze = false;
         _heldTrash.Visible = true;
         _heldTrash.SetProcess(true);
@@ -127,44 +177,30 @@ public partial class RaccoonAgent : CharacterBody3D
 
         _lastDroppedTrash = _heldTrash;
         _heldTrash = null;
+
+        SetRandomWanderTarget();
     }
 
-
-    public override void _Process(double delta)
+    private Vector3 GetTrashDropLocation()
     {
-        if (_heldTrash == null && _targetTrash != null)
-        {
-            if (IsInstanceValid(_targetTrash))
-            {
-                if (GlobalPosition.DistanceTo(_targetTrash.GlobalPosition) < 1f)
-                {
-                    PickupTrash(_targetTrash);
-                }
-            }
-            else
-            {
-                _targetTrash = null;
-            }
-
-        }
+        return GlobalPosition + new Vector3(
+            (float)_rand.NextDouble() * 2f - 1f,
+            0,
+            (float)_rand.NextDouble() * 2f - 1f
+        ).Normalized() * DropDistance;
     }
 
-    private void FleeFromPlayer(double delta)
+    public void AttractToBait(Vector3 baitPosition)
     {
-        _isFleeing = true;
-        Vector3 playerFlat = new Vector3(Player.GlobalPosition.X, GlobalPosition.Y, Player.GlobalPosition.Z);
-        Vector3 fleeDir = (GlobalPosition - playerFlat).Normalized();
-
-        Velocity = fleeDir * Speed * 1.5f;
-        MoveAndSlide();
-
+        NavAgent.TargetPosition = baitPosition;
+        _isFleeing = false;
         _targetTrash = null;
     }
 
-    private void updateTargetLocation(Vector3 target)
+    public void Stun()
     {
-        _navAgent.TargetPosition = target;
+        _isStunned = true;
+        _stunTimer = StunDuration;
+        Velocity = Vector3.Zero;
     }
-
-
 }
