@@ -11,6 +11,8 @@ public partial class TrashCube1 : RigidBody3D
 	private Sprite3D _minimapsprite;
 	private SpringArm3D _springarm;
 
+	private float _player_dis;
+
 	
 
 	public override void _Ready()
@@ -28,7 +30,19 @@ public partial class TrashCube1 : RigidBody3D
 	public override void _Process(double delta)
 	{
 		_time_active += (float)delta;
-		if ((GlobalPosition.Y < -40 | _time_active > 100) && GlobalPosition.DistanceTo(_player.GlobalPosition) > 40)
+		_player_dis = GlobalPosition.DistanceTo(_player.GlobalPosition);
+		if (_player_dis > 40)
+		{
+			_sprite.Hide();
+			_minimapsprite.Hide();
+		}
+		else
+		{
+			_sprite.Show();
+			_minimapsprite.Show();
+		}
+		
+		if ((GlobalPosition.Y < -40 | _time_active > 100) && _player_dis > 40)
 		{
 			QueueFree();
 		}
@@ -36,8 +50,17 @@ public partial class TrashCube1 : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_springarm.GlobalRotation = new Godot.Vector3(Mathf.DegToRad(90), 0, 0);
-		_minimapsprite.GlobalPosition = GlobalPosition;
+		if (_player_dis > 40)
+		{
+			Sleeping = true;
+		}
+		else
+		{
+			Sleeping = false;
+			_springarm.GlobalRotation = new Godot.Vector3(Mathf.DegToRad(90), 0, 0);
+			_minimapsprite.GlobalPosition = GlobalPosition;
+		}
+
 	}
 
 	public int _GetTrashID()

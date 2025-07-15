@@ -5805,8 +5805,13 @@ shape = SubResource("ConcavePolygonShape3D_ryowc")
 environment = SubResource("Environment_ubd4l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, -0.612372, 0.612372, 0, 0.707107, 0.707107, -0.866025, -0.353553, 0.353553, 0, 8.34669, 0)
+transform = Transform3D(0.5, -0.771634, 0.393167, 0, 0.45399, 0.891006, -0.866025, -0.445503, 0.226995, 0, 8.34669, 0)
+layers = 2
 light_specular = 0.0
 shadow_enabled = true
 shadow_caster_mask = 4294967293
+directional_shadow_mode = 0
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 80.0
+directional_shadow_pancake_size = 0.0
 sky_mode = 1

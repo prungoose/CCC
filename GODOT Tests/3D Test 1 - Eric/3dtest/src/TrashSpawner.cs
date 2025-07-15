@@ -45,7 +45,7 @@ public partial class TrashSpawner : Node3D
 	void _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling()
 	{
 		//gamble for which types of trash to spawn, how many, and in what ratio (all random). trash types are 1,2,3,4
-		int total_amnt_to_spawn = GD.RandRange(10, 30);
+		int total_amnt_to_spawn = GD.RandRange(0, 0);
 
 		int total_types_to_spawn;
 		var r = GD.Randf();
