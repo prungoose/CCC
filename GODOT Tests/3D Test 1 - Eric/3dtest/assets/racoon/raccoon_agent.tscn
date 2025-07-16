@@ -129,5 +129,6 @@ shape = SubResource("BoxShape3D_3km4c")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+render_priority = 1
 sprite_frames = SubResource("SpriteFrames_h11xc")
 animation = &"idle"
