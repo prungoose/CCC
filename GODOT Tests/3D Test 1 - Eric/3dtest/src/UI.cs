@@ -169,7 +169,7 @@ public partial class UI : Control
 			_phonetext = "";
 			_wiggle();
 			PhoneSFX.Play();
-		}	
+		}
 	}
 
 	public void _wiggle()

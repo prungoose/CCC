@@ -346,7 +346,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("_gameCompletionBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -355,6 +355,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_4b2l8")
+_gameCompletionBar = NodePath("ProgressBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
