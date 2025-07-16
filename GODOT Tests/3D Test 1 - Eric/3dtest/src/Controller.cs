@@ -23,6 +23,7 @@ public partial class Controller : CharacterBody3D
 	[Export] public PackedScene _trajtarget_scene;
 	[Export] public Control _ui;
 	[Export] public PackedScene _thrown_beacon;
+	[Export] public PackedScene _thrown_bait;
 	public int _tankpercentage = 0;
 	private Node3D _head;
 	private AnimatedSprite3D _anim;
@@ -63,6 +64,8 @@ public partial class Controller : CharacterBody3D
 	private Button _phoneDialButton;
 
 	private bool _onhomescreen = true;
+
+	private bool baitEquipped = false;
 
 	public override void _Ready()
 	{
@@ -289,7 +292,7 @@ public partial class Controller : CharacterBody3D
 		}
 
 		// start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready) && !phone)
+		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready | baitEquipped) && !phone)
 		{
 			WindUpSFX.Play();
 			is_blowing = true;
@@ -323,6 +326,11 @@ public partial class Controller : CharacterBody3D
 				beacon_ready = false;
 				var tween = GetTree().CreateTween();
 				tween.TweenProperty(_beacon_pivot, "scale", Godot.Vector3.Zero, .12f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In);
+			}
+			else if (baitEquipped)
+			{
+				yeet = _thrown_bait.Instantiate<RigidBody3D>();
+				baitEquipped = false;
 			}
 			else
 			{
