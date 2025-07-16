@@ -52,6 +52,8 @@ public partial class TrashBin : Node3D
 	{
 		if (body.IsInGroup("thrown") && (int)body.Call("GetThrownTrashID") == _trashId)
 		{
+			// Update Game Completion
+			_ui.Call("updateGameCompletionBar", 5);
 			body.CollisionLayer = 0;
 			body.CollisionMask = 0;
 			_splode_particles.Restart();
@@ -74,8 +76,7 @@ public partial class TrashBin : Node3D
 				_tutorial_hazard.Call("_PlayPulseAnim");
 			}
 
-			// Update Game Completion
-			_ui.Call("UpdateGameCompletion", 5);
+
 		}
 	}
 
