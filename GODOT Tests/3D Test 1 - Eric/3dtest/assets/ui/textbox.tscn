@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpiqgw426s24"]
+[gd_scene load_steps=9 format=3 uid="uid://cpiqgw426s24"]
 
 [ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://src/Textbox.cs" id="1_5wdy1"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="1_aqvb0"]
 [ext_resource type="Texture2D" uid="uid://blfnydurnolwj" path="res://assets/ui/circle.png" id="3_g1w8g"]
-[ext_resource type="Texture2D" uid="uid://emtut8a80gn6" path="res://assets/cutscene characters/Mayumarosprite_1.png" id="3_k7pxp"]
-[ext_resource type="Texture2D" uid="uid://bk7kl7vcljpbg" path="res://assets/cutscene characters/Mayumarosprite_2.png" id="4_g1w8g"]
+[ext_resource type="Texture2D" uid="uid://irn3nw5xvxsu" path="res://assets/cutscene characters/matsumoto_talk.png" id="3_vwjde"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obbyq"]
 bg_color = Color(1, 1, 1, 0.262745)
@@ -22,25 +21,11 @@ corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwjde"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s421u"]
-atlas = ExtResource("3_k7pxp")
-region = Rect2(0, 0, 500, 500)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvir3"]
-atlas = ExtResource("4_g1w8g")
-region = Rect2(0, 0, 500, 500)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_fafr0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s421u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kvir3")
+"texture": ExtResource("3_vwjde")
 }],
 "loop": true,
 "name": &"default",
@@ -107,7 +92,6 @@ keep_pressed_outside = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer"]
 scale = Vector2(0.26, 0.26)
 sprite_frames = SubResource("SpriteFrames_fafr0")
-frame = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="PanelContainer/AnimatedSprite2D"]
 show_behind_parent = true

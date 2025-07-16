@@ -31,6 +31,6 @@ public partial class PauseScreen : Control
 	public void QuitLevel()
 	{
 		GetTree().Paused = false;
-		_transitionscene.Call("ChangeScene", "res://assets/menu/MainMenu.tscn");
+		_transitionscene.Call("ChangeScene", "res://TitleScreen.tscn");
 	}
 }
