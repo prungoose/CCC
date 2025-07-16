@@ -196,7 +196,7 @@ public partial class UI : Control
 			if (!_movementStepCompleted)
 			{
 				_movementStepCompleted = true;
-				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/Beacon");
+				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon");
 				beacon.QueueFree();
 				NextTutorialStep();
 			}

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikigbxtw4lkl"
-path="res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"
+uid="uid://bnfr8av5rdq1l"
+path="res://.godot/imported/batteryicon.png-85f15eb617252103f185c2390f00c89c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/phone_window.png"
-dest_files=["res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"]
+source_file="res://assets/ui/batteryicon.png"
+dest_files=["res://.godot/imported/batteryicon.png-85f15eb617252103f185c2390f00c89c.ctex"]
 
 [params]
 

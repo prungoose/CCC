@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikigbxtw4lkl"
-path="res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"
+uid="uid://dstxyn273sjn2"
+path="res://.godot/imported/wifiicon.png-e0d812ee7fc94f24acc8e73db586807d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/phone_window.png"
-dest_files=["res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"]
+source_file="res://assets/ui/wifiicon.png"
+dest_files=["res://.godot/imported/wifiicon.png-e0d812ee7fc94f24acc8e73db586807d.ctex"]
 
 [params]
 

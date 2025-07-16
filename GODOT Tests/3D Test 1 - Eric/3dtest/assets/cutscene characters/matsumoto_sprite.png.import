@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikigbxtw4lkl"
-path="res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"
+uid="uid://b2f2ckpuawo5f"
+path="res://.godot/imported/matsumoto_sprite.png-3a37b4c85e55bd843fda8d1ce73cd20b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/phone_window.png"
-dest_files=["res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"]
+source_file="res://assets/cutscene characters/matsumoto_sprite.png"
+dest_files=["res://.godot/imported/matsumoto_sprite.png-3a37b4c85e55bd843fda8d1ce73cd20b.ctex"]
 
 [params]
 

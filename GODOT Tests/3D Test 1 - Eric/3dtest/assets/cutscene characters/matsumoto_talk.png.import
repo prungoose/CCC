@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikigbxtw4lkl"
-path="res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"
+uid="uid://dahd5dylyef8b"
+path="res://.godot/imported/matsumoto_talk.png-ccec4ad2f2cf254e6ad77804e0461c5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/phone_window.png"
-dest_files=["res://.godot/imported/phone_window.png-63e578cbdf3d0fd1e690770ad9454620.ctex"]
+source_file="res://assets/cutscene characters/matsumoto_talk.png"
+dest_files=["res://.godot/imported/matsumoto_talk.png-ccec4ad2f2cf254e6ad77804e0461c5d.ctex"]
 
 [params]
 

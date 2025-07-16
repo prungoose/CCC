@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7ghxngbd3bft"]
+[gd_scene load_steps=22 format=3 uid="uid://7ghxngbd3bft"]
 
 [ext_resource type="Script" uid="uid://c1lp2taogx252" path="res://assets/ui/iPhoneUI.cs" id="1_suae8"]
 [ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_jf7fs"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://ckrg2klg24db1" path="res://assets/ui/electric_icon.png" id="4_sjcv4"]
 [ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_y157e"]
 [ext_resource type="Texture2D" uid="uid://x5v312jstqri" path="res://assets/ui/health_icon.png" id="6_njngd"]
+[ext_resource type="Texture2D" uid="uid://bikigbxtw4lkl" path="res://assets/ui/phone_window.png" id="9_mnjly"]
+[ext_resource type="Texture2D" uid="uid://bnfr8av5rdq1l" path="res://assets/ui/batteryicon.png" id="11_i3jg3"]
+[ext_resource type="Texture2D" uid="uid://c6qqfsxya6lt8" path="res://assets/ui/networkicon.png" id="12_r5ww3"]
+[ext_resource type="Texture2D" uid="uid://dstxyn273sjn2" path="res://assets/ui/wifiicon.png" id="13_8qfgr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_suae8"]
 
@@ -21,13 +25,8 @@ corner_radius_bottom_left = 10
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjly"]
-bg_color = Color(0, 0, 0, 1)
-border_color = Color(1, 1, 1, 1)
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3jg3"]
+texture = ExtResource("9_mnjly")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suae8"]
 bg_color = Color(1, 1, 1, 1)
@@ -53,6 +52,11 @@ unicode = 102
 
 [sub_resource type="Shortcut" id="Shortcut_gr0p4"]
 events = [SubResource("InputEventKey_y157e")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qfgr"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Phone" type="Control"]
 layout_mode = 3
@@ -119,6 +123,7 @@ offset_left = -195.0
 offset_top = -164.0
 offset_right = -95.0
 offset_bottom = -119.0
+theme_override_constants/outline_size = 5
 text = "Fire Dept."
 horizontal_alignment = 1
 
@@ -153,6 +158,7 @@ offset_left = -50.0
 offset_top = -164.0
 offset_right = 50.0
 offset_bottom = -119.0
+theme_override_constants/outline_size = 5
 text = "Plumbing"
 horizontal_alignment = 1
 
@@ -187,13 +193,15 @@ offset_left = 100.0
 offset_top = -164.0
 offset_right = 200.0
 offset_bottom = -119.0
+theme_override_constants/outline_size = 5
 text = "Power Co."
 horizontal_alignment = 1
 
 [node name="Animal" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 70.0
+offset_right = 110.0
 offset_bottom = 40.0
 
 [node name="animalButton" type="Button" parent="Animal"]
@@ -223,13 +231,15 @@ offset_left = -204.0
 offset_top = -14.0
 offset_right = -88.0
 offset_bottom = 31.0
+theme_override_constants/outline_size = 5
 text = "Animal Control"
 horizontal_alignment = 1
 
 [node name="Health" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 75.0
+offset_right = 115.0
 offset_bottom = 40.0
 
 [node name="healthButton" type="Button" parent="Health"]
@@ -259,6 +269,7 @@ offset_left = -50.0
 offset_top = -14.0
 offset_right = 50.0
 offset_bottom = 31.0
+theme_override_constants/outline_size = 5
 text = "Health"
 horizontal_alignment = 1
 
@@ -270,12 +281,13 @@ offset_right = 225.0
 offset_bottom = 351.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(70, 340)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
 theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_mnjly")
+theme_override_styles/normal = SubResource("StyleBoxTexture_i3jg3")
 bbcode_enabled = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -301,6 +313,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="dialButton" type="Button" parent="Dial/dialTextDisplay"]
+visible = false
 layout_mode = 0
 offset_left = 109.0
 offset_top = 223.0
@@ -330,6 +343,42 @@ text = "O"
 stream = ExtResource("4_y157e")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="BatteryIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = -406.0
+offset_right = 982.0
+offset_bottom = 246.0
+scale = Vector2(0.0522156, 0.0552113)
+texture = ExtResource("11_i3jg3")
+flip_h = true
+
+[node name="NetworkIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 107.0
+offset_top = -400.0
+offset_right = 624.0
+offset_bottom = 71.0
+scale = Vector2(0.0522156, 0.0552113)
+texture = ExtResource("12_r5ww3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = -400.0
+offset_right = 2622.0
+offset_bottom = 1774.0
+scale = Vector2(0.0104431, 0.0110423)
+texture = ExtResource("13_8qfgr")
+
+[node name="FrontCameraIcon" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -73.0
+offset_top = -416.0
+offset_right = 72.0
+offset_bottom = -376.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8qfgr")
 
 [connection signal="pressed" from="Fire/fireButton" to="." method="firePressed"]
 [connection signal="pressed" from="Water/waterButton" to="." method="waterPressed"]
