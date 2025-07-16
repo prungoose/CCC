@@ -356,7 +356,7 @@ _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_sybqf")
 
 [node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player") instance=ExtResource("16_i3gsk")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.9539, 0.401721, 2.2704)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.598672, 0.915737, 3.95279)
 Player = NodePath("../Player")
 
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("17_l6626")]
