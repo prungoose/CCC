@@ -58,7 +58,7 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(215, 190);
-		displayInfo.Text = "The [b][color=blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
+		displayInfo.Text = "The [b][color=light_blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -80,8 +80,8 @@ public partial class iPhoneUI : Control
 	private void animalPressed()
 	{
 		_player.Call("setHomeScreen", false);
-		displayInfo.PivotOffset = new Vector2(70, 340);
-		displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not touch, feed, or handle wild animals.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
+		displayInfo.PivotOffset = new Vector2(135, 340);
+		displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not handle wild animals without proper equipment.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -90,7 +90,7 @@ public partial class iPhoneUI : Control
 	private void healthPressed()
 	{
 		_player.Call("setHomeScreen", false);
-		displayInfo.PivotOffset = new Vector2(215, 340);
+		displayInfo.PivotOffset = new Vector2(295, 340);
 		displayInfo.Text = "The [b][color=green]General Health Team[/color][/b] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
 
 		//"Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
@@ -105,12 +105,13 @@ public partial class iPhoneUI : Control
 	}
 	private void dialPressed()
 	{
-		
+
 		_tween?.Kill();
 		_tween?.CustomStep(0.3);
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		_dialButton.Hide();
+		_ui.Call("_dial", " ");
 		//_tween.TweenProperty(dialDisplay, "size", new Vector2(1, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 
 		// displayInfo.PivotOffset = new Vector2(365, 340);
@@ -145,9 +146,10 @@ public partial class iPhoneUI : Control
 				_tween?.CustomStep(0.3);
 				_tween = GetTree().CreateTween();
 				_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+				_ui.Call("_dial", ' ');
 
-				if (displayInfo.Scale != new Godot.Vector2 (1,1))
-					_tween.Finished += () => _player.Call("setHomeScreen", true);
+				if (displayInfo.Scale != new Godot.Vector2(1, 1))
+				_tween.Finished += () => _player.Call("setHomeScreen", true);
 			}
 	}
 	
