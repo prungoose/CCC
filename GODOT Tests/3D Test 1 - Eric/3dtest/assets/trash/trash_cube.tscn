@@ -35,6 +35,7 @@ cast_shadow = 0
 gi_mode = 0
 pixel_size = 0.017
 axis = 1
+shaded = true
 texture_filter = 4
 render_priority = 1
 texture = ExtResource("3_4y814")

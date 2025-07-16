@@ -43,6 +43,8 @@ public partial class UI : Control
 	// Game Progress Bar
 	private ProgressBar _gameCompletionBar;
 
+	private float _TimeSinceSideQuestStart = 0;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -278,5 +280,10 @@ public partial class UI : Control
 	public string GetPhoneText()
 	{
 		return _phonetext;
+	}
+
+	public void SidequestStart()
+	{
+		//KeyValuePair<string[], int>[] randquestlist = 
 	}
 }

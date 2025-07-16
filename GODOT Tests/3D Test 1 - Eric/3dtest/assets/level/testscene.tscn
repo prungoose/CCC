@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=29 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="PackedScene" uid="uid://cv2hos6td6wwj" path="res://assets/trash/TrashSpawner.tscn" id="2_04qkv"]
@@ -8,14 +8,13 @@
 [ext_resource type="AudioStream" uid="uid://efphq3x1xrqr" path="res://assets/Audios/Glubglub.mp3" id="6_75yh3"]
 [ext_resource type="AudioStream" uid="uid://c635urq3msa13" path="res://assets/Audios/windingUp.wav" id="7_bxlu3"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="8_lhto2"]
-[ext_resource type="Shader" path="res://assets/level/pixxel.gdshader" id="9_e3ega"]
+[ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="9_e3ega"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="10_j627c"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="11_qxjth"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="12_jokxy"]
 [ext_resource type="PackedScene" uid="uid://b83ge5vg8o8bc" path="res://assets/trash/thrown_trash.tscn" id="13_tlno6"]
 [ext_resource type="PackedScene" uid="uid://dx8ow0dtwewfy" path="res://assets/trash/throw_target.tscn" id="14_f70y2"]
 [ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_sybqf"]
-[ext_resource type="PackedScene" uid="uid://rhbsyxl7cpup" path="res://assets/player/AnimalBait.tscn" id="16_04qkv"]
 [ext_resource type="PackedScene" uid="uid://bcgqxkucyl1uq" path="res://assets/racoon/raccoon_agent.tscn" id="16_i3gsk"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="17_l6626"]
 
@@ -210,6 +209,16 @@ _possible_types = PackedInt32Array(0, 1)
 _enabled = true
 _tutorial = true
 
+[node name="HazardSpawner2" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6215, -0.0669975, -32.2673)
+_possible_types = PackedInt32Array(1, 3)
+_enabled = true
+
+[node name="HazardSpawner3" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3499, -0.187, -16.8746)
+_possible_types = PackedInt32Array(0, 2, 3)
+_enabled = true
+
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
 
 [node name="Trashbin1" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Bins" instance=ExtResource("4_ljpjc")]
@@ -284,11 +293,6 @@ _trashId = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.2431, 0.796582, -18.2469)
 _trashId = 3
 
-[node name="HazardSpawner" parent="SubViewportContainer/SubViewport/NavigationRegion3D" instance=ExtResource("3_r1ht6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6215, -0.0669975, -32.2673)
-_possible_types = PackedInt32Array(1, 3)
-_enabled = true
-
 [node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/Audio"]
@@ -355,7 +359,6 @@ _thrown_trash = ExtResource("13_tlno6")
 _trajtarget_scene = ExtResource("14_f70y2")
 _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_sybqf")
-_thrown_bait = ExtResource("16_04qkv")
 
 [node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player") instance=ExtResource("16_i3gsk")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.598672, 0.915737, 3.95279)
@@ -371,10 +374,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742
 
 [node name="SubViewportContainer_SubViewport_Level_Spawners#RTrashSpawner2" parent="." instance=ExtResource("2_04qkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1663, -0.0570002, -13.0694)
-
-[node name="HazardSpawner" parent="." instance=ExtResource("3_r1ht6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3499, -0.187, -16.8746)
-_possible_types = PackedInt32Array(0, 2, 3)
-_enabled = true
 
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/Area3D" to="SubViewportContainer/UI" method="OnBeaconReached"]
