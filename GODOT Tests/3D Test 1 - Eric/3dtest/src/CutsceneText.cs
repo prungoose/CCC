@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 public partial class CutsceneText : RichTextLabel
 {
@@ -8,11 +10,17 @@ public partial class CutsceneText : RichTextLabel
     private bool typeStart = false;
     private AudioStreamPlayer CutsceneSFX;
     private RichTextLabel BottomTip;
-    
+
     public ConfigFile CF = new ConfigFile();
     private float val;
-	private int sfx_index;
+    private int sfx_index;
     [Export] SceneTransition _transitionscene;
+
+    private TextureRect MatIMG; // d2a245
+    private TextureRect InuIMG; // b09af4
+    private TextureRect MizIMG; // 58bfb4
+    private RichTextLabel CharaName;
+    int charactersIntroduced = 1;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -20,6 +28,10 @@ public partial class CutsceneText : RichTextLabel
         _transitionscene = GetNode<SceneTransition>("/root/SceneTransition");
 
         sfx_index = AudioServer.GetBusIndex("SFX");
+        MatIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Matsumoto");
+        InuIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Inumaru");
+        MizIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Mizuki");
+        CharaName = GetParent().GetParent().GetNode<RichTextLabel>("Character Name");
 
         BottomTip = GetParent().GetNode<RichTextLabel>("Bottom Tip");
         CutsceneSFX = GetParent().GetParent().GetNode<AudioStreamPlayer>("CutsceneSFX");
@@ -44,7 +56,7 @@ public partial class CutsceneText : RichTextLabel
     // Text to be displayed in the visual novel.
     private string[] text = {
         "Welcome to Crisis Cleanup Crew! This is our test playground where we’ll teach you everything we know before assigning you to your first job!",
-        "Cleaning up after a natural disaster is very important! It helps create room for the city to rebuild and prevents further issues in plumbing and roadways; And it keeps the citizens safe.",
+        "Cleaning up after a natural disaster is very important! It helps create room for the city to rebuild and prevents further issues in plumbing and roadways, and it keeps the citizens safe.",
         "Your job is the reason that the city continues to remain safe and operable after a typhoon, so do your best!",
     };
 
@@ -65,8 +77,23 @@ public partial class CutsceneText : RichTextLabel
                 BottomTip.Modulate = new Color(1, 1, 1, 0);
             }
             else if ((Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1")) && text.Length == 1)
-                _transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
-                //GetTree().ChangeSceneToFile("res://assets/level/testscene.tscn");
+            {
+                if (charactersIntroduced == 1)
+                {
+                    changeSpeaker("Inumaru");
+                    charactersIntroduced += 1;
+                }
+                else if (charactersIntroduced == 2)
+                {
+                    changeSpeaker("Mizuki");
+                    charactersIntroduced += 1;
+                }
+                else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
+                {
+                    _transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
+                    //res://assets/level/SceneLoader.tscn
+                }
+            }
         }
         TypeText(text[0]);
     }
@@ -88,9 +115,42 @@ public partial class CutsceneText : RichTextLabel
 
     public void FadeIn()
     {
-		_tween?.Kill();
-		_tween = GetTree().CreateTween();
+        _tween?.Kill();
+        _tween = GetTree().CreateTween();
         _tween.TweenProperty(BottomTip, "modulate:a", 1, 1f);
         _tween.Play();
+    }
+
+    public void changeSpeaker(string newNPC)
+    {
+        CharaName.Text = newNPC;
+        textPos = 0;
+        this.Text = "";
+        CutsceneSFX.Play();
+        BottomTip.Modulate = new Color(1, 1, 1, 0);
+        
+        if (newNPC == "Inumaru")
+        {
+            MatIMG.Hide();
+            InuIMG.Show();
+            MizIMG.Hide();
+            text = [
+                "line 1", // EDIT/ADD LINES HERE FOR INUMARU
+                "line 2",
+                "..."
+                ];
+
+        }
+        else if (newNPC == "Mizuki")
+        {
+            MatIMG.Hide();
+            InuIMG.Hide();
+            MizIMG.Show();
+            text = [
+                "line 1", // EDIT/ADD LINES HERE FOR MIZUKI
+                "line 2",
+                "..."
+                ];
+        }
     }
 }

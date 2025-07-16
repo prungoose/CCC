@@ -38,13 +38,7 @@ script = ExtResource("3_tu0on")
 
 [node name="Map" parent="." instance=ExtResource("2_pkhjh")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.5, -0.612372, 0.612373, 0, 0.707107, 0.707106, -0.866025, -0.353553, 0.353554, 0, 8.34669, 0)
-light_specular = 0.0
-shadow_enabled = true
-shadow_caster_mask = 4294967293
-sky_mode = 1
+_title = true
 
 [node name="MouseStuff" type="Node3D" parent="."]
 transform = Transform3D(0.437069, 0.217591, -0.872711, 0, 0.970296, 0.241921, 0.899428, -0.105736, 0.424086, -30.5409, 30.9383, 10.7212)

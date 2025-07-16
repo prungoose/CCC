@@ -43,6 +43,8 @@ public partial class UI : Control
 	// Game Progress Bar
 	private ProgressBar _gameCompletionBar;
 
+	private float _TimeSinceSideQuestStart = 0;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -194,7 +196,7 @@ public partial class UI : Control
 			if (!_movementStepCompleted)
 			{
 				_movementStepCompleted = true;
-				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/Level/Beacon");
+				var beacon = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon");
 				beacon.QueueFree();
 				NextTutorialStep();
 			}
@@ -278,5 +280,10 @@ public partial class UI : Control
 	public string GetPhoneText()
 	{
 		return _phonetext;
+	}
+
+	public void SidequestStart()
+	{
+		//KeyValuePair<string[], int>[] randquestlist = 
 	}
 }

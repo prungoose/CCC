@@ -62,8 +62,8 @@ public partial class Hazardspawner : Node3D
 		_active = false;
 		_time_since_last = 0;
 		_player.Call("DecActiveHazardCount");
-		// Update Game Progress
-		_ui.Call("updateGameCompletionBar", 10);
+		GD.Print("hazard dealtwith");
+		_ui.Call("IncreaseGameCompletion", 10);
 
 		// Gift the player animal bait
 	}
