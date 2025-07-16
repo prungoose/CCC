@@ -62,6 +62,10 @@ public partial class Hazardspawner : Node3D
 		_active = false;
 		_time_since_last = 0;
 		_player.Call("DecActiveHazardCount");
+		// Update Game Progress
+		_ui.Call("updateGameCompletionBar", 10);
+
+		// Gift the player animal bait
 	}
 
 	void _SpawnAHazard()
@@ -76,7 +80,7 @@ public partial class Hazardspawner : Node3D
 		AddChild(_hazard);
 		_hazard.Call("_UpdateID", rand_haz);
 	}
-	
+
 	void _PlayPulseAnim()
 	{
 		_minimapsprite.Play("warning_pulse");
