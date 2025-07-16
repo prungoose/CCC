@@ -48,7 +48,7 @@ public partial class iPhoneUI : Control
 		
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(70, 190);
-		displayInfo.Text = "The Fire Department responds to:\n• [b]Fires[/b]\n• [b]Rescue operations[/b]\n• [b]Hazardous spills[/b]\n\nThey have the training and equipment to handle life-threatening hazards quickly.\n\n[b]Agency Access Code:[/b] ↓ ← ↑ →";
+		displayInfo.Text = "The [b][color=red]Fire Department[/color][/b] responds to:\n•  [b]Fires[/b]\n•  [b]Rescue operations[/b]\n\nSeparate any flammable objects close to the area to control the spread of fire.\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -58,6 +58,7 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(215, 190);
+		displayInfo.Text = "The [b][color=blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -67,7 +68,7 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(365, 190);
-		displayInfo.Text = "The Power Company maintains the [i]electric grid[/i] and responds to issues like [b]downed lines[/b], [b]blackouts[/b], or [b]transformer damage[/b].\n\n• Contact them for electrical hazards\n• Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
+		displayInfo.Text = "The [b][color=yellow]Power Company[/color][/b] maintains the [i]electric grid[/i] and responds to:\n•  [b]downed lines[/b] \n•  [b]blackouts[/b]\n•  [b]damaged transformer boxes[/b]\n\nContact them for electrical hazards. Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] → ← → ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -80,6 +81,7 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(70, 340);
+		displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not touch, feed, or handle wild animals.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -89,13 +91,16 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(215, 340);
-		displayInfo.Text = "Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
+		displayInfo.Text = "The [b][color=green]General Health Team[/color][/b] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
+
+		//"Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
+		
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-
-		//"Fallen trees can block roads and damage property or power lines.\n\nWhen you see one:\n• [b]Keep a safe distance[/b] from hanging wires\n• Call the appropriate agency\n• Do not attempt to move it yourself"
+		
+		// "Fallen trees can block roads and damage property or power lines.\n\nWhen you see one:\n• [b]Keep a safe distance[/b] from hanging wires\n• Call the appropriate agency\n• Do not attempt to move it yourself"
 		//"EMS provides [b]life-saving care[/b] in emergencies.\n\nThey respond to:\n• [i]Injuries[/i]\n• [i]Exposure to toxins[/i]\n• [i]Fainting or collapse[/i]\n\nCall EMS if someone is hurt or unconscious.\n\n[b]Agency Access Code:[/b] ↓ ↓ ↑ ↑"
 	}
 	private void dialPressed()

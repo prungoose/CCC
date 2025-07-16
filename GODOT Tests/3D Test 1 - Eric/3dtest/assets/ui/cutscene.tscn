@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cu1c28dfj70xp" path="res://assets/ui/movingBackground.gdshader" id="1_6pv4d"]
 [ext_resource type="Texture2D" uid="uid://cqpjr7ua45rse" path="res://assets/cutscene characters/kyoto.png" id="1_b0kbf"]
-[ext_resource type="Texture2D" uid="uid://dib8w61u6g2qv" path="res://assets/trash/trashbackground.png" id="2_dgd76"]
+[ext_resource type="Texture2D" uid="uid://qve321oyxsrk" path="res://assets/menu/BackgroundTexture.tres" id="2_dgd76"]
 [ext_resource type="Script" uid="uid://dn1ca42qw7ja1" path="res://src/CutsceneText.cs" id="2_kfutr"]
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="2_q1fht"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="3_x3fml"]

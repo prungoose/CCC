@@ -1,41 +1,33 @@
-[gd_scene load_steps=14 format=3 uid="uid://7ghxngbd3bft"]
+[gd_scene load_steps=17 format=3 uid="uid://7ghxngbd3bft"]
 
 [ext_resource type="Script" uid="uid://c1lp2taogx252" path="res://assets/ui/iPhoneUI.cs" id="1_suae8"]
 [ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_jf7fs"]
 [ext_resource type="Texture2D" uid="uid://dlr6f83dmgy1c" path="res://assets/ui/catback.png" id="3_mnjly"]
+[ext_resource type="Texture2D" uid="uid://bgh74auiou4nw" path="res://assets/ui/animalc_icon.png" id="4_gr0p4"]
+[ext_resource type="Texture2D" uid="uid://dw4pjhr472vay" path="res://assets/ui/fire_icon.png" id="4_jf7fs"]
+[ext_resource type="Texture2D" uid="uid://cdrdx7f7vlfko" path="res://assets/ui/water_icon.png" id="4_njngd"]
+[ext_resource type="Texture2D" uid="uid://ckrg2klg24db1" path="res://assets/ui/electric_icon.png" id="4_sjcv4"]
 [ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_y157e"]
+[ext_resource type="Texture2D" uid="uid://tojky2kthr7" path="res://assets/ui/health_icon.png" id="6_njngd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_suae8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gr0p4"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-shadow_size = 3
-shadow_offset = Vector2(0, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2bu7"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-shadow_size = 3
-shadow_offset = Vector2(0, 2)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjcv4"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnjly"]
 bg_color = Color(0, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suae8"]
 bg_color = Color(1, 1, 1, 1)
@@ -105,9 +97,19 @@ offset_top = -270.0
 offset_right = -95.0
 offset_bottom = -170.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="TextureRect" type="TextureRect" parent="Fire/fireButton"]
+layout_mode = 0
+offset_left = 1.5
+offset_top = 2.32
+offset_right = 178.5
+offset_bottom = 179.32
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_jf7fs")
+stretch_mode = 1
 
 [node name="fireLabel" type="Label" parent="Fire"]
 layout_mode = 0
@@ -129,9 +131,18 @@ offset_top = -270.0
 offset_right = 50.0
 offset_bottom = -170.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="TextureRect" type="TextureRect" parent="Water/waterButton"]
+offset_left = 1.5
+offset_top = 2.32
+offset_right = 178.5
+offset_bottom = 179.32
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_njngd")
+stretch_mode = 1
 
 [node name="waterLabel" type="Label" parent="Water"]
 layout_mode = 0
@@ -153,9 +164,18 @@ offset_top = -270.0
 offset_right = 200.0
 offset_bottom = -170.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="TextureRect" type="TextureRect" parent="Power/powerButton"]
+offset_left = 1.5
+offset_top = 2.32
+offset_right = 178.5
+offset_bottom = 179.32
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_sjcv4")
+stretch_mode = 1
 
 [node name="powerLabel" type="Label" parent="Power"]
 layout_mode = 0
@@ -179,9 +199,18 @@ offset_top = -119.0
 offset_right = -95.0
 offset_bottom = -19.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="TextureRect" type="TextureRect" parent="Animal/animalButton"]
+offset_left = 1.5
+offset_top = 2.32
+offset_right = 178.5
+offset_bottom = 179.32
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("4_gr0p4")
+stretch_mode = 1
 
 [node name="animalLabel" type="Label" parent="Animal"]
 layout_mode = 0
@@ -205,9 +234,18 @@ offset_top = -119.0
 offset_right = 50.0
 offset_bottom = -19.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gr0p4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g2bu7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+
+[node name="TextureRect" type="TextureRect" parent="Health/healthButton"]
+offset_left = 1.5
+offset_top = 2.32
+offset_right = 178.5
+offset_bottom = 179.32
+scale = Vector2(0.555, 0.555)
+texture = ExtResource("6_njngd")
+stretch_mode = 1
 
 [node name="healthLabel" type="Label" parent="Health"]
 layout_mode = 0
@@ -233,6 +271,8 @@ theme_override_font_sizes/normal_font_size = 30
 theme_override_font_sizes/bold_font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_mnjly")
 bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Dial" type="Control" parent="."]
 layout_mode = 3
