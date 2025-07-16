@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=23 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
@@ -346,6 +346,23 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7p23"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 0.67451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.493545, 0.493546, 0.493545, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -478,10 +495,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 193.0
-offset_top = -142.0
-offset_right = 593.0
-offset_bottom = 158.0
+offset_left = 192.0
+offset_top = -135.0
+offset_right = 592.0
+offset_bottom = 165.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(200, 0)
@@ -638,6 +655,20 @@ text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ProgressBar" type="ProgressBar" parent="Minimap"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 841.0
+offset_top = 30.0
+offset_right = 1674.0
+offset_bottom = 110.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("14_rts35")
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/background = SubResource("StyleBoxFlat_e7p23")
+
 [node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
 process_mode = 2
 visible = false
@@ -648,18 +679,5 @@ layout_mode = 1
 visible = false
 z_index = 999
 layout_mode = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 0
-offset_left = 547.0
-offset_top = 24.0
-offset_right = 1380.0
-offset_bottom = 104.0
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("14_rts35")
-theme_override_fonts/font = ExtResource("3_bscbh")
-theme_override_font_sizes/font_size = 36
 
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]

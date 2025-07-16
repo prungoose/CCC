@@ -41,7 +41,7 @@ public partial class UI : Control
 	private Control _minimap;
 
 	// Game Progress Bar
-	[Export] ProgressBar _gameCompletionBar;
+	private ProgressBar _gameCompletionBar;
 
 	public override void _Ready()
 	{
@@ -71,6 +71,8 @@ public partial class UI : Control
 		_pauseScreen = GetNode<Control>("PauseScreen");
 
 		_minimap = GetNode<Control>("Minimap");
+
+		_gameCompletionBar = GetNode<ProgressBar>("Minimap/ProgressBar");
 	}
 
 	public override void _Process(double delta)
@@ -159,17 +161,19 @@ public partial class UI : Control
 			switch (_phonetext)
 			{
 				case "↑→↓←": if (GetTutorialStep() == 9) NextTutorialStep(); beacon_to_get = 0; break; //fire
-				case "↓→↑↑": beacon_to_get = 1; break;
-				case "→←→←": beacon_to_get = 2; break;
-				case "←↓→←": beacon_to_get = 3; break;
-				case "↓→↓→": beacon_to_get = 4; break;
+				case "↓→↑↑": beacon_to_get = 1; break; //water
+				case "→←→←": beacon_to_get = 2; break; //elec
+				case "←↓→←": beacon_to_get = 3; break; //animal
+				case "↓→↓→": beacon_to_get = 4; break; //health
 			}
 
-			if (beacon_to_get <= 4) _player.Call("ReadyBeacon", beacon_to_get);
+			if (beacon_to_get <= 4) { _player.Call("ReadyBeacon", beacon_to_get); _phone.Call("homePressed"); }
+			;
 			_phonetext = "";
 			_wiggle();
 			PhoneSFX.Play();
-		}	
+
+		}
 	}
 
 	public void _wiggle()
@@ -256,7 +260,7 @@ public partial class UI : Control
 		}
 	}
 
-	public void updateGameCompletionBar(float completion)
+	public void IncreaseGameCompletion(float completion)
 	{
 		_gameCompletionBar.Value += completion;
 		if (_gameCompletionBar.Value >= 100)
@@ -269,5 +273,10 @@ public partial class UI : Control
 		{
 			_gameCompletionBar.Modulate = new Color(1f, 1f, 1f);
 		}
+	}
+
+	public string GetPhoneText()
+	{
+		return _phonetext;
 	}
 }

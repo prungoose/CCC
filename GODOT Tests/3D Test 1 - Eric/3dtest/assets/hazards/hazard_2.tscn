@@ -91,6 +91,7 @@ render_priority = 1
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
+cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
@@ -140,7 +141,6 @@ transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.74056e-06, 0, 0.00318682)
 amount = 64
 lifetime = 3.0
-transform_align = 3
 trail_enabled = true
 trail_lifetime = 1.86
 process_material = SubResource("ParticleProcessMaterial_hx2lr")
