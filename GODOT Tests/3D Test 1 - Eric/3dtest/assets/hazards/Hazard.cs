@@ -10,9 +10,13 @@ public partial class Hazard : Area3D
 	private CharacterBody3D _player;
 	private float _time_after_dealt_with = 0;
 
+	private AudioStreamPlayer3D thumpSFX;
+
 
 	public override void _Ready()
 	{
+		thumpSFX = GetNode<AudioStreamPlayer3D>("thumpSFX");
+
 		_tape = GetNode<Node3D>("tape");
 		var proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
 		_shader = (ShaderMaterial)proxmesh.GetActiveMaterial(0);
@@ -35,6 +39,7 @@ public partial class Hazard : Area3D
 		var tween = GetTree().CreateTween();
 		_tape.Show();
 		tween.TweenProperty(_tape, "position", _tape.Position + Godot.Vector3.Down * 50, 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
+		thumpSFX.Play();
 		GetParent().Call("_HazardIsDealtWith");
 		
 	}

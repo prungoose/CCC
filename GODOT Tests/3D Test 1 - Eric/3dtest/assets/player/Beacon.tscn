@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://dehxjhb5ukc3g"]
+[gd_scene load_steps=29 format=3 uid="uid://dehxjhb5ukc3g"]
 
 [ext_resource type="Script" uid="uid://ern722h687j1" path="res://src/Beacon.cs" id="1_8obva"]
+[ext_resource type="AudioStream" uid="uid://bywnrp0i7jxs2" path="res://assets/Audios/FSSSH.wav" id="2_weuih"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8obva"]
 bounce = 0.4
@@ -175,3 +176,9 @@ amount = 32
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_weuih")
 draw_pass_1 = SubResource("SphereMesh_kysm2")
+
+[node name="FSSSH" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_weuih")
+volume_db = -10.0
+max_distance = 5.0
+bus = &"SFX"

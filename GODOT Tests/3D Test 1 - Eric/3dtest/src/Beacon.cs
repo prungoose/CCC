@@ -10,8 +10,12 @@ public partial class Beacon : RigidBody3D
 	private bool _timer_phase = false;
 	private bool _primed = false;
 
+	private AudioStreamPlayer3D flareSFX;
+
 	public override void _Ready()
 	{
+		flareSFX = GetNode<AudioStreamPlayer3D>("FSSSH");
+
 		_particles = GetNode<GpuParticles3D>("GPUParticles3D");
 		_flaretimer = new Timer();
 		_flaretimer.Autostart = true;

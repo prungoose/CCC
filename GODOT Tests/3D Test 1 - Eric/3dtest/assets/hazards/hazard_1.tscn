@@ -1,9 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://cyen7es8yitaj"]
+[gd_scene load_steps=39 format=3 uid="uid://cyen7es8yitaj"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_r1awe"]
-[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_mhcrq"]
+[ext_resource type="Shader" path="res://assets/trash/obstacle_proximity.gdshader" id="2_mhcrq"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_r7oiw"]
 [ext_resource type="PackedScene" uid="uid://bueced7uee81a" path="res://assets/map/deco/dumpster.gltf" id="4_r1awe"]
+[ext_resource type="AudioStream" uid="uid://bvd1cq0b28aab" path="res://assets/Audios/fire.wav" id="5_mhcrq"]
+[ext_resource type="AudioStream" uid="uid://csengdlp4hhjd" path="res://assets/Audios/thump.wav" id="6_r7oiw"]
 
 [sub_resource type="Gradient" id="Gradient_r1awe"]
 interpolation_mode = 1
@@ -223,5 +225,13 @@ speed_scale = 0.3
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_fi06t")
 draw_pass_1 = SubResource("SphereMesh_e8ewt")
+
+[node name="fireSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_mhcrq")
+autoplay = true
+bus = &"SFX"
+
+[node name="thumpSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_r7oiw")
 
 [connection signal="body_entered" from="." to="." method="_BeaconEntered"]
