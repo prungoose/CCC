@@ -37,11 +37,11 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y157e"]
-bg_color = Color(0.0632628, 0.883766, 0.0534876, 1)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
+bg_color = Color(1, 0.326668, 0.412871, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
@@ -100,6 +100,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sjcv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_sjcv4")
+icon_alignment = 1
+expand_icon = true
 
 [node name="TextureRect" type="TextureRect" parent="Fire/fireButton"]
 layout_mode = 0
@@ -288,21 +290,24 @@ offset_right = 206.0
 offset_bottom = -270.0
 pivot_offset = Vector2(204, 38)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_suae8")
+text = "asdfasdf"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="dialButton" type="Button" parent="Dial/dialTextDisplay"]
-visible = false
 layout_mode = 0
 offset_left = 109.0
 offset_top = 223.0
 offset_right = 304.0
 offset_bottom = 273.0
+theme_override_font_sizes/font_size = 26
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y157e")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y157e")
 theme_override_styles/normal = SubResource("StyleBoxFlat_y157e")
-text = "Dial"
+text = "DIAL"
 
 [node name="homeButton" type="Button" parent="."]
 z_index = 995
