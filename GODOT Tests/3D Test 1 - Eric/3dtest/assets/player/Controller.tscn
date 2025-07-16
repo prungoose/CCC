@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cabv8uwds750s" path="res://assets/ui/sprite_map_mod.png" id="10_uhyoe"]
 [ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="10_xplcw"]
 [ext_resource type="Texture2D" uid="uid://c0xnbjb4bphpv" path="res://assets/ui/sprite_map_outline.png" id="11_u26f6"]
-[ext_resource type="Texture2D" uid="uid://ww7uln05l322" path="res://assets/icon.svg" id="13_j21t7"]
+[ext_resource type="Texture2D" uid="uid://cn023xmgk71r2" path="res://assets/ui/beacon icon.png" id="13_j21t7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rlquk"]
 radius = 0.35
@@ -702,5 +702,7 @@ transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0.841534, 0)
 [node name="BeaconSprite" type="Sprite3D" parent="BeaconPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1.4)
 billboard = 1
+alpha_cut = 1
+alpha_scissor_threshold = 0.915
 render_priority = 1
 texture = ExtResource("13_j21t7")

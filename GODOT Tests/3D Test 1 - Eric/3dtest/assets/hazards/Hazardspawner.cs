@@ -34,23 +34,26 @@ public partial class Hazardspawner : Node3D
 
 	public override void _Process(double delta)
 	{
+		var player_dis = GlobalPosition.DistanceTo(_player.GlobalPosition);
 		if (!_enabled) return;
-		if (_initial_spawn && !_active && (bool)_player.Call("GetActiveHazardCount")) _time_since_last += (float)delta;
+		if (_initial_spawn && !_active && (int)_player.Call("GetActiveHazardCount") < 3) _time_since_last += (float)delta;
 		if (!_initial_spawn)
 		{
-			if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 75)
+			if (player_dis < 75)
 			{
 				_SpawnAHazard();
 				_initial_spawn = true;
 			}
 		}
-		else if (GlobalPosition.DistanceTo(_player.GlobalPosition) > 75 && !_active && _time_since_last >= _time_until_next)
+		else if (player_dis > 75 && !_active && _time_since_last >= _time_until_next)
 		{
 			var r = GD.Randf();
 			if (r > 0.75) _SpawnAHazard();
 			else _time_since_last = 70;
 		}
-		if (GlobalPosition.DistanceTo(_player.GlobalPosition) < 8 && (int)_ui.Call("GetTutorialStep") == 4) _ui.Call("NextTutorialStep");
+		if (_tutorial && player_dis < 8 && (int)_ui.Call("GetTutorialStep") == 4) _ui.Call("NextTutorialStep");
+
+		if (!_active) _minimapsprite.Hide(); else _minimapsprite.Show();
 
 	}
 
@@ -63,6 +66,7 @@ public partial class Hazardspawner : Node3D
 
 	void _SpawnAHazard()
 	{
+		if (_active) return;
 		_active = true;
 		_time_until_next = 100 + GD.RandRange(-10, 20);
 		_player.Call("IncActiveHazardCount");

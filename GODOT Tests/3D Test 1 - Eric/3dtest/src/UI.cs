@@ -14,7 +14,7 @@ public partial class UI : Control
 	private ProgressBar _tank;
 	private RichTextLabel _phonedisplay;
 	private Button _phonedisplayButton;
-	private string _phonetext;
+	private string _phonetext = "";
 	private MarginContainer _tutorialStuff;
 
 	private bool _tankStepCompleted = false;
@@ -137,7 +137,7 @@ public partial class UI : Control
 
 	public void _dial(char c)
 	{
-		if (c != ' ')
+		if (c != ' ' && _phonetext.Length < 4)
 		{
 			_phonetext += c;
 			if (!_phonedisplayButton.Visible)
@@ -150,26 +150,26 @@ public partial class UI : Control
 				_tween.Finished += () => _phonedisplayButton.Show();
 
 			}
+			_wiggle();
+			PhoneSFX.Play();
 		}
-		else
+		else if (c == ' ')
 		{
-			//Power company: ID 1
-			if (_phonetext == "↑→↓←")
+			int beacon_to_get = 5;
+			switch (_phonetext)
 			{
-				if (GetTutorialStep() == 9)
-				{
-					NextTutorialStep();
-				}
-				_player.Call("ReadyBeacon", 0);
+				case "↑→↓←": if (GetTutorialStep() == 9) NextTutorialStep(); beacon_to_get = 0; break; //fire
+				case "↓→↑↑": beacon_to_get = 1; break;
+				case "→←→←": beacon_to_get = 2; break;
+				case "←↓→←": beacon_to_get = 3; break;
+				case "↓→↓→": beacon_to_get = 4; break;
 			}
 
-			//More agencies go here with their own code
-
-			//Reset phone text
+			if (beacon_to_get <= 4) _player.Call("ReadyBeacon", beacon_to_get);
 			_phonetext = "";
-		}
-		_wiggle();
-		PhoneSFX.Play();
+			_wiggle();
+			PhoneSFX.Play();
+		}	
 	}
 
 	public void _wiggle()

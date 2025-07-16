@@ -62,14 +62,15 @@ collision_mask = 2
 script = ExtResource("1_m76na")
 
 [node name="ProximityWarning" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.685, 0, 0, 0, 0.001, 0, 0, 0, 0.685, 0, 0, 0)
 mesh = SubResource("TorusMesh_ysqfc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177295, 0)
+transform = Transform3D(0.66, 0, 0, 0, 0.66, 0, 0, 0, 0.66, 0, 0.177295, 0)
 shape = SubResource("CylinderShape3D_sobga")
 
 [node name="PlayerHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 8
 collision_mask = 0
 
@@ -77,11 +78,11 @@ collision_mask = 0
 shape = SubResource("CapsuleShape3D_qpi7s")
 
 [node name="tape" parent="." instance=ExtResource("3_845jt")]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 50, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 50, 0)
 visible = false
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 0, 0, 0)
+transform = Transform3D(0.453154, 0, -0.211309, 0, 0.5, 0, 0.211309, 0, 0.453154, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("CylinderMesh_m76na")
