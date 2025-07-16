@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://rhbsyxl7cpup"]
+[gd_scene load_steps=3 format=3 uid="uid://rhbsyxl7cpup"]
 
-[node name="AnimalBait" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_llw03"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v66tb"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_llw03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v66tb")

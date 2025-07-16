@@ -1,10 +1,117 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcgqxkucyl1uq"]
+[gd_scene load_steps=17 format=3 uid="uid://bcgqxkucyl1uq"]
 
 [ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://src/RaccoonAgent.cs" id="1_yq413"]
+[ext_resource type="Texture2D" uid="uid://blawe26d558il" path="res://assets/racoon/sprites_racoon.png" id="2_3km4c"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2nen"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3km4c"]
+size = Vector3(1.44836, 1, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0pl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g67e"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(0, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnwci"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(0, 176, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ul8me"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(528, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbxkw"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(704, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jruh5"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(880, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abs4x"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(1056, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko3h2"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(0, 352, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_528hd"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(0, 528, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yv3v"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(528, 176, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i4ey"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(704, 176, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xht2i"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(880, 176, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yybc"]
+atlas = ExtResource("2_3km4c")
+region = Rect2(1056, 176, 176, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h11xc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g67e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnwci")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ul8me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbxkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jruh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abs4x")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko3h2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_528hd")
+}],
+"loop": true,
+"name": &"trash_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yv3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i4ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xht2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yybc")
+}],
+"loop": true,
+"name": &"trash_run",
+"speed": 5.0
+}]
 
 [node name="RaccoonAgent" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -15,10 +122,12 @@ NavAgent = NodePath("NavigationAgent3D")
 wait_time = 1.5
 autostart = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_a2nen")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_iw0pl")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106812, -0.245652, 0)
+shape = SubResource("BoxShape3D_3km4c")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h11xc")
+animation = &"idle"
