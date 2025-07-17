@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://b6actpw1ujmo7"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_45ep6"]
-[ext_resource type="Shader" path="res://assets/trash/obstacle_proximity.gdshader" id="2_jjh7j"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_jjh7j"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_pv4tb"]
 [ext_resource type="PackedScene" uid="uid://br02h05i3k6c5" path="res://assets/map/deco/pole.glb" id="4_45ep6"]
 [ext_resource type="AudioStream" uid="uid://csengdlp4hhjd" path="res://assets/Audios/thump.wav" id="5_jjh7j"]
@@ -50,8 +50,8 @@ colors = PackedColorArray(0.982167, 0.793419, 0.484554, 1, 1, 0.867206, 0.100355
 gradient = SubResource("Gradient_45ep6")
 
 [sub_resource type="Curve" id="Curve_jjh7j"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 8.64759), 0.0, 0.0, 0, 0]
+_limits = [0.0, 25.0, 0.0, 1.0]
+_data = [Vector2(0, 25), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="CurveTexture" id="CurveTexture_pv4tb"]
@@ -63,6 +63,7 @@ direction = Vector3(-1, 0, 0)
 spread = 62.353
 initial_velocity_min = 3.88
 initial_velocity_max = 10.0
+attractor_interaction_enabled = false
 color_initial_ramp = SubResource("GradientTexture1D_jjh7j")
 emission_curve = SubResource("CurveTexture_pv4tb")
 

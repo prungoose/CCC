@@ -45,7 +45,7 @@ public partial class iPhoneUI : Control
 
 	private void firePressed()
 	{
-		
+
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(70, 190);
 		displayInfo.Text = "The [b][color=red]Fire Department[/color][/b] responds to:\n•  [b]Fires[/b]\n•  [b]Rescue operations[/b]\n\nSeparate any flammable objects close to the area to control the spread of fire.\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
@@ -53,6 +53,9 @@ public partial class iPhoneUI : Control
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		
+		if ((int)_ui?.Call("GetTutorialStep") == 7)
+			_ui.Call("NextTutorialStep");
 	}
 	private void waterPressed()
 	{
@@ -74,8 +77,7 @@ public partial class iPhoneUI : Control
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 
-		if ((int)_ui?.Call("GetTutorialStep") == 7)
-			_ui.Call("NextTutorialStep");
+
 	}
 	private void animalPressed()
 	{
@@ -105,13 +107,16 @@ public partial class iPhoneUI : Control
 	}
 	private void dialPressed()
 	{
-
+		GD.Print("dial pressed");
+		/*
 		_tween?.Kill();
 		_tween?.CustomStep(0.3);
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		_dialButton.Hide();
-		_ui.Call("_dial", " ");
+		*/
+		_ui.Call("_dial", ' ');
+		//ui.Call("")
 		//_tween.TweenProperty(dialDisplay, "size", new Vector2(1, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 
 		// displayInfo.PivotOffset = new Vector2(365, 340);
@@ -126,6 +131,7 @@ public partial class iPhoneUI : Control
 
 	public void homePressed()
 	{
+		GD.Print("homepressed");
 		if (!(bool)_player.Call("_getPhone")) return;
 		if (!_dialButton.Visible)
 		{
@@ -146,7 +152,7 @@ public partial class iPhoneUI : Control
 				_tween?.CustomStep(0.3);
 				_tween = GetTree().CreateTween();
 				_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
-				_ui.Call("_dial", ' ');
+				//_ui.Call("_dial", ' ');
 
 				if (displayInfo.Scale != new Godot.Vector2(1, 1))
 				_tween.Finished += () => _player.Call("setHomeScreen", true);

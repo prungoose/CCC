@@ -211,12 +211,27 @@ _tutorial = true
 
 [node name="HazardSpawner2" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6215, -0.0669975, -32.2673)
-_possible_types = PackedInt32Array(1, 3)
+_possible_types = PackedInt32Array(1, 3, 4)
 _enabled = true
 
 [node name="HazardSpawner3" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3499, -0.187, -16.8746)
 _possible_types = PackedInt32Array(0, 2, 3)
+_enabled = true
+
+[node name="HazardSpawner4" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.8876, -0.187, -46.7343)
+_possible_types = PackedInt32Array(0, 2, 3)
+_enabled = true
+
+[node name="HazardSpawner5" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1634, -0.187, -64.6704)
+_possible_types = PackedInt32Array(1, 2)
+_enabled = true
+
+[node name="HazardSpawner6" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0582, -0.174999, 7.96514)
+_possible_types = PackedInt32Array(0, 2, 4)
 _enabled = true
 
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
@@ -367,7 +382,6 @@ Player = NodePath("../Player")
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("17_l6626")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
-debug = true
 
 [node name="SubViewportContainer_SubViewport_Level_Spawners#RTrashSpawner" parent="." instance=ExtResource("2_04qkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742)

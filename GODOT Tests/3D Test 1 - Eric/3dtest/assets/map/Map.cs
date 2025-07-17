@@ -28,9 +28,10 @@ public partial class Map : Node3D
 	{
 		if (!_title) _game_time += (float)delta;
 		if (_player != null) _rain.GlobalPosition = _player.GlobalPosition;
-		if (_game_time > 45 && _day_phase == 0) EveningTransition();
-		else if (_game_time > 90 && _day_phase == 1) StormyNightTransition();
-		else if (_game_time > 125 && _day_phase == 2) MorningTransition();
+		
+		if (_game_time > 90 && _day_phase == 0) EveningTransition();
+		else if (_game_time > 135 && _day_phase == 1) StormyNightTransition();
+		else if (_game_time > 180 && _day_phase == 2) MorningTransition();
 	}
 
 

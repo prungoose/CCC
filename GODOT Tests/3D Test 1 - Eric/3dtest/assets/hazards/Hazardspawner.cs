@@ -12,7 +12,7 @@ public partial class Hazardspawner : Node3D
 	private CharacterBody3D _player;
 	private AnimatedSprite3D _minimapsprite;
 	private float _time_since_last;
-	private float _time_until_next = 100;
+	private float _time_until_next = 50;
 	private bool _initial_spawn = false;
 
 	private Control _ui;

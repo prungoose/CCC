@@ -520,6 +520,7 @@ public partial class Controller : CharacterBody3D
 
 	private void setHomeScreen(bool a)
 	{
+		GD.Print("home set to: ", a);
 		_onhomescreen = a;
 	}
 

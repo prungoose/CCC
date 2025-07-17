@@ -141,6 +141,8 @@ public partial class UI : Control
 
 	public void _dial(char c)
 	{
+		GD.Print(c, " l:", _phonetext.Length);
+		GD.Print("visibility: ", _phonedisplayButton.Visible);
 		if (c != ' ' && _phonetext.Length < 4)
 		{
 			_phonetext += c;
@@ -159,6 +161,7 @@ public partial class UI : Control
 		}
 		else if (c == ' ')
 		{
+			GD.Print("dial detected");
 			int beacon_to_get = 5;
 			switch (_phonetext)
 			{
