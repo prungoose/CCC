@@ -36,6 +36,7 @@ public partial class Controller : CharacterBody3D
 	private ShapeCast3D _stepray;
 	private ShapeCast3D _stepray2;
 	private Node3D _stepraypivot;
+	private SpotLight3D _flashlight;
 	bool phone = false;
 	bool is_sucking = false;
 	bool is_blowing = false;
@@ -88,6 +89,7 @@ public partial class Controller : CharacterBody3D
 		WindUpSFX = GetNode<AudioStreamPlayer>("Sounds/WindUpSFX");
 		_beacon_pivot = GetNode<Node3D>("BeaconPivot");
 		_beacon_sprite = GetNode<Sprite3D>("BeaconPivot/BeaconSprite");
+		_flashlight = GetNode<SpotLight3D>("LightPivot/Light");
 
 		var parent = _ui.GetNode<Control>("Phone").GetNode<Control>("Dial");
 		_phoneDialButton = parent.GetNode<Button>("dialTextDisplay/dialButton");
@@ -232,8 +234,8 @@ public partial class Controller : CharacterBody3D
 		}
 
 		String[] dirs = { "sw", "s", "se", "e", "ne", "n", "nw", "w", "sw", "s", "se" };
-
-		if (!phone && (is_sucking | is_blowing))
+		if (phone) _anim.Play("se_idle");
+		else if (!phone && (is_sucking | is_blowing))
 		{
 			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_suck");
 		}
@@ -255,6 +257,8 @@ public partial class Controller : CharacterBody3D
 		{
 			_campivot.Call("_ToggleZoom");
 			phone = !phone;
+			if (phone) _flashlight.LightEnergy = 0;
+			else _flashlight.LightEnergy = 0.1f;
 			_ui.Call("_updatephone", phone);
 			// get rid of vacuum if it is out
 			if (is_sucking)

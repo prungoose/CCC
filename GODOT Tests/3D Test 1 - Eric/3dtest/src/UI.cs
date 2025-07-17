@@ -289,4 +289,9 @@ public partial class UI : Control
 	{
 		//KeyValuePair<string[], int>[] randquestlist = 
 	}
+
+	public void ResetPhoneText()
+	{
+		_phonetext = "";
+	}
 }

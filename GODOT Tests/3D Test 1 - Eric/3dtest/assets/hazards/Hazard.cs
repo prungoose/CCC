@@ -16,11 +16,11 @@ public partial class Hazard : Area3D
 	public override void _Ready()
 	{
 		thumpSFX = GetNode<AudioStreamPlayer3D>("thumpSFX");
-
 		_tape = GetNode<Node3D>("tape");
 		var proxmesh = GetNode<MeshInstance3D>("ProximityWarning");
 		_shader = (ShaderMaterial)proxmesh.GetActiveMaterial(0);
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
+		Rotation = new Godot.Vector3(0, Mathf.DegToRad(GD.Randf() * 360), 0);
 	}
 
 	public override void _Process(double delta)

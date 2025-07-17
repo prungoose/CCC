@@ -133,6 +133,7 @@ public partial class iPhoneUI : Control
 	{
 		GD.Print("homepressed");
 		if (!(bool)_player.Call("_getPhone")) return;
+		_ui.Call("ResetPhoneText");
 		if (!_dialButton.Visible)
 		{
 			displayInfo.Text = "";
