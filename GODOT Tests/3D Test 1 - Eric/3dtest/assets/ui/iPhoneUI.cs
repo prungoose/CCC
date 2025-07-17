@@ -111,7 +111,7 @@ public partial class iPhoneUI : Control
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(dialDisplay, "size", new Vector2(410, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		_dialButton.Hide();
-		_ui.Call("_dial", " ");
+		_ui.Call("_dial", ' ');
 		//_tween.TweenProperty(dialDisplay, "size", new Vector2(1, 0), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 
 		// displayInfo.PivotOffset = new Vector2(365, 340);

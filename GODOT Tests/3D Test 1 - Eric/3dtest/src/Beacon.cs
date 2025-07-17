@@ -44,6 +44,7 @@ public partial class Beacon : RigidBody3D
 	{
 		_primed = true;
 		_particles.Emitting = true;
+		flareSFX.Play();
 	}
 
 	void TimerEnd()
