@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://df0vxbjb3i6m"]
+[gd_scene load_steps=26 format=3 uid="uid://df0vxbjb3i6m"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_hx2lr"]
 [ext_resource type="Shader" path="res://assets/trash/obstacle_proximity.gdshader" id="2_wy577"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_okaqf"]
 [ext_resource type="AudioStream" uid="uid://csengdlp4hhjd" path="res://assets/Audios/thump.wav" id="4_wy577"]
+[ext_resource type="AudioStream" uid="uid://ck8a8okp13usv" path="res://assets/Audios/waterSpray.wav" id="5_okaqf"]
 
 [sub_resource type="Gradient" id="Gradient_r1awe"]
 interpolation_mode = 1
@@ -154,5 +155,12 @@ skeleton = NodePath("../GPUParticles3D")
 
 [node name="thumpSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_wy577")
+bus = &"SFX"
+
+[node name="waterSpraySFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_okaqf")
+attenuation_model = 2
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_BeaconEntered"]

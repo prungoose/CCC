@@ -112,7 +112,7 @@ public partial class Options : Control
 	private void _MainMenuButtonPressed()
 	{
 		Save();
-		GetTree().ChangeSceneToFile("res://assets/menu/MainMenu.tscn");
+		GetTree().ChangeSceneToFile("res://TitleScreen.tscn");
 	}
 
 	private void LangSelected(int lang)
