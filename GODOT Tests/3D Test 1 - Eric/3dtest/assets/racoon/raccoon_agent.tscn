@@ -132,3 +132,4 @@ shape = SubResource("BoxShape3D_3km4c")
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_h11xc")
 animation = &"idle"
+autoplay = "idle"
