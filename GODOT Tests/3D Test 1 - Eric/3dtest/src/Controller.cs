@@ -187,9 +187,6 @@ public partial class Controller : CharacterBody3D
 				if (_stepray2.IsColliding())
 				{
 					GlobalTranslate(new Godot.Vector3(0, .1f, 0));
-
-					var height = (_stepray.GetCollisionPoint(0) - GlobalPosition).Y;
-					GlobalTranslate(new Godot.Vector3(0, height, 0));
 				}
 			}
 			else _velocity = _velocity.Lerp(Godot.Vector3.Zero, (float)delta * _fric);

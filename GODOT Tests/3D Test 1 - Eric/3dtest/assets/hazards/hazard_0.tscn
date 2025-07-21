@@ -1,7 +1,7 @@
 [gd_scene load_steps=39 format=3 uid="uid://bpspbjxvn1am1"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_a8uqt"]
-[ext_resource type="Shader" path="res://assets/trash/obstacle_proximity.gdshader" id="1_yjji7"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="1_yjji7"]
 [ext_resource type="PackedScene" uid="uid://c145g4ore1naw" path="res://assets/map/deco/car_stationwagon.gltf" id="2_sobga"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="4_qpi7s"]
 [ext_resource type="AudioStream" uid="uid://bvd1cq0b28aab" path="res://assets/Audios/fire.wav" id="5_djutl"]
@@ -25,7 +25,7 @@ shader_parameter/fade_distance = 5.0
 shader_parameter/character_position = Vector3(0, 0, 0)
 shader_parameter/tile_x = 50.0
 shader_parameter/tile_y = 1.0
-shader_parameter/scroll_speed_x = 0.0
+shader_parameter/scroll_speed_x = 0.075
 shader_parameter/scroll_speed_y = 0.0
 shader_parameter/rotation_degrees = 15.0
 
@@ -188,7 +188,7 @@ collision_mask = 2
 script = ExtResource("1_a8uqt")
 
 [node name="ProximityWarning" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("TorusMesh_ysqfc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

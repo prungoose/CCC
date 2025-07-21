@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ckrg2klg24db1" path="res://assets/ui/electric_icon.png" id="4_sjcv4"]
 [ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_y157e"]
 [ext_resource type="Texture2D" uid="uid://x5v312jstqri" path="res://assets/ui/health_icon.png" id="6_njngd"]
-[ext_resource type="Texture2D" uid="uid://bikigbxtw4lkl" path="res://assets/ui/phone_window.png" id="9_mnjly"]
+[ext_resource type="Texture2D" uid="uid://y5o8u51kcoa1" path="res://assets/ui/window_gray.png" id="9_8qfgr"]
 [ext_resource type="Texture2D" uid="uid://bnfr8av5rdq1l" path="res://assets/ui/batteryicon.png" id="11_i3jg3"]
 [ext_resource type="Texture2D" uid="uid://c6qqfsxya6lt8" path="res://assets/ui/networkicon.png" id="12_r5ww3"]
 [ext_resource type="Texture2D" uid="uid://dstxyn273sjn2" path="res://assets/ui/wifiicon.png" id="13_8qfgr"]
@@ -26,7 +26,7 @@ shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3jg3"]
-texture = ExtResource("9_mnjly")
+texture = ExtResource("9_8qfgr")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suae8"]
 bg_color = Color(1, 1, 1, 1)
@@ -275,10 +275,10 @@ horizontal_alignment = 1
 
 [node name="displayInfo" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = -215.0
+offset_left = -218.0
 offset_top = -416.0
 offset_right = 225.0
-offset_bottom = 351.0
+offset_bottom = 355.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(70, 340)
 theme_override_constants/outline_size = 10

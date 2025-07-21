@@ -41,7 +41,7 @@ public partial class Hazard : Area3D
 		tween.TweenProperty(_tape, "position", _tape.Position + Godot.Vector3.Down * 50, 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
 		thumpSFX.Play();
 		GetParent().Call("_HazardIsDealtWith");
-		
+
 	}
 
 	void _UpdateID(int id)

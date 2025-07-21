@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://df0vxbjb3i6m"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_hx2lr"]
-[ext_resource type="Shader" path="res://assets/trash/obstacle_proximity.gdshader" id="2_wy577"]
+[ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_wy577"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_okaqf"]
 [ext_resource type="AudioStream" uid="uid://csengdlp4hhjd" path="res://assets/Audios/thump.wav" id="4_wy577"]
 [ext_resource type="AudioStream" uid="uid://ck8a8okp13usv" path="res://assets/Audios/waterSpray.wav" id="5_okaqf"]
@@ -118,7 +118,7 @@ collision_mask = 2
 script = ExtResource("1_hx2lr")
 
 [node name="ProximityWarning" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("TorusMesh_ysqfc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

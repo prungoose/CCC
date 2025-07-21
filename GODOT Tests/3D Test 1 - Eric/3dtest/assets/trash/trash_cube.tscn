@@ -48,7 +48,11 @@ top_level = true
 layers = 32
 cast_shadow = 0
 gi_mode = 0
-pixel_size = 0.061
+pixel_size = 0.1
 texture_filter = 0
 render_priority = 1
 texture = ExtResource("4_4y814")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

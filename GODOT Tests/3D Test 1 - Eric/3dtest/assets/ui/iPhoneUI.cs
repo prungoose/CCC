@@ -54,7 +54,7 @@ public partial class iPhoneUI : Control
 		_tween = GetTree().CreateTween();
 		_tween.TweenProperty(displayInfo, "scale", new Vector2(1, 1), 0.2f).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 		
-		if ((int)_ui?.Call("GetTutorialStep") == 7)
+		if ((int)_ui?.Call("GetTutorialStep") == 6)
 			_ui.Call("NextTutorialStep");
 	}
 	private void waterPressed()

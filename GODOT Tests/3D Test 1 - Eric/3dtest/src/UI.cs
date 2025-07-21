@@ -165,7 +165,7 @@ public partial class UI : Control
 			int beacon_to_get = 5;
 			switch (_phonetext)
 			{
-				case "↑→↓←": if (GetTutorialStep() == 9) NextTutorialStep(); beacon_to_get = 0; break; //fire
+				case "↑→↓←": if (GetTutorialStep() == 7) NextTutorialStep(); beacon_to_get = 0; break; //fire
 				case "↓→↑↑": beacon_to_get = 1; break; //water
 				case "→←→←": beacon_to_get = 2; break; //elec
 				case "←↓→←": beacon_to_get = 3; break; //animal
@@ -177,6 +177,8 @@ public partial class UI : Control
 			_phonetext = "";
 			_wiggle();
 			PhoneSFX.Play();
+
+
 
 		}
 	}
