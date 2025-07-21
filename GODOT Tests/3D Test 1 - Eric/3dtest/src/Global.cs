@@ -49,6 +49,12 @@ public partial class Global : Node
 		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
 		{
 			AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb(1f));
+			CF.SetValue("playersettings", "vol", 1f);
+			CF.SetValue("playersettings", "sfx", 1f);
+			CF.SetValue("playersettings", "amb", 1f);
+			CF.SetValue("playersettings", "lang", 0);
+			CF.SetValue("playersettings", "screen", false);
+			CF.Save(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg");
 		}
 		else
 		{

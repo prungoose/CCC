@@ -91,7 +91,7 @@ public partial class CutsceneText : RichTextLabel
                 else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
                 {
                     _transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
-                    //res://assets/level/SceneLoader.tscn
+                    //res://assets/level/SceneLoader.tscn res://assets/level/SceneLoader.tscn
                 }
             }
         }

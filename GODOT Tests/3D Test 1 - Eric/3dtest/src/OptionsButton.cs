@@ -7,6 +7,9 @@ public partial class OptionsButton : Button
 	private Vector2 originalScale = Godot.Vector2.One;
 	private Vector2 hoverScale = new Godot.Vector2(1.2f, 1.2f);
 	private float _animationTime = 0.15f;
+	public ConfigFile CF = new ConfigFile();
+	[Export] private Control Options;
+	private int langSelected;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,7 +22,7 @@ public partial class OptionsButton : Button
 
 	private void _OptionsButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://assets/menu/Options.tscn");
+		GetTree().ChangeSceneToFile("res://assets/menu/Options.tscn");		
 	}
 
 	private void hovered()

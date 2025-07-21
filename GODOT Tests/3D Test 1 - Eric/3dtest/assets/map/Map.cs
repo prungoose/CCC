@@ -11,12 +11,14 @@ public partial class Map : Node3D
 	private float _game_time = 0;
 	private Tween _tween;
 	private CharacterBody3D _player;
+	private AudioStreamPlayer rainSFX;
 
 	float transition_time = 5.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		rainSFX = GetNode<AudioStreamPlayer>("RainSFX");
 		_worldenvironment = GetNode<WorldEnvironment>("WorldEnvironment");
 		_directionallight = GetNode<DirectionalLight3D>("DirectionalLight3D");
 		_rain = GetNode<GpuParticles3D>("GPUParticles3D");
@@ -28,10 +30,23 @@ public partial class Map : Node3D
 	{
 		if (!_title) _game_time += (float)delta;
 		if (_player != null) _rain.GlobalPosition = _player.GlobalPosition;
-		
-		if (_game_time > 90 && _day_phase == 0) EveningTransition();
-		else if (_game_time > 135 && _day_phase == 1) StormyNightTransition();
-		else if (_game_time > 180 && _day_phase == 2) MorningTransition();
+
+		if (_game_time > 90 && _day_phase == 0)
+		{
+			rainSFX.Stop();
+			EveningTransition();
+		}
+		else if (_game_time > 135 && _day_phase == 1)
+		{
+			if (!rainSFX.Playing)
+				rainSFX.Play();
+			StormyNightTransition();
+		}
+		else if (_game_time > 180 && _day_phase == 2)
+		{
+			rainSFX.Stop();
+			MorningTransition();
+		}
 	}
 
 

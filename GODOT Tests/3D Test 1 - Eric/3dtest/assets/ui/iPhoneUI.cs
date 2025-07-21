@@ -10,6 +10,11 @@ public partial class iPhoneUI : Control
 	private Button _animalButton;
 	private Button _healthButton;
 	private Button _dialButton;
+	private Label _fireLabel;
+	private Label _waterLabel;
+	private Label _powerLabel;
+	private Label _animalLabel;
+	private Label _healthLabel;
 
 	private RichTextLabel displayInfo;
 	private RichTextLabel dialDisplay;
@@ -19,6 +24,9 @@ public partial class iPhoneUI : Control
 	private Tween _tween;
 
 	private CharacterBody3D _player;
+	private int _language;
+
+	public ConfigFile CF = new ConfigFile();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,6 +36,12 @@ public partial class iPhoneUI : Control
 		_healthButton = GetNode<Control>("Health").GetNode<Button>("healthButton");
 		_dialButton = GetNode<Control>("Dial").GetNode<Button>("dialTextDisplay/dialButton");
 
+		_fireLabel = GetNode<Control>("Fire").GetNode<Label>("fireLabel");
+		_waterLabel = GetNode<Control>("Water").GetNode<Label>("waterLabel");
+		_powerLabel = GetNode<Control>("Power").GetNode<Label>("powerLabel");
+		_animalLabel = GetNode<Control>("Animal").GetNode<Label>("animalLabel");
+		_healthLabel = GetNode<Control>("Health").GetNode<Label>("healthLabel");
+
 		_ui = GetNodeOrNull<Control>("../../UI");
 		_phoneSfx = GetNodeOrNull<AudioStreamPlayer>("PhoneSFX");
 
@@ -35,6 +49,34 @@ public partial class iPhoneUI : Control
 		dialDisplay = GetNode<Control>("Dial").GetNode<RichTextLabel>("dialTextDisplay");
 
 		_player = GetTree().CurrentScene.GetNode<CharacterBody3D>("SubViewportContainer/SubViewport/Player");
+
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			_language = 0;
+		}
+		else
+		{
+			_language = (int)CF.GetValue("playersettings", "lang");
+		}
+
+		if (_language == 1)
+		{
+			_fireLabel.Text = "消防";
+			_waterLabel.Text = "配管";
+			_powerLabel.Text = "電力会社";
+			_animalLabel.Text = "動物管理";
+			_healthLabel.Text = "病院";
+			_dialButton.Text = "ダイヤルする";
+		}
+		else
+		{
+			_fireLabel.Text = "Fire Dept.";
+			_waterLabel.Text = "Plumbing";
+			_powerLabel.Text = "Power Co.";
+			_animalLabel.Text = "Animal Control";
+			_healthLabel.Text = "Health Services";
+			_dialButton.Text = "Dial";
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,7 +90,11 @@ public partial class iPhoneUI : Control
 
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(70, 190);
-		displayInfo.Text = "The [b][color=red]Fire Department[/color][/b] responds to:\n•  [b]Fires[/b]\n•  [b]Rescue operations[/b]\n\nSeparate any flammable objects close to the area to control the spread of fire.\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
+		if (_language == 1)
+			displayInfo.Text = "The [b][color=red]Fire Department[/color][/b] responds to:\n•  [b]Fires[/b]\n•  [b]Rescue operations[/b]\n\nSeparate any flammable objects close to the area to control the spread of fire.\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
+		else
+			displayInfo.Text = "";
+
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -61,7 +107,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(215, 190);
-		displayInfo.Text = "The [b][color=light_blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
+		if (_language == 1)
+			displayInfo.Text = "The [b][color=light_blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
+		else
+			displayInfo.Text = "";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -71,7 +120,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(365, 190);
-		displayInfo.Text = "The [b][color=yellow]Power Company[/color][/b] maintains the [i]electric grid[/i] and responds to:\n•  [b]downed lines[/b] \n•  [b]blackouts[/b]\n•  [b]damaged transformer boxes[/b]\n\nContact them for electrical hazards. Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] → ← → ←";
+		if (_language == 1)
+			displayInfo.Text = "The [b][color=yellow]Power Company[/color][/b] maintains the [i]electric grid[/i] and responds to:\n•  [b]downed lines[/b] \n•  [b]blackouts[/b]\n•  [b]damaged transformer boxes[/b]\n\nContact them for electrical hazards. Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] → ← → ←";
+		else
+			displayInfo.Text = "";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -83,7 +135,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(135, 340);
-		displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not handle wild animals without proper equipment.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
+		if (_language == 1)
+			displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not handle wild animals without proper equipment.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
+		else
+			displayInfo.Text = "";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -93,8 +148,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(295, 340);
-		displayInfo.Text = "The [b][color=green]General Health Team[/color][/b] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
-
+		if (_language == 1)
+			displayInfo.Text = "The [b][color=green]General Health Team[/color][/b] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
+		else
+			displayInfo.Text = "";
 		//"Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
 		
 		_tween?.CustomStep(0.3);

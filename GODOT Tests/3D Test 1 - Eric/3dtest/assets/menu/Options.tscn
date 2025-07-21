@@ -257,14 +257,14 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1fypi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1fypi")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1fypi")
-selected = 1
+selected = 0
 item_count = 2
-popup/item_0/text = "日本"
-popup/item_0/id = 1
-popup/item_1/text = "English"
-popup/item_1/id = 0
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "日本語"
+popup/item_1/id = 1
 
-[node name="CheckButton" type="CheckButton" parent="Adjustments"]
+[node name="FullscreenButton" type="CheckButton" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1

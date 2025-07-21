@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics.SymbolStore;
 
 public partial class InGameOptions : Control
 {
@@ -7,7 +8,7 @@ public partial class InGameOptions : Control
 	private HSlider volslider;
 	private HSlider sfxslider;
 	private HSlider ambslider;
-	private OptionButton langbutton;
+	private CheckButton fsbutton;
 	[Export] public VBoxContainer parent;
 	private AudioStreamPlayer SampleSFX;
 	private AudioStreamPlayer SampleAMB;
@@ -15,6 +16,12 @@ public partial class InGameOptions : Control
 	private int main_index;
 	private int sfx_index;
 	private int ambiance_index;
+	private int lang;
+	private Label volLabel;
+	private Label sfxLabel;
+	private Label ambLabel;
+	private Label fsLabel;
+	private Label OptionsTitle;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,7 +34,15 @@ public partial class InGameOptions : Control
 		volslider = parent.GetNode<HSlider>("VolumeSlider");
 		sfxslider = parent.GetNode<HSlider>("SoundEffectsSlider");
 		ambslider = parent.GetNode<HSlider>("AmbianceSlider");
-		langbutton = parent.GetNode<OptionButton>("LanguageButton");
+		fsbutton = parent.GetNode<CheckButton>("FullscreenButton");
+
+		var parentLabel = GetNode<VBoxContainer>("Labels");
+
+		volLabel = parentLabel.GetNode<Label>("Volume");
+		sfxLabel = parentLabel.GetNode<Label>("Sound Effects");
+		ambLabel = parentLabel.GetNode<Label>("Ambiance");
+		fsLabel = parentLabel.GetNode<Label>("Fullscreen");
+		OptionsTitle = GetNode<Label>("OptionsLabel");
 
 		main_index = AudioServer.GetBusIndex("Main");
 		AudioServer.SetBusVolumeDb(main_index, Mathf.LinearToDb((float)volslider.Value));
@@ -35,6 +50,32 @@ public partial class InGameOptions : Control
 		AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb((float)sfxslider.Value));
 		ambiance_index = AudioServer.GetBusIndex("Ambiance");
 		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb((float)ambslider.Value));
+
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			lang = 0;
+		}
+		else
+		{
+			lang = (int)CF.GetValue("playersettings", "lang");
+		}
+
+		if (lang == 0)
+		{
+			volLabel.Text = "Volume";
+			sfxLabel.Text = "Sound Effects";
+			ambLabel.Text = "Ambiance";
+			fsLabel.Text = "Fullscreen";
+			OptionsTitle.Text = " Options ";
+		}
+		else if (lang == 1)
+		{
+			volLabel.Text = "音量";
+			sfxLabel.Text = "効果音";
+			ambLabel.Text = "雰囲気";
+			fsLabel.Text = "全画面表示";
+			OptionsTitle.Text = "設定";
+		}
 
 		Load();
 	}
@@ -78,7 +119,7 @@ public partial class InGameOptions : Control
 		CF.SetValue("playersettings", "vol", volslider.Value);
 		CF.SetValue("playersettings", "sfx", sfxslider.Value);
 		CF.SetValue("playersettings", "amb", ambslider.Value);
-		CF.SetValue("playersettings", "lang", langbutton.Selected);
+		CF.SetValue("playersettings", "screen", fsbutton.ButtonPressed);
 		CF.Save(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg");
 		GD.Print(OS.GetUserDataDir());
 	}
@@ -94,7 +135,7 @@ public partial class InGameOptions : Control
 			volslider.Value = (float)CF.GetValue("playersettings", "vol", volslider.Value);
 			sfxslider.Value = (float)CF.GetValue("playersettings", "sfx", sfxslider.Value);
 			ambslider.Value = (float)CF.GetValue("playersettings", "amb", ambslider.Value);
-			langbutton.Selected = (int)CF.GetValue("playersettings", "lang", langbutton.Selected);
+			fsbutton.ButtonPressed = (bool)CF.GetValue("playersettings", "screen", fsbutton.ButtonPressed);
 		}
 	}
 }

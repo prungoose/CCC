@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyh4mgfebq10y"]
+[gd_scene load_steps=16 format=3 uid="uid://cyh4mgfebq10y"]
 
 [ext_resource type="Script" uid="uid://sv8q6abhuai" path="res://src/InGameOptions.cs" id="1_i5ekm"]
-[ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="1_q2ip2"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_qx56b"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="5_6ifhe"]
 
@@ -20,8 +19,17 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qx56b"]
-texture = ExtResource("1_q2ip2")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx56b"]
+bg_color = Color(0.494118, 0.878431, 0.780392, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6ifhe"]
 thickness = 10
@@ -33,16 +41,6 @@ thickness = 10
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_i5ekm"]
 color = Color(0.494118, 0.878431, 0.780392, 1)
 thickness = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q2ip2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx56b"]
-bg_color = Color(0.533037, 0.533037, 0.533037, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qx56b"]
 
@@ -129,22 +127,23 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2fkgi")
 
 [node name="OptionsLabel" type="Label" parent="."]
-process_mode = 3
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -240.0
+offset_left = -260.5
 offset_top = 25.0
-offset_right = 226.0
+offset_right = 260.5
 offset_bottom = 202.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxTexture_qx56b")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qx56b")
+text = " Options "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Labels" type="VBoxContainer" parent="."]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 4
@@ -158,7 +157,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 100
 
-[node name="Volume" type="Label" parent="VBoxContainer"]
+[node name="Volume" type="Label" parent="Labels"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
@@ -167,7 +166,7 @@ theme_override_font_sizes/font_size = 60
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Sound Effects" type="Label" parent="VBoxContainer"]
+[node name="Sound Effects" type="Label" parent="Labels"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
@@ -176,7 +175,7 @@ theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
 horizontal_alignment = 1
 
-[node name="Ambiance" type="Label" parent="VBoxContainer"]
+[node name="Ambiance" type="Label" parent="Labels"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
@@ -185,13 +184,13 @@ theme_override_font_sizes/font_size = 60
 text = "Ambiance"
 horizontal_alignment = 1
 
-[node name="Language" type="Label" parent="VBoxContainer"]
+[node name="Fullscreen" type="Label" parent="Labels"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 60
-text = "Language"
+text = "Fullscreen"
 horizontal_alignment = 1
 
 [node name="Adjustments" type="VBoxContainer" parent="."]
@@ -238,26 +237,10 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="LanguageButton" type="OptionButton" parent="Adjustments"]
-process_mode = 3
+[node name="FullscreenButton" type="CheckButton" parent="Adjustments"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxEmpty_q2ip2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qx56b")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qx56b")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qx56b")
-selected = 1
-item_count = 2
-popup/item_0/text = "日本"
-popup/item_0/id = 1
-popup/item_1/text = "English"
-popup/item_1/id = 0
+alignment = 1
 
 [node name="BacktoGameButton" type="Button" parent="."]
 process_mode = 3
