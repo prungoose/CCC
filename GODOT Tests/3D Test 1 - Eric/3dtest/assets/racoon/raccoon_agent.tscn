@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://blawe26d558il" path="res://assets/racoon/sprites_racoon.png" id="2_3km4c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3km4c"]
-size = Vector3(1.5, 1, 0.45)
+size = Vector3(1.27924, 0.647919, 0.209766)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3g67e"]
 atlas = ExtResource("2_3km4c")
@@ -125,13 +125,17 @@ wait_time = 1.5
 autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0106812, -0.245652, 0.0445306)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00820918, -0.528718, 0.0134271)
 shape = SubResource("BoxShape3D_3km4c")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+billboard = 1
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_h11xc")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.664459

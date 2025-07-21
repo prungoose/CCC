@@ -28,8 +28,8 @@ public partial class RaccoonAgent : CharacterBody3D
 
     public override void _Ready()
     {
-        NavAgent.PathDesiredDistance = 1.2f;
-        NavAgent.TargetDesiredDistance = 1.5f;
+        NavAgent.PathDesiredDistance = 1f;
+        NavAgent.TargetDesiredDistance = 1f;
         NavAgent.Radius = 0.5f;
 
 
@@ -73,14 +73,15 @@ public partial class RaccoonAgent : CharacterBody3D
         // Currently fleeing - move to flee target and check for stopping flee
         if (_isFleeing)
         {
+            // Make it flee towards trash bins
             MoveTowards(NavAgent.GetNextPathPosition(), delta);
-            CheckCrashIntoBins();
+            // CheckCrashIntoBins();
 
             // Stop fleeing when far enough and reset target trash
             if (distToPlayer > AvoidPlayerDistance * 2f)
             {
                 _isFleeing = false;
-                _targetTrash = null; // clear target after fleeing
+                _targetTrash = null;
                 SetRandomWanderTarget();
             }
             _animations.Play(_heldTrash != null ? "trash_run" : "run");
@@ -148,6 +149,22 @@ public partial class RaccoonAgent : CharacterBody3D
         NavAgent.TargetPosition = target;
     }
 
+    // private void MoveTowards(Vector3 targetPosition, double delta)
+    // {
+    //     if (NavAgent.IsNavigationFinished())
+    //     {
+    //         _animations.Play("idle");
+    //         Velocity = Vector3.Zero;
+    //         MoveAndSlide();
+    //         return;
+    //     }
+
+    //     Vector3 nextPathPosition = NavAgent.GetNextPathPosition();
+
+    //     Vector3 direction = (nextPathPosition - GlobalPosition).Normalized();
+    //     Velocity = direction * Speed;
+    //     MoveAndSlide();
+    // }
     private void MoveTowards(Vector3 targetPosition, double delta)
     {
         if (NavAgent.IsNavigationFinished())
@@ -157,6 +174,8 @@ public partial class RaccoonAgent : CharacterBody3D
             return;
         }
 
+        Vector3 navTarget = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), targetPosition);
+        NavAgent.TargetPosition = navTarget;
         Vector3 nextPathPosition = NavAgent.GetNextPathPosition();
 
         Vector3 direction = (nextPathPosition - GlobalPosition).Normalized();
@@ -165,9 +184,9 @@ public partial class RaccoonAgent : CharacterBody3D
     }
 
 
-
     private void FleeFromPlayer()
     {
+        Speed = 8f;
         _isFleeing = true;
 
         // Find nearest trash bin to sabotage while fleeing
@@ -188,7 +207,7 @@ public partial class RaccoonAgent : CharacterBody3D
         }
 
         Vector3 target;
-        if (nearestBin != null && nearestBinDist < 20f)
+        if (nearestBin != null)
         {
             // Flee towards the bin for sabotage opportunity
             Vector3 dirToBin = (nearestBin.GlobalPosition - GlobalPosition).Normalized();
@@ -205,49 +224,12 @@ public partial class RaccoonAgent : CharacterBody3D
             target = GlobalPosition + fleeDir * 10f;
         }
 
+        // Snap to nearest navigable position on the NavMesh
+        target = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), target);
         NavAgent.TargetPosition = target;
     }
 
-    private void CheckCrashIntoBins()
-    {
-        foreach (var node in GetTree().GetNodesInGroup("trash_bins"))
-        {
-            if (node is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) < SabotageCrashRange)
-            {
-                GD.Print("Raccoon crashed into bin!");
-
-                // // Trigger bin sabotage - call method on the bin to spill trash
-                // if (bin.HasMethod("_RaccoonSabotage"))
-                // {
-                //     bin.Call("_RaccoonSabotage");
-                // }
-
-                // // Create some visual/audio feedback
-                // if (bin.HasMethod("_PlaySabotageEffect"))
-                // {
-                //     bin.Call("_PlaySabotageEffect");
-                // }
-
-                // Reduce game completion progress (optional)
-                var ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
-                if (ui != null && ui.HasMethod("IncreaseGameCompletion"))
-                {
-                    ui.Call("IncreaseGameCompletion", -10);
-                }
-
-                // Stun the raccoon briefly from the impact
-                _isStunned = true;
-                _stunTimer = 2f;
-
-                _isFleeing = false;
-                SetRandomWanderTarget();
-                break;
-            }
-        }
-    }
-
-    bool IsTrashValid(Node trash) =>
-    trash != null && GodotObject.IsInstanceValid(trash);
+    bool IsTrashValid(Node trash) => trash != null && IsInstanceValid(trash);
 
 
     private RigidBody3D FindNearbyTrash()
@@ -304,6 +286,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
         trash.Freeze = true;
         trash.Visible = false;
+        _animations.Play("trash_idle");
         trash.SetProcess(false);
 
         _currentTarget = GetTrashDropLocation();
@@ -317,11 +300,15 @@ public partial class RaccoonAgent : CharacterBody3D
         _heldTrash.Freeze = false;
         _heldTrash.Visible = true;
         _heldTrash.SetProcess(true);
+
+        // appears as if the trash is tossed
         _heldTrash.ApplyImpulse(Vector3.Up, new Vector3(
             (float)_rand.NextDouble() * 4f - 2f,
             1,
             (float)_rand.NextDouble() * 4f - 2f
         ));
+
+        _animations.Play("idle");
 
         _lastDroppedTrash = _heldTrash;
         _heldTrash = null;
@@ -336,6 +323,8 @@ public partial class RaccoonAgent : CharacterBody3D
 
         int trashType = (int)_heldTrash.Call("_GetTrashID");
 
+
+        // Finds the trash's corresponding bin type (change to array later)
         Node3D correctBin = null;
         foreach (var node in GetTree().GetNodesInGroup("trash_bins"))
         {
@@ -350,6 +339,7 @@ public partial class RaccoonAgent : CharacterBody3D
             }
         }
 
+
         Vector3 desired;
         if (correctBin != null)
         {
@@ -358,6 +348,7 @@ public partial class RaccoonAgent : CharacterBody3D
         }
         else
         {
+            // No matching bin found, drop randomly
             desired = GlobalPosition + new Vector3(
                 (float)_rand.NextDouble() * 2f - 1f,
                 0,
@@ -380,7 +371,41 @@ public partial class RaccoonAgent : CharacterBody3D
         return snapped;
     }
 
+    // private void CheckCrashIntoBins()
+    // {
+    //     foreach (var node in GetTree().GetNodesInGroup("trash_bins"))
+    //     {
+    //         if (node is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) < SabotageCrashRange)
+    //         {
+    //             GD.Print("Raccoon crashed into bin!");
 
+    //             // // Trigger bin sabotage - call method on the bin to spill trash
+    //             // if (bin.HasMethod("_RaccoonSabotage"))
+    //             // {
+    //             //     bin.Call("_RaccoonSabotage");
+    //             // }
 
+    //             // // Create some visual/audio feedback
+    //             // if (bin.HasMethod("_PlaySabotageEffect"))
+    //             // {
+    //             //     bin.Call("_PlaySabotageEffect");
+    //             // }
 
+    //             // Reduce game completion progress (optional)
+    //             var ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
+    //             if (ui != null && ui.HasMethod("IncreaseGameCompletion"))
+    //             {
+    //                 ui.Call("IncreaseGameCompletion", -10);
+    //             }
+
+    //             // Stun the raccoon briefly from the impact
+    //             _isStunned = true;
+    //             _stunTimer = 2f;
+
+    //             _isFleeing = false;
+    //             SetRandomWanderTarget();
+    //             break;
+    //         }
+    //     }
+    // }
 }
