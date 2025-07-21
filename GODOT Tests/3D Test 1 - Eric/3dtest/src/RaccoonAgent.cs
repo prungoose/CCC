@@ -30,7 +30,6 @@ public partial class RaccoonAgent : CharacterBody3D
     {
         NavAgent.PathDesiredDistance = 1f;
         NavAgent.TargetDesiredDistance = 1f;
-        NavAgent.Radius = 0.5f;
 
 
         SetRandomWanderTarget();
@@ -148,23 +147,6 @@ public partial class RaccoonAgent : CharacterBody3D
         Vector3 target = GlobalPosition + randomOffset;
         NavAgent.TargetPosition = target;
     }
-
-    // private void MoveTowards(Vector3 targetPosition, double delta)
-    // {
-    //     if (NavAgent.IsNavigationFinished())
-    //     {
-    //         _animations.Play("idle");
-    //         Velocity = Vector3.Zero;
-    //         MoveAndSlide();
-    //         return;
-    //     }
-
-    //     Vector3 nextPathPosition = NavAgent.GetNextPathPosition();
-
-    //     Vector3 direction = (nextPathPosition - GlobalPosition).Normalized();
-    //     Velocity = direction * Speed;
-    //     MoveAndSlide();
-    // }
     private void MoveTowards(Vector3 targetPosition, double delta)
     {
         if (NavAgent.IsNavigationFinished())
@@ -232,6 +214,10 @@ public partial class RaccoonAgent : CharacterBody3D
     bool IsTrashValid(Node trash) => trash != null && IsInstanceValid(trash);
 
 
+    // Need to fix this logic so the raccoon isnt forced to pass through the player's field to get to trash
+    // it should not try to find trash in the direction of the player 
+    // right now accidentally leads to the raccoon getting stuck in a loop
+    // by targetting trash behiind the player the raccoon can't reach
     private RigidBody3D FindNearbyTrash()
     {
         RigidBody3D closest = null;
@@ -314,6 +300,29 @@ public partial class RaccoonAgent : CharacterBody3D
         _heldTrash = null;
 
         SetRandomWanderTarget();
+    }
+
+    // Only worry about left/right, just flip horizontal animation
+    private void HandleRunAnimationDirection(Camera3D camera, Vector3 targetLocation)
+    {
+        if (camera == null)
+            return;
+
+        Vector3 cameraForward = camera.GlobalTransform.Basis.Z.Normalized();
+        Vector3 cameraRight = camera.GlobalTransform.Basis.X.Normalized();
+
+        Vector3 direction = (targetLocation - GlobalPosition).Normalized();
+        float dotForward = direction.Dot(cameraForward);
+        float dotRight = direction.Dot(cameraRight);
+
+        if (Mathf.Abs(dotForward) > Mathf.Abs(dotRight))
+        {
+            _animations.FlipH = dotForward < 0;
+        }
+        else
+        {
+            _animations.FlipH = dotRight < 0;
+        }
     }
 
     private Vector3 GetTrashDropLocation()

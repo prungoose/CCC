@@ -131,11 +131,14 @@ shape = SubResource("BoxShape3D_3km4c")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
+radius = 1.0
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 billboard = 1
+shaded = true
+texture_filter = 0
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_h11xc")
 animation = &"run"
 autoplay = "idle"
-frame_progress = 0.664459
+frame_progress = 0.27802

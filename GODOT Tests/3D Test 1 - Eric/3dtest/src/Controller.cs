@@ -237,12 +237,12 @@ public partial class Controller : CharacterBody3D
 		if (phone) _anim.Play("se_idle");
 		else if (!phone && (is_sucking | is_blowing))
 		{
-			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_suck");
+			_anim.Play(dirs[(int)(Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle()) / 45 + 6.5)] + "_suck");
 		}
 		else if (!inputdir.IsZeroApprox() && !phone)
 			_anim.Play(dirs[(int)Mathf.RadToDeg(inputdir.Angle()) / 45 + 3] + "_run");
 		else
-			_anim.Play(dirs[(int)((Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle())) / 45 + 6.5)] + "_idle");
+			_anim.Play(dirs[(int)(Mathf.RadToDeg(Godot.Vector2.FromAngle(_head.Rotation.Y - _campivot.Rotation.Y).Angle()) / 45 + 6.5)] + "_idle");
 
 
 		_anim.SetFrameAndProgress(frame, prog);

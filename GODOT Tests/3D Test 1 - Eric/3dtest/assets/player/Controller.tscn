@@ -574,7 +574,7 @@ shaded = true
 texture_filter = 0
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_pidqv")
-animation = &"e_run"
+animation = &"ne_idle"
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
