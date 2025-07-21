@@ -12,6 +12,11 @@ public partial class RaccoonAgent : CharacterBody3D
     [Export] public CharacterBody3D Player;
     [Export] public NavigationAgent3D NavAgent;
 
+    [Export] public Timer WanderCooldownTimer;
+
+    [Export] private AnimatedSprite3D _animations;
+
+
     private Vector3 _currentTarget;
     private RigidBody3D _targetTrash;
     private RigidBody3D _heldTrash;
@@ -23,18 +28,52 @@ public partial class RaccoonAgent : CharacterBody3D
 
     public override void _Ready()
     {
-        GlobalPosition = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), GlobalPosition);
+
+
         GD.Print("Nav Finished: ", NavAgent.IsNavigationFinished(), " | Next: ", NavAgent.GetNextPathPosition());
 
 
+        NavAgent.PathDesiredDistance = 1f;
+        NavAgent.TargetDesiredDistance = 5f;
 
-        NavAgent.PathDesiredDistance = 0.5f;
-        NavAgent.TargetDesiredDistance = 0.5f;
+        SetRandomWanderTarget();
 
-        // Just walk 10 units forward from wherever the raccoon starts
-        NavAgent.TargetPosition = GlobalPosition + new Vector3(10, 0, 0);
+        WanderCooldownTimer.Timeout += OnWanderTimerTimeout;
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        if (NavAgent.IsNavigationFinished())
+        {
+            _animations.Play("idle");
+
+            return;
+        }
+
+        _animations.Play("run");
+        Vector3 nextPosition = NavAgent.GetNextPathPosition();
+        Vector3 direction = (nextPosition - GlobalPosition).Normalized();
+        Velocity = direction * Speed;
+
+        MoveAndSlide();
+    }
+
+    private void OnWanderTimerTimeout()
+    {
+        SetRandomWanderTarget();
+    }
+
+    private void SetRandomWanderTarget()
+    {
+        Vector3 randomOffset = new Vector3(
+            (float)(_rand.NextDouble() * 20 - 10), 0,
+            (float)(_rand.NextDouble() * 20 - 10)
+        );
+        Vector3 target = GlobalPosition + randomOffset;
+
+        Vector3 navTarget = NavigationServer3D.MapGetClosestPoint(NavAgent.GetNavigationMap(), target);
+        NavAgent.TargetPosition = navTarget;
+    }
 
     // public override void _PhysicsProcess(double delta)
     // {
@@ -101,34 +140,6 @@ public partial class RaccoonAgent : CharacterBody3D
     //         }
     //     }
     // }
-
-    private void MoveTowards(Vector3 target, double delta)
-    {
-        Vector3 direction = (target - GlobalPosition).Normalized();
-        Velocity = direction * Speed;
-        MoveAndSlide();
-    }
-
-    private void SetRandomWanderTarget()
-    {
-        Vector3 randomOffset = new Vector3(
-            (float)(_rand.NextDouble() * 40 - 20),
-            0,
-            (float)(_rand.NextDouble() * 40 - 20)
-        );
-        NavAgent.TargetPosition = GlobalPosition + randomOffset;
-    }
-    public override void _PhysicsProcess(double delta)
-    {
-        if (NavAgent.IsNavigationFinished())
-            return;
-
-        Vector3 nextPosition = NavAgent.GetNextPathPosition();
-        Vector3 direction = (nextPosition - GlobalPosition).Normalized();
-        Velocity = direction * Speed;
-
-        MoveAndSlide();
-    }
 
 
     //     private void FleeFromPlayer()

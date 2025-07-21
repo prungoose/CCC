@@ -113,13 +113,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="RaccoonAgent" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent")]
+[node name="RaccoonAgent" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "WanderCooldownTimer", "_animations")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_yq413")
 NavAgent = NodePath("NavigationAgent3D")
+WanderCooldownTimer = NodePath("WanderCooldownTimer")
+_animations = NodePath("AnimatedSprite3D")
 
-[node name="SearchTimer" type="Timer" parent="."]
-wait_time = 1.5
+[node name="WanderCooldownTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
