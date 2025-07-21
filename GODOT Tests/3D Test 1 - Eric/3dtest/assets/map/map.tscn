@@ -1,8 +1,9 @@
-[gd_scene load_steps=350 format=4 uid="uid://d1pe32eowvpbh"]
+[gd_scene load_steps=351 format=4 uid="uid://d1pe32eowvpbh"]
 
 [ext_resource type="Script" uid="uid://gyw8cugf0h3q" path="res://assets/map/Map.cs" id="1_ubd4l"]
 [ext_resource type="MeshLibrary" uid="uid://2hhoh2k5h22a" path="res://assets/map/tiles/tiles.tres" id="1_ur8lv"]
 [ext_resource type="Sky" uid="uid://ccjprw06t3qxv" path="res://assets/map/sky_normal.tres" id="5_xa1fc"]
+[ext_resource type="AudioStream" uid="uid://7v8lyco8ga7" path="res://assets/Audios/rain.wav" id="7_umbqo"]
 [ext_resource type="PackedScene" uid="uid://dco3vfox7j33l" path="res://assets/map/deco/trash_A.gltf" id="11_om8m6"]
 [ext_resource type="PackedScene" uid="uid://bam4ewwurfcj0" path="res://assets/map/deco/trash_B.gltf" id="12_8r1wy"]
 [ext_resource type="Texture2D" uid="uid://b7o1xfyc6ykvr" path="res://assets/map/deco/citybits_texture.png" id="26_1scyg"]
@@ -5850,3 +5851,9 @@ lifetime = 0.79
 trail_lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_ubd4l")
 draw_pass_1 = SubResource("RibbonTrailMesh_umbqo")
+
+[node name="RainSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_umbqo")
+bus = &"Ambiance"
+
+[node name="rainSFX" type="AudioStreamPlayer" parent="."]

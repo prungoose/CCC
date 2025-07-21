@@ -16,11 +16,13 @@ public partial class Map : Node3D
 
 	//first time flags for evening, rain
 	private bool[] _flags = { false, false };
+	private AudioStreamPlayer rainSFX;
 
 	float transition_time = 5.0f;
 
 	public override void _Ready()
 	{
+		rainSFX = GetNode<AudioStreamPlayer>("RainSFX");
 		_worldenvironment = GetNode<WorldEnvironment>("WorldEnvironment");
 		_directionallight = GetNode<DirectionalLight3D>("DirectionalLight3D");
 		_rain = GetNode<GpuParticles3D>("GPUParticles3D");
@@ -39,10 +41,23 @@ public partial class Map : Node3D
 	{
 		if (!_title) _game_time += (float)delta;
 		if (_player != null) _rain.GlobalPosition = _player.GlobalPosition;
-		
-		if (_game_time > 150 && _day_phase == 0) EveningTransition();
-		else if (_game_time > 250 && _day_phase == 1) StormyNightTransition();
-		else if (_game_time > 310 && _day_phase == 2) MorningTransition();
+
+		if (_game_time > 150 && _day_phase == 0)
+		{
+			rainSFX.Stop();
+			EveningTransition();
+		}
+		else if (_game_time > 250 && _day_phase == 1)
+		{
+			if (!rainSFX.Playing)
+				rainSFX.Play();
+			StormyNightTransition();
+		}
+		else if (_game_time > 310 && _day_phase == 2)
+		{
+			rainSFX.Stop();
+			MorningTransition();
+		}
 	}
 
 
