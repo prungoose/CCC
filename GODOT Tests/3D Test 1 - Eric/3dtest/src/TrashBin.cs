@@ -80,8 +80,9 @@ public partial class TrashBin : Node3D
 		}
 	}
 
-
-
-
+	public int GetBinType()
+	{
+		return _trashId;
+	}
 
 }
