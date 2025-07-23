@@ -45,6 +45,9 @@ public partial class UI : Control
 
 	private float _TimeSinceSideQuestStart = 0;
 
+	[Export] private ColorRect _baitDisplay;
+	[Export] private RichTextLabel _baitTest;
+
 	public override void _Ready()
 	{
 		_phone = GetNode<Control>("Phone");
@@ -295,5 +298,15 @@ public partial class UI : Control
 	public void ResetPhoneText()
 	{
 		_phonetext = "";
+	}
+
+	public void _UpdateBaitCharges(int charges)
+	{
+		_baitTest.Text = charges.ToString();
+	}
+
+	private void _UpdateBaitSelected(bool isSelected)
+	{
+		_baitDisplay.Modulate = isSelected ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0.5f);
 	}
 }

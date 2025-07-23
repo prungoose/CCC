@@ -363,7 +363,7 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("_baitDisplay", "_baitTest")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,6 +372,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_4b2l8")
+_baitDisplay = NodePath("Minimap/Bait/ColorRect")
+_baitTest = NodePath("Minimap/Bait/RichTextLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -668,6 +670,31 @@ theme = ExtResource("14_rts35")
 theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/background = SubResource("StyleBoxFlat_e7p23")
+
+[node name="Bait" type="Control" parent="Minimap"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Minimap/Bait"]
+layout_mode = 2
+offset_left = 647.0
+offset_top = -39.0
+offset_right = 702.0
+offset_bottom = 16.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Minimap/Bait"]
+layout_mode = 0
+offset_left = 662.0
+offset_top = 22.0
+offset_right = 685.0
+offset_bottom = 45.0
+theme_override_fonts/normal_font = ExtResource("3_bscbh")
+theme_override_fonts/bold_font = ExtResource("3_bscbh")
+text = "0"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
 process_mode = 2

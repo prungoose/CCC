@@ -67,6 +67,7 @@ public partial class Controller : CharacterBody3D
 	private bool _onhomescreen = true;
 
 	private bool baitEquipped = false;
+	private int _baitCharges = 0;
 
 	public override void _Ready()
 	{
@@ -143,6 +144,7 @@ public partial class Controller : CharacterBody3D
 					case Key.Key2: SwitchThrown(2); break;
 					case Key.Key3: SwitchThrown(3); break;
 					case Key.Key4: SwitchThrown(4); break;
+					case Key.Key5: ToggleBait(); break;
 				}
 			}
 
@@ -245,6 +247,16 @@ public partial class Controller : CharacterBody3D
 		_anim.SetFrameAndProgress(frame, prog);
 	}
 
+	private bool CanThrow()
+	{
+		if (is_sucking || phone) return false;
+
+		bool hasTrash = _thrown_id != 0 && _GetTankPercentage(_thrown_id) >= 20;
+		bool hasBait = baitEquipped && _baitCharges > 0;
+
+		return hasTrash || hasBait || beacon_ready;
+	}
+
 	private void _HandleControls(float delta)
 	{
 		if (_status != 0) return;
@@ -293,7 +305,7 @@ public partial class Controller : CharacterBody3D
 		}
 
 		// start a throw
-		if (Input.IsActionJustPressed("m2") && !is_sucking && (_GetTankPercentage(_thrown_id) >= 20 | beacon_ready | baitEquipped) && !phone)
+		if (Input.IsActionJustPressed("m2") && CanThrow())
 		{
 			WindUpSFX.Play();
 			is_blowing = true;
@@ -331,7 +343,13 @@ public partial class Controller : CharacterBody3D
 			else if (baitEquipped)
 			{
 				yeet = _thrown_bait.Instantiate<RigidBody3D>();
-				baitEquipped = false;
+				_baitCharges--;
+				_ui.Call("_UpdateBaitCharges", _baitCharges);
+				if (_baitCharges <= 0)
+				{
+					baitEquipped = false;
+					_ui.Call("_UpdateBaitSelected", false);
+				}
 			}
 			else
 			{
@@ -352,6 +370,31 @@ public partial class Controller : CharacterBody3D
 				_trajtarget.Hide();
 			FWOOMPSFX.Play();
 		}
+	}
+
+	public void AddBaitCharge()
+	{
+		_baitCharges++;
+		_ui.Call("_UpdateBaitCharges", _baitCharges);
+		GD.Print($"Bait charges: {_baitCharges}");
+	}
+
+	private void ToggleBait()
+	{
+		if (is_blowing) return;
+		if (_baitCharges <= 0 && !baitEquipped) return;
+
+
+		baitEquipped = !baitEquipped;
+
+		if (baitEquipped)
+		{
+			_thrown_id = 0;
+			beacon_ready = false;
+			_ui.Call("_UpdateThrown", 0);
+		}
+
+		_ui.Call("_UpdateBaitSelected", baitEquipped);
 	}
 
 	private void _IncTank(int tank_no)
@@ -488,6 +531,10 @@ public partial class Controller : CharacterBody3D
 	{
 		beacon_ready = true;
 		_beacon_id = id;
+
+		baitEquipped = false;
+		_ui.Call("_UpdateBaitSelected", false);
+
 		var tween = GetTree().CreateTween();
 		tween.TweenProperty(_beacon_pivot, "scale", new Godot.Vector3(1, 1, 1), .4f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 	}
