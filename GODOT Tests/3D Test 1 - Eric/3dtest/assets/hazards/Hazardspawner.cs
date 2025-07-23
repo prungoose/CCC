@@ -59,7 +59,7 @@ public partial class Hazardspawner : Node3D
 
 		if ((int)_ui.Call("GetTutorialStep") == 8) _ui.Call("NextTutorialStep");
 
-		// Gift the player animal bait
+		_player.Call("AddBaitCharge");
 	}
 
 	void _SpawnAHazard()
