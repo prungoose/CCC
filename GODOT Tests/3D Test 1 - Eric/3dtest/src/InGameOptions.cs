@@ -64,7 +64,7 @@ public partial class InGameOptions : Control
 		{
 			volLabel.Text = "Volume";
 			sfxLabel.Text = "Sound Effects";
-			ambLabel.Text = "Ambiance";
+			ambLabel.Text = "Ambience";
 			fsLabel.Text = "Fullscreen";
 			OptionsTitle.Text = " Options ";
 		}

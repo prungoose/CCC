@@ -7,9 +7,47 @@ public partial class ExitButton : Button
 	private Vector2 originalScale = Godot.Vector2.One;
 	private Vector2 hoverScale = new Godot.Vector2(1.2f, 1.2f);
 	private float _animationTime = 0.15f;
+	public ConfigFile CF = new ConfigFile();
+	int lang = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			lang = 0;
+
+			StyleBoxTexture image = new();
+			StyleBoxTexture imageHover = new();
+			image.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT.png");
+			imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT_Pressed.png");
+			this.AddThemeStyleboxOverride("normal", image);
+			this.AddThemeStyleboxOverride("hover", imageHover);
+			this.AddThemeStyleboxOverride("pressed", imageHover);
+		}
+		else
+		{
+			lang = (int)CF.GetValue("playersettings", "lang");
+			if (lang == 1)
+			{
+				StyleBoxTexture image = new();
+				StyleBoxTexture imageHover = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT_JP.png");
+				imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT_Pressed_JP.png");
+				this.AddThemeStyleboxOverride("normal", image);
+				this.AddThemeStyleboxOverride("hover", imageHover);
+				this.AddThemeStyleboxOverride("pressed", imageHover);
+			}
+			else
+			{
+				StyleBoxTexture image = new();
+				StyleBoxTexture imageHover = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT.png");
+				imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/EXIT_Pressed.png");
+				this.AddThemeStyleboxOverride("normal", image);
+				this.AddThemeStyleboxOverride("hover", imageHover);
+				this.AddThemeStyleboxOverride("pressed", imageHover);
+			}
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

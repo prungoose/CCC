@@ -11,12 +11,51 @@ public partial class StartButton : Button
 
 	[Export] SceneTransition _transitionscene;
 
+	public ConfigFile CF = new ConfigFile();
+	int lang = 0;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_pauseScreen = GetParent<Control>();
 		_transitionscene = GetNode<SceneTransition>("/root/SceneTransition");
 
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			lang = 0;
+
+			StyleBoxTexture image = new();
+			StyleBoxTexture imageHover = new();
+			image.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button.png");
+			imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button_Hover.png");
+			this.AddThemeStyleboxOverride("normal", image);
+			this.AddThemeStyleboxOverride("hover", imageHover);
+			this.AddThemeStyleboxOverride("pressed", imageHover);
+		}
+		else
+		{
+			lang = (int)CF.GetValue("playersettings", "lang");
+			if (lang == 1)
+			{
+				StyleBoxTexture image = new();
+				StyleBoxTexture imageHover = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button_JP.png");
+				imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button_Hover_JP.png");
+				this.AddThemeStyleboxOverride("normal", image);
+				this.AddThemeStyleboxOverride("hover", imageHover);
+				this.AddThemeStyleboxOverride("pressed", imageHover);
+			}
+			else
+			{
+				StyleBoxTexture image = new();
+				StyleBoxTexture imageHover = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button.png");
+				imageHover.Texture = GD.Load<Texture2D>("res://assets/menu/Start_Button_Hover.png");
+				this.AddThemeStyleboxOverride("normal", image);
+				this.AddThemeStyleboxOverride("hover", imageHover);
+				this.AddThemeStyleboxOverride("pressed", imageHover);
+			}
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

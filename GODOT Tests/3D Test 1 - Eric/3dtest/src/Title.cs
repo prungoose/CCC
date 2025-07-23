@@ -10,20 +10,47 @@ public partial class Title : Panel
 	private Vector2 originalScale = Godot.Vector2.One;
 	private Vector2 hoverScale = new Godot.Vector2(1.2f, 1.2f);
 	private float _animationTime = 0.15f;
+	public ConfigFile CF = new ConfigFile();
+	int lang = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_tweenScale = GetTree().CreateTween();
 		_tweenRotation = GetTree().CreateTween();
 		_tweenPosition = GetTree().CreateTween();
-		
-		_tweenScale.TweenProperty(this, "scale", new Vector2(1.1f,1.1f), 0f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
-		_tweenScale.TweenProperty(this, "scale", new Vector2(1f,1f), 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
-		
+
+		_tweenScale.TweenProperty(this, "scale", new Vector2(1.1f, 1.1f), 0f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
+		_tweenScale.TweenProperty(this, "scale", new Vector2(1f, 1f), 1f).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
+
 		this.Rotation = 0f;
 		_tweenRotation.TweenProperty(this, "rotation", 0.04f, 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 		//_tweenScale.TweenProperty(this, "scale", new Vector2(this.Scale.X*1f, this.Scale.Y*1f), 0.3f).SetTrans(Tween.TransitionType.Bounce).SetEase(Tween.EaseType.In);
-		
+
 		_tweenPosition.TweenProperty(this, "position", new Vector2(this.Position.X, this.Position.Y + 20), 0.3f).SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+
+		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
+		{
+			lang = 0;
+
+			StyleBoxTexture image = new();
+			image.Texture = GD.Load<Texture2D>("res://assets/menu/Title_Finished.png");
+			this.AddThemeStyleboxOverride("panel", image);
+		}
+		else
+		{
+			lang = (int)CF.GetValue("playersettings", "lang");
+			if (lang == 1)
+			{
+				StyleBoxTexture image = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/Title_JP.png");
+				this.AddThemeStyleboxOverride("panel", image);
+			}
+			else
+			{
+				StyleBoxTexture image = new();
+				image.Texture = GD.Load<Texture2D>("res://assets/menu/Title_Finished.png");
+				this.AddThemeStyleboxOverride("panel", image);
+			}
+		}
 	}
 }

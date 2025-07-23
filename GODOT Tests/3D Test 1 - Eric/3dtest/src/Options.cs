@@ -143,7 +143,7 @@ public partial class Options : Control
 		{
 			volLabel.Text = "Volume";
 			sfxLabel.Text = "Sound Effects";
-			ambLabel.Text = "Ambiance";
+			ambLabel.Text = "Ambience";
 			langLabel.Text = "Language";
 			fsLabel.Text = "Fullscreen";
 			OptionsTitle.Text = " Options ";

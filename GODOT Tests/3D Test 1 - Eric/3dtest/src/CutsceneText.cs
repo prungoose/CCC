@@ -16,9 +16,9 @@ public partial class CutsceneText : RichTextLabel
     private int sfx_index;
     [Export] SceneTransition _transitionscene;
 
-    private TextureRect MatIMG; // d2a245
-    private TextureRect InuIMG; // b09af4
-    private TextureRect MizIMG; // 58bfb4
+    private TextureRect MatIMG; // d2a245   (0.824f, 0.635f, 0.271f, 1.0f)
+    private TextureRect InuIMG; // b09af4   (0.69f, 0.604f, 0.957f, 1.0f)
+    private TextureRect MizIMG; // 58bfb4   (0.345f, 0.749f, 0.706f, 1.0f)
     private RichTextLabel CharaName;
     int charactersIntroduced = 1;
     int language = 0;
@@ -46,6 +46,8 @@ public partial class CutsceneText : RichTextLabel
         {
             AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
             BottomTip.Text = "Press Space/Click to Continue...";
+            text = Englishtext;
+            CharaName.Text = "Matsumoto";
         }
         else
         {
@@ -55,20 +57,15 @@ public partial class CutsceneText : RichTextLabel
             if (language == 1)
             {
                 BottomTip.Text = "スペースキーまたはクリックして続行します...";
+                text = JapaneseText;
+                CharaName.Text = "松本";
             }
             else
             {
                 BottomTip.Text = "Press Space/Click to Continue...";
+                text = Englishtext;
+                CharaName.Text = "Matsumoto";
             }
-        }
-
-        if (language == 1)
-        {
-            text = JapaneseText;
-        }
-        else
-        {
-            text = Englishtext;
         }
 
     }
@@ -81,30 +78,20 @@ public partial class CutsceneText : RichTextLabel
         "Your job is the reason that the city continues to remain safe and operable after a typhoon, so do your best!",
     };
     private string[] JapaneseText = {
-        "insert translation",
-        "insert translation",
-        "insert translation",
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。",
     };
 
     private string[] IMEnglishtext = {
-        "line 1", // EDIT/ADD LINES HERE FOR INUMARU
-        "line 2",
-        "...",
+        "We apologize for the inconvenience. The script is a work in progress.", // EDIT/ADD LINES HERE FOR INUMARU
     };
     private string[] IMJapanesetext = {
-        "line 一", // EDIT/ADD LINES HERE FOR INUMARU
-        "line 二",
-        "...",
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
     };
     private string[] MZEnglishtext = {
-        "line 1", // EDIT/ADD LINES HERE FOR INUMARU
-        "line 2",
-        "...",
+        "We apologize for the inconvenience. The script is a work in progress.", // EDIT/ADD LINES HERE FOR INUMARU
     };
     private string[] MZJapanesetext = {
-        "line 一", // EDIT/ADD LINES HERE FOR INUMARU
-        "line 二",
-        "...",
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
     };
 
 
@@ -129,12 +116,26 @@ public partial class CutsceneText : RichTextLabel
             {
                 if (charactersIntroduced == 1)
                 {
-                    changeSpeaker("Inumaru");
+                    if (language == 1)
+                    {
+                        changeSpeaker("犬丸");
+                    }
+                    else
+                    {
+                        changeSpeaker("Inumaru");
+                    }
                     charactersIntroduced += 1;
                 }
                 else if (charactersIntroduced == 2)
                 {
-                    changeSpeaker("Mizuki");
+                    if (language == 1)
+                    {
+                        changeSpeaker("海月");
+                    }
+                    else
+                    {
+                        changeSpeaker("Mizuki");
+                    }
                     charactersIntroduced += 1;
                 }
                 else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
@@ -173,16 +174,20 @@ public partial class CutsceneText : RichTextLabel
     public void changeSpeaker(string newNPC)
     {
         CharaName.Text = newNPC;
+        StyleBoxFlat charaColor = new();
         textPos = 0;
         this.Text = "";
         CutsceneSFX.Play();
         BottomTip.Modulate = new Color(1, 1, 1, 0);
 
-        if (newNPC == "Inumaru")
+        if (newNPC == "Inumaru" || newNPC == "犬丸")
         {
             MatIMG.Hide();
             InuIMG.Show();
             MizIMG.Hide();
+
+            charaColor.BgColor = new Color(0.69f, 0.604f, 0.957f, 1.0f);
+            CharaName.AddThemeStyleboxOverride("normal", charaColor);
             if (language == 1)
             {
                 text = IMJapanesetext;
@@ -193,11 +198,15 @@ public partial class CutsceneText : RichTextLabel
             }
 
         }
-        else if (newNPC == "Mizuki")
+        else if (newNPC == "Mizuki" || newNPC == "海月")
         {
             MatIMG.Hide();
             InuIMG.Hide();
             MizIMG.Show();
+
+            charaColor.BgColor = new Color(0.345f, 0.749f, 0.706f, 1.0f);
+            CharaName.AddThemeStyleboxOverride("normal", charaColor);
+
             if (language == 1)
             {
                 text = MZJapanesetext;

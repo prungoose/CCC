@@ -183,7 +183,7 @@ layout_mode = 2
 size_flags_vertical = 7
 theme_override_fonts/font = ExtResource("2_qx56b")
 theme_override_font_sizes/font_size = 60
-text = "Ambiance"
+text = "Ambience"
 horizontal_alignment = 1
 
 [node name="Fullscreen" type="Label" parent="Labels"]
@@ -196,6 +196,7 @@ text = "Fullscreen"
 horizontal_alignment = 1
 
 [node name="FullscreenButton" type="CheckButton" parent="."]
+layout_mode = 0
 offset_left = 755.0
 offset_top = 851.0
 offset_right = 799.0
