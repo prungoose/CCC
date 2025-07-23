@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=24 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
 [ext_resource type="Script" uid="uid://cs8nr4eurmo3m" path="res://src/TutorialStuff.cs" id="7_cufnj"]
+[ext_resource type="Texture2D" uid="uid://hwktuap1nw8p" path="res://assets/map/bait_sprite.png" id="9_e7p23"]
 [ext_resource type="PackedScene" uid="uid://b3ubdifkuxj2m" path="res://assets/ui/minimap.tscn" id="10_cufnj"]
 [ext_resource type="AudioStream" uid="uid://bowim880o460g" path="res://assets/Audios/TextBubble.wav" id="11_e7p23"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="14_rts35"]
@@ -363,7 +364,7 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("_baitDisplay", "_baitText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,6 +373,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_4b2l8")
+_baitDisplay = NodePath("Minimap/Bait/ColorRect")
+_baitText = NodePath("Minimap/Bait/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -676,23 +679,32 @@ offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="Minimap/Bait"]
 layout_mode = 2
-offset_left = 647.0
-offset_top = -39.0
-offset_right = 702.0
-offset_bottom = 16.0
+offset_left = 609.0
+offset_top = -51.0
+offset_right = 695.0
+offset_bottom = 35.0
 color = Color(0.2, 0.2, 0.2, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Minimap/Bait"]
+[node name="Label" type="Label" parent="Minimap/Bait"]
 layout_mode = 0
-offset_left = 662.0
-offset_top = 22.0
-offset_right = 685.0
-offset_bottom = 45.0
-theme_override_fonts/normal_font = ExtResource("3_bscbh")
-theme_override_fonts/bold_font = ExtResource("3_bscbh")
+offset_left = 631.0
+offset_top = 44.0
+offset_right = 671.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("3_bscbh")
+theme_override_font_sizes/font_size = 36
 text = "0"
-fit_content = true
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Minimap/Bait"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = -44.0
+offset_right = 689.0
+offset_bottom = 29.0
+texture = ExtResource("9_e7p23")
+expand_mode = 1
 
 [node name="PauseScreen" parent="." instance=ExtResource("4_um4x4")]
 process_mode = 2

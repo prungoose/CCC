@@ -46,7 +46,7 @@ public partial class UI : Control
 	private float _TimeSinceSideQuestStart = 0;
 
 	[Export] private ColorRect _baitDisplay;
-	[Export] private RichTextLabel _baitTest;
+	[Export] private Label _baitText;
 
 	public override void _Ready()
 	{
@@ -302,7 +302,7 @@ public partial class UI : Control
 
 	public void _UpdateBaitCharges(int charges)
 	{
-		_baitTest.Text = charges.ToString();
+		_baitText.Text = charges.ToString();
 	}
 
 	private void _UpdateBaitSelected(bool isSelected)
