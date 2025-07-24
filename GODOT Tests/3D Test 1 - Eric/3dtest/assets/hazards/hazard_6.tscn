@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmvn3hx0kaidt"]
+[gd_scene load_steps=16 format=3 uid="uid://dmvn3hx0kaidt"]
 
 [ext_resource type="Script" uid="uid://bx6mi1oiqmlky" path="res://assets/hazards/Hazard.cs" id="1_ajcj5"]
 [ext_resource type="Shader" uid="uid://da572h82uggpo" path="res://assets/trash/obstacle_proximity.gdshader" id="2_wahm4"]
 [ext_resource type="PackedScene" uid="uid://5u688ggx0sv3" path="res://assets/level/tape.glb" id="3_n3j3h"]
-[ext_resource type="Texture2D" uid="uid://bx3kkjwgbnprb" path="res://assets/hazards/deer.png" id="4_5cwc5"]
+[ext_resource type="Texture2D" uid="uid://ccmvkwdd1hm0u" path="res://assets/map/lost_animals.png" id="4_ajcj5"]
 [ext_resource type="AudioStream" uid="uid://csengdlp4hhjd" path="res://assets/Audios/thump.wav" id="5_w25ql"]
+[ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="5_wahm4"]
 
 [sub_resource type="Gradient" id="Gradient_r1awe"]
 interpolation_mode = 1
@@ -42,6 +43,28 @@ radius = 0.7
 radius = 0.85
 height = 2.8
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wahm4"]
+atlas = ExtResource("4_ajcj5")
+region = Rect2(0, 440, 352, 440)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3j3h"]
+atlas = ExtResource("4_ajcj5")
+region = Rect2(352, 440, 352, 440)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5cwc5"]
+animations = [{
+"frames": [{
+"duration": 14.0,
+"texture": SubResource("AtlasTexture_wahm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3j3h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Hazard" type="Area3D" groups=["hazard"]]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 collision_mask = 2
@@ -68,13 +91,22 @@ visible = false
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350491, 0)
-pixel_size = 0.0014
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.482693, 0)
+layers = 2
+flip_h = true
+pixel_size = 0.0025
 billboard = 2
-shaded = true
 render_priority = 1
-texture = ExtResource("4_5cwc5")
+sprite_frames = SubResource("SpriteFrames_5cwc5")
+frame_progress = 0.191508
+
+[node name="Decal" type="Decal" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0.0996305, -1.77636e-15)
+size = Vector3(0.5, 0.22, 0.5)
+texture_albedo = ExtResource("5_wahm4")
+upper_fade = 0.000162534
+cull_mask = 1048573
 
 [node name="thumpSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_w25ql")

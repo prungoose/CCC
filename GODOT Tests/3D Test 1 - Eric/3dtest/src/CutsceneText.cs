@@ -84,14 +84,15 @@ public partial class CutsceneText : RichTextLabel
     };
 
     private string[] IMEnglishtext = {
-        "Oh, hey. You’re a service worker right?", // EDIT/ADD LINES HERE FOR INUMARU
-        "I seem to have dropped something really important to me, do you think you could help me find it? It should be somewhere in the [b]park area[/b]."
+        "Oh hey, you're the person on cleanup duty, right?",
+        "I used to live in the area, but I had to evacuate since the typhoon was looking pretty bad...",
     };
     private string[] IMJapanesetext = {
         "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
     };
     private string[] MZEnglishtext = {
-        "We apologize for the inconvenience. The script is a work in progress.", // EDIT/ADD LINES HERE FOR INUMARU
+        "Me too, I had to leave to my grandma's house an hour over...",
+        "I know your guys' jobs are tough, so do your best!"
     };
     private string[] MZJapanesetext = {
         "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU

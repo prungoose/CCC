@@ -34,7 +34,8 @@ public partial class TutorialStuff : MarginContainer
         ["You now have a flare that can alert the agency to the hazard's location.",
             "Throw it at the hazard just like trash, using [b]Right Click[/b]."],
         ["Great job! You now know how to deal with hazards!",
-                "The minimap at the bottom-left shows the location of hazards as a large warning sign."],
+                "The minimap at the bottom-left shows the location of hazards as a large warning sign.",
+                "Try to fully clean the area. Your job will be complete once the bar at the bottom right reaches 100%."],
         ["Thanks for playing our prototype!"]
     ];
     private string[][] _Jmessages =

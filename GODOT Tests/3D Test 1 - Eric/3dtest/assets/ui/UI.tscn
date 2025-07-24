@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=25 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
@@ -364,7 +364,14 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 
-[node name="Control" type="Control" node_paths=PackedStringArray("_baitDisplay", "_baitText")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_870eb"]
+bg_color = Color(0.111197, 0.111197, 0.111197, 0.407843)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -373,8 +380,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_4b2l8")
-_baitDisplay = NodePath("Minimap/Bait/ColorRect")
-_baitText = NodePath("Minimap/Bait/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -678,12 +683,21 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="Minimap/Bait"]
+visible = false
 layout_mode = 2
 offset_left = 609.0
 offset_top = -51.0
 offset_right = 695.0
 offset_bottom = 35.0
 color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Panel" type="Panel" parent="Minimap/Bait"]
+layout_mode = 0
+offset_left = 608.0
+offset_top = -55.0
+offset_right = 696.0
+offset_bottom = 41.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_870eb")
 
 [node name="Label" type="Label" parent="Minimap/Bait"]
 layout_mode = 0
@@ -716,5 +730,9 @@ layout_mode = 1
 visible = false
 z_index = 999
 layout_mode = 1
+
+[node name="SidequestGiveTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
 
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]
