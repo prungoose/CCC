@@ -78,11 +78,14 @@ public partial class CutsceneText : RichTextLabel
         "Your job is the reason that the city continues to remain safe and operable after a typhoon, so do your best!",
     };
     private string[] JapaneseText = {
-        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。",
+        "クライシス・クリーンアップ・クルーへようこそ！ここは私たちのテストの場です。最初の仕事に配属される前に、私たちが知っていることの全てをお教えします！",
+        "自然災害後の清掃は非常に重要です！街の復興のためのスペースを確保し、水道や道路のさらなる問題を防ぐのに役立ちます。そして、住民の安全を守ることにもつながります。",
+        "台風後も街が安全に機能し続けるのはあなたの仕事のおかげです。頑張ってください！"
     };
 
     private string[] IMEnglishtext = {
-        "We apologize for the inconvenience. The script is a work in progress.", // EDIT/ADD LINES HERE FOR INUMARU
+        "Oh, hey. You’re a service worker right?", // EDIT/ADD LINES HERE FOR INUMARU
+        "I seem to have dropped something really important to me, do you think you could help me find it? It should be somewhere in the [b]park area[/b]."
     };
     private string[] IMJapanesetext = {
         "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU

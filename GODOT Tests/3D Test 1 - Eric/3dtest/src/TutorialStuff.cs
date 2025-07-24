@@ -52,10 +52,10 @@ public partial class TutorialStuff : MarginContainer
         ["清掃の旅を続けるには、地図上で点滅しているシンボルに向かいます。"],
         ["この地域が結構危険やね。", "[b]F[/b]で携帯をとって情報を確認しよう。"],
         ["この危険に対処できる機関をすぐに見つけてください。"],
-        ["The agency's phone number is listed at the bottom. Dial the inputs using [b]WASD[/b] and press [b]SPACE[/b] or click \"DIAL\" to dial them."],
-        ["You now have a flare that can alert the agency to the hazard's location.", "Throw it at the hazard just like trash, using [b]Right Click[/b]."],
-        ["Great job! You now know how to deal with hazards!", "The minimap at the bottom-left shows the location of hazards as a large warning sign."],
-        ["Thanks for playing our prototype!"]
+        ["代理店の電話番号は下部に記載されています。[b]WASD[/b]キーを押しながら[b]SPACE[/b]キーを押すか、\"ダイヤル\" をクリックしてダイヤルしてください。"],
+        ["これで、危険物の位置を当局に警告できる信号弾が手に入りました。[b]右クリック[/b]を使用して、ゴミと同じように危険物に投げてください。"],
+        ["よくできました！危険に対処する方法がわかりました！", "左下のミニマップには、危険の場所が大きな警告サインとして表示されます。"],
+        ["プロトタイプをプレイしていただきありがとうございます!"]
     ];
 
 
