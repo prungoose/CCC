@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 public partial class UI : Control
 {
 
-	private struct Sidequest {
+	private struct Sidequest
+	{
 		public int spawn_location;
 		public int caller_id;
 		public string[] starting_dialogue_en;
@@ -18,7 +19,7 @@ public partial class UI : Control
 
 		public Sidequest(int a, int b, string[] c, string[] d, string[] e, string[] f)
 		{
-			spawn_location = a;		//
+			spawn_location = a;     //
 			caller_id = b;
 			starting_dialogue_en = c;
 			ending_dialogue_en = d;
@@ -68,12 +69,15 @@ public partial class UI : Control
 	private bool _firstsidequestgiven = false;
 	private bool _jp_lang_enable = false;
 	Sidequest[] _possible_sidequests = {
-		new Sidequest(0, 2, ["sq1 s en"], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
-		new Sidequest(1, 3, ["sq2 s en"], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"])
+		new Sidequest(0, 2, ["Hey... haha... I heard you were in the area...", "Listen, I lost something important to me, just, don't tell anyone it's mine, OK?", "It should be around the parking lot to the north. If you find it, you'll be a big help, thanks."], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
+		new Sidequest(1, 3, ["HELP!!!!! AHH!!!!!", "During the typhoon, I lost my cat, Mr. Snuggles, and I don't know where he went!!!", "Can you check around and see if you can find him??", "I think I last saw him around the [b]western park[/b] area..."], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"])
 	};
 
 
 
+
+	[Export] private ColorRect _baitDisplay;
+	[Export] private Label _baitText;
 
 	public override void _Ready()
 	{
@@ -114,7 +118,6 @@ public partial class UI : Control
 	public override void _Process(double delta)
 	{
 		//_phonedisplay.Text = _phonetext;
-		GD.Print(GetTutorialStep());
 		_tank1.Value = (int)_player.Call("_GetTankPercentage", 1);
 		_tank2.Value = (int)_player.Call("_GetTankPercentage", 2);
 		_tank3.Value = (int)_player.Call("_GetTankPercentage", 3);
@@ -328,10 +331,7 @@ public partial class UI : Control
 
 	public void SidequestGive()
 	{
-		GD.Print("tried giving sidequest");
-		GD.Print("sidequest amnt: ", _possible_sidequests.Length);
-		GD.Print(_possible_sidequests[0].starting_dialogue_en);
-		if (_active_sidequest != 100 | GetTutorialStep() <= 8) //sq id 100 = no sidequest active
+		if (_active_sidequest != 100) //sq id 100 = no sidequest active
 		{
 			_sidequestgivetimer.WaitTime = 20;
 			_sidequestgivetimer.Start();
@@ -339,13 +339,13 @@ public partial class UI : Control
 		}
 		_sidequestgivetimer.WaitTime = 120;
 		_sidequestgivetimer.Start();
-		_active_sidequest = GD.RandRange(0, _possible_sidequests.Length - 1);
+		_active_sidequest = GD.RandRange(1, _possible_sidequests.Length - 1);
 		Sidequest quest = _possible_sidequests[_active_sidequest];
 
 		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.starting_dialogue_en, quest.caller_id);
 		else _textbox.Call("PopUp", quest.starting_dialogue_jp, quest.caller_id);
 
-		if (!_firstsidequestgiven) NextTutorialStep();
+		if (!_firstsidequestgiven) QuestTutorial();
 	}
 
 	public void SidequestComplete()
@@ -355,5 +355,20 @@ public partial class UI : Control
 		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.ending_dialogue_en, quest.caller_id);
 		else _textbox.Call("PopUp", quest.ending_dialogue_jp, quest.caller_id);
 		IncreaseGameCompletion(10);
+	}
+
+	public void _UpdateBaitCharges(int charges)
+	{
+		_baitText.Text = charges.ToString();
+	}
+
+	private void _UpdateBaitSelected(bool isSelected)
+	{
+		_baitDisplay.Modulate = isSelected ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0.5f);
+	}
+
+	private void QuestTutorial()
+	{
+		_textbox.Call("PopUp", (string[])["It looks like you just got your first [b]request[/b]. Help the citizen in need by finding where their lost item is!"], 1);
 	}
 }

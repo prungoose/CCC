@@ -16,11 +16,12 @@ public partial class CutsceneText : RichTextLabel
     private int sfx_index;
     [Export] SceneTransition _transitionscene;
 
-    private TextureRect MatIMG; // d2a245
-    private TextureRect InuIMG; // b09af4
-    private TextureRect MizIMG; // 58bfb4
+    private TextureRect MatIMG; // d2a245   (0.824f, 0.635f, 0.271f, 1.0f)
+    private TextureRect InuIMG; // b09af4   (0.69f, 0.604f, 0.957f, 1.0f)
+    private TextureRect MizIMG; // 58bfb4   (0.345f, 0.749f, 0.706f, 1.0f)
     private RichTextLabel CharaName;
     int charactersIntroduced = 1;
+    int language = 0;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -44,25 +45,62 @@ public partial class CutsceneText : RichTextLabel
         if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
         {
             AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
+            BottomTip.Text = "Press Space/Click to Continue...";
+            text = Englishtext;
+            CharaName.Text = "Matsumoto";
         }
         else
         {
             val = (float)CF.GetValue("playersettings", "sfx");
+            language = (int)CF.GetValue("playersettings", "lang");
             AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(val));
+            if (language == 1)
+            {
+                BottomTip.Text = "スペースキーまたはクリックして続行します...";
+                text = JapaneseText;
+                CharaName.Text = "松本";
+            }
+            else
+            {
+                BottomTip.Text = "Press Space/Click to Continue...";
+                text = Englishtext;
+                CharaName.Text = "Matsumoto";
+            }
         }
 
     }
 
     // Text to be displayed in the visual novel.
-    private string[] text = {
+    private string[] text = { };
+    private string[] Englishtext = {
         "Welcome to Crisis Cleanup Crew! This is our test playground where we’ll teach you everything we know before assigning you to your first job!",
         "Cleaning up after a natural disaster is very important! It helps create room for the city to rebuild and prevents further issues in plumbing and roadways, and it keeps the citizens safe.",
         "Your job is the reason that the city continues to remain safe and operable after a typhoon, so do your best!",
     };
+    private string[] JapaneseText = {
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。",
+    };
+
+    private string[] IMEnglishtext = {
+        "Oh hey, you're the person on cleanup duty, right?",
+        "I used to live in the area, but I had to evacuate since the typhoon was looking pretty bad...",
+    };
+    private string[] IMJapanesetext = {
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
+    };
+    private string[] MZEnglishtext = {
+        "Me too, I had to leave to my grandma's house an hour over...",
+        "I know your guys' jobs are tough, so do your best!"
+    };
+    private string[] MZJapanesetext = {
+        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
+    };
+
 
     //Have space change text
     public override void _Process(double delta)
     {
+
         // Check if the player pressed the space key or left mouse button
         if (Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1"))
         {
@@ -80,12 +118,26 @@ public partial class CutsceneText : RichTextLabel
             {
                 if (charactersIntroduced == 1)
                 {
-                    changeSpeaker("Inumaru");
+                    if (language == 1)
+                    {
+                        changeSpeaker("犬丸");
+                    }
+                    else
+                    {
+                        changeSpeaker("Inumaru");
+                    }
                     charactersIntroduced += 1;
                 }
                 else if (charactersIntroduced == 2)
                 {
-                    changeSpeaker("Mizuki");
+                    if (language == 1)
+                    {
+                        changeSpeaker("海月");
+                    }
+                    else
+                    {
+                        changeSpeaker("Mizuki");
+                    }
                     charactersIntroduced += 1;
                 }
                 else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
@@ -124,33 +176,47 @@ public partial class CutsceneText : RichTextLabel
     public void changeSpeaker(string newNPC)
     {
         CharaName.Text = newNPC;
+        StyleBoxFlat charaColor = new();
         textPos = 0;
         this.Text = "";
         CutsceneSFX.Play();
         BottomTip.Modulate = new Color(1, 1, 1, 0);
-        
-        if (newNPC == "Inumaru")
+
+        if (newNPC == "Inumaru" || newNPC == "犬丸")
         {
             MatIMG.Hide();
             InuIMG.Show();
             MizIMG.Hide();
-            text = [
-                "line 1", // EDIT/ADD LINES HERE FOR INUMARU
-                "line 2",
-                "..."
-                ];
+
+            charaColor.BgColor = new Color(0.69f, 0.604f, 0.957f, 1.0f);
+            CharaName.AddThemeStyleboxOverride("normal", charaColor);
+            if (language == 1)
+            {
+                text = IMJapanesetext;
+            }
+            else
+            {
+                text = IMEnglishtext;
+            }
 
         }
-        else if (newNPC == "Mizuki")
+        else if (newNPC == "Mizuki" || newNPC == "海月")
         {
             MatIMG.Hide();
             InuIMG.Hide();
             MizIMG.Show();
-            text = [
-                "line 1", // EDIT/ADD LINES HERE FOR MIZUKI
-                "line 2",
-                "..."
-                ];
+
+            charaColor.BgColor = new Color(0.345f, 0.749f, 0.706f, 1.0f);
+            CharaName.AddThemeStyleboxOverride("normal", charaColor);
+
+            if (language == 1)
+            {
+                text = MZJapanesetext;
+            }
+            else
+            {
+                text = MZEnglishtext;
+            }
         }
     }
 }

@@ -90,10 +90,10 @@ public partial class iPhoneUI : Control
 
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(70, 190);
-		if (_language == 1)
+		if (_language == 0)
 			displayInfo.Text = "The [b][color=red]Fire Department[/color][/b] responds to:\n•  [b]Fires[/b]\n•  [b]Rescue operations[/b]\n\nSeparate any flammable objects close to the area to control the spread of fire.\n\n[b]Agency Access Code:[/b] ↑ → ↓ ←";
 		else
-			displayInfo.Text = "";
+			displayInfo.Text = "[color=red]消防署[/color]は次のような事態に対応します:\n• 火災\n• 救助活動\n\n延焼を防ぐため、現場付近の可燃物を遠ざけてください。\n\n消防アクセスコード： ↑ → ↓ ←";
 
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
@@ -107,10 +107,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(215, 190);
-		if (_language == 1)
+		if (_language == 0)
 			displayInfo.Text = "The [b][color=light_blue]Water Utility Company[/color][/b] maintains [i]water systems[/i] and responds to:\n•  [b]Burst pipes[/b] \n\nBe wary of contaminated water. \n\n[b]Agency Access Code:[/b] ↓ → ↑ ↑";
 		else
-			displayInfo.Text = "";
+			displayInfo.Text = "[color=light_blue]水道会社[/color]は[i]水道システム[/i]を維持し、以下の対応を行います。\n• 水道管の破裂\n\n汚染された水に注意してください。\n\n機関アクセスコード： ↓ → ↑ ↑";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -120,10 +120,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(365, 190);
-		if (_language == 1)
+		if (_language == 0)
 			displayInfo.Text = "The [b][color=yellow]Power Company[/color][/b] maintains the [i]electric grid[/i] and responds to:\n•  [b]downed lines[/b] \n•  [b]blackouts[/b]\n•  [b]damaged transformer boxes[/b]\n\nContact them for electrical hazards. Do not handle power lines yourself\n\n[b]Agency Access Code:[/b] → ← → ←";
 		else
-			displayInfo.Text = "";
+			displayInfo.Text = "[color=yellow]電力会社[/color]は[i]電力網[/i]を維持し、以下の事態に対応します：\n• 電線の切断\n• 停電\n• 変圧器ボックスの破損\n\n電気による危険については、電力会社にご連絡ください。電線を自分で扱わないでください\n\n電力会社アクセスコード： → ← → ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -135,10 +135,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(135, 340);
-		if (_language == 1)
+		if (_language == 0)
 			displayInfo.Text = "The [b][color=purple]Animal Control Center[/color][/b] responds to:\n•  [b]wild or injured animals[/b]\n\nDo not handle wild animals without proper equipment.\n\n[b]Agency Access Code:[/b] ← ↓ → ←";
 		else
-			displayInfo.Text = "";
+			displayInfo.Text = "[color=purple]動物管理センター[/color]は次のような対応をします:\n• 野生動物または負傷した動物\n\n適切な装備を持たずに野生動物を扱わないでください。\n\n機関アクセスコード: ← ↓ → ←";
 		_tween?.CustomStep(0.3);
 		_tween?.Kill();
 		_tween = GetTree().CreateTween();
@@ -148,10 +148,10 @@ public partial class iPhoneUI : Control
 	{
 		_player.Call("setHomeScreen", false);
 		displayInfo.PivotOffset = new Vector2(295, 340);
-		if (_language == 1)
-			displayInfo.Text = "The [b][color=green]General Health Team[/color][/b] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
+		if (_language == 0)
+			displayInfo.Text = "The [color=green]General Health Team[/color] responds to:\n•  [b]tipped porta potties[/b]\n•  [b]chemical spills[/b]\n\nStay a safe distance away from the hazard. \n\n[b]Agency Access Code:[/b] ↓ → ↓ →";
 		else
-			displayInfo.Text = "";
+			displayInfo.Text = "[color=green]総合保健チーム[/color]は次のような事態に対応します:\n• 転倒した仮設トイレ\n• 化学物質のこぼれ\n\n危険物から安全な距離を保ってください。\n\n機関アクセスコード： ↓ → ↓ →";
 		//"Chemical spills can be [b]extremely dangerous[/b].\n\nThey may cause [i]fires[/i], [i]explosions[/i], or long-term [color=orange]environmental damage[/color].\n\nIf you see a chemical spill:\n• [b]Avoid the area immediately[/b]\n• Call the proper agency for cleanup\n• Do not touch or inhale fumes";
 		
 		_tween?.CustomStep(0.3);

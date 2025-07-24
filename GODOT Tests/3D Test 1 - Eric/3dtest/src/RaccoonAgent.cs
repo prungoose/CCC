@@ -38,6 +38,8 @@ public partial class RaccoonAgent : CharacterBody3D
     private Vector3 _lastPositionSnapshot;
     private float _totalStuckTime = 0f;
     private float _stuckCheckTimer;
+    private bool _isLured = false;
+    private Vector3 _baitTarget;
 
     private Dictionary<int, List<Node3D>> _binsByType = [];
     public override void _Ready()
@@ -68,6 +70,11 @@ public partial class RaccoonAgent : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (_isLured)
+        {
+            HandleLuredState((float)delta);
+            return;
+        }
         if (_isStunned)
         {
             HandleStunnedState((float)delta);
@@ -103,6 +110,47 @@ public partial class RaccoonAgent : CharacterBody3D
         else
         {
             HandleWanderState(delta);
+        }
+    }
+
+    public void LureBait(Vector3 baitPosition)
+    {
+        if (_isStunned) return;
+
+        GD.Print("Raccoon lured by bait at: ", baitPosition);
+        _isLured = true;
+        _baitTarget = baitPosition;
+
+        _isFleeing = false;
+        if (_heldTrash != null) DropTrash();
+        _targetTrash = null;
+        Speed = 5f;
+
+        NavAgent.TargetPosition = NavigationServer3D.MapGetClosestPoint(
+            NavAgent.GetNavigationMap(), _baitTarget
+        );
+    }
+
+    private void HandleLuredState(float delta)
+    {
+        if (NavAgent.TargetPosition != _baitTarget)
+        {
+            NavAgent.TargetPosition = _baitTarget;
+        }
+
+        MoveTowards(NavAgent.GetNextPathPosition(), delta);
+        HandleRunAnimationDirection(NavAgent.GetNextPathPosition());
+        _animations.Play("run");
+
+        if (GlobalPosition.DistanceTo(_baitTarget) < 1.5f)
+        {
+            GD.Print("Raccoon reached the bait! Now stunned.");
+            _isLured = false;
+            _isStunned = true;
+            _stunTimer = StunDuration;
+            Velocity = Vector3.Zero;
+            MoveAndSlide();
+            _animations.Play("idle");
         }
     }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=30 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="PackedScene" uid="uid://cv2hos6td6wwj" path="res://assets/trash/TrashSpawner.tscn" id="2_04qkv"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b83ge5vg8o8bc" path="res://assets/trash/thrown_trash.tscn" id="13_tlno6"]
 [ext_resource type="PackedScene" uid="uid://dx8ow0dtwewfy" path="res://assets/trash/throw_target.tscn" id="14_f70y2"]
 [ext_resource type="PackedScene" uid="uid://dehxjhb5ukc3g" path="res://assets/player/Beacon.tscn" id="15_sybqf"]
+[ext_resource type="PackedScene" uid="uid://rhbsyxl7cpup" path="res://assets/player/AnimalBait.tscn" id="16_04qkv"]
 [ext_resource type="PackedScene" uid="uid://bcgqxkucyl1uq" path="res://assets/racoon/raccoon_agent.tscn" id="16_i3gsk"]
 [ext_resource type="PackedScene" uid="uid://cxp72rj3a11g4" path="res://assets/ui/UI.tscn" id="17_l6626"]
 
@@ -413,6 +414,7 @@ _thrown_trash = ExtResource("13_tlno6")
 _trajtarget_scene = ExtResource("14_f70y2")
 _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_sybqf")
+_thrown_bait = ExtResource("16_04qkv")
 
 [node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player") instance=ExtResource("16_i3gsk")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.91378, 1.79169, 8.89394)

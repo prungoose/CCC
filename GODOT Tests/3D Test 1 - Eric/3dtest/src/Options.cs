@@ -43,7 +43,7 @@ public partial class Options : Control
 		sfxslider = parent.GetNode<HSlider>("SoundEffectsSlider");
 		ambslider = parent.GetNode<HSlider>("AmbianceSlider");
 		langbutton = parent.GetNode<OptionButton>("LanguageButton");
-		fsbutton = parent.GetNode<CheckButton>("FullscreenButton");
+		fsbutton = GetNode<CheckButton>("FullscreenButton");
 
 		ambiance_index = AudioServer.GetBusIndex("Ambiance");
 		AudioServer.SetBusVolumeDb(ambiance_index, Mathf.LinearToDb((float)ambslider.Value));
@@ -91,6 +91,18 @@ public partial class Options : Control
 		SampleAMB.Play();
 	}
 
+	public void toggledFS(bool isFS)
+	{
+		if (isFS)
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		}
+		else
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		}
+	}
+
 	public void Save()
 	{
 		CF.SetValue("playersettings", "vol", volslider.Value);
@@ -131,7 +143,7 @@ public partial class Options : Control
 		{
 			volLabel.Text = "Volume";
 			sfxLabel.Text = "Sound Effects";
-			ambLabel.Text = "Ambiance";
+			ambLabel.Text = "Ambience";
 			langLabel.Text = "Language";
 			fsLabel.Text = "Fullscreen";
 			OptionsTitle.Text = " Options ";

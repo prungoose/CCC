@@ -34,7 +34,7 @@ public partial class InGameOptions : Control
 		volslider = parent.GetNode<HSlider>("VolumeSlider");
 		sfxslider = parent.GetNode<HSlider>("SoundEffectsSlider");
 		ambslider = parent.GetNode<HSlider>("AmbianceSlider");
-		fsbutton = parent.GetNode<CheckButton>("FullscreenButton");
+		fsbutton = GetNode<CheckButton>("FullscreenButton");
 
 		var parentLabel = GetNode<VBoxContainer>("Labels");
 
@@ -64,7 +64,7 @@ public partial class InGameOptions : Control
 		{
 			volLabel.Text = "Volume";
 			sfxLabel.Text = "Sound Effects";
-			ambLabel.Text = "Ambiance";
+			ambLabel.Text = "Ambience";
 			fsLabel.Text = "Fullscreen";
 			OptionsTitle.Text = " Options ";
 		}
@@ -106,6 +106,17 @@ public partial class InGameOptions : Control
 	public void stopAdjustAMB(bool value)
 	{
 		SampleAMB.Play();
+	}
+	public void toggledFS(bool isFS)
+	{
+		if (isFS)
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		}
+		else
+		{
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+		}
 	}
 
 	public void BacktoGame()

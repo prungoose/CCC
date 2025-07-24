@@ -42,27 +42,16 @@ public partial class Map : Node3D
 		if (!_title) _game_time += (float)delta;
 		if (_player != null) _rain.GlobalPosition = _player.GlobalPosition;
 
-		if (_game_time > 150 && _day_phase == 0)
-		{
-			rainSFX.Stop();
-			EveningTransition();
-		}
-		else if (_game_time > 250 && _day_phase == 1)
-		{
-			if (!rainSFX.Playing)
-				rainSFX.Play();
-			StormyNightTransition();
-		}
-		else if (_game_time > 310 && _day_phase == 2)
-		{
-			rainSFX.Stop();
-			MorningTransition();
-		}
+		if (_game_time > 75 && _day_phase == 0) 	  EveningTransition();
+		else if (_game_time > 125 && _day_phase == 1) StormyNightTransition();
+		else if (_game_time > 170 && _day_phase == 2) MorningTransition();
+		
 	}
 
 
 	void EveningTransition()
 	{
+		rainSFX.Stop();
 		if (_textbox != null && !_flags[0])
 		{
 			_flags[0] = true;
@@ -124,6 +113,7 @@ public partial class Map : Node3D
 			_textbox.Call("PopUp", (string[])["A storm is starting in your area!", "Your vacuum should have a built-in flashlight, you can use it to light your surroundings."], 1);
 		}
 
+		if (!rainSFX.Playing) rainSFX.Play();
 		_day_phase += 1;
 		var sky = _worldenvironment.Environment.Sky.SkyMaterial as ProceduralSkyMaterial;
 
@@ -178,6 +168,7 @@ public partial class Map : Node3D
 	
 		void MorningTransition()
 	{
+		rainSFX.Stop();
 		_day_phase = 0;
 		_game_time = 0;
 		_directionallight.Rotation = new Godot.Vector3(0, Mathf.DegToRad(-23), 0);
