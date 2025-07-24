@@ -20,7 +20,7 @@ public partial class TutorialStuff : MarginContainer
         ["The agency's phone number is listed at the bottom. Dial the inputs using [b]WASD[/b] and press [b]SPACE[/b] or click \"DIAL\" to dial them."],
         ["You now have a flare that can alert the agency to the hazard's location.", "Throw it at the hazard just like trash, using [b]Right Click[/b]."],
         ["Great job! You now know how to deal with hazards!", "The minimap at the bottom-left shows the location of hazards as a large warning sign."],
-        ["Thanks for playing our prototype!"]
+        ["It looks like you just got your first [b]side quest[/b]. Help the citizen in need by finding where their lost item is!"]
     ];
 
     public override void _Ready()

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -6,6 +7,25 @@ using System.Threading.Tasks;
 
 public partial class UI : Control
 {
+
+	private struct Sidequest {
+		public int spawn_location;
+		public int caller_id;
+		public string[] starting_dialogue_en;
+		public string[] ending_dialogue_en;
+		public string[] starting_dialogue_jp;
+		public string[] ending_dialogue_jp;
+
+		public Sidequest(int a, int b, string[] c, string[] d, string[] e, string[] f)
+		{
+			spawn_location = a;		//
+			caller_id = b;
+			starting_dialogue_en = c;
+			ending_dialogue_en = d;
+			starting_dialogue_jp = e;
+			ending_dialogue_jp = f;
+		}
+	}
 
 	[Export] public CharacterBody3D _player;
 	private Tween _tween;
@@ -16,6 +36,7 @@ public partial class UI : Control
 	private Button _phonedisplayButton;
 	private string _phonetext = "";
 	private MarginContainer _tutorialStuff;
+
 
 	private bool _tankStepCompleted = false;
 	private bool _movementStepCompleted = false;
@@ -37,13 +58,22 @@ public partial class UI : Control
 	private RichTextLabel _debugtext;
 
 	private Control _pauseScreen;
-
+	private Control _textbox;
 	private Control _minimap;
 
-	// Game Progress Bar
 	private ProgressBar _gameCompletionBar;
 
-	private float _TimeSinceSideQuestStart = 0;
+	private Timer _sidequestgivetimer;
+	private int _active_sidequest = 100;
+	private bool _firstsidequestgiven = false;
+	private bool _jp_lang_enable = false;
+	Sidequest[] _possible_sidequests = {
+		new Sidequest(0, 2, ["sq1 s en"], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
+		new Sidequest(1, 3, ["sq2 s en"], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"])
+	};
+
+
+
 
 	public override void _Ready()
 	{
@@ -71,16 +101,20 @@ public partial class UI : Control
 		}
 
 		_pauseScreen = GetNode<Control>("PauseScreen");
-
+		_textbox = GetNode<Control>("Textbox");
 		_minimap = GetNode<Control>("Minimap");
 
 		_gameCompletionBar = GetNode<ProgressBar>("Minimap/ProgressBar");
+
+		_sidequestgivetimer = GetNode<Timer>("SidequestGiveTimer");
+		_sidequestgivetimer.Timeout += SidequestGive;
+
 	}
 
 	public override void _Process(double delta)
 	{
 		//_phonedisplay.Text = _phonetext;
-
+		GD.Print(GetTutorialStep());
 		_tank1.Value = (int)_player.Call("_GetTankPercentage", 1);
 		_tank2.Value = (int)_player.Call("_GetTankPercentage", 2);
 		_tank3.Value = (int)_player.Call("_GetTankPercentage", 3);
@@ -287,13 +321,39 @@ public partial class UI : Control
 		return _phonetext;
 	}
 
-	public void SidequestStart()
-	{
-		//KeyValuePair<string[], int>[] randquestlist = 
-	}
-
 	public void ResetPhoneText()
 	{
 		_phonetext = "";
+	}
+
+	public void SidequestGive()
+	{
+		GD.Print("tried giving sidequest");
+		GD.Print("sidequest amnt: ", _possible_sidequests.Length);
+		GD.Print(_possible_sidequests[0].starting_dialogue_en);
+		if (_active_sidequest != 100 | GetTutorialStep() <= 8) //sq id 100 = no sidequest active
+		{
+			_sidequestgivetimer.WaitTime = 20;
+			_sidequestgivetimer.Start();
+			return;
+		}
+		_sidequestgivetimer.WaitTime = 120;
+		_sidequestgivetimer.Start();
+		_active_sidequest = GD.RandRange(0, _possible_sidequests.Length - 1);
+		Sidequest quest = _possible_sidequests[_active_sidequest];
+
+		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.starting_dialogue_en, quest.caller_id);
+		else _textbox.Call("PopUp", quest.starting_dialogue_jp, quest.caller_id);
+
+		if (!_firstsidequestgiven) NextTutorialStep();
+	}
+
+	public void SidequestComplete()
+	{
+		Sidequest quest = _possible_sidequests[_active_sidequest];
+		_active_sidequest = 100;
+		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.ending_dialogue_en, quest.caller_id);
+		else _textbox.Call("PopUp", quest.ending_dialogue_jp, quest.caller_id);
+		IncreaseGameCompletion(10);
 	}
 }

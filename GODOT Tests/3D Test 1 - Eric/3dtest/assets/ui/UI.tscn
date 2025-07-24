@@ -680,4 +680,8 @@ visible = false
 z_index = 999
 layout_mode = 1
 
+[node name="SidequestGiveTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
 [connection signal="pressed" from="PauseButton" to="." method="Paused"]
