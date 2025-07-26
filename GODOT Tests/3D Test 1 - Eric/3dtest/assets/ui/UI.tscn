@@ -371,7 +371,7 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" node_paths=PackedStringArray("_baitDisplay", "_baitText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -380,6 +380,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_4b2l8")
+_baitDisplay = NodePath("Minimap/Bait/ColorRect")
+_baitText = NodePath("Minimap/Bait/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false

@@ -25,7 +25,6 @@ public partial class AnimalBait : RigidBody3D
             {
                 _isLanded = true;
                 _areaShape.Disabled = false;
-                GD.Print("Bait is now active");
             }
         }
         else
@@ -38,7 +37,6 @@ public partial class AnimalBait : RigidBody3D
     {
         if (body is RaccoonAgent raccoon)
         {
-            GD.Print("Bait has lured raccoon");
             raccoon.Call("LureBait", this.GlobalPosition);
 
             _areaShape.Disabled = true;

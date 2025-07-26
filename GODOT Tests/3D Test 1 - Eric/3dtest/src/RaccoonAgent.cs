@@ -117,7 +117,6 @@ public partial class RaccoonAgent : CharacterBody3D
     {
         if (_isStunned) return;
 
-        GD.Print("Raccoon lured by bait at: ", baitPosition);
         _isLured = true;
         _baitTarget = baitPosition;
 
@@ -144,7 +143,6 @@ public partial class RaccoonAgent : CharacterBody3D
 
         if (GlobalPosition.DistanceTo(_baitTarget) < 1.5f)
         {
-            GD.Print("Raccoon reached the bait! Now stunned.");
             _isLured = false;
             _isStunned = true;
             _stunTimer = StunDuration;
@@ -420,7 +418,6 @@ public partial class RaccoonAgent : CharacterBody3D
 
         if (!_binsByType.TryGetValue(trashType, out var binList) || binList.Count == 0)
         {
-            GD.Print("No corresponding bins found. Scattering randomly.");
             return DropRandomAwayFromPlayer();
         }
 
@@ -442,7 +439,6 @@ public partial class RaccoonAgent : CharacterBody3D
 
         if (closeBinToAvoid != null)
         {
-            GD.Print($"Corresponding bin ({closeBinToAvoid.Name}) too close. Moving away and scattering.");
             Vector3 directionAwayFromBin = (GlobalPosition - closeBinToAvoid.GlobalPosition).Normalized();
             Vector3 desired = GlobalPosition + directionAwayFromBin * (DropDistance + 2f);
 
@@ -450,7 +446,6 @@ public partial class RaccoonAgent : CharacterBody3D
         }
         else
         {
-            GD.Print("No close corresponding bins. Scattering randomly away from player.");
             return DropRandomAwayFromPlayer();
         }
     }
@@ -494,7 +489,6 @@ public partial class RaccoonAgent : CharacterBody3D
 
         if (_totalStuckTime > StuckDurationThreshold)
         {
-            GD.Print("Raccoon stuck, rerouting...");
             _totalStuckTime = 0f;
 
             if (_targetTrash != null)
@@ -538,8 +532,6 @@ public partial class RaccoonAgent : CharacterBody3D
         {
             if (node is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) < SabotageCrashRange)
             {
-                GD.Print("Raccoon crashed into bin!");
-
                 if (bin.HasMethod("_RaccoonSabotage"))
                 {
                     bin.Call("_RaccoonSabotage");
