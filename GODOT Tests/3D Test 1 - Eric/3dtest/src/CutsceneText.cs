@@ -214,6 +214,16 @@ public partial class CutsceneText : RichTextLabel
             MizIMG.Hide();
 
             charaColor.BgColor = new Color(0.69f, 0.604f, 0.957f, 1.0f);
+            charaColor.BorderColor = new Color(1f, 1f, 1f, 1f);
+            charaColor.BorderBlend = false;
+            charaColor.CornerRadiusBottomLeft = 20;
+            charaColor.CornerRadiusBottomRight = 20;
+            charaColor.CornerRadiusTopLeft = 20;
+            charaColor.CornerRadiusTopRight = 20;
+            charaColor.BorderWidthLeft = 4;
+            charaColor.BorderWidthRight = 4;
+            charaColor.BorderWidthTop = 4;
+            charaColor.BorderWidthBottom = 4;
             CharaName.AddThemeStyleboxOverride("normal", charaColor);
             if (language == 1)
             {
@@ -232,6 +242,16 @@ public partial class CutsceneText : RichTextLabel
             MizIMG.Show();
 
             charaColor.BgColor = new Color(0.345f, 0.749f, 0.706f, 1.0f);
+            charaColor.BorderColor = new Color(1f, 1f, 1f, 1f);
+            charaColor.BorderBlend = false;
+            charaColor.CornerRadiusBottomLeft = 20;
+            charaColor.CornerRadiusBottomRight = 20;
+            charaColor.CornerRadiusTopLeft = 20;
+            charaColor.CornerRadiusTopRight = 20;
+            charaColor.BorderWidthLeft = 4;
+            charaColor.BorderWidthRight = 4;
+            charaColor.BorderWidthTop = 4;
+            charaColor.BorderWidthBottom = 4;
             CharaName.AddThemeStyleboxOverride("normal", charaColor);
 
             if (language == 1)
