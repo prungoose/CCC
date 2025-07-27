@@ -13,7 +13,7 @@ public partial class RaccoonAgent : CharacterBody3D
     [Export] public float AvoidBinDistance = 10f;
     [Export] public float DropDistance = 5f;
     [Export] public float DetectionRadius = 15f;
-    [Export] public float SabotageCrashRange = 1f;
+    [Export] public float SabotageCrashRange = 2.5f;
     [Export] public float StunDuration = 20f;
     [Export] public CharacterBody3D Player;
     [Export] public NavigationAgent3D NavAgent;
@@ -42,6 +42,10 @@ public partial class RaccoonAgent : CharacterBody3D
     private Vector3 _baitTarget;
     [Export] private Area3D _sabatageArea;
     [Export] private CollisionShape3D _areaShape;
+
+    private static Node3D _lastSabotagedBin = null;
+
+
 
     private Dictionary<int, List<Node3D>> _binsByType = [];
     public override void _Ready()
@@ -176,8 +180,14 @@ public partial class RaccoonAgent : CharacterBody3D
 
     private void HandleFleeingState(float distToPlayer, double delta)
     {
-        if (_heldTrash != null && (!IsInstanceValid(_heldTrash) || !_heldTrash.IsInsideTree())) DropTrash();
-
+        if (_heldTrash != null && (!IsInstanceValid(_heldTrash) || !_heldTrash.IsInsideTree()))
+        {
+            _heldTrash = null;
+        }
+        else if (_heldTrash != null)
+        {
+            DropTrash();
+        }
         _targetTrash = null;
         FleeFromPlayer();
         MoveTowards(NavAgent.GetNextPathPosition(), delta);
@@ -307,9 +317,6 @@ public partial class RaccoonAgent : CharacterBody3D
                 }
             }
         }
-
-        GD.Print("Best bin found: ", bestBin?.Name ?? "None", " with score: ", bestScore);
-
         Vector3 target;
         if (bestBin != null)
         {
@@ -539,35 +546,31 @@ public partial class RaccoonAgent : CharacterBody3D
 
     private void CheckCrashIntoBins()
     {
-        if (_sabatageArea == null || _areaShape == null) return;
-
-        _areaShape.Disabled = false;
-
-        // Check for collisions with bins
-        foreach (Node3D body in _sabatageArea.GetOverlappingBodies())
+        foreach (Node node in GetTree().GetNodesInGroup("trash_bins"))
         {
-            OnSabotageAreaBodyEntered(body);
-        }
-    }
-    private void OnSabotageAreaBodyEntered(Node3D body)
-    {
-        GD.Print("Checking body in sabotage area: ", body.Name);
-        if (body is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) <
-            SabotageCrashRange && bin.IsInGroup("trash_bins"))
-        {
-            GD.Print("Raccoon crashed into bin: ", bin.Name);
-            if (bin.HasMethod("_RaccoonSabotage"))
+            if (node is Node3D bin)
             {
-                bin.Call("_RaccoonSabotage");
+                if (_lastSabotagedBin != null && _lastSabotagedBin == bin) continue;
+                float distanceToBin = GlobalPosition.DistanceTo(bin.GlobalPosition);
+
+                if (distanceToBin < SabotageCrashRange)
+                {
+                    if (bin.HasMethod("_RaccoonSabotage"))
+                    {
+                        bin.Call("_RaccoonSabotage");
+                    }
+
+                    // Stun the raccoon briefly from the impact
+                    _isStunned = true;
+                    _stunTimer = 2f;
+                    _isFleeing = false;
+                    Speed = 5f;
+                    _lastSabotagedBin = bin;
+                    SetRandomWanderTarget();
+
+                    return;
+                }
             }
-
-            // Stun the raccoon briefly from the impact
-            _isStunned = true;
-            _stunTimer = 2f;
-
-            _isFleeing = false;
-            Speed = 5f;
-            SetRandomWanderTarget();
         }
     }
 }

@@ -299,6 +299,11 @@ public partial class UI : Control
 		}
 	}
 
+	public double GetGameCompletion()
+	{
+		return _gameCompletionBar.Value;
+	}
+
 	public void IncreaseGameCompletion(float completion)
 	{
 		_gameCompletionBar.Value += completion;

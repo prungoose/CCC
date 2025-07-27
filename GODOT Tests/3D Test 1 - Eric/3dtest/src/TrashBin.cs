@@ -17,6 +17,10 @@ public partial class TrashBin : Node3D
 	private Node3D _tutorial_hazard;
 
 	private Sprite3D _minimapsprite;
+	private float _lastSabotageTime = -999f;
+	private const float SABOTAGE_COOLDOWN = 15f;
+
+
 
 	public override void _Ready()
 	{
@@ -84,5 +88,56 @@ public partial class TrashBin : Node3D
 	{
 		return _trashId;
 	}
+	public void _RaccoonSabotage()
+	{
+		float currentTime = Time.GetTicksMsec() / 1000f;
+		if (currentTime - _lastSabotageTime < SABOTAGE_COOLDOWN)
+		{
+			return;
+		}
+		_lastSabotageTime = currentTime;
 
+		_SFX.Play();
+		double completion = (double)_ui.Call("GetGameCompletion");
+		if (completion < 5)
+		{
+			_ui.Call("IncreaseGameCompletion", -1 * completion);
+		}
+		else
+		{
+			_ui.Call("IncreaseGameCompletion", -5);
+		}
+
+		// have trash spawn around the bin to simulate raccoon crashing into it
+		for (int i = 0; i < 1; i++)
+		{
+			var trash = GD.Load<PackedScene>("res://assets/trash/thrown_trash.tscn").Instantiate<ThrownTrash>();
+
+			float angle = GD.Randf() * Mathf.Tau;
+			float distance = (float)GD.RandRange(2f, 4f);
+
+			Vector3 spawnPos = GlobalPosition + new Vector3(
+				Mathf.Cos(angle) * distance,
+				1f,
+				Mathf.Sin(angle) * distance
+			);
+
+			GetTree().CurrentScene.AddChild(trash);
+
+			trash.GlobalPosition = spawnPos;
+			trash.Call("_ChangeToType", _trashId);
+
+			trash.CallDeferred("apply_impulse", Vector3.Up, new Vector3(
+				(float)GD.RandRange(-3f, 3f),
+				(float)GD.RandRange(2f, 5f),
+				(float)GD.RandRange(-3f, 3f)
+			));
+		}
+
+		if (_splode_particles != null)
+		{
+			_splode_particles.Restart();
+			_splode_particles.Emitting = true;
+		}
+	}
 }
