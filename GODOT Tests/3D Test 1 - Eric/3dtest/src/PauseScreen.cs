@@ -12,9 +12,11 @@ public partial class PauseScreen : Control
 	private Button _resumeButton;
 	private Button _IGOptionsButton;
 	private Button _IGexitButton;
+	private Button _pauseButton;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_pauseButton = GetParent().GetNode<Button>("PauseButton");
 		IGOptions = GetParent().GetNode<Control>("IGOptions");
 
 		_title = GetNode<Label>("PauseTitle");
@@ -118,8 +120,21 @@ public partial class PauseScreen : Control
 
 	public void Play()
 	{
+		_pauseButton.Icon = GD.Load<CompressedTexture2D>("res://assets/menu/pausebutton.png");
+		_pauseButton.Scale = new Vector2(0.6f, 0.6f);
+		_pauseButton.Position = new Vector2(-12f, -12f);
+		_pauseButton.Size = new Vector2(200f, 200f);
 		GetTree().Paused = false;
 		this.Hide();
+	}
+
+	public void Paused()
+	{
+		_pauseButton.Icon = GD.Load<CompressedTexture2D>("res://assets/menu/playbutton.png");
+		_pauseButton.Scale = new Vector2(0.2f, 0.2f);
+		_pauseButton.Position = new Vector2(0f, 0f);
+		GetTree().Paused = true;
+		this.Show();
 	}
 
 	public void InGameOptions()

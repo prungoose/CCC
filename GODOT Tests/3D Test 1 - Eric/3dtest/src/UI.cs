@@ -290,12 +290,6 @@ public partial class UI : Control
 		}
 	}
 
-	public void Paused()
-	{
-		GetTree().Paused = true;
-		_pauseScreen.Show();
-	}
-
 	public void UpdateTankColors()
 	{
 		foreach (ProgressBar t in _tanks)

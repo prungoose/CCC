@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxp72rj3a11g4"]
+[gd_scene load_steps=26 format=3 uid="uid://cxp72rj3a11g4"]
 
 [ext_resource type="Script" uid="uid://dgcicwen6exd1" path="res://src/UI.cs" id="1_4b2l8"]
 [ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="3_bscbh"]
+[ext_resource type="Texture2D" uid="uid://cv6120las2xg" path="res://assets/menu/pausebutton.png" id="4_2glbg"]
 [ext_resource type="PackedScene" uid="uid://7ghxngbd3bft" path="res://assets/ui/newphone.tscn" id="4_cufnj"]
 [ext_resource type="PackedScene" uid="uid://bmfwxtxydwese" path="res://assets/ui/pause_screen.tscn" id="4_um4x4"]
 [ext_resource type="PackedScene" uid="uid://cyh4mgfebq10y" path="res://assets/ui/InGameOptions.tscn" id="5_ie8hw"]
@@ -14,41 +15,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u48x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki1gq"]
-bg_color = Color(0.429315, 0.825203, 0.726859, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.847474, 0.847474, 0.847474, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8ku6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um4x4"]
-bg_color = Color(0.357675, 0.741759, 0.648549, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.674815, 0.674815, 0.674815, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay32x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie8hw"]
-bg_color = Color(0.494118, 0.878431, 0.780392, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kfsq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="InputEventKey" id="InputEventKey_um4x4"]
 device = -1
@@ -408,19 +382,20 @@ offset_bottom = 471.0
 [node name="PauseButton" type="Button" parent="."]
 process_mode = 3
 layout_mode = 1
-offset_left = -71.0
-offset_top = 13.0
-offset_right = -21.0
-offset_bottom = 63.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 188.0
+offset_bottom = 188.0
+scale = Vector2(0.6, 0.6)
 focus_mode = 1
 theme_override_fonts/font = ExtResource("3_bscbh")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6u48x")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ki1gq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_um4x4")
-theme_override_styles/normal = SubResource("StyleBoxFlat_ie8hw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q8ku6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ay32x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1kfsq")
 shortcut = SubResource("Shortcut_um4x4")
-text = "M"
+icon = ExtResource("4_2glbg")
 
 [node name="Textbox" parent="." instance=ExtResource("15_870eb")]
 offset_left = 401.0
@@ -737,4 +712,4 @@ layout_mode = 1
 wait_time = 60.0
 autostart = true
 
-[connection signal="pressed" from="PauseButton" to="." method="Paused"]
+[connection signal="pressed" from="PauseButton" to="PauseScreen" method="Paused"]
