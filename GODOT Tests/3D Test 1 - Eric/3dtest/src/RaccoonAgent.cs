@@ -40,6 +40,8 @@ public partial class RaccoonAgent : CharacterBody3D
     private float _stuckCheckTimer;
     private bool _isLured = false;
     private Vector3 _baitTarget;
+    [Export] private Area3D _sabatageArea;
+    [Export] private CollisionShape3D _areaShape;
 
     private Dictionary<int, List<Node3D>> _binsByType = [];
     public override void _Ready()
@@ -66,6 +68,13 @@ public partial class RaccoonAgent : CharacterBody3D
 
         _stuckCheckTimer = StuckCheckCooldown;
         _lastPositionSnapshot = GlobalPosition;
+
+        // Print Bins dictionary for debugging
+        GD.Print("Bins by type:");
+        foreach (var kvp in _binsByType)
+        {
+            GD.Print($"Type {kvp.Key}: {kvp.Value.Count} bins");
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -299,6 +308,8 @@ public partial class RaccoonAgent : CharacterBody3D
             }
         }
 
+        GD.Print("Best bin found: ", bestBin?.Name ?? "None", " with score: ", bestScore);
+
         Vector3 target;
         if (bestBin != null)
         {
@@ -528,24 +539,35 @@ public partial class RaccoonAgent : CharacterBody3D
 
     private void CheckCrashIntoBins()
     {
-        foreach (var node in GetTree().GetNodesInGroup("trash_bins"))
+        if (_sabatageArea == null || _areaShape == null) return;
+
+        _areaShape.Disabled = false;
+
+        // Check for collisions with bins
+        foreach (Node3D body in _sabatageArea.GetOverlappingBodies())
         {
-            if (node is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) < SabotageCrashRange)
+            OnSabotageAreaBodyEntered(body);
+        }
+    }
+    private void OnSabotageAreaBodyEntered(Node3D body)
+    {
+        GD.Print("Checking body in sabotage area: ", body.Name);
+        if (body is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) <
+            SabotageCrashRange && bin.IsInGroup("trash_bins"))
+        {
+            GD.Print("Raccoon crashed into bin: ", bin.Name);
+            if (bin.HasMethod("_RaccoonSabotage"))
             {
-                if (bin.HasMethod("_RaccoonSabotage"))
-                {
-                    bin.Call("_RaccoonSabotage");
-                }
-
-                // Stun the raccoon briefly from the impact
-                _isStunned = true;
-                _stunTimer = 2f;
-
-                _isFleeing = false;
-                Speed = 5f;
-                SetRandomWanderTarget();
-                break;
+                bin.Call("_RaccoonSabotage");
             }
+
+            // Stun the raccoon briefly from the impact
+            _isStunned = true;
+            _stunTimer = 2f;
+
+            _isFleeing = false;
+            Speed = 5f;
+            SetRandomWanderTarget();
         }
     }
 }

@@ -376,7 +376,6 @@ public partial class Controller : CharacterBody3D
 	{
 		_baitCharges++;
 		_ui.Call("_UpdateBaitCharges", _baitCharges);
-		GD.Print($"Bait charges: {_baitCharges}");
 	}
 
 	private void ToggleBait()
