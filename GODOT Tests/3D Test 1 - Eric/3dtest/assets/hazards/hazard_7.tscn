@@ -99,10 +99,11 @@ upper_fade = 0.000162534
 cull_mask = 1048573
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43514, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.280777, 0)
 layers = 2
-pixel_size = 0.0035
+pixel_size = 0.0025
 billboard = 2
+shaded = true
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_7udeq")
 frame_progress = 0.00418975

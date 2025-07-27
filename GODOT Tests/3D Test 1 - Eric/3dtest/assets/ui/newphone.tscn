@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://7ghxngbd3bft"]
+[gd_scene load_steps=26 format=3 uid="uid://7ghxngbd3bft"]
 
 [ext_resource type="Script" uid="uid://c1lp2taogx252" path="res://assets/ui/iPhoneUI.cs" id="1_suae8"]
 [ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_jf7fs"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://x5v312jstqri" path="res://assets/ui/health_icon.png" id="6_njngd"]
 [ext_resource type="Texture2D" uid="uid://y5o8u51kcoa1" path="res://assets/ui/window_gray.png" id="9_8qfgr"]
 [ext_resource type="Texture2D" uid="uid://bnfr8av5rdq1l" path="res://assets/ui/batteryicon.png" id="11_i3jg3"]
+[ext_resource type="AudioStream" uid="uid://crmyayeje6ee5" path="res://assets/Audios/NoSound.mp3" id="12_m1oip"]
+[ext_resource type="AudioStream" uid="uid://bwhgx7jua7n1m" path="res://assets/Audios/YesSound.mp3" id="12_p8g61"]
 [ext_resource type="Texture2D" uid="uid://c6qqfsxya6lt8" path="res://assets/ui/networkicon.png" id="12_r5ww3"]
 [ext_resource type="Texture2D" uid="uid://dstxyn273sjn2" path="res://assets/ui/wifiicon.png" id="13_8qfgr"]
 
@@ -234,9 +236,9 @@ stretch_mode = 1
 
 [node name="animalLabel" type="Label" parent="Animal"]
 layout_mode = 0
-offset_left = -204.0
+offset_left = -215.0
 offset_top = -14.0
-offset_right = -88.0
+offset_right = -74.0
 offset_bottom = 31.0
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("5_6c7ln")
@@ -273,9 +275,9 @@ stretch_mode = 1
 
 [node name="healthLabel" type="Label" parent="Health"]
 layout_mode = 0
-offset_left = -59.0
+offset_left = -61.0
 offset_top = -14.0
-offset_right = 60.0
+offset_right = 83.0
 offset_bottom = 31.0
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("5_6c7ln")
@@ -367,6 +369,14 @@ text = "O"
 stream = ExtResource("4_y157e")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="YesSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_p8g61")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="NoSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_m1oip")
 
 [node name="BatteryIcon" type="TextureRect" parent="."]
 layout_mode = 0

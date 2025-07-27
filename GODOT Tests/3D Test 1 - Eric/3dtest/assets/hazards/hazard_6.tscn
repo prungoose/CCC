@@ -97,6 +97,7 @@ layers = 2
 flip_h = true
 pixel_size = 0.0025
 billboard = 2
+shaded = true
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_5cwc5")
 frame_progress = 0.191508

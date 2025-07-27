@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dewmax538audw"]
+[gd_scene load_steps=13 format=3 uid="uid://dewmax538audw"]
 
 [ext_resource type="Shader" uid="uid://cu1c28dfj70xp" path="res://assets/ui/movingBackground.gdshader" id="1_6pv4d"]
 [ext_resource type="Texture2D" uid="uid://qve321oyxsrk" path="res://assets/menu/BackgroundTexture.tres" id="2_dgd76"]
@@ -13,8 +13,31 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nba4c"]
 shader = ExtResource("1_6pv4d")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dauie"]
+bg_color = Color(0.941176, 0.623529, 0.670588, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.939118, 0.740822, 0.822785, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 19
+shadow_offset = Vector2(7.74, 11.405)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nba4c"]
 bg_color = Color(0.823529, 0.635294, 0.270588, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Cutscene" type="Control"]
 layout_mode = 3
@@ -86,13 +109,13 @@ offset_right = 1921.0
 offset_bottom = 1080.0
 texture = ExtResource("6_nba4c")
 
-[node name="Big ColorBox" type="ColorRect" parent="."]
+[node name="Big ColorBox" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 31.0
 offset_top = 763.0
 offset_right = 1827.0
 offset_bottom = 1043.0
-color = Color(0.942317, 0.621788, 0.669498, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dauie")
 
 [node name="Cutscene Text" type="RichTextLabel" parent="Big ColorBox"]
 layout_mode = 1

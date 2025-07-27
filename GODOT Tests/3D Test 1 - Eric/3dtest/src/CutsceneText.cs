@@ -26,6 +26,8 @@ public partial class CutsceneText : RichTextLabel
     public FontFile JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
 	public FontFile EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
 
+    float _acc = 0;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -118,7 +120,7 @@ public partial class CutsceneText : RichTextLabel
     //Have space change text
     public override void _Process(double delta)
     {
-
+        _acc += (float)delta;
         // Check if the player pressed the space key or left mouse button
         if (Input.IsActionJustPressed("jump") || Input.IsActionJustPressed("m1"))
         {
@@ -165,7 +167,12 @@ public partial class CutsceneText : RichTextLabel
                 }
             }
         }
-        TypeText(text[0]);
+        while (_acc > 0.01f)
+        {
+            TypeText(text[0]);
+            _acc -= 0.01f;
+        }
+        
     }
 
     public void TypeText(string text)

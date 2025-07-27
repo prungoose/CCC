@@ -73,6 +73,9 @@ public partial class UI : Control
 		new Sidequest(1, 3, ["HELP!!!!! AHH!!!!!", "During the typhoon, I lost my cat, Mr. Snuggles, and I don't know where he went!!!", "Can you check around and see if you can find him??", "I think I last saw him around the [b]western park[/b] area..."], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"])
 	};
 
+	private AudioStreamPlayer _yessfx;
+	private AudioStreamPlayer _nosfx;
+
 
 
 
@@ -113,6 +116,9 @@ public partial class UI : Control
 		_sidequestgivetimer.Timeout += SidequestGive;
 
 		_baitText.Modulate = new Color(0.8f, 0.8f, 0.8f);
+
+		_yessfx = GetNode<AudioStreamPlayer>("Phone/YesSFX");
+		_nosfx = GetNode<AudioStreamPlayer>("Phone/NoSFX");
 
 	}
 
@@ -210,14 +216,15 @@ public partial class UI : Control
 				case "↓→↓→": beacon_to_get = 4; break; //health
 			}
 
-			if (beacon_to_get <= 4) { _player.Call("ReadyBeacon", beacon_to_get); _phone.Call("homePressed"); }
-			;
+			if (beacon_to_get <= 4)
+			{
+				_player.Call("ReadyBeacon", beacon_to_get);
+				_phone.Call("homePressed");
+				_yessfx.Play();
+			}
+			else _nosfx.Play();
 			_phonetext = "";
 			_wiggle();
-			PhoneSFX.Play();
-
-
-
 		}
 	}
 
@@ -312,6 +319,12 @@ public partial class UI : Control
 			_gameCompletionBar.Modulate = new Color(0.2f, 1f, 0.2f);
 			_gameCompletionBar.Value = 100;
 			// Trigger game completion logic here, e.g., show a victory screen or end level
+			_textbox.Call("PopUp", (string[])["Wow! Looks like you cleaned up the whole area! Good work!", "Emergency services can take it from here, but you can continue cleaning if you like.", "Thank you so much for playing our prototype!"], 1);
+			_textbox.Call("PopUp", (string[])["Yeah, you're awesome!"], 2);
+			_textbox.Call("PopUp", (string[])["I can finally go home and reunite with Mr. Snuggles!"], 3);
+			_textbox.Call("PopUp", (string[])["Woah... so you cleaned up that whole place? Sick..."], 4);
+			_textbox.Call("PopUp", (string[])["Interesting, it's spotless. I never would have thought this would happen so fast."], 5);
+
 		}
 		else
 		{
@@ -331,9 +344,9 @@ public partial class UI : Control
 
 	public void SidequestGive()
 	{
-		if (_active_sidequest != 100) //sq id 100 = no sidequest active
+		if (_active_sidequest != 100 && GetTutorialStep() > 9) //sq id 100 = no sidequest active
 		{
-			_sidequestgivetimer.WaitTime = 20;
+			_sidequestgivetimer.WaitTime = 10;
 			_sidequestgivetimer.Start();
 			return;
 		}
@@ -346,6 +359,8 @@ public partial class UI : Control
 		else _textbox.Call("PopUp", quest.starting_dialogue_jp, quest.caller_id);
 
 		if (!_firstsidequestgiven) QuestTutorial();
+
+		
 	}
 
 	public void SidequestComplete()
@@ -354,7 +369,7 @@ public partial class UI : Control
 		_active_sidequest = 100;
 		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.ending_dialogue_en, quest.caller_id);
 		else _textbox.Call("PopUp", quest.ending_dialogue_jp, quest.caller_id);
-		IncreaseGameCompletion(10);
+		IncreaseGameCompletion(8);
 	}
 
 	public void _UpdateBaitCharges(int charges)

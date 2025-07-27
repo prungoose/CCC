@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcdk34thcw7ty"]
 
-[ext_resource type="Script" uid="uid://ctanhp3jrjimm" path="res://SceneLoader.cs" id="1_gl168"]
+[ext_resource type="Script" uid="uid://ctanhp3jrjimm" path="res://src/SceneLoader.cs" id="1_gl168"]
 
 [node name="SceneLoader" type="Control"]
 layout_mode = 3

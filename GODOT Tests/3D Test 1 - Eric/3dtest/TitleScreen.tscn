@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="1_1xr1c"]
 [ext_resource type="PackedScene" uid="uid://bp8fj6wujphhr" path="res://assets/menu/MainMenu.tscn" id="1_fnlyl"]
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="2_pkhjh"]
-[ext_resource type="Script" uid="uid://cve6evv8j4w1" path="res://TitleCamera.cs" id="3_tu0on"]
+[ext_resource type="Script" uid="uid://cve6evv8j4w1" path="res://src/TitleCamera.cs" id="3_tu0on"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1xr1c"]
 top_radius = 10.0

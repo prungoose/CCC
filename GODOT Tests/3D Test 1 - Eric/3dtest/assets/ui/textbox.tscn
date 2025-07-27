@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpiqgw426s24"]
+[gd_scene load_steps=17 format=3 uid="uid://cpiqgw426s24"]
 
 [ext_resource type="Script" uid="uid://dat5p8hhjanyo" path="res://src/Textbox.cs" id="1_5wdy1"]
 [ext_resource type="Theme" uid="uid://dswyovdkpbswa" path="res://assets/ui/UI theme.tres" id="1_aqvb0"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://irn3nw5xvxsu" path="res://assets/cutscene characters/matsumoto_talk.png" id="3_vwjde"]
 [ext_resource type="Texture2D" uid="uid://t61h0xhd0p5a" path="res://assets/cutscene characters/inumaru_sprite.png" id="4_g1w8g"]
 [ext_resource type="Texture2D" uid="uid://co60rjy3b3q4y" path="res://assets/cutscene characters/mizuki_sprite.png" id="5_s421u"]
+[ext_resource type="Texture2D" uid="uid://cg34dgi68njtx" path="res://assets/cutscene characters/nekota_sprite.png" id="6_kvir3"]
+[ext_resource type="Texture2D" uid="uid://dt4gd8317h6tn" path="res://assets/cutscene characters/shinroku_sprite.png" id="7_i65hj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obbyq"]
 bg_color = Color(1, 1, 1, 0.262745)
@@ -31,6 +33,14 @@ region = Rect2(0, 0, 500, 500)
 atlas = ExtResource("5_s421u")
 region = Rect2(0, 0, 500, 500)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eyt4"]
+atlas = ExtResource("7_i65hj")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fafr0"]
+atlas = ExtResource("6_kvir3")
+region = Rect2(0, 0, 500, 500)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fafr0"]
 animations = [{
 "frames": [{
@@ -45,6 +55,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i65hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eyt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fafr0")
 }],
 "loop": true,
 "name": &"default",
