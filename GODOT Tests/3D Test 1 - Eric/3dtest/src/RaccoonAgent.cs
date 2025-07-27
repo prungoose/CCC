@@ -176,7 +176,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
     private void HandleFleeingState(float distToPlayer, double delta)
     {
-        if (_heldTrash != null) DropTrash();
+        if (_heldTrash != null && (!IsInstanceValid(_heldTrash) || !_heldTrash.IsInsideTree())) DropTrash();
 
         _targetTrash = null;
         FleeFromPlayer();
@@ -392,7 +392,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
     private void DropTrash()
     {
-        if (_heldTrash != null)
+        if (_heldTrash != null && IsInstanceValid(_heldTrash) && _heldTrash.IsInsideTree())
         {
             _heldTrash.GlobalPosition = _currentTarget;
             _heldTrash.Freeze = false;
@@ -423,7 +423,7 @@ public partial class RaccoonAgent : CharacterBody3D
     }
     private Vector3 GetTrashDropLocation()
     {
-        if (_heldTrash == null) return GlobalPosition;
+        if (_heldTrash == null || !IsInstanceValid(_heldTrash) || !_heldTrash.IsInsideTree()) return GlobalPosition;
 
         int trashType = (int)_heldTrash.Call("_GetTrashID");
 
