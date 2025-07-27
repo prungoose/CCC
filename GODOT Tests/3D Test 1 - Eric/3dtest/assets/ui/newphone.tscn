@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://7ghxngbd3bft"]
+[gd_scene load_steps=24 format=3 uid="uid://7ghxngbd3bft"]
 
 [ext_resource type="Script" uid="uid://c1lp2taogx252" path="res://assets/ui/iPhoneUI.cs" id="1_suae8"]
 [ext_resource type="Texture2D" uid="uid://bcqo5pjjy7ls5" path="res://assets/ui/Phone UI Front.png" id="2_jf7fs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bdtjexijtk88v" path="res://assets/ui/water_icon.png" id="4_njngd"]
 [ext_resource type="Texture2D" uid="uid://ckrg2klg24db1" path="res://assets/ui/electric_icon.png" id="4_sjcv4"]
 [ext_resource type="AudioStream" uid="uid://3mt8br5424k2" path="res://assets/Audios/BeepBeepBoop.wav" id="4_y157e"]
+[ext_resource type="FontFile" uid="uid://dy7gh6c8lyxoe" path="res://assets/menu/Futehodo-MaruGothic.ttf" id="5_6c7ln"]
 [ext_resource type="Texture2D" uid="uid://x5v312jstqri" path="res://assets/ui/health_icon.png" id="6_njngd"]
 [ext_resource type="Texture2D" uid="uid://y5o8u51kcoa1" path="res://assets/ui/window_gray.png" id="9_8qfgr"]
 [ext_resource type="Texture2D" uid="uid://bnfr8av5rdq1l" path="res://assets/ui/batteryicon.png" id="11_i3jg3"]
@@ -127,6 +128,7 @@ offset_top = -164.0
 offset_right = -95.0
 offset_bottom = -119.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_6c7ln")
 text = "Fire Dept."
 horizontal_alignment = 1
 
@@ -162,6 +164,7 @@ offset_top = -164.0
 offset_right = 50.0
 offset_bottom = -119.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_6c7ln")
 text = "Plumbing"
 horizontal_alignment = 1
 
@@ -197,6 +200,7 @@ offset_top = -164.0
 offset_right = 200.0
 offset_bottom = -119.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_6c7ln")
 text = "Power Co."
 horizontal_alignment = 1
 
@@ -235,6 +239,7 @@ offset_top = -14.0
 offset_right = -88.0
 offset_bottom = 31.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_6c7ln")
 text = "Animal Control"
 horizontal_alignment = 1
 
@@ -273,6 +278,7 @@ offset_top = -14.0
 offset_right = 60.0
 offset_bottom = 31.0
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_6c7ln")
 text = "Health Services"
 horizontal_alignment = 1
 
@@ -285,6 +291,11 @@ offset_bottom = 355.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(70, 340)
 theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("5_6c7ln")
+theme_override_fonts/mono_font = ExtResource("5_6c7ln")
+theme_override_fonts/italics_font = ExtResource("5_6c7ln")
+theme_override_fonts/bold_italics_font = ExtResource("5_6c7ln")
+theme_override_fonts/bold_font = ExtResource("5_6c7ln")
 theme_override_font_sizes/bold_italics_font_size = 30
 theme_override_font_sizes/italics_font_size = 30
 theme_override_font_sizes/mono_font_size = 30
@@ -309,6 +320,11 @@ offset_right = 206.0
 offset_bottom = -270.0
 pivot_offset = Vector2(204, 38)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_6c7ln")
+theme_override_fonts/mono_font = ExtResource("5_6c7ln")
+theme_override_fonts/italics_font = ExtResource("5_6c7ln")
+theme_override_fonts/bold_italics_font = ExtResource("5_6c7ln")
+theme_override_fonts/bold_font = ExtResource("5_6c7ln")
 theme_override_font_sizes/normal_font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_suae8")
 text = "asdfasdf"
@@ -322,6 +338,7 @@ offset_left = 109.0
 offset_top = 223.0
 offset_right = 304.0
 offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("5_6c7ln")
 theme_override_font_sizes/font_size = 26
 theme_override_styles/focus = SubResource("StyleBoxEmpty_suae8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y157e")
@@ -338,6 +355,7 @@ offset_right = 50.0
 offset_bottom = 406.0
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_6c7ln")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/hover = SubResource("StyleBoxFlat_6c7ln")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6c7ln")

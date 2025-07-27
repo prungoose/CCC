@@ -5854,6 +5854,5 @@ draw_pass_1 = SubResource("RibbonTrailMesh_umbqo")
 
 [node name="RainSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_umbqo")
+volume_db = -20.0
 bus = &"Ambiance"
-
-[node name="rainSFX" type="AudioStreamPlayer" parent="."]

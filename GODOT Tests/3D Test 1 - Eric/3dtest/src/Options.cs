@@ -23,15 +23,19 @@ public partial class Options : Control
 	private Label langLabel;
 	private Label fsLabel;
 	private Label OptionsTitle;
+	private VBoxContainer Labels;
+
+	public FontFile JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
+	public FontFile EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var parentLabel = GetNode<VBoxContainer>("Labels");
-		volLabel = parentLabel.GetNode<Label>("Volume");
-		sfxLabel = parentLabel.GetNode<Label>("Sound Effects");
-		ambLabel = parentLabel.GetNode<Label>("Ambiance");
-		langLabel = parentLabel.GetNode<Label>("Language");
-		fsLabel = parentLabel.GetNode<Label>("Fullscreen");
+		Labels = GetNode<VBoxContainer>("Labels");
+		volLabel = Labels.GetNode<Label>("Volume");
+		sfxLabel = Labels.GetNode<Label>("Sound Effects");
+		ambLabel = Labels.GetNode<Label>("Ambiance");
+		langLabel = Labels.GetNode<Label>("Language");
+		fsLabel = Labels.GetNode<Label>("Fullscreen");
 		OptionsTitle = GetNode<Label>("OptionsLabel");
 
 		SampleSFX = GetNode<AudioStreamPlayer>("SampleSFX");
@@ -142,20 +146,36 @@ public partial class Options : Control
 		if (lang == 0)
 		{
 			volLabel.Text = "Volume";
+			volLabel.AddThemeFontOverride("font", EFont);
 			sfxLabel.Text = "Sound Effects";
+			sfxLabel.AddThemeFontOverride("font", EFont);
 			ambLabel.Text = "Ambience";
+			ambLabel.AddThemeFontOverride("font", EFont);
 			langLabel.Text = "Language";
+			langLabel.AddThemeFontOverride("font", EFont);
 			fsLabel.Text = "Fullscreen";
+			fsLabel.AddThemeFontOverride("font", EFont);
 			OptionsTitle.Text = " Options ";
+			OptionsTitle.AddThemeFontOverride("font", EFont);
+
+			Labels.AddThemeConstantOverride("separation", 80);
 		}
 		else if (lang == 1)
 		{
 			volLabel.Text = "音量";
+			volLabel.AddThemeFontOverride("font", JFont);
 			sfxLabel.Text = "効果音";
+			sfxLabel.AddThemeFontOverride("font", JFont);
 			ambLabel.Text = "雰囲気";
+			ambLabel.AddThemeFontOverride("font", JFont);
 			langLabel.Text = "言語";
+			langLabel.AddThemeFontOverride("font", JFont);
 			fsLabel.Text = "全画面表示";
+			fsLabel.AddThemeFontOverride("font", JFont);
 			OptionsTitle.Text = "設定";
+			OptionsTitle.AddThemeFontOverride("font", JFont);
+
+			Labels.AddThemeConstantOverride("separation", 93);
 		}
 
 	}

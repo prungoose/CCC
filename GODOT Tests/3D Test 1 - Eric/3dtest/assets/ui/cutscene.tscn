@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dewmax538audw"]
+[gd_scene load_steps=12 format=3 uid="uid://dewmax538audw"]
 
 [ext_resource type="Shader" uid="uid://cu1c28dfj70xp" path="res://assets/ui/movingBackground.gdshader" id="1_6pv4d"]
 [ext_resource type="Texture2D" uid="uid://qve321oyxsrk" path="res://assets/menu/BackgroundTexture.tres" id="2_dgd76"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d4hkjsnfqy2ro" path="res://assets/cutscene characters/matsumoto_sprite.png" id="4_nba4c"]
 [ext_resource type="Texture2D" uid="uid://c3de7bsowr7rj" path="res://assets/cutscene characters/inumaru_1.png" id="5_dgd76"]
 [ext_resource type="Texture2D" uid="uid://dh8ekpjo3mwwf" path="res://assets/cutscene characters/Mizuki_1.png" id="6_nba4c"]
+[ext_resource type="FontFile" uid="uid://dy7gh6c8lyxoe" path="res://assets/menu/Futehodo-MaruGothic.ttf" id="7_dauie"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nba4c"]
 shader = ExtResource("1_6pv4d")
@@ -99,29 +100,45 @@ anchors_preset = -1
 anchor_right = 0.364
 anchor_bottom = 0.556
 offset_left = 11.0
-offset_top = 37.0
-offset_right = 1142.26
+offset_top = 52.0
+offset_right = 1123.26
 offset_bottom = 78.32
+theme_override_fonts/normal_font = ExtResource("7_dauie")
+theme_override_fonts/mono_font = ExtResource("7_dauie")
+theme_override_fonts/italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_font = ExtResource("7_dauie")
 theme_override_font_sizes/normal_font_size = 40
 fit_content = true
 script = ExtResource("2_kfutr")
 
 [node name="Bottom Tip" type="RichTextLabel" parent="Big ColorBox"]
 layout_mode = 0
-offset_left = 643.0
+offset_left = 381.0
 offset_top = 234.0
-offset_right = 1189.0
+offset_right = 1224.0
 offset_bottom = 276.0
+theme_override_fonts/normal_font = ExtResource("7_dauie")
+theme_override_fonts/mono_font = ExtResource("7_dauie")
+theme_override_fonts/italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_font = ExtResource("7_dauie")
 theme_override_font_sizes/normal_font_size = 30
 text = "Press Space/Click to Continue..."
 fit_content = true
+horizontal_alignment = 1
 
 [node name="Character Name" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 1517.0
+offset_left = 1381.0
 offset_top = 729.0
 offset_right = 1774.0
 offset_bottom = 800.0
+theme_override_fonts/normal_font = ExtResource("7_dauie")
+theme_override_fonts/mono_font = ExtResource("7_dauie")
+theme_override_fonts/italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_italics_font = ExtResource("7_dauie")
+theme_override_fonts/bold_font = ExtResource("7_dauie")
 theme_override_font_sizes/normal_font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_nba4c")
 text = "Matsumoto"

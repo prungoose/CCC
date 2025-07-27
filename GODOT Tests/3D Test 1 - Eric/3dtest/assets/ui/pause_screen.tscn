@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cdfp8wkly552l" path="res://assets/menu/Resume_Button_Hover.png" id="2_htskl"]
 [ext_resource type="Texture2D" uid="uid://1vrepp1xtysa" path="res://assets/menu/Resume_Button.png" id="3_3pt0r"]
 [ext_resource type="Texture2D" uid="uid://dgvfrutdonpqv" path="res://assets/menu/Options_Button_Hover.png" id="3_f4b01"]
+[ext_resource type="FontFile" uid="uid://dy7gh6c8lyxoe" path="res://assets/menu/Futehodo-MaruGothic.ttf" id="3_htskl"]
 [ext_resource type="Texture2D" uid="uid://bmfdsrq06jtbn" path="res://assets/menu/Options_Button.png" id="4_jxqms"]
-[ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="7_jxqms"]
 [ext_resource type="Texture2D" uid="uid://b1ipy74768n1y" path="res://assets/menu/EXIT_Pressed.png" id="8_fub31"]
 [ext_resource type="Texture2D" uid="uid://d1ry7wuldve26" path="res://assets/menu/EXIT.png" id="9_phwk8"]
 
@@ -91,7 +91,7 @@ offset_right = 381.5
 offset_bottom = -133.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("7_jxqms")
+theme_override_fonts/font = ExtResource("3_htskl")
 theme_override_font_sizes/font_size = 150
 theme_override_styles/normal = SubResource("StyleBoxFlat_htskl")
 text = "Paused"

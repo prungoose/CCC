@@ -30,11 +30,15 @@ public partial class PauseScreen : Control
 		StyleBoxTexture imageHoverO = new();
 		StyleBoxTexture imageHoverE = new();
 
+		var JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
+		var EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
+
 		if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
 		{
 			lang = 0;
 
 			_title.Text = "Paused";
+			_title.AddThemeFontOverride("font", EFont);
 
 			imageHoverR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button_Hover.png");
 			imageR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button.png");
@@ -60,6 +64,7 @@ public partial class PauseScreen : Control
 			if (lang == 1)
 			{
 				_title.Text = "休止";
+				_title.AddThemeFontOverride("font", JFont);
 
 				imageHoverR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button_Hover_JP.png");
 				imageR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button_JP.png");
@@ -83,6 +88,7 @@ public partial class PauseScreen : Control
 			else
 			{
 				_title.Text = "Paused";
+				_title.AddThemeFontOverride("font", EFont);
 
 				imageHoverR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button_Hover.png");
 				imageR.Texture = GD.Load<Texture2D>("res://assets/menu/Resume_Button.png");

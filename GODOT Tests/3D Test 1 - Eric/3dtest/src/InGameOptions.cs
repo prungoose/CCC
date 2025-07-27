@@ -26,6 +26,9 @@ public partial class InGameOptions : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		var JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
+		var EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
+		
 		SampleSFX = GetNode<AudioStreamPlayer>("IGSampleSFX");
 		SampleAMB = GetNode<AudioStreamPlayer>("IGSampleAMB");
 
@@ -63,18 +66,28 @@ public partial class InGameOptions : Control
 		if (lang == 0)
 		{
 			volLabel.Text = "Volume";
+			volLabel.AddThemeFontOverride("font", EFont);
 			sfxLabel.Text = "Sound Effects";
+			sfxLabel.AddThemeFontOverride("font", EFont);
 			ambLabel.Text = "Ambience";
+			ambLabel.AddThemeFontOverride("font", EFont);
 			fsLabel.Text = "Fullscreen";
+			fsLabel.AddThemeFontOverride("font", EFont);
 			OptionsTitle.Text = " Options ";
+			OptionsTitle.AddThemeFontOverride("font", EFont);
 		}
 		else if (lang == 1)
 		{
 			volLabel.Text = "音量";
+			volLabel.AddThemeFontOverride("font", JFont);
 			sfxLabel.Text = "効果音";
+			sfxLabel.AddThemeFontOverride("font", JFont);
 			ambLabel.Text = "雰囲気";
+			ambLabel.AddThemeFontOverride("font", JFont);
 			fsLabel.Text = "全画面表示";
+			fsLabel.AddThemeFontOverride("font", JFont);
 			OptionsTitle.Text = "設定";
+			OptionsTitle.AddThemeFontOverride("font", JFont);
 		}
 
 		Load();

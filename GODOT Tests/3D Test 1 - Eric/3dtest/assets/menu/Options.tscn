@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://cm5rd518ga13s"]
 
 [ext_resource type="Script" uid="uid://bxujvvrxnec4p" path="res://src/Options.cs" id="1_xygxo"]
-[ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_sxq6w"]
+[ext_resource type="FontFile" uid="uid://dy7gh6c8lyxoe" path="res://assets/menu/Futehodo-MaruGothic.ttf" id="3_3tk4e"]
 [ext_resource type="AudioStream" uid="uid://b7f2e0aiu16bf" path="res://assets/Audios/WalkSound.wav" id="4_3tk4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tk4e"]
@@ -132,7 +132,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 70
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sxq6w")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wtj14")
@@ -151,7 +151,7 @@ offset_top = 25.0
 offset_right = 240.0
 offset_bottom = 202.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5wrm")
 text = " Options "
@@ -169,39 +169,39 @@ offset_right = 750.0
 offset_bottom = 423.0
 grow_vertical = 2
 size_flags_horizontal = 0
-theme_override_constants/separation = 80
+theme_override_constants/separation = 92
 
 [node name="Volume" type="Label" parent="Labels"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 60
 text = "Volume"
 horizontal_alignment = 1
 
 [node name="Sound Effects" type="Label" parent="Labels"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 60
 text = "Sound Effects"
 horizontal_alignment = 1
 
 [node name="Ambiance" type="Label" parent="Labels"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 60
 text = "Ambience"
 horizontal_alignment = 1
 
 [node name="Language" type="Label" parent="Labels"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 60
 text = "Language"
 horizontal_alignment = 1
 
 [node name="Fullscreen" type="Label" parent="Labels"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sxq6w")
+theme_override_fonts/font = ExtResource("3_3tk4e")
 theme_override_font_sizes/font_size = 60
 text = "Fullscreen"
 horizontal_alignment = 1

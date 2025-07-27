@@ -62,9 +62,16 @@ public partial class TutorialStuff : MarginContainer
 
     public override void _Ready()
     {
+        var JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
+		var EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
+
+        TextBubbleSFX = GetParent().GetNode<AudioStreamPlayer>("TextBubbleSFX");
+        _textbox = GetParent().GetNode<Control>("Textbox");
+
         if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
         {
             _messages = _Emessages;
+            _textbox.AddThemeFontOverride("font", EFont);
         }
         else
         {
@@ -72,14 +79,15 @@ public partial class TutorialStuff : MarginContainer
             if (language == 1)
             {
                 _messages = _Jmessages;
+                _textbox.AddThemeFontOverride("font", JFont);
+
             }
             else
             {
                 _messages = _Emessages;
+                _textbox.AddThemeFontOverride("font", EFont);
             }
         }
-        TextBubbleSFX = GetParent().GetNode<AudioStreamPlayer>("TextBubbleSFX");
-        _textbox = GetParent().GetNode<Control>("Textbox");
         ShowStep(_step);
     }
 

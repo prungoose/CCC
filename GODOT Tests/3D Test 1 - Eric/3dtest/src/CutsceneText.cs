@@ -23,6 +23,9 @@ public partial class CutsceneText : RichTextLabel
     int charactersIntroduced = 1;
     int language = 0;
 
+    public FontFile JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
+	public FontFile EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -46,8 +49,13 @@ public partial class CutsceneText : RichTextLabel
         {
             AudioServer.SetBusVolumeDb(sfx_index, Mathf.LinearToDb(1f));
             BottomTip.Text = "Press Space/Click to Continue...";
+            BottomTip.AddThemeFontOverride("font", EFont);
             text = Englishtext;
             CharaName.Text = "Matsumoto";
+            CharaName.AddThemeFontOverride("font", EFont);
+
+
+            this.AddThemeFontOverride("font", EFont);
         }
         else
         {
@@ -57,14 +65,22 @@ public partial class CutsceneText : RichTextLabel
             if (language == 1)
             {
                 BottomTip.Text = "スペースキーまたはクリックして続行します...";
+                BottomTip.AddThemeFontOverride("font", JFont);
                 text = JapaneseText;
                 CharaName.Text = "松本";
+                CharaName.AddThemeFontOverride("font", JFont);
+
+                this.AddThemeFontOverride("font", JFont);
             }
             else
             {
                 BottomTip.Text = "Press Space/Click to Continue...";
+                BottomTip.AddThemeFontOverride("font", EFont);
                 text = Englishtext;
                 CharaName.Text = "Matsumoto";
+                CharaName.AddThemeFontOverride("font", EFont);
+
+                this.AddThemeFontOverride("font", EFont);
             }
         }
 
