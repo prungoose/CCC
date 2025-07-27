@@ -553,7 +553,7 @@ public partial class RaccoonAgent : CharacterBody3D
     {
         GD.Print("Checking body in sabotage area: ", body.Name);
         if (body is Node3D bin && GlobalPosition.DistanceTo(bin.GlobalPosition) <
-            SabotageCrashRange && body.IsInGroup("trash_bins"))
+            SabotageCrashRange && bin.IsInGroup("trash_bins"))
         {
             GD.Print("Raccoon crashed into bin: ", bin.Name);
             if (bin.HasMethod("_RaccoonSabotage"))

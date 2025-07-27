@@ -76,7 +76,6 @@ public partial class UI : Control
 
 
 
-	[Export] private ColorRect _baitDisplay;
 	[Export] private Label _baitText;
 
 	public override void _Ready()
@@ -112,6 +111,8 @@ public partial class UI : Control
 
 		_sidequestgivetimer = GetNode<Timer>("SidequestGiveTimer");
 		_sidequestgivetimer.Timeout += SidequestGive;
+
+		_baitText.Modulate = new Color(0.8f, 0.8f, 0.8f);
 
 	}
 
@@ -364,7 +365,17 @@ public partial class UI : Control
 
 	private void _UpdateBaitSelected(bool isSelected)
 	{
-		_baitDisplay.Modulate = isSelected ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0.5f);
+		if (isSelected)
+		{
+			_baitText.Modulate = new Color(1f, 1f, 1f);
+
+		}
+		else
+		{
+			_baitText.Modulate = new Color(0.8f, 0.8f, 0.8f);
+
+		}
+
 	}
 
 	private void QuestTutorial()

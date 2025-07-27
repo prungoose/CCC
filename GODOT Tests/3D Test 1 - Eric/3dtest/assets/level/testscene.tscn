@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://efphq3x1xrqr" path="res://assets/Audios/Glubglub.mp3" id="6_75yh3"]
 [ext_resource type="AudioStream" uid="uid://c635urq3msa13" path="res://assets/Audios/windingUp.wav" id="7_bxlu3"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="8_lhto2"]
-[ext_resource type="Shader" uid="uid://cnrhmm0hdhrma" path="res://assets/level/pixxel.gdshader" id="9_e3ega"]
+[ext_resource type="Shader" path="res://assets/level/pixxel.gdshader" id="9_e3ega"]
 [ext_resource type="Script" uid="uid://ddgqogq0prhuv" path="res://src/CameraTarget.cs" id="10_j627c"]
 [ext_resource type="Script" uid="uid://bu31vgxj1soh2" path="res://src/MouseTarget.cs" id="11_qxjth"]
 [ext_resource type="PackedScene" uid="uid://cw6evgdxg1kpf" path="res://assets/player/Controller.tscn" id="12_jokxy"]
@@ -416,10 +416,36 @@ _ui = NodePath("../../UI")
 _thrown_beacon = ExtResource("15_sybqf")
 _thrown_bait = ExtResource("16_04qkv")
 
-[node name="RaccoonAgent" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -7.91378, 1.79169, 8.89394)
-Player = NodePath("../Player")
-_camera = NodePath("../Camera/Camera3D")
+[node name="Animals" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Raccoons" type="Node3D" parent="SubViewportContainer/SubViewport/Animals"]
+
+[node name="RaccoonAgent" parent="SubViewportContainer/SubViewport/Animals/Raccoons" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 9.34429, 1.79169, -6.43479)
+Player = NodePath("../../../Player")
+_camera = NodePath("../../../Camera/Camera3D")
+
+[node name="Raccoon2" parent="SubViewportContainer/SubViewport/Animals/Raccoons" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 17.4421, 1.79169, 4.29699)
+Player = NodePath("../../../Player")
+_camera = NodePath("../../../Camera/Camera3D")
+
+[node name="Raccoon3" parent="SubViewportContainer/SubViewport/Animals/Raccoons" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 11.0942, 1.79169, -37.2727)
+Player = NodePath("../../../Player")
+_camera = NodePath("../../../Camera/Camera3D")
+
+[node name="Raccoon4" parent="SubViewportContainer/SubViewport/Animals/Raccoons" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 46.225, 1.79169, -37.8243)
+Player = NodePath("../../../Player")
+_camera = NodePath("../../../Camera/Camera3D")
+
+[node name="Raccoon5" parent="SubViewportContainer/SubViewport/Animals/Raccoons" node_paths=PackedStringArray("Player", "_camera") instance=ExtResource("16_i3gsk")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 44.4118, 1.79169, -57.5314)
+Player = NodePath("../../../Player")
+_camera = NodePath("../../../Camera/Camera3D")
+
+[node name="Birds" type="Node3D" parent="SubViewportContainer/SubViewport/Animals"]
 
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("17_l6626")]
 layout_mode = 2
