@@ -125,7 +125,7 @@ billboard_keep_scale = true
 material = SubResource("StandardMaterial3D_gcamg")
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Trashbin" type="Node3D"]
+[node name="Trashbin" type="Node3D" groups=["trash_bins"]]
 script = ExtResource("1_dqtvc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

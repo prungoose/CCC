@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bcgqxkucyl1uq"]
+[gd_scene load_steps=18 format=3 uid="uid://bcgqxkucyl1uq"]
 
 [ext_resource type="Script" uid="uid://bo16n5q7cfi6h" path="res://src/RaccoonAgent.cs" id="1_yq413"]
 [ext_resource type="Texture2D" uid="uid://blawe26d558il" path="res://assets/racoon/sprites_racoon.png" id="2_3km4c"]
@@ -114,12 +114,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="RaccoonAgent" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "WanderCooldownTimer", "_animations")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3km4c"]
+radius = 2.53174
+
+[node name="RaccoonAgent" type="CharacterBody3D" node_paths=PackedStringArray("NavAgent", "WanderCooldownTimer", "_animations", "_sabatageArea", "_areaShape")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_yq413")
 NavAgent = NodePath("NavigationAgent3D")
 WanderCooldownTimer = NodePath("WanderCooldownTimer")
 _animations = NodePath("AnimatedSprite3D")
+_sabatageArea = NodePath("SabaRange")
+_areaShape = NodePath("SabaRange/CollisionShape3D")
 
 [node name="WanderCooldownTimer" type="Timer" parent="."]
 wait_time = 1.5
@@ -143,3 +148,10 @@ sprite_frames = SubResource("SpriteFrames_h11xc")
 animation = &"run"
 autoplay = "idle"
 frame_progress = 0.27802
+
+[node name="SabaRange" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SabaRange"]
+shape = SubResource("CylinderShape3D_3km4c")
+
+[connection signal="body_entered" from="SabaRange" to="." method="OnSabotageAreaBodyEntered"]

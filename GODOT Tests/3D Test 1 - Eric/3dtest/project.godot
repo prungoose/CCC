@@ -45,6 +45,7 @@ ground=""
 thrown=""
 hazard=""
 beacon=""
+trash_bins=""
 
 [input]
 
