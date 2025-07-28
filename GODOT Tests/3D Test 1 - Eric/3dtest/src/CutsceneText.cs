@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -19,6 +20,8 @@ public partial class CutsceneText : RichTextLabel
     private TextureRect MatIMG; // d2a245   (0.824f, 0.635f, 0.271f, 1.0f)
     private TextureRect InuIMG; // b09af4   (0.69f, 0.604f, 0.957f, 1.0f)
     private TextureRect MizIMG; // 58bfb4   (0.345f, 0.749f, 0.706f, 1.0f)
+    private TextureRect NekIMG; // 5694cd (0.335f, 0.58f, 0.802f, 1.0f)
+    private TextureRect ShiIMG; // d780c0 (0.841f, 0.503f, 0.752f, 1.0f)
     private RichTextLabel CharaName;
     int charactersIntroduced = 1;
     int language = 0;
@@ -37,6 +40,8 @@ public partial class CutsceneText : RichTextLabel
         MatIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Matsumoto");
         InuIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Inumaru");
         MizIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Mizuki");
+        NekIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Nekota");
+        ShiIMG = GetParent().GetParent().GetNode<Control>("Character Images").GetNode<TextureRect>("Shinroku");
         CharaName = GetParent().GetParent().GetNode<RichTextLabel>("Character Name");
 
         BottomTip = GetParent().GetNode<RichTextLabel>("Bottom Tip");
@@ -106,15 +111,30 @@ public partial class CutsceneText : RichTextLabel
         "I used to live in the area, but I had to evacuate since the typhoon was looking pretty bad...",
     };
     private string[] IMJapanesetext = {
-        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
+        "ああ、あなたは掃除当番ですよね？",
+        "以前、この地域に住んでいましたが、台風がかなりひどくなりそうだったので避難しなければなりませんでした...",
     };
     private string[] MZEnglishtext = {
         "Me too, I had to leave to my grandma's house an hour over...",
         "I know your guys' jobs are tough, so do your best!"
     };
     private string[] MZJapanesetext = {
-        "ご不便をおかけして申し訳ございません。このスクリプトはまだ完成していません。", // EDIT/ADD LINES HERE FOR INUMARU
+        "私も、おばあちゃんの家に行くのに1時間も遅れて出発しなければならなかったので...",
+        "皆さんの仕事は大変だとは思いますが、頑張ってください！",
     };
+
+    // private string[] NTEnglishtext = {
+    //     "...",
+    // };
+    // private string[] NTJapanesetext = {
+    //     "...",
+    // };
+    // private string[] SREnglishtext = {
+    //     "...",
+    // };
+    // private string[] SRJapanesetext = {
+    //     "...",
+    // };
 
 
     //Have space change text
@@ -160,6 +180,30 @@ public partial class CutsceneText : RichTextLabel
                     }
                     charactersIntroduced += 1;
                 }
+                // else if (charactersIntroduced == 3)
+                // {
+                //     if (language == 1)
+                //     {
+                //         changeSpeaker("猫田");
+                //     }
+                //     else
+                //     {
+                //         changeSpeaker("Nekota");
+                //     }
+                //     charactersIntroduced += 1;
+                // }
+                // else if (charactersIntroduced == 4)
+                // {
+                //     if (language == 1)
+                //     {
+                //         changeSpeaker("神鹿");
+                //     }
+                //     else
+                //     {
+                //         changeSpeaker("Shinroku");
+                //     }
+                //     charactersIntroduced += 1;
+                // }
                 else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
                 {
                     _transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
@@ -172,7 +216,7 @@ public partial class CutsceneText : RichTextLabel
             TypeText(text[0]);
             _acc -= 0.01f;
         }
-        
+
     }
 
     public void TypeText(string text)
@@ -206,25 +250,30 @@ public partial class CutsceneText : RichTextLabel
         this.Text = "";
         CutsceneSFX.Play();
         BottomTip.Modulate = new Color(1, 1, 1, 0);
+        charaColor.BorderColor = new Color(1f, 1f, 1f, 1f);
+        charaColor.BorderBlend = false;
+        charaColor.CornerRadiusBottomLeft = 20;
+        charaColor.CornerRadiusBottomRight = 20;
+        charaColor.CornerRadiusTopLeft = 20;
+        charaColor.CornerRadiusTopRight = 20;
+        charaColor.BorderWidthLeft = 4;
+        charaColor.BorderWidthRight = 4;
+        charaColor.BorderWidthTop = 4;
+        charaColor.BorderWidthBottom = 4;
+        MatIMG.Hide();
+        InuIMG.Hide();
+        MizIMG.Hide();
+        NekIMG.Hide();
+        ShiIMG.Hide();
 
         if (newNPC == "Inumaru" || newNPC == "犬丸")
         {
-            MatIMG.Hide();
             InuIMG.Show();
-            MizIMG.Hide();
 
             charaColor.BgColor = new Color(0.69f, 0.604f, 0.957f, 1.0f);
-            charaColor.BorderColor = new Color(1f, 1f, 1f, 1f);
-            charaColor.BorderBlend = false;
-            charaColor.CornerRadiusBottomLeft = 20;
-            charaColor.CornerRadiusBottomRight = 20;
-            charaColor.CornerRadiusTopLeft = 20;
-            charaColor.CornerRadiusTopRight = 20;
-            charaColor.BorderWidthLeft = 4;
-            charaColor.BorderWidthRight = 4;
-            charaColor.BorderWidthTop = 4;
-            charaColor.BorderWidthBottom = 4;
+
             CharaName.AddThemeStyleboxOverride("normal", charaColor);
+
             if (language == 1)
             {
                 text = IMJapanesetext;
@@ -237,21 +286,10 @@ public partial class CutsceneText : RichTextLabel
         }
         else if (newNPC == "Mizuki" || newNPC == "海月")
         {
-            MatIMG.Hide();
-            InuIMG.Hide();
             MizIMG.Show();
 
             charaColor.BgColor = new Color(0.345f, 0.749f, 0.706f, 1.0f);
-            charaColor.BorderColor = new Color(1f, 1f, 1f, 1f);
-            charaColor.BorderBlend = false;
-            charaColor.CornerRadiusBottomLeft = 20;
-            charaColor.CornerRadiusBottomRight = 20;
-            charaColor.CornerRadiusTopLeft = 20;
-            charaColor.CornerRadiusTopRight = 20;
-            charaColor.BorderWidthLeft = 4;
-            charaColor.BorderWidthRight = 4;
-            charaColor.BorderWidthTop = 4;
-            charaColor.BorderWidthBottom = 4;
+
             CharaName.AddThemeStyleboxOverride("normal", charaColor);
 
             if (language == 1)
@@ -263,5 +301,39 @@ public partial class CutsceneText : RichTextLabel
                 text = MZEnglishtext;
             }
         }
+        // else if (newNPC == "Nekota" || newNPC == "猫田")
+        // {
+        //     NekIMG.Show();
+
+        //     charaColor.BgColor = new Color(0.335f, 0.58f, 0.802f, 1.0f);
+
+        //     CharaName.AddThemeStyleboxOverride("normal", charaColor);
+
+        //     if (language == 1)
+        //     {
+        //         text = NTJapanesetext;
+        //     }
+        //     else
+        //     {
+        //         text = NTEnglishtext;
+        //     }
+        // }
+        // else if (newNPC == "Shinroku" || newNPC == "神鹿")
+        // {
+        //     ShiIMG.Show();
+
+        //     charaColor.BgColor = new Color(0.841f, 0.503f, 0.752f, 1.0f);
+
+        //     CharaName.AddThemeStyleboxOverride("normal", charaColor);
+
+        //     if (language == 1)
+        //     {
+        //         text = SRJapanesetext;
+        //     }
+        //     else
+        //     {
+        //         text = SREnglishtext;
+        //     }
+        // }
     }
 }
