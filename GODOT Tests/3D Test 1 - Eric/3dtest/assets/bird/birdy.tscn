@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dij82ay47q6d7"]
+[gd_scene load_steps=16 format=3 uid="uid://dij82ay47q6d7"]
 
 [ext_resource type="Texture2D" uid="uid://b6c6h0f5iklt2" path="res://assets/bird/bird spritesheet.png" id="1_ib568"]
+[ext_resource type="Script" uid="uid://gqgcfy7hutvr" path="res://assets/bird/Birdy.cs" id="1_yqkbs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yqkbs"]
 radius = 0.185689
@@ -99,7 +100,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_yqkbs"]
+radius = 15.501
+
 [node name="Birdy" type="CharacterBody3D"]
+script = ExtResource("1_yqkbs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0.00020944, 0, -0.00020944, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -114,4 +119,11 @@ render_priority = 1
 sprite_frames = SubResource("SpriteFrames_cbq1r")
 animation = &"fly"
 autoplay = "fly"
-frame_progress = 0.771375
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("SphereShape3D_yqkbs")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]

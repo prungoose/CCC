@@ -373,7 +373,8 @@ public partial class UI : Control
 
 			_sidequestspawner.Call("_SpawnAt", _active_sidequest);
 		}
-		else {
+		else
+		{
 			_sidequestgivetimer.WaitTime = 10;
 			_sidequestgivetimer.Start();
 		}

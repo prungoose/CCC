@@ -14,7 +14,7 @@ public partial class RaccoonAgent : CharacterBody3D
     [Export] public float DropDistance = 5f;
     [Export] public float DetectionRadius = 15f;
     [Export] public float SabotageCrashRange = 2.5f;
-    [Export] public float StunDuration = 20f;
+    [Export] public float StunDuration = 10f;
     [Export] public CharacterBody3D Player;
     [Export] public NavigationAgent3D NavAgent;
     [Export] public Timer WanderCooldownTimer;
@@ -42,6 +42,7 @@ public partial class RaccoonAgent : CharacterBody3D
     private Vector3 _baitTarget;
     [Export] private Area3D _sabatageArea;
     [Export] private CollisionShape3D _areaShape;
+    [Export] GpuParticles3D _stunParticles;
 
     private static Node3D _lastSabotagedBin = null;
 
@@ -72,13 +73,6 @@ public partial class RaccoonAgent : CharacterBody3D
 
         _stuckCheckTimer = StuckCheckCooldown;
         _lastPositionSnapshot = GlobalPosition;
-
-        // Print Bins dictionary for debugging
-        GD.Print("Bins by type:");
-        foreach (var kvp in _binsByType)
-        {
-            GD.Print($"Type {kvp.Key}: {kvp.Value.Count} bins");
-        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -172,10 +166,25 @@ public partial class RaccoonAgent : CharacterBody3D
         {
             _isStunned = false;
             SetRandomWanderTarget();
+            // turn particles off after stun ends
+            _stunParticles.Emitting = false;
+
+
         }
         Velocity = Vector3.Zero;
         MoveAndSlide();
         _animations.Play("idle");
+
+        _stunParticles.Emitting = true;
+        // Slightly rotate the particles to give a more dynamic effect
+        _stunParticles.GlobalRotation = new Vector3(
+            (float)(_rand.NextDouble() * 0.1 - 0.05),
+            (float)(_rand.NextDouble() * 0.1 - 0.05),
+            (float)(_rand.NextDouble() * 0.1 - 0.05)
+        );
+
+
+
     }
 
     private void HandleFleeingState(float distToPlayer, double delta)
@@ -562,7 +571,7 @@ public partial class RaccoonAgent : CharacterBody3D
 
                     // Stun the raccoon briefly from the impact
                     _isStunned = true;
-                    _stunTimer = 2f;
+                    _stunTimer = 10f;
                     _isFleeing = false;
                     Speed = 5f;
                     _lastSabotagedBin = bin;
