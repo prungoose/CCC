@@ -127,4 +127,4 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ksraf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1179, 963)
 sprite_frames = SubResource("SpriteFrames_4kfbv")
-frame_progress = 0.0413132
+frame_progress = 0.260018

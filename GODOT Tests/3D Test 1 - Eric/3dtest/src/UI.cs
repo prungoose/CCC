@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 public partial class UI : Control
@@ -69,10 +70,10 @@ public partial class UI : Control
 	private bool _firstsidequestgiven = false;
 	private bool _jp_lang_enable = false;
 	Sidequest[] _possible_sidequests = {
-		new Sidequest(0, 2, ["Hey... haha... I heard you were in the area...", "Listen, I lost something important to me, just, don't tell anyone it's mine, OK?", "It should be around the empty lots. If you find it, you'll be a big help, thanks."], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
+		new Sidequest(0, 2, ["Hey... haha... I heard you were in the area...", "Listen, I lost something important to me, just, don't tell anyone it's mine, OK?", "It should be around the empty lots. If you find it, you'll be a big help, thanks."], ["Thanks for finding it. Remember to keep it a secret..."], ["ねえ...ハハハ...あなたがその辺りにいたと聞いたよ...", "いいか、俺は大切なものを失ったんだ、ただ、それが俺のものだって誰にも言わないでくれ、いいか？", "空き地のあたりにあるはずです。見つけたらとても助かります。ありがとうございます。"], ["見つけてくれてありがとう。秘密にしておいてくださいね..."]),
 		new Sidequest(1, 3, ["HELP!!!!! AHH!!!!!", "During the typhoon, I lost my cat, [b]Mr. Snuggles[/b], and I don't know where he went!!!", "Can you check around and see if you can find him??", "I think I last saw him around the [b]smaller park[/b] area..."], ["Mr. Snuggles, there you are! Thank you so much for finding him for me!"], ["助けて！！！！！ああ！！！！！", "台風の際、私の猫の[b]チョコさん[/b]がいなくなり、どこへ行ったのか分かりません!!!", "周りを調べて彼を見つけられるかどうか確認してもらえますか？", "最後に彼を見たのは、[b]小さめの公園[/b]のあたりだったと思うのですが..."], ["チョコさん、そこにいました！見つけてくれて本当にありがとう！"]),
-		new Sidequest(2, 4, ["Excuse me, I can’t find my important [b]family photo[/b].", "I was carrying it with me on the way home, and the wind blew it away. Please help me find it!", "It might be [b]near a police car[/b]."], ["sq3 f en"], ["すみません、大切な[b]家族の写真[/b]が見つかりません。", "帰り道、持ち歩いていたのですが、風で飛ばされてしまいました。探すのを手伝ってください！", "[b]パトカーの近くにあるかもしれません[/b]。"], ["sq3 f jp"]),
-		new Sidequest(3, 5, ["return the slab n shit"], ["a"], ["a"], ["a"])
+		new Sidequest(2, 4, ["Excuse me, I can’t find my important [b]family photo[/b].", "I was carrying it with me on the way home, and the wind blew it away. Please help me find it!", "It might be [b]near a police car[/b]."], ["Phew, the photo is safe, thanks to you!"], ["すみません、大切な[b]家族の写真[/b]が見つかりません。", "帰り道、持ち歩いていたのですが、風で飛ばされてしまいました。探すのを手伝ってください！", "[b]パトカーの近くにあるかもしれません[/b]。"], ["よかった、あなたのおかげで写真は無事です！"]),
+		new Sidequest(3, 5, ["I lost my [b]buddy[/b] in the midst of all the chaos. If you find my [b]buddy[/b], let me know!"], ["Sick, you found my friend! Thanks!"], ["この混乱の中で、[b]相棒[/b]を失くしてしまいました。もし[b]相棒[/b]を見つけたら、教えてください！"], ["すごいね、友達が見つかった！ありがとう！"])
 	};
 	Array<int> _done_quests = [];
 	private Node3D _sidequestspawner;
@@ -329,14 +330,26 @@ public partial class UI : Control
 			_gameCompletionBar.Modulate = new Color(0.2f, 1f, 0.2f);
 			_gameCompletionBar.Value = 100;
 			// Trigger game completion logic here, e.g., show a victory screen or end level
-			_textbox.Call("PopUp", (string[])["Wow! Looks like you cleaned up the whole area! Good work!", "Emergency services can take it from here, but you can continue cleaning if you like."], 1);
-			_textbox.Call("PopUp", (string[])["Yeah, you're awesome!"], 2);
-			_textbox.Call("PopUp", (string[])["I can finally go home and reunite with Mr. Snuggles!"], 3);
-			_textbox.Call("PopUp", (string[])["Woah... so you cleaned up that whole place? Sick..."], 5);
-			_textbox.Call("PopUp", (string[])["Interesting, it's spotless. I never would have thought that this would happen so fast."], 4);
-			_textbox.Call("PopUp", (string[])["Thank you so much for playing our game!"], 1);
-			_objlabel.Text = "Thank you for playing our game!";
-
+			if (!_jp_lang_enable)
+			{
+				_textbox.Call("PopUp", (string[])["Wow! Looks like you cleaned up the whole area! Good work!", "Emergency services can take it from here, but you can continue cleaning if you like."], 1);
+				_textbox.Call("PopUp", (string[])["Yeah, you're awesome!"], 2);
+				_textbox.Call("PopUp", (string[])["I can finally go home and reunite with Mr. Snuggles!"], 3);
+				_textbox.Call("PopUp", (string[])["Woah... so you cleaned up that whole place? Sick..."], 5);
+				_textbox.Call("PopUp", (string[])["Interesting, it's spotless. I never would have thought that this would happen so fast."], 4);
+				_textbox.Call("PopUp", (string[])["Thank you so much for playing our game!"], 1);
+				_objlabel.Text = "Thank you for playing our game!";
+			}
+			else
+			{
+				_textbox.Call("PopUp", (string[])["すごい！辺り一面をきれいに掃除したみたいですね！よくやった！", "ここからは緊急サービスが対応しますが、ご希望であれば清掃を続けることもできます。"], 1);
+				_textbox.Call("PopUp", (string[])["うん、君は素晴らしいよ！"], 2);
+				_textbox.Call("PopUp", (string[])["やっと家に帰ってチョコさんと再会できる！"], 3);
+				_textbox.Call("PopUp", (string[])["うわあ。。。それで、あそこ全部掃除したの？すごい。。。"], 5);
+				_textbox.Call("PopUp", (string[])["面白いですね、きれいですね。こんなに早くそうなるとは思いませんでした。"], 4);
+				_textbox.Call("PopUp", (string[])["私たちのゲームをプレイしていただき、誠にありがとうございます！"], 1);
+				_objlabel.Text = "私たちのゲームをプレイしていただきありがとうございます！";
+			}
 		}
 		else
 		{

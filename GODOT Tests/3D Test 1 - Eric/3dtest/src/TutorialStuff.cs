@@ -60,7 +60,8 @@ public partial class TutorialStuff : MarginContainer
         ["プロトタイプをプレイしていただきありがとうございます!"]
     ];
 
-    private string[] _objs =
+    private string[] _objs = [];
+    private string[] _Eobjs =
     [
         "Head over to the blue beacon near the park using WASD",
         "Vacuum 20 (50% of a tank) trash of a single type",
@@ -75,6 +76,21 @@ public partial class TutorialStuff : MarginContainer
         "Thanks for playing our game!"
     ];
 
+    private string[] _Jobjs =
+    [
+        "WASDを使って公園近くの青いビーコンに向かいます",
+        "1種類のゴミを20個（タンクの50%）吸引する",
+        "右クリックを押したまま放すことで、可燃物の入った袋を赤いゴミ箱に投げ入れます。",
+        "ゴミは各色のゴミ箱に捨ててください",
+        "公園内の点滅するシンボルに向かってください",
+        "Fで携帯電話を開く",
+        "危険に対処できる機関を見つける",
+        "WASDとスペースキーを使って消防署の番号をダイヤルします",
+        "右クリックで危険物にフレアを投げる",
+        "エリアを100％完了まで清掃してください。",
+        "ゲームをプレイしていただきありがとうございます！"
+    ];
+
 
     public override void _Ready()
     {
@@ -87,6 +103,7 @@ public partial class TutorialStuff : MarginContainer
 
         if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
         {
+            _objs = _Eobjs;
             _messages = _Emessages;
             _textbox.AddThemeFontOverride("font", EFont);
         }
@@ -95,12 +112,14 @@ public partial class TutorialStuff : MarginContainer
             language = (int)CF.GetValue("playersettings", "lang");
             if (language == 1)
             {
+                _objs = _Jobjs;
                 _messages = _Jmessages;
                 _textbox.AddThemeFontOverride("font", JFont);
 
             }
             else
             {
+                _objs = _Eobjs;
                 _messages = _Emessages;
                 _textbox.AddThemeFontOverride("font", EFont);
             }
