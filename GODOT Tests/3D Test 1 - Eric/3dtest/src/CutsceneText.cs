@@ -25,6 +25,7 @@ public partial class CutsceneText : RichTextLabel
     private RichTextLabel CharaName;
     int charactersIntroduced = 1;
     int language = 0;
+    private bool callOnce = true;
 
     public FontFile JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
 	public FontFile EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
@@ -206,8 +207,13 @@ public partial class CutsceneText : RichTextLabel
                 // }
                 else // ADD MORE ELSE IFS IF MORE NPCS ARE ADDED
                 {
-                    _transitionscene.Call("ChangeScene", "res://assets/level/SceneLoader.tscn");
-                    //res://assets/level/SceneLoader.tscn res://assets/level/testscene.tscn
+                    if (callOnce)
+                    {
+                        callOnce = false;
+                        _transitionscene.Call("ChangeScene", "res://assets/level/SceneLoader.tscn");
+                        //res://assets/level/SceneLoader.tscn res://assets/level/testscene.tscn
+                    }
+                        
                 }
             }
         }

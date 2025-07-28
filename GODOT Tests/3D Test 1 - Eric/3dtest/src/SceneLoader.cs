@@ -27,6 +27,7 @@ public partial class SceneLoader : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		GD.Print(loading, progressBar.Value);
 		if (loading)
 		{
 			var progress = new Godot.Collections.Array();
@@ -72,7 +73,10 @@ public partial class SceneLoader : Control
 		this.path = path;
 		if (ResourceLoader.HasCached(path))
 		{
-			ResourceLoader.LoadThreadedGet(path);
+			//ResourceLoader.LoadThreadedGet(path);
+			ResourceLoader.LoadThreadedRequest(path, null, false, ResourceLoader.CacheMode.Reuse);
+			//ResourceLoader.LoadThreadedRequest(path);
+			loading = true;
 		}
 		else
 		{
