@@ -1,77 +1,83 @@
 using Godot;
 using System;
+using System.Runtime.ExceptionServices;
 using static Godot.ResourceLoader;
 
 public partial class SceneLoader : Control
 {
-	string loadDir;
-	Node currentLoadedNode;
-	private Tween tween;
-	bool isLoading = false;
-	public static SceneLoader Instance;
-	private ProgressBar ProgressBar;
+	private string path;
+	private bool loading;
+	private AnimatedSprite2D sprite;
+
+	[Export] public bool waitforInput = true;
+	[Export] SceneTransition _transitionscene;
+
+	private ProgressBar progressBar;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Instance = this;
-		ProgressBar = GetNode<ProgressBar>("ProgressBar");
+		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		sprite.Play();
+		_transitionscene = GetNode<SceneTransition>("/root/SceneTransition");
+		progressBar = GetNode<Panel>("Panel").GetNode<ProgressBar>("ProgressBar");
+		LoadLevel("res://assets/level/testscene.tscn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (!isLoading || loadDir == "")
+		if (loading)
 		{
-			return;
-		}
-
-		Godot.Collections.Array loadPercent = new();
-		ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(loadDir, loadPercent);
-		double percentage = (double)loadPercent[0];
-
-		if (status == ResourceLoader.ThreadLoadStatus.Loaded)
-		{
-			if (tween.IsRunning())
+			var progress = new Godot.Collections.Array();
+			var status = ResourceLoader.LoadThreadedGetStatus(path, progress);
+			if (status == ResourceLoader.ThreadLoadStatus.InProgress)
 			{
-				return;
+				progressBar.Value = (double)progress[0] * 100;
 			}
-			isLoading = false;
-			tween = GetTree().CreateTween();
-			tween.TweenProperty(this, "value", percentage, 0.5);
-			tween.TweenCallback(Callable.From(InstantiateScene));
+			else if (status == ResourceLoader.ThreadLoadStatus.Loaded)
+			{
+				SetProcess(false);
+				progressBar.Value = 100;
+				if (progressBar.Value == 100)
+				{
+					_transitionscene.Call("ChangeScene", "res://assets/level/testscene.tscn");
+					//ChangeScene(ResourceLoader.LoadThreadedGet(path) as PackedScene);
+				}
+			}
 		}
-
-		if (ProgressBar.Value == percentage || tween != null)
-		{
-			return;
-		}
-
-		tween = GetTree().CreateTween();
-		tween.TweenProperty(this, "value", percentage, 0.5);
 	}
 
-	private void InstantiateScene()
-	{
-		var resource = ResourceLoader.LoadThreadedGet(loadDir) as PackedScene;
-		currentLoadedNode = resource.Instantiate();
-		GetTree().Root.AddChild(currentLoadedNode);
-		this.Hide();
-	}
+	// public void ChangeScene(PackedScene resource)
+	// {
 
-	public void LoadScene(string Path)
+	// 	var rootNode = GetTree().Root;
+	// 	// foreach (var item in GetTree().Root.GetChildren())
+	// 	// {
+	// 	// 	if (item is Node3D || item is Node2D || item is Control)
+	// 	// 	{
+	// 	// 		GetTree().Root.RemoveChild(item);
+	// 	// 		item.QueueFree();
+	// 	// 	}
+
+	// 	// }
+
+	// 	Node currentNode = resource.Instantiate();
+	// 	rootNode.AddChild(currentNode);
+	// 	//QueueFree();
+	// }
+
+	public void LoadLevel(string path)
 	{
-		if (isLoading)
+		this.path = path;
+		if (ResourceLoader.HasCached(path))
 		{
-			return;
+			ResourceLoader.LoadThreadedGet(path);
 		}
-		loadDir = Path;
-		ResourceLoader.LoadThreadedRequest(loadDir);
-		Visible = true;
-		ProgressBar.Value = 0;
-		if (currentLoadedNode == null)
+		else
 		{
-			currentLoadedNode.QueueFree();
+			ResourceLoader.LoadThreadedRequest(path);
+			loading = true;
 		}
 	}
 }

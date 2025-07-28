@@ -1,6 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcdk34thcw7ty"]
+[gd_scene load_steps=16 format=3 uid="uid://dcdk34thcw7ty"]
 
 [ext_resource type="Script" uid="uid://ctanhp3jrjimm" path="res://src/SceneLoader.cs" id="1_gl168"]
+[ext_resource type="FontFile" uid="uid://bvp4jwnfmfmx4" path="res://assets/menu/Atop.ttf" id="2_ksraf"]
+[ext_resource type="Texture2D" uid="uid://ctya2idliyg6f" path="res://assets/player/sprites_run_blue.png" id="3_ycp2n"]
+[ext_resource type="Shader" uid="uid://cu1c28dfj70xp" path="res://assets/ui/movingBackground.gdshader" id="4_hfhmp"]
+[ext_resource type="Texture2D" uid="uid://qve321oyxsrk" path="res://assets/menu/BackgroundTexture.tres" id="5_bkx2y"]
+[ext_resource type="Material" uid="uid://cbsbewut8v25j" path="res://assets/ui/blur.tres" id="6_4kfbv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vabyu"]
+shader = ExtResource("4_hfhmp")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfhmp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycp2n"]
+bg_color = Color(0.493, 0.713, 0.742, 0.749)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksraf"]
+bg_color = Color(0.513469, 0.812708, 0.398251, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovojs"]
+atlas = ExtResource("3_ycp2n")
+region = Rect2(880, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55eho"]
+atlas = ExtResource("3_ycp2n")
+region = Rect2(880, 176, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfhmp"]
+atlas = ExtResource("3_ycp2n")
+region = Rect2(880, 352, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkx2y"]
+atlas = ExtResource("3_ycp2n")
+region = Rect2(880, 528, 176, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kfbv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovojs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55eho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfhmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkx2y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="SceneLoader" type="Control"]
 layout_mode = 3
@@ -11,16 +63,68 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gl168")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Solid Color" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.655458, 0.836538, 0.859311, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_vabyu")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_bkx2y")
+
+[node name="Blur" type="ColorRect" parent="Background"]
+material = ExtResource("6_4kfbv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hfhmp")
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -25.0
-offset_right = 250.0
-offset_bottom = 25.0
+offset_left = 305.0
+offset_top = 413.0
+offset_right = 928.0
+offset_bottom = 508.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ksraf")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/background = SubResource("StyleBoxFlat_ycp2n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ksraf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1179, 963)
+sprite_frames = SubResource("SpriteFrames_4kfbv")
+frame_progress = 0.897459
