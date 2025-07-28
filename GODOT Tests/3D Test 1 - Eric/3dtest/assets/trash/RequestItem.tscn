@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfjlkiksmlf46"]
+
+[ext_resource type="Texture2D" uid="uid://c88aasafkv421" path="res://assets/player/shadow.png" id="1_cu6gv"]
+[ext_resource type="Script" uid="uid://blmbuxruyfmjo" path="res://assets/trash/RequestItem.cs" id="1_fvwj0"]
+[ext_resource type="Texture2D" uid="uid://cpw4dv6kuuk1j" path="res://assets/character items/character quest item sprites.png" id="2_vwuh5"]
+[ext_resource type="Texture2D" uid="uid://bfl8hpd1n576v" path="res://assets/trash/sprite_map_trash_32.png" id="3_q2856"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ra36g"]
+margin = 0.03
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["request"]]
+collision_layer = 2
+collision_mask = 3
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_fvwj0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ra36g")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+spring_length = 10.0
+
+[node name="Decal" type="Decal" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6.64567e-09, 0.152035)
+size = Vector3(0.5, 0.22, 0.5)
+texture_albedo = ExtResource("1_cu6gv")
+upper_fade = 0.000162534
+cull_mask = 1048573
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0356851, 0)
+layers = 2
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 0.008
+billboard = 1
+shaded = true
+texture_filter = 4
+render_priority = 1
+texture = ExtResource("2_vwuh5")
+hframes = 10
+vframes = 4
+
+[node name="MapSprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.629937, 0)
+top_level = true
+layers = 32
+cast_shadow = 0
+gi_mode = 0
+pixel_size = 0.1
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_q2856")

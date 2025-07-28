@@ -11,7 +11,7 @@ public partial class TrashSpawner : Node3D
 	private Timer _timer;
 	private CharacterBody3D _player;
 
-	private float _TimeSinceLastSpawn;
+	private float _TimeSinceLastSpawn = 0;
 	private bool _initial_spawn = false;
 
 	public override void _Ready()
@@ -21,7 +21,7 @@ public partial class TrashSpawner : Node3D
 
 	public override void _Process(double delta)
 	{
-		if (_initial_spawn && GlobalPosition.DistanceTo(_player.GlobalPosition) < 50) _TimeSinceLastSpawn += (float)delta;
+		_TimeSinceLastSpawn += (float)delta;
 
 		//spawn if player > x distance away, more than a minute since last spawn, spawner has <5 remaining trash
 		if (!_initial_spawn)
@@ -32,12 +32,12 @@ public partial class TrashSpawner : Node3D
 				_initial_spawn = true;
 			}
 		}
-		else if (_TimeSinceLastSpawn > 100 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 40 && GetChildCount() < 5 && _enabled)
+		else if (_TimeSinceLastSpawn > 70 && GlobalPosition.DistanceTo(_player.GlobalPosition) > 40 && GetChildCount() < 5 && _enabled)
 		{
 			var r = GD.Randf();
-			if (r > .75) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
+			if (r > .5) _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling();
 			else _TimeSinceLastSpawn = 120f;
-			_TimeSinceLastSpawn -= 100;
+			_TimeSinceLastSpawn -= 10;
 		}
 
 	}
@@ -45,7 +45,7 @@ public partial class TrashSpawner : Node3D
 	void _SpawnSomeTrashYayHoorayILoveThisFunctionItsMyFavoriteOfAllTimeWoooILoveGambling()
 	{
 		//gamble for which types of trash to spawn, how many, and in what ratio (all random). trash types are 1,2,3,4
-		int total_amnt_to_spawn = GD.RandRange(5, 20);
+		int total_amnt_to_spawn = GD.RandRange(5, 15);
 
 		int total_types_to_spawn;
 		var r = GD.Randf();

@@ -6,6 +6,7 @@ public partial class TutorialStuff : MarginContainer
 {
     private AudioStreamPlayer TextBubbleSFX;
     private Control _textbox;
+    private RichTextLabel _objlabel;
 
     private int _step = 0;
     private int language = 0;
@@ -21,7 +22,7 @@ public partial class TutorialStuff : MarginContainer
         ["Great job! Now, let's learn how to toss trash.",
             "Use [b][color=misty_rose]1-4[/color][/b] to select the type of trash you want to toss.",
             "Then, once your tank is at 50% capacity or more, hold [b][color=misty_rose]Right Click[/color][/b] to charge up a throw.",
-            "Finally, release [b]M2[/b] to toss a bag of the selected trash!",
+            "Finally, release [b]Right Click[/b] to toss a bag of the selected trash!",
             "Your tank holds [b][color=#ff4e4a]Combustibles[/color][/b], [b][color=#57e792]Plastics[/color][/b], [b][color=#e9c261]PET Bottles[/color][/b], and [b][color=#5a98fa]Cans & Glass Bottles[/color][/b].",
             "Try throwing a bag of [b][color=#ff4e4a]Combustibles[/color][/b] into the correct trash bin!",
             "Trash bins appear on the [b]Minimap[/b] as a colored circle with an outline."],
@@ -36,7 +37,7 @@ public partial class TutorialStuff : MarginContainer
         ["Great job! You now know how to deal with hazards!",
                 "The minimap at the bottom-left shows the location of hazards as a large warning sign.",
                 "Try to fully clean the area. Your job will be complete once the bar at the bottom right reaches 100%."],
-        ["Thanks for playing our prototype!"]
+        ["Thanks for playing our game!"]
     ];
     private string[][] _Jmessages =
     [
@@ -59,14 +60,30 @@ public partial class TutorialStuff : MarginContainer
         ["プロトタイプをプレイしていただきありがとうございます!"]
     ];
 
+    private string[] _objs =
+    [
+        "Head over to the blue beacon near the park using WASD",
+        "Vacuum 20 (50% of a tank) trash of a single type",
+        "Toss a bag of Combustibles in a red bin by holding and releasing Right Click",
+        "Toss trash into one of each colored bin",
+        "Head towards the flashing symbol in the park",
+        "Open your phone with F",
+        "Find the agency that can deal with the hazard",
+        "Dial the number of the Fire Department using WASD and SPACE",
+        "Throw the flare at the hazard using Right Click",
+        "Clean the area to 100% completion!",
+        "Thanks for playing our game!"
+    ];
+
 
     public override void _Ready()
     {
         var JFont = GD.Load<FontFile>("res://assets/menu/Futehodo-MaruGothic.ttf");
-		var EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
+        var EFont = GD.Load<FontFile>("res://assets/menu/Atop.ttf");
 
         TextBubbleSFX = GetParent().GetNode<AudioStreamPlayer>("TextBubbleSFX");
         _textbox = GetParent().GetNode<Control>("Textbox");
+        _objlabel = GetParent().GetNode<RichTextLabel>("Minimap/PanelContainer/CenterContainer/ObjLabel");
 
         if (CF.Load(OS.GetUserDataDir() + "/" + "PlayerSettings.cfg") != Error.Ok)
         {
@@ -96,6 +113,7 @@ public partial class TutorialStuff : MarginContainer
         if (step < _messages.Length)
         {
             _textbox.Call("PopUp", _messages[step], 1);
+            _objlabel.Text = _objs[step];
         }
     }
 

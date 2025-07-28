@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dehxjhb5ukc3g"]
+[gd_scene load_steps=31 format=3 uid="uid://dehxjhb5ukc3g"]
 
 [ext_resource type="Script" uid="uid://ern722h687j1" path="res://src/Beacon.cs" id="1_8obva"]
 [ext_resource type="AudioStream" uid="uid://bywnrp0i7jxs2" path="res://assets/Audios/FSSSH.wav" id="2_weuih"]
@@ -96,6 +96,12 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_2hcfa"]
 curve = SubResource("Curve_e78u0")
 
+[sub_resource type="Gradient" id="Gradient_kysm2"]
+colors = PackedColorArray(1, 1, 0, 1, 0.901961, 0.0431373, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m0r6o"]
+gradient = SubResource("Gradient_kysm2")
+
 [sub_resource type="Gradient" id="Gradient_weuih"]
 offsets = PackedFloat32Array(0.193662)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -119,6 +125,7 @@ attractor_interaction_enabled = false
 scale_min = 0.4
 scale_max = 0.7
 color_ramp = SubResource("GradientTexture1D_kysm2")
+color_initial_ramp = SubResource("GradientTexture1D_m0r6o")
 alpha_curve = SubResource("CurveTexture_2hcfa")
 emission_curve = SubResource("CurveTexture_p6tt8")
 
@@ -128,6 +135,7 @@ alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.372549, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_kysm2"]
 material = SubResource("StandardMaterial3D_kysm2")
@@ -171,7 +179,6 @@ draw_pass_1 = SubResource("SphereMesh_weuih")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448938, 0)
-visible = false
 amount = 32
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_weuih")

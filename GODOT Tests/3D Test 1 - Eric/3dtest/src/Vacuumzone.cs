@@ -6,6 +6,7 @@ public partial class Vacuumzone : Area3D
 {
 	[Export] private float _deletedistance = 1.5f;
 	private CharacterBody3D _player;
+	private Control _ui;
 	private List<RigidBody3D> _bodies;
 	private Area3D _suckhitbox;
 	private GpuParticles3D _particles1;
@@ -17,6 +18,7 @@ public partial class Vacuumzone : Area3D
 	public override void _Ready()
 	{
 		_player = GetParent<CharacterBody3D>();
+		_ui = GetTree().CurrentScene.GetNode<Control>("SubViewportContainer/UI");
 		_bodies = new List<RigidBody3D>();
 		_suckhitbox = GetNode<Area3D>("suck");
 		_particles1 = GetNode<GpuParticles3D>("GPUParticles3D");
@@ -40,7 +42,7 @@ public partial class Vacuumzone : Area3D
 			RigidBody3D body = _bodies[i];
 			if (body.IsInGroup("cleanable_vacuum"))
 			{
-				body.ApplyCentralForce(Godot.Vector3.Up * 0.001f); //to wkae the body up
+				body.ApplyCentralForce(Godot.Vector3.Up * 0.001f); //to wake the body up
 				int trash_id = (int)_bodies[i].Call("_GetTrashID");
 				int playerpercentage = (int)_player.Call("_GetTankPercentage", trash_id);
 				if (playerpercentage < 40 && _time_active > 0.2)
@@ -54,6 +56,16 @@ public partial class Vacuumzone : Area3D
 					_bodies.Remove(body);
 				}
 			}
+			if (body.IsInGroup("request"))
+			{
+				_ui.Call("SidequestComplete");
+				body.CollisionLayer = 0;
+				var tween = GetTree().CreateTween();
+				tween.TweenProperty(body, "global_position", _player.GlobalPosition + Vector3.Up * 0.5f, .13f).SetTrans(Tween.TransitionType.Quad);
+				tween.Finished += () => body.QueueFree();
+				_PlaySuckSFX();
+				_bodies.Remove(body);
+			}
 
 		}
 
@@ -61,7 +73,7 @@ public partial class Vacuumzone : Area3D
 
 	private void _suck_entered(Node3D body)
 	{
-		if (body.IsInGroup("cleanable_vacuum"))
+		if (body.IsInGroup("cleanable_vacuum") | body.IsInGroup("request"))
 		{
 			_bodies.Add((RigidBody3D)body);
 		}
@@ -69,7 +81,7 @@ public partial class Vacuumzone : Area3D
 
 	private void _suck_exited(Node3D body)
 	{
-		if (body.IsInGroup("cleanable_vacuum"))
+		if (body.IsInGroup("cleanable_vacuum") | body.IsInGroup("request"))
 		{
 			_bodies.Remove((RigidBody3D)body);
 		}

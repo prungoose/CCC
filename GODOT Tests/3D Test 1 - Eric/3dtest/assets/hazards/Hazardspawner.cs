@@ -28,7 +28,7 @@ public partial class Hazardspawner : Node3D
 			_possible_types_arr.Add(i);
 		}
 		var r = GD.Randf();
-		if ((r > 0.5 && _enabled) | _tutorial) _SpawnAHazard();
+		if ((r > 0.8 && _enabled) | _tutorial) _SpawnAHazard();
 	}
 
 	public override void _Process(double delta)
@@ -37,10 +37,10 @@ public partial class Hazardspawner : Node3D
 		if (!_enabled) return;
 		if (!_active) _time_since_last += (float)delta;
 
-		if (player_dis > 75 && !_active && _time_since_last >= _time_until_next)
+		if (player_dis > 75 && !_active && _time_since_last >= _time_until_next && (int)_player.Call("GetActiveHazardCount") < 5)
 		{
 			var r = GD.Randf();
-			if (r > 0.75) _SpawnAHazard();
+			if (r > 0.9) _SpawnAHazard();
 			else _time_since_last = _time_until_next - 10;
 		}
 		if (_tutorial && player_dis < 8 && (int)_ui.Call("GetTutorialStep") == 4) _ui.Call("NextTutorialStep");

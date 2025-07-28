@@ -69,15 +69,20 @@ public partial class UI : Control
 	private bool _firstsidequestgiven = false;
 	private bool _jp_lang_enable = false;
 	Sidequest[] _possible_sidequests = {
-		new Sidequest(0, 2, ["Hey... haha... I heard you were in the area...", "Listen, I lost something important to me, just, don't tell anyone it's mine, OK?", "It should be around the parking lot to the north. If you find it, you'll be a big help, thanks."], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
-		new Sidequest(1, 3, ["HELP!!!!! AHH!!!!!", "During the typhoon, I lost my cat, Mr. Snuggles, and I don't know where he went!!!", "Can you check around and see if you can find him??", "I think I last saw him around the [b]western park[/b] area..."], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"])
+		new Sidequest(0, 2, ["Hey... haha... I heard you were in the area...", "Listen, I lost something important to me, just, don't tell anyone it's mine, OK?", "It should be around the empty lots. If you find it, you'll be a big help, thanks."], ["sq1 f en"], ["sq1 s jp"], ["sq1 e jp"]),
+		new Sidequest(1, 3, ["HELP!!!!! AHH!!!!!", "During the typhoon, I lost my cat, [b]Mr. Snuggles[/b], and I don't know where he went!!!", "Can you check around and see if you can find him??", "I think I last saw him around the [b]smaller park[/b] area..."], ["sq2 f en"], ["sq2 s jp"], ["sq2 e jp"]),
+		new Sidequest(2, 4, ["Excuse me, I can’t find my important family photo.", "I was carrying it with me on the way home, and the wind blew it away. Please help me find it!", "It might be near a police car."], ["sq3 f en"], ["sq3 s jp"], ["sq3 f jp"]),
+		new Sidequest(3, 5, ["return the slab n shit"], ["a"], ["a"], ["a"])
 	};
+	Array<int> _done_quests = [];
+	private Node3D _sidequestspawner;
 
 	private AudioStreamPlayer _yessfx;
 	private AudioStreamPlayer _nosfx;
 
+	private bool _gamedone = false;
 
-
+	private RichTextLabel _objlabel;
 
 	[Export] private Label _baitText;
 
@@ -114,8 +119,11 @@ public partial class UI : Control
 
 		_sidequestgivetimer = GetNode<Timer>("SidequestGiveTimer");
 		_sidequestgivetimer.Timeout += SidequestGive;
+		_sidequestspawner = GetTree().CurrentScene.GetNode<Node3D>("SubViewportContainer/SubViewport/NavigationRegion3D/Level/ItemSpawners");
 
 		_baitText.Modulate = new Color(0.8f, 0.8f, 0.8f);
+
+		_objlabel = GetNode<RichTextLabel>("Minimap/PanelContainer/CenterContainer/ObjLabel");
 
 		_yessfx = GetNode<AudioStreamPlayer>("Phone/YesSFX");
 		_nosfx = GetNode<AudioStreamPlayer>("Phone/NoSFX");
@@ -302,7 +310,7 @@ public partial class UI : Control
 	{
 		foreach (ProgressBar t in _tanks)
 		{
-			//eventually add something so that tank background changes when throwable ready
+			//eventually add something so that tank background changes when throwable ready ?
 		}
 	}
 
@@ -313,17 +321,21 @@ public partial class UI : Control
 
 	public void IncreaseGameCompletion(float completion)
 	{
+		if (_gamedone) return;
 		_gameCompletionBar.Value += completion;
 		if (_gameCompletionBar.Value >= 100)
 		{
+			_gamedone = true;
 			_gameCompletionBar.Modulate = new Color(0.2f, 1f, 0.2f);
 			_gameCompletionBar.Value = 100;
 			// Trigger game completion logic here, e.g., show a victory screen or end level
-			_textbox.Call("PopUp", (string[])["Wow! Looks like you cleaned up the whole area! Good work!", "Emergency services can take it from here, but you can continue cleaning if you like.", "Thank you so much for playing our prototype!"], 1);
+			_textbox.Call("PopUp", (string[])["Wow! Looks like you cleaned up the whole area! Good work!", "Emergency services can take it from here, but you can continue cleaning if you like."], 1);
 			_textbox.Call("PopUp", (string[])["Yeah, you're awesome!"], 2);
 			_textbox.Call("PopUp", (string[])["I can finally go home and reunite with Mr. Snuggles!"], 3);
-			_textbox.Call("PopUp", (string[])["Woah... so you cleaned up that whole place? Sick..."], 4);
-			_textbox.Call("PopUp", (string[])["Interesting, it's spotless. I never would have thought this would happen so fast."], 5);
+			_textbox.Call("PopUp", (string[])["Woah... so you cleaned up that whole place? Sick..."], 5);
+			_textbox.Call("PopUp", (string[])["Interesting, it's spotless. I never would have thought that this would happen so fast."], 4);
+			_textbox.Call("PopUp", (string[])["Thank you so much for playing our game!"], 1);
+			_objlabel.Text = "Thank you for playing our game!";
 
 		}
 		else
@@ -344,27 +356,33 @@ public partial class UI : Control
 
 	public void SidequestGive()
 	{
-		if (_active_sidequest != 100 && GetTutorialStep() > 9) //sq id 100 = no sidequest active
+		if (_done_quests.Count == _possible_sidequests.Length) return;
+		if (_active_sidequest == 100 && GetTutorialStep() >= 9) //sq id 100 = no sidequest active
 		{
+			_sidequestgivetimer.WaitTime = 120;
+			_sidequestgivetimer.Start();
+			_active_sidequest = GD.RandRange(0, _possible_sidequests.Length - 1);
+			while (_done_quests.Contains(_active_sidequest))
+				_active_sidequest = GD.RandRange(0, _possible_sidequests.Length - 1);
+			Sidequest quest = _possible_sidequests[_active_sidequest];
+
+			if (!_jp_lang_enable) _textbox.Call("PopUp", quest.starting_dialogue_en, quest.caller_id);
+			else _textbox.Call("PopUp", quest.starting_dialogue_jp, quest.caller_id);
+
+			if (!_firstsidequestgiven) QuestTutorial();
+
+			_sidequestspawner.Call("_SpawnAt", _active_sidequest);
+		}
+		else {
 			_sidequestgivetimer.WaitTime = 10;
 			_sidequestgivetimer.Start();
-			return;
 		}
-		_sidequestgivetimer.WaitTime = 120;
-		_sidequestgivetimer.Start();
-		_active_sidequest = GD.RandRange(1, _possible_sidequests.Length - 1);
-		Sidequest quest = _possible_sidequests[_active_sidequest];
-
-		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.starting_dialogue_en, quest.caller_id);
-		else _textbox.Call("PopUp", quest.starting_dialogue_jp, quest.caller_id);
-
-		if (!_firstsidequestgiven) QuestTutorial();
-
-		
 	}
 
 	public void SidequestComplete()
 	{
+		if (_active_sidequest > 4) return;
+		_done_quests.Add(_active_sidequest);
 		Sidequest quest = _possible_sidequests[_active_sidequest];
 		_active_sidequest = 100;
 		if (!_jp_lang_enable) _textbox.Call("PopUp", quest.ending_dialogue_en, quest.caller_id);
@@ -394,6 +412,7 @@ public partial class UI : Control
 
 	private void QuestTutorial()
 	{
+		_firstsidequestgiven = true;
 		_textbox.Call("PopUp", (string[])["It looks like you just got your first [b]request[/b]. Help the citizen in need by finding where their lost item is!"], 1);
 	}
 }

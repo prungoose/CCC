@@ -1,10 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://bc07qh3pxn6kk"]
+[gd_scene load_steps=57 format=3 uid="uid://bc07qh3pxn6kk"]
 
 [ext_resource type="PackedScene" uid="uid://d1pe32eowvpbh" path="res://assets/map/map.tscn" id="1_wpr57"]
 [ext_resource type="PackedScene" uid="uid://cv2hos6td6wwj" path="res://assets/trash/TrashSpawner.tscn" id="2_04qkv"]
+[ext_resource type="AudioStream" uid="uid://bywnrp0i7jxs2" path="res://assets/Audios/FSSSH.wav" id="2_75yh3"]
 [ext_resource type="PackedScene" uid="uid://byblgrke0emy" path="res://assets/hazards/hazardspawner.tscn" id="3_r1ht6"]
 [ext_resource type="PackedScene" uid="uid://cklsw1rjdbip0" path="res://assets/trash/TrashBin.tscn" id="4_ljpjc"]
 [ext_resource type="AudioStream" uid="uid://b88r37dtfg52l" path="res://assets/Audios/Ambiance.wav" id="5_1enne"]
+[ext_resource type="Script" uid="uid://cy1bv3qx56ni6" path="res://assets/level/ItemSpawners.cs" id="5_ljpjc"]
+[ext_resource type="PackedScene" uid="uid://cfjlkiksmlf46" path="res://assets/trash/RequestItem.tscn" id="6_1enne"]
 [ext_resource type="AudioStream" uid="uid://efphq3x1xrqr" path="res://assets/Audios/Glubglub.mp3" id="6_75yh3"]
 [ext_resource type="AudioStream" uid="uid://c635urq3msa13" path="res://assets/Audios/windingUp.wav" id="7_bxlu3"]
 [ext_resource type="Script" uid="uid://7o0d0pohglr4" path="res://src/Camera.cs" id="8_lhto2"]
@@ -29,12 +32,133 @@ agent_max_slope = 30.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bofc0"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_a2nen"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75yh3"]
+albedo_color = Color(0.355707, 0.587344, 0.989974, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bofc0"]
-emission_enabled = true
-emission = Color(0.141176, 0.788235, 1, 1)
-emission_energy_multiplier = 6.03
+[sub_resource type="CylinderMesh" id="CylinderMesh_8obva"]
+material = SubResource("StandardMaterial3D_75yh3")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.795
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8obva"]
+points = PackedVector3Array(0.108214, 0.40381, -0.0305668, -0.10631, -0.40381, -0.0431871, -0.10631, -0.40381, 0.0451129, -0.10631, 0.40381, -0.0431871, -0.0305668, 0.40381, 0.108214, 0.0829737, -0.40381, 0.0829737, 0.0451129, -0.40381, -0.10631, -0.0431871, 0.40381, -0.10631, 0.0829737, 0.40381, 0.0829737, -0.0305668, -0.40381, 0.108214, 0.108214, -0.40381, -0.0305668, -0.0936892, 0.40381, 0.0703534, 0.0703534, 0.40381, -0.0936892, -0.0684277, -0.40381, -0.0936892, 0.0324926, -0.40381, 0.108214, 0.108214, -0.40381, 0.0324926, 0.0829737, -0.40381, -0.081048, -0.081048, -0.40381, 0.0829737, 0.0324926, 0.40381, 0.108214, 0.108214, 0.40381, 0.0324926, -0.0936892, 0.40381, -0.0684277, -0.0431871, -0.40381, -0.10631, -0.10631, 0.40381, 0.0451129, 0.0451129, 0.40381, -0.10631, -0.0936892, -0.40381, -0.0684277, -0.0684277, 0.40381, -0.0936892, -0.081048, 0.40381, 0.0829737, 0.0829737, 0.40381, -0.081048, -0.0936892, -0.40381, 0.0703534, 0.0703534, -0.40381, -0.0936892)
+
+[sub_resource type="Curve" id="Curve_weuih"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282974, 0.833027), 0.0, 0.0, 0, 0, Vector2(0.431655, 0.850917), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_8obva"]
+curve = SubResource("Curve_weuih")
+
+[sub_resource type="Gradient" id="Gradient_8obva"]
+offsets = PackedFloat32Array(0, 0.88491)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_weuih"]
+gradient = SubResource("Gradient_8obva")
+
+[sub_resource type="Curve" id="Curve_kysm2"]
+_data = [Vector2(0.407674, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_m0r6o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o40p0"]
+_data = [Vector2(0.285372, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kysm2"]
+curve_x = SubResource("Curve_kysm2")
+curve_y = SubResource("Curve_m0r6o")
+curve_z = SubResource("Curve_o40p0")
+
+[sub_resource type="Curve" id="Curve_8obva"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.235012, 0.821101), 0.785273, 0.785273, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m0r6o"]
+curve = SubResource("Curve_8obva")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8obva"]
+direction = Vector3(0, 1, 0)
+spread = 4.0
+initial_velocity_min = 13.19
+initial_velocity_max = 13.19
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_kysm2")
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_m0r6o")
+color_ramp = SubResource("GradientTexture1D_weuih")
+alpha_curve = SubResource("CurveTexture_8obva")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxlu3"]
+render_priority = 2
+transparency = 3
+alpha_hash_scale = 0.1
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.424767, 0.569437, 0.993306, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_lhto2"]
+material = SubResource("StandardMaterial3D_bxlu3")
+radius = 1.0
+
+[sub_resource type="Curve" id="Curve_e78u0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.212903, 1), 0.452423, 0.452423, 0, 0, Vector2(0.816129, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2hcfa"]
+curve = SubResource("Curve_e78u0")
+
+[sub_resource type="Gradient" id="Gradient_weuih"]
+offsets = PackedFloat32Array(0.193662)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kysm2"]
+gradient = SubResource("Gradient_weuih")
+
+[sub_resource type="Curve" id="Curve_2hcfa"]
+_data = [Vector2(0.219355, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_p6tt8"]
+curve = SubResource("Curve_2hcfa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_weuih"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_min = 0.4
+scale_max = 0.7
+color_ramp = SubResource("GradientTexture1D_kysm2")
+alpha_curve = SubResource("CurveTexture_2hcfa")
+emission_curve = SubResource("CurveTexture_p6tt8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kysm2"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_kysm2"]
+material = SubResource("StandardMaterial3D_kysm2")
+radius = 0.1
+height = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jotil"]
 size = Vector3(255.876, 1, 179.104)
@@ -111,17 +235,51 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/Area3D"]
 shape = SubResource("BoxShape3D_bofc0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.773479, 0)
-mesh = SubResource("CylinderMesh_a2nen")
-surface_material_override/0 = SubResource("StandardMaterial3D_bofc0")
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon"]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon"]
-light_color = Color(0.108084, 0.430034, 0.981764, 1)
-light_energy = 5.15
-light_size = 0.34
-omni_range = 2.663
-omni_attenuation = 10.0
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8obva")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_8obva")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, -0.371747, -2.18557e-08, -0.334371)
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+omni_range = 0.5
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, 0.371747, 2.18557e-08, 0.334371)
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+omni_range = 0.5
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38428, 0.448938, -0.24206)
+top_level = true
+amount = 32
+speed_scale = 0.3
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_8obva")
+draw_pass_1 = SubResource("SphereMesh_lhto2")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, -0.333783, -1.96237e-08, -0.300223)
+visible = false
+amount = 32
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_weuih")
+draw_pass_1 = SubResource("SphereMesh_kysm2")
+
+[node name="FSSSH" type="AudioStreamPlayer3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Beacon/StaticBody3D"]
+transform = Transform3D(0.668741, -0.743495, -3.24992e-08, 0, -4.37114e-08, 1, -0.743495, -0.668741, -2.92316e-08, 0, 0, 0)
+stream = ExtResource("2_75yh3")
+volume_db = 10.0
+bus = &"SFX"
 
 [node name="Level geometry" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
 
@@ -222,7 +380,7 @@ _tutorial = true
 
 [node name="HazardSpawner2" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6215, -0.0669975, -32.2673)
-_possible_types = PackedInt32Array(1, 3, 4)
+_possible_types = PackedInt32Array(1, 3, 4, 4)
 _enabled = true
 
 [node name="HazardSpawner3" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
@@ -247,32 +405,102 @@ _enabled = true
 
 [node name="HazardSpawner7" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2064, -0.0670013, 21.4093)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
 _enabled = true
 
 [node name="HazardSpawner8" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.67137, -0.0669975, 12.3294)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
 _enabled = true
 
 [node name="HazardSpawner9" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6248, -0.0670013, -12.9971)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
 _enabled = true
 
 [node name="HazardSpawner10" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3308, -0.0669975, -32.0624)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
 _enabled = true
 
 [node name="HazardSpawner11" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90416, -0.0670013, -21.51)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
 _enabled = true
 
 [node name="HazardSpawner12" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5898, -0.0669975, -65.2471)
-_possible_types = PackedInt32Array(6, 7)
+_possible_types = PackedInt32Array(6, 7, 8)
+_enabled = true
+
+[node name="HazardSpawner13" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.9864, -0.187004, -79.6265)
+_possible_types = PackedInt32Array(0)
+_enabled = true
+
+[node name="HazardSpawner14" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.611, -0.0670013, 27.9395)
+_possible_types = PackedInt32Array(3, 4, 4)
+_enabled = true
+
+[node name="HazardSpawner15" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.0186, -0.186998, 23.6338)
+_possible_types = PackedInt32Array(0, 1, 2, 3, 8)
+_enabled = true
+
+[node name="HazardSpawner16" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.2605, -0.187, 14.3776)
+_possible_types = PackedInt32Array(1, 4, 8)
+_enabled = true
+
+[node name="HazardSpawner17" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.8398, -0.898735, -2.96151)
+_possible_types = PackedInt32Array(1, 4, 8)
+_enabled = true
+
+[node name="HazardSpawner18" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.8808, -0.187, 18.9323)
+_possible_types = PackedInt32Array(0, 8, 2)
+_enabled = true
+
+[node name="HazardSpawner19" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.6654, -0.187, -4.7431)
+_possible_types = PackedInt32Array(0, 2, 8)
+_enabled = true
+
+[node name="HazardSpawner20" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.4577, -0.186996, 4.46037)
+_possible_types = PackedInt32Array(0, 1, 2, 8)
+_enabled = true
+
+[node name="HazardSpawner21" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.177, -0.187, -26.3286)
+_possible_types = PackedInt32Array(0, 2, 8, 3)
+_enabled = true
+
+[node name="HazardSpawner22" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.1945, -0.187, -46.56)
+_possible_types = PackedInt32Array(0, 2, 8)
+_enabled = true
+
+[node name="HazardSpawner23" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.9645, -0.0669937, -67.3095)
+_possible_types = PackedInt32Array(4, 6, 7, 8)
+_enabled = true
+
+[node name="HazardSpawner24" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1123, -0.0669975, -53.3162)
+_possible_types = PackedInt32Array(4, 6, 7, 8)
+_enabled = true
+
+[node name="HazardSpawner25" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.3392, -0.0669937, -30.8871)
+_possible_types = PackedInt32Array(4, 6, 7, 8)
+_enabled = true
+
+[node name="HazardSpawner26" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/HazSpawners" instance=ExtResource("3_r1ht6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.4464, -0.187, -78.2633)
+_possible_types = PackedInt32Array(2, 3, 8)
 _enabled = true
 
 [node name="Bins" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
@@ -348,6 +576,22 @@ _trashId = 1
 [node name="Trashbin18" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/Bins" instance=ExtResource("4_ljpjc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.2431, 0.796582, -18.2469)
 _trashId = 3
+
+[node name="ItemSpawners" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level"]
+script = ExtResource("5_ljpjc")
+_itemscene = ExtResource("6_1enne")
+
+[node name="BigPark" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/ItemSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.44825, 0.998557, -14.4117)
+
+[node name="SmallPark" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/ItemSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2119, 0.998557, -57.6766)
+
+[node name="Lot" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/ItemSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.58, 0.998557, 6.48363)
+
+[node name="Polizia" type="Node3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Level/ItemSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.6011, 0.998557, 24.817)
 
 [node name="Audio" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
@@ -454,7 +698,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70579, 6.12238, 17.5557)
 [node name="UI" parent="SubViewportContainer" node_paths=PackedStringArray("_player") instance=ExtResource("17_l6626")]
 layout_mode = 2
 _player = NodePath("../SubViewport/Player")
-debug = true
 
 [node name="SubViewportContainer_SubViewport_Level_Spawners#RTrashSpawner" parent="." instance=ExtResource("2_04qkv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4727, -0.0569999, 12.0742)

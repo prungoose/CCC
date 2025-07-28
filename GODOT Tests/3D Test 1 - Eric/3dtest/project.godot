@@ -47,6 +47,7 @@ thrown=""
 hazard=""
 beacon=""
 trash_bins=""
+request=""
 
 [input]
 
