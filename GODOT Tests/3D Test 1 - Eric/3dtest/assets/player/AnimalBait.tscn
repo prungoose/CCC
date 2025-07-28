@@ -15,7 +15,7 @@ _attractionArea = NodePath("AttractionArea")
 _areaShape = NodePath("AttractionArea/CollisionShape3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164993, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22021, 0)
 shape = SubResource("BoxShape3D_p474g")
 
 [node name="AttractionArea" type="Area3D" parent="."]
@@ -24,7 +24,7 @@ shape = SubResource("BoxShape3D_p474g")
 shape = SubResource("SphereShape3D_llw03")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.903631, 0)
+transform = Transform3D(0.5, 0, 0, 0, -0.0209465, -0.499561, 0, 0.499561, -0.0209465, 0, 0.903631, 0)
 billboard = 1
 shaded = true
 render_priority = 1
