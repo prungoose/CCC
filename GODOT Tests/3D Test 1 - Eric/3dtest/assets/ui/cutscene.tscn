@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dewmax538audw"]
+[gd_scene load_steps=15 format=3 uid="uid://dewmax538audw"]
 
 [ext_resource type="Shader" uid="uid://cu1c28dfj70xp" path="res://assets/ui/movingBackground.gdshader" id="1_6pv4d"]
 [ext_resource type="Texture2D" uid="uid://qve321oyxsrk" path="res://assets/menu/BackgroundTexture.tres" id="2_dgd76"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://d4hkjsnfqy2ro" path="res://assets/cutscene characters/matsumoto_sprite.png" id="4_nba4c"]
 [ext_resource type="Texture2D" uid="uid://c3de7bsowr7rj" path="res://assets/cutscene characters/inumaru_1.png" id="5_dgd76"]
 [ext_resource type="Texture2D" uid="uid://dh8ekpjo3mwwf" path="res://assets/cutscene characters/Mizuki_1.png" id="6_nba4c"]
+[ext_resource type="Texture2D" uid="uid://dcqlx682y7dhc" path="res://assets/cutscene characters/nekota_1.png" id="7_6q50k"]
 [ext_resource type="FontFile" uid="uid://dy7gh6c8lyxoe" path="res://assets/menu/Futehodo-MaruGothic.ttf" id="7_dauie"]
+[ext_resource type="Texture2D" uid="uid://xwdawhkrg5t3" path="res://assets/cutscene characters/shinroku.png" id="8_tdudh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nba4c"]
 shader = ExtResource("1_6pv4d")
@@ -108,6 +110,23 @@ offset_left = 1089.0
 offset_right = 1921.0
 offset_bottom = 1080.0
 texture = ExtResource("6_nba4c")
+
+[node name="Nekota" type="TextureRect" parent="Character Images"]
+visible = false
+layout_mode = 0
+offset_left = 1012.0
+offset_top = -94.0
+offset_right = 1960.0
+offset_bottom = 1133.0
+texture = ExtResource("7_6q50k")
+
+[node name="Shinroku" type="TextureRect" parent="Character Images"]
+visible = false
+layout_mode = 0
+offset_left = 1064.0
+offset_right = 1901.0
+offset_bottom = 1083.0
+texture = ExtResource("8_tdudh")
 
 [node name="Big ColorBox" type="Panel" parent="."]
 layout_mode = 0
