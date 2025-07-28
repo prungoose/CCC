@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://gqgcfy7hutvr" path="res://assets/bird/Birdy.cs" id="1_yqkbs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yqkbs"]
-radius = 0.185689
-height = 0.6837
+radius = 0.773014
+height = 1.56493
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f4al"]
 atlas = ExtResource("1_ib568")
@@ -101,10 +101,11 @@ animations = [{
 }]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yqkbs"]
-radius = 15.501
+radius = 16.4878
 
-[node name="Birdy" type="CharacterBody3D"]
+[node name="Birdy" type="CharacterBody3D" node_paths=PackedStringArray("_anims")]
 script = ExtResource("1_yqkbs")
+_anims = NodePath("AnimatedSprite3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0.00020944, 0, -0.00020944, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -117,13 +118,14 @@ billboard = 1
 shaded = true
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_cbq1r")
-animation = &"fly"
-autoplay = "fly"
+animation = &"fly_trash"
+frame_progress = 0.728164
 
 [node name="DetectionArea" type="Area3D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
 shape = SubResource("SphereShape3D_yqkbs")
 
-[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnBodyExited"]
